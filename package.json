@@ -1,0 +1,15 @@
+{
+  "name": "browser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/fushra/browser.git",
+  "author": "trickypr <trickypr@icloud.com>",
+  "license": "MPL-2.0",
+  "private": true,
+  "dependencies": {
+    "melon-build": "^1.0.0-a.2"
+  },
+  "scripts": {
+    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link melon-build"
+  }
+}
