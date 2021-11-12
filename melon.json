@@ -1,0 +1,10 @@
+{
+  "name": "Focus browser",
+  "vendor": "Fushra",
+  "appId": "com.fushra.focus.desktop",
+  "version": {
+    "product": "firefox",
+    "version": "94.0.1",
+    "displayVersion": "1.0.0"
+  }
+}

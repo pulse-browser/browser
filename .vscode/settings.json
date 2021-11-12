@@ -1,0 +1,21 @@
+{
+  "files.associations": {
+    "*.jsm": "javascript",
+    "moz.build": "python",
+    "moz.configure": "python",
+    "app.mozbuild": "python",
+    "Makefile.in": "makefile",
+    "mozconfig": "shellscript"
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "*.tar.xz": true
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.dotbuild": true
+  }
+}
