@@ -6,5 +6,9 @@
     "product": "firefox",
     "version": "94.0.1",
     "displayVersion": "1.0.0"
+  },
+  "buildOptions": {
+    "artifactBuilds": false,
+    "generateBranding": false
   }
 }

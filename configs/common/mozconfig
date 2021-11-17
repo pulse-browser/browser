@@ -1,24 +1,25 @@
 # Browser branding
 ac_add_options --enable-update-channel=release
 
-ac_add_options --with-branding=${brandingDir}
-ac_add_options --with-app-name=dot
-export MOZ_USER_DIR="${name}"
-export MOZ_APP_VENDOR="${vendor}"
+# ac_add_options --with-branding=branding/unofficial
+ac_add_options --with-app-name=focus-browser
+export MOZ_USER_DIR="Focus browser"
+export MOZ_APP_VENDOR="Focus browser"
 export MOZ_APP_BASENAME=Dot
-export MOZ_APP_PROFILE=dot
-export MOZ_APP_DISPLAYNAME="${name}"
-export MOZ_BRANDING_DIRECTORY=${brandingDir}
-export MOZ_OFFICIAL_BRANDING_DIRECTORY=${brandingDir}
-export MOZ_MACBUNDLE_ID=${appId}
-export MOZ_DISTRIBUTION_ID=${appId}
+export MOZ_APP_PROFILE=focus-browser
+export MOZ_APP_DISPLAYNAME="Focus browser"
+# Temporaroly removed
+# export MOZ_BRANDING_DIRECTORY=branding/unofficial
+# export MOZ_OFFICIAL_BRANDING_DIRECTORY=branding/unofficial
+export MOZ_MACBUNDLE_ID=com.fushra.focus.desktop
+export MOZ_DISTRIBUTION_ID=com.fushra.focus.desktop
 
 # Uncomment if builds are too resource hungry
-# mk_add_options MOZ_MAKE_FLAGS="-j4"
-# ac_add_options --enable-linker=gold
+mk_add_options MOZ_MAKE_FLAGS="-j4"
+ac_add_options --enable-linker=gold
 
 # Misc
 export MOZ_STUB_INSTALLER=1
 export MOZ_INCLUDE_SOURCE_INFO=1
 export MOZ_SOURCE_REPO=https://github.com/dothq/browser-desktop
-export MOZ_SOURCE_CHANGESET=5893b1f8552ad0956b28ffd8105bf706bc9ee6fa
+export MOZ_SOURCE_CHANGESET=6185a4cb9f00a367c09f3909e7d6a9bc72dcfbf1
