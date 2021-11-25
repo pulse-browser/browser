@@ -1,8 +1,19 @@
 diff --git a/browser/components/customizableui/CustomizableUI.jsm b/browser/components/customizableui/CustomizableUI.jsm
-index a52c35c3810ca8ccbde97d932d34652d9ec728c1..f23d0c43fc844d8b09cb9a3d5ddafbc848925a44 100644
+index a52c35c3810ca8ccbde97d932d34652d9ec728c1..9ac73b461f8951609cd623acbb49c012749ef28e 100644
 --- a/browser/components/customizableui/CustomizableUI.jsm
 +++ b/browser/components/customizableui/CustomizableUI.jsm
-@@ -247,7 +247,8 @@ var CustomizableUIInternal = {
+@@ -238,16 +238,18 @@ var CustomizableUIInternal = {
+     );
+ 
+     let navbarPlacements = [
++      // Focus Browser: Position the reload button between the back and forward button
+       "back-button",
+-      "forward-button",
+       "stop-reload-button",
++      "forward-button",
+       Services.policies.isAllowed("removeHomeButtonByDefault")
+         ? null
+         : "home-button",
        "spring",
        "urlbar-container",
        "spring",
