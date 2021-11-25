@@ -1,0 +1,14 @@
+diff --git a/browser/components/customizableui/CustomizableUI.jsm b/browser/components/customizableui/CustomizableUI.jsm
+index a52c35c3810ca8ccbde97d932d34652d9ec728c1..f23d0c43fc844d8b09cb9a3d5ddafbc848925a44 100644
+--- a/browser/components/customizableui/CustomizableUI.jsm
++++ b/browser/components/customizableui/CustomizableUI.jsm
+@@ -247,7 +247,8 @@ var CustomizableUIInternal = {
+       "spring",
+       "urlbar-container",
+       "spring",
+-      "save-to-pocket-button",
++      // Focus Browser: Remove pocket
++      // "save-to-pocket-button",
+       "downloads-button",
+       AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
+       "fxa-toolbar-menu-button",
