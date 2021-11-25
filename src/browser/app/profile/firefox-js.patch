@@ -1,0 +1,30 @@
+diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
+index e5844761ac37e5b368b25a23b030421c742c6a19..a00eb99367586a76ce267b47a796bc145ee93846 100644
+--- a/browser/app/profile/firefox.js
++++ b/browser/app/profile/firefox.js
+@@ -1979,12 +1979,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
+ pref("browser.migrate.chrome.history.maxAgeInDays", 180);
+ pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
+ 
+-pref("extensions.pocket.api", "api.getpocket.com");
+-pref("extensions.pocket.enabled", true);
+-pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
+-pref("extensions.pocket.site", "getpocket.com");
+-pref("extensions.pocket.onSaveRecs", true);
+-pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
++// Focus Browser: Disable pocket
++// pref("extensions.pocket.api", "api.getpocket.com");
++// pref("extensions.pocket.enabled", true);
++// pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
++// pref("extensions.pocket.site", "getpocket.com");
++// pref("extensions.pocket.onSaveRecs", true);
++// pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
+ 
+ // Enable Pocket button home panel for non link pages.
+ pref("extensions.pocket.showHome", true);
+@@ -2591,3 +2592,5 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
+ #ifdef NIGHTLY_BUILD
+   pref("extensions.translations.disabled", true);
+ #endif
++
++#include focus-browser.js

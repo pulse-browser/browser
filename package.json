@@ -10,6 +10,12 @@
     "melon-build": "^1.0.0-a.2"
   },
   "scripts": {
-    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link melon-build"
+    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link melon-build",
+    "build": "melon build",
+    "build:ui": "melon build --ui",
+    "start": "melon run",
+    "export": "melon export-file",
+    "imp": "melon import",
+    "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default"
   }
 }
