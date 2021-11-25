@@ -1,0 +1,11 @@
+:root {
+  --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
+  --tab-border-radius: 0 !important; /* The border radius of the tab */
+
+  --tab-padding-inline: 0 !important; /* Padding to the left and right of the tab. **Focus Browser custom** */
+}
+
+#tabbrowser-arrowscrollbox .tabbrowser-tab {
+  /* Specifies the padding to the left and right of the tab */
+  padding-inline: var(--tab-padding-inline) !important;
+}

@@ -1,11 +1,12 @@
 diff --git a/browser/themes/shared/browser.inc.css b/browser/themes/shared/browser.inc.css
-index b345560225ee8619524481c4570540746be9fcba..cafddff0e4febe056fceb35d705f3ef43cc08b1f 100644
+index fd1518b7718192b997255bccd6a158e79b9b83a8..c8fd4814e3eed365689a7f125ced0d0938130445 100644
 --- a/browser/themes/shared/browser.inc.css
 +++ b/browser/themes/shared/browser.inc.css
-@@ -2,6 +2,8 @@
+@@ -2,6 +2,9 @@
   * License, v. 2.0. If a copy of the MPL was not distributed with this
   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
  
++/* This is included at the bottom to override everything */
 +%include ../custom/shared/shared.inc.css
 +
  %include downloads/indicator.inc.css
