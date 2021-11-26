@@ -12,6 +12,11 @@
   /* App Menu styling */
   --arrowpanel-menuitem-border-radius: 0 !important; /* The border radius of the app menu items */
   --arrowpanel-border-radius: 0 !important; /* The border radius of the app menu */
+  --panel-separator-zap-gradient: linear-gradient(
+    90deg,
+    hsla(212, 97%, 54%, 1) 0%,
+    hsla(295, 70%, 58%, 1) 100%
+  ) !important; /* The gradient used for the app menu separator */
 
   /* Panel variables */
   --panel-footer-item-border-radius: 0; /* The border radius of the panel footer items */
