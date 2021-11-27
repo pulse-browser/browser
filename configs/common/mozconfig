@@ -22,4 +22,4 @@ ac_add_options --enable-linker=gold
 export MOZ_STUB_INSTALLER=1
 export MOZ_INCLUDE_SOURCE_INFO=1
 export MOZ_SOURCE_REPO=https://github.com/dothq/browser-desktop
-export MOZ_SOURCE_CHANGESET=ac1275377d0a1a8a21ea866e1fad630c785af22d
+export MOZ_SOURCE_CHANGESET=${changeset}
