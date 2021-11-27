@@ -8,7 +8,12 @@
     "displayVersion": "1.0.0"
   },
   "buildOptions": {
-    "artifactBuilds": false,
     "generateBranding": false
+  },
+  "addons": {
+    "ublock": {
+      "id": "uBlock0@raymondhill.net",
+      "url": "https://github.com/gorhill/uBlock/releases/download/1.39.0/uBlock0_1.39.0.firefox.xpi"
+    }
   }
 }

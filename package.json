@@ -16,6 +16,7 @@
     "start": "melon run",
     "export": "melon export-file",
     "imp": "melon import",
-    "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default"
+    "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default",
+    "download": "melon download"
   }
 }
