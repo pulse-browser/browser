@@ -1,0 +1,15 @@
+diff --git a/browser/components/newtab/content-src/components/TopSites/_TopSites.scss b/browser/components/newtab/content-src/components/TopSites/_TopSites.scss
+index dd4dbd13cfc30f6ccb6b36c492e8cca312679310..e91d414b042ace1af725bcbb86e2cffb6bf6017f 100644
+--- a/browser/components/newtab/content-src/components/TopSites/_TopSites.scss
++++ b/browser/components/newtab/content-src/components/TopSites/_TopSites.scss
+@@ -1,8 +1,8 @@
+ @use 'sass:math';
+ 
+ $top-sites-size: $grid-unit-small;
+-$top-sites-border-radius: 8px;
+-$top-sites-icon-border-radius: 4px;
++$top-sites-border-radius: $border-radius-new;
++$top-sites-icon-border-radius: $border-radius;
+ $rich-icon-size: 96px;
+ $default-icon-wrapper-size: 32px;
+ $default-icon-size: 32px;

@@ -1,0 +1,15 @@
+diff --git a/browser/components/newtab/content-src/styles/_variables.scss b/browser/components/newtab/content-src/styles/_variables.scss
+index f86faffb61b4a197ef9c5894b9165faeedf1ecb9..614fae589f9ceecc7514bae51ce02802d849e1ff 100644
+--- a/browser/components/newtab/content-src/styles/_variables.scss
++++ b/browser/components/newtab/content-src/styles/_variables.scss
+@@ -60,8 +60,8 @@ $newtab-background-secondary-dark: rgb(66, 65, 77);
+ // Photon transitions from http://design.firefox.com/photon/motion/duration-and-easing.html
+ $photon-easing: cubic-bezier(0.07, 0.95, 0, 1);
+ 
+-$border-radius: 3px;
+-$border-radius-new: 8px;
++$border-radius: $border-radius-small;
++$border-radius-new: $border-radius-card;
+ 
+ // Grid related styles
+ $base-gutter: 32px;

@@ -1,0 +1,13 @@
+diff --git a/browser/components/newtab/content-src/components/Search/_Search.scss b/browser/components/newtab/content-src/components/Search/_Search.scss
+index 1212dcc40363763d1fb576d91a373d35a5245d86..24516744711955b1887d5f84bfc16b294a0a7fa0 100644
+--- a/browser/components/newtab/content-src/components/Search/_Search.scss
++++ b/browser/components/newtab/content-src/components/Search/_Search.scss
+@@ -94,7 +94,7 @@ $glyph-forward: url('chrome://browser/skin/forward.svg');
+     width: 100%;
+     box-shadow: $shadow-card;
+     border: 1px solid transparent;
+-    border-radius: 8px;
++    border-radius: $border-radius-card;
+ 
+     &:dir(rtl) {
+       background-position-x: right $search-icon-padding;
