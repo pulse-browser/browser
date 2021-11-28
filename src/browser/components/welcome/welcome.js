@@ -6,6 +6,9 @@ XPCOMUtils.defineLazyModuleGetters(this, {
   AddonManager: 'resource://gre/modules/AddonManager.jsm',
 })
 
+const sleep = (duration) =>
+  new Promise((resolve) => setTimeout(resolve, duration))
+
 class Page {
   /**
    * A basic controller for individual pages
@@ -45,14 +48,14 @@ class Themes extends Page {
   }
 
   async loadThemes() {
+    await sleep(1000)
+
     const themes = (await AddonManager.getAddonsByTypes(['theme'])).filter(
       (theme) => !theme.id.includes('colorway')
     )
     const themeList = document.getElementById('themeList')
 
     const themeElements = []
-
-    let selectedTheme = ''
 
     console.log(themes)
 
@@ -62,13 +65,11 @@ class Themes extends Page {
 
       if (theme.isActive) {
         container.classList.add('selected')
-        selectedTheme = theme.id
       }
 
       container.addEventListener('click', () => {
         themeElements.forEach((el) => el.classList.remove('selected'))
         container.classList.add('selected')
-        selectedTheme = theme.id
         theme.enable()
       })
 
