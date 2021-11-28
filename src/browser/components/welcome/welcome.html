@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src chrome:; object-src 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="chrome://global/skin/in-content/common.css"
+    />
+    <link rel="localization" href="branding/brand.ftl" />
+
+    <link rel="stylesheet" href="chrome://focus/content/welcome.css" />
+  </head>
+  <body>
+    <div class="page" id="welcome">
+      <h2>Welcome to Focus Browser</h2>
+
+      <p>Lets get you setup</p>
+
+      <button id="welcomeNext" class="primary">Get started</button>
+    </div>
+
+    <div class="page" id="import">
+      <h2>Import your stuff</h2>
+      <p>
+        TODO: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+      <br />
+
+      <button class="primary">Import from previous browser</button>
+      <button class="text-link" id="importNext">Not now</button>
+    </div>
+
+    <div class="page" id="theme">
+      <h2>Chose a theme</h2>
+      <div id="themeList"></div>
+      <button id="themeNext" class="primary">Continue</button>
+    </div>
+
+    <div class="page" id="search">
+      <h2>Chose a search engine</h2>
+      <p>TODO: Search engines here</p>
+      <button id="searchNext" class="primary">Done</button>
+    </div>
+
+    <script src="./welcome.js"></script>
+  </body>
+</html>

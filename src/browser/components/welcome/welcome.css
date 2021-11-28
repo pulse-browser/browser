@@ -1,0 +1,54 @@
+body {
+  width: 504px;
+  height: 504px;
+
+  display: flex;
+  position: relative;
+  flex-flow: row nowrap;
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+
+  margin: 64px;
+}
+
+.card h3 {
+  font-size: 0.75rem;
+}
+
+#themeList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#themeList .card {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
+  transition: all 250ms ease-in-out;
+}
+
+#themeList .card.selected {
+  border: 2px solid var(--in-content-item-selected);
+}
+
+h2,
+p {
+  margin: 8px 0;
+}

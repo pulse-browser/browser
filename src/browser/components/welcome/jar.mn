@@ -1,0 +1,5 @@
+focus.jar:
+%  content focus %content/focus/ contentaccessible=yes
+    content/focus/welcome.html
+    content/focus/welcome.css
+    content/focus/welcome.js

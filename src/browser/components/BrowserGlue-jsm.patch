@@ -1,0 +1,54 @@
+diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
+index 7bfc4ff7684931a656c0c1cd85a83082219e4f45..f88d4af15d7863d51b9f6894e24fa9ec6759a402 100644
+--- a/browser/components/BrowserGlue.jsm
++++ b/browser/components/BrowserGlue.jsm
+@@ -3981,6 +3981,18 @@ BrowserGlue.prototype = {
+     );
+   },
+ 
++  /**
++   * Displays the welcome dialog. Trigured `_maybeShowDefaultBrowserPrompt`.
++   *
++   * @todo Provide documentation for implementing custom popups
++   * @patch FocusBrowser
++   */
++  _showWelcomeDialog() {
++    BrowserWindowTracker.getTopWindow().gDialogBox.open(
++      "chrome://focus/content/welcome.html"
++    );
++  },
++
+   async _maybeShowDefaultBrowserPrompt() {
+     // Highest priority is the upgrade dialog, which can include a "primary
+     // browser" request and is limited in various ways, e.g., major upgrades.
+@@ -4038,6 +4050,30 @@ BrowserGlue.prototype = {
+       return;
+     }
+ 
++
++    // =========================================================================
++    // Focus browser welcome
++
++    const welcomeEnabledPref = 'focus.welcome.enabled'
++    const welcomeSeenPref = 'focus.welcome.seen'
++
++    // NOTE: Get bool prefs takes in two options, the pref string and a default
++    // value if it is not defined
++    
++    // TODO: Add pref information to melon docs
++
++    const welcomeEnabled = Services.prefs.getBoolPref(welcomeEnabledPref, true)
++    const welcomeSeen = Services.prefs.getBoolPref(welcomeSeenPref, false)
++
++    if (welcomeEnabled && !welcomeSeen) {
++      this._showWelcomeDialog()
++      // TODO: When welcome is fully implemented, the following line should run
++      // Services.prefs.setBoolPref(welcomeSeenPref, true)
++    }
++
++    // =========================================================================
++
++
+     const willPrompt = await DefaultBrowserCheck.willCheckDefaultBrowser(
+       /* isStartupCheck */ true
+     );

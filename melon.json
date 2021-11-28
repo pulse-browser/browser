@@ -14,6 +14,10 @@
     "ublock": {
       "id": "uBlock0@raymondhill.net",
       "url": "https://github.com/gorhill/uBlock/releases/download/1.39.0/uBlock0_1.39.0.firefox.xpi"
+    },
+    "newtab": {
+      "id": "newtab@browser.fushra.com",
+      "url": "https://github.com/focus-browser/newtab/releases/download/v1.0.0-a.2/newtab.zip"
     }
   }
 }

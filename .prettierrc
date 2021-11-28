@@ -1,0 +1,12 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": "src/browser/app/profile/*.js",
+      "options": {
+        "semi": true
+      }
+    }
+  ]
+}
