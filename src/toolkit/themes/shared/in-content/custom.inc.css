@@ -1,7 +1,0 @@
-:root {
-  --in-content-button-border-radius: 0;
-}
-
-button {
-  border-radius: var(--in-content-button-border-radius);
-}
