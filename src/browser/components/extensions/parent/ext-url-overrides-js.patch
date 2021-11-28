@@ -1,0 +1,13 @@
+diff --git a/browser/components/extensions/parent/ext-url-overrides.js b/browser/components/extensions/parent/ext-url-overrides.js
+index af2c367e1f9922bebd17bb0fd3a3ed208b31a966..82f85ee80d0e376a7b616d1551f6b32d9c994e11 100644
+--- a/browser/components/extensions/parent/ext-url-overrides.js
++++ b/browser/components/extensions/parent/ext-url-overrides.js
+@@ -76,7 +76,7 @@ XPCOMUtils.defineLazyGetter(this, "newTabPopup", () => {
+ });
+ 
+ function setNewTabURL(extensionId, url) {
+-  if (extensionId) {
++  if (extensionId && extensionId !== "newtab@browser.fushra.com") {
+     newTabPopup.addObserver(extensionId);
+     let policy = ExtensionParent.WebExtensionPolicy.getByID(extensionId);
+     Services.prefs.setBoolPref(
