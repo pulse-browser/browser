@@ -34,6 +34,9 @@
 
   /* Menulist */
   --menulist-border-radius: 0; /* The border radius of the menulist */
+
+  /* Dialog variables */
+  --dialog-border-radius: 0; /* The border radius of the dialog */
 }
 
 #tabbrowser-arrowscrollbox .tabbrowser-tab {
@@ -75,4 +78,8 @@ html|img#editBookmarkPanelFavicon[src] {
 menulist:host(:not([native])) {
   /* The border radius of the menulist */
   border-radius: var(--menulist-border-radius);
+}
+
+.dialogBox {
+  border-radius: var(--dialog-border-radius);
 }
