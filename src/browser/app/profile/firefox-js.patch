@@ -1,8 +1,17 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index e5844761ac37e5b368b25a23b030421c742c6a19..a00eb99367586a76ce267b47a796bc145ee93846 100644
+index e5844761ac37e5b368b25a23b030421c742c6a19..0dcedf94cb1a0cf69f8cc6aafb3e6e5c7603dee6 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -1979,12 +1979,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
+@@ -19,6 +19,8 @@
+   #endif
+ #endif
+ 
++#include focus-browser.js
++
+ pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
+ 
+ // Enables some extra Extension System Logging (can reduce performance)
+@@ -1979,12 +1981,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -22,9 +31,8 @@ index e5844761ac37e5b368b25a23b030421c742c6a19..a00eb99367586a76ce267b47a796bc14
  
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
-@@ -2591,3 +2592,5 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
+@@ -2591,3 +2594,4 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
  #ifdef NIGHTLY_BUILD
    pref("extensions.translations.disabled", true);
  #endif
 +
-+#include focus-browser.js
