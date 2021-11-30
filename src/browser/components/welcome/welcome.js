@@ -4,7 +4,65 @@ const { XPCOMUtils } = ChromeUtils.import(
 
 XPCOMUtils.defineLazyModuleGetters(this, {
   AddonManager: 'resource://gre/modules/AddonManager.jsm',
+  Services: 'resource://gre/modules/Services.jsm',
 })
+
+ChromeUtils.defineModuleGetter(
+  this,
+  'ExtensionSettingsStore',
+  'resource://gre/modules/ExtensionSettingsStore.jsm'
+)
+
+// =============================================================================
+// Util stuff copied from browser/components/preferences/search.js
+
+class EngineStore {
+  constructor() {
+    this._engines = []
+  }
+
+  async init() {
+    const visibleEngines = await Services.search.getVisibleEngines()
+    this.initSpecificEngine(visibleEngines)
+  }
+
+  getEngine() {
+    return this._engines
+  }
+
+  initSpecificEngine(engines) {
+    for (const engine of engines) {
+      this._engines.push(this._cloneEngine(engine))
+    }
+  }
+
+  getEngineByName(name) {
+    return this._engines.find((engine) => engine.name == name)
+  }
+
+  _cloneEngine(aEngine) {
+    const clonedObj = {}
+
+    for (const i of ['name', 'alias', 'iconURI', 'hidden']) {
+      clonedObj[i] = aEngine[i]
+    }
+
+    clonedObj.originalEngine = aEngine
+
+    return clonedObj
+  }
+
+  async getDefaultEngine() {
+    let engineName = await Services.search.getDefault()
+    return this.getEngineByName(engineName._name)
+  }
+
+  async setDefaultEngine(engine) {
+    await Services.search.setDefault(engine)
+  }
+}
+
+// =============================================================================
 
 const sleep = (duration) =>
   new Promise((resolve) => setTimeout(resolve, duration))
@@ -57,8 +115,6 @@ class Themes extends Page {
 
     const themeElements = []
 
-    console.log(themes)
-
     themes.forEach((theme) => {
       const container = document.createElement('div')
       container.classList.add('card')
@@ -86,6 +142,63 @@ class Themes extends Page {
       themeList.appendChild(container)
       themeElements.push(container)
     })
+  }
+}
+
+class Search extends Page {
+  constructor(id) {
+    super(id)
+
+    this.store = new EngineStore()
+    this.searchList = []
+
+    this.loadSearch()
+  }
+
+  async loadSearch() {
+    await sleep(1100)
+    await this.store.init()
+
+    const defaultEngine = await Services.search.getDefault()
+
+    const searchElements = document.getElementById('searchList')
+
+    this.store.getEngine().forEach((search) => {
+      const container = this.loadSpecificSearch(search, defaultEngine)
+
+      searchElements.appendChild(container)
+      this.searchList.push(container)
+    })
+  }
+
+  /**
+   * @returns {HTMLDivElement}
+   */
+  loadSpecificSearch(search, defaultSearch) {
+    const container = document.createElement('div')
+    container.classList.add('card')
+
+    if (search.name == defaultSearch._name) {
+      container.classList.add('selected')
+    }
+
+    container.addEventListener('click', () => {
+      this.searchList.forEach((el) => el.classList.remove('selected'))
+      container.classList.add('selected')
+      this.store.setDefaultEngine(search)
+    })
+
+    const img = document.createElement('img')
+    img.src = search.iconURI.spec
+    img.classList.add('card-heading-image')
+
+    const name = document.createElement('h3')
+    name.textContent = search.name
+
+    container.appendChild(img)
+    container.appendChild(name)
+
+    return container
   }
 }
 
@@ -128,5 +241,5 @@ const pages = new Pages([
   new Page('welcome'),
   new Page('import'),
   new Themes('theme'),
-  new Page('search'),
+  new Search('search'),
 ])

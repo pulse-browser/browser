@@ -25,9 +25,10 @@ body {
 
 .card h3 {
   font-size: 0.75rem;
+  /* margin: 0; */
 }
 
-#themeList {
+.cardGroup {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -35,16 +36,21 @@ body {
   margin-bottom: 8px;
 }
 
-#themeList .card {
+.cardGroup .card {
   width: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid transparent;
   transition: all 250ms ease-in-out;
+  margin: 0;
 }
 
-#themeList .card.selected {
+#searchList .card {
+  width: 80px;
+}
+
+.cardGroup .card.selected {
   border: 2px solid var(--in-content-item-selected);
 }
 
