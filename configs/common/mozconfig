@@ -6,7 +6,7 @@ ac_add_options --with-ccache=sccache
 ac_add_options --with-app-name=focus-browser
 export MOZ_USER_DIR="Focus browser"
 export MOZ_APP_VENDOR="Focus browser"
-export MOZ_APP_BASENAME=Dot
+export MOZ_APP_BASENAME=FocusBrowser
 export MOZ_APP_PROFILE=focus-browser
 export MOZ_APP_DISPLAYNAME="Focus browser"
 # Temporaroly removed
