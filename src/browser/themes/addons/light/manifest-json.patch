@@ -1,0 +1,13 @@
+diff --git a/browser/themes/addons/light/manifest.json b/browser/themes/addons/light/manifest.json
+index a73604690b1b71c99ee0289ea7c4326a84408331..53461caacef48737b3c10eeb355159c2833a0fb1 100644
+--- a/browser/themes/addons/light/manifest.json
++++ b/browser/themes/addons/light/manifest.json
+@@ -17,7 +17,7 @@
+   "theme": {
+     "colors": {
+       "tab_background_text": "rgb(21,20,26)",
+-      "tab_selected": "#fff",
++      "tab_selected": "#f9f9fb",
+       "tab_text": "rgb(21,20,26)",
+       "icons": "rgb(91,91,102)",
+       "frame": "#f0f0f4",
