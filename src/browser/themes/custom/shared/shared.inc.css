@@ -1,4 +1,12 @@
 :root {
+  /* Colors */
+  --gradient-orientation: 90deg;
+  --gradient: linear-gradient(
+    var(--gradient-orientation),
+    hsla(212, 97%, 54%, 1) 0%,
+    hsla(295, 70%, 58%, 1) 100%
+  );
+
   /* Tabs */
   --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
   --tab-border-radius: 0 !important; /* The border radius of the tab */
@@ -12,10 +20,8 @@
   /* App Menu styling */
   --arrowpanel-menuitem-border-radius: 0 !important; /* The border radius of the app menu items */
   --arrowpanel-border-radius: 0 !important; /* The border radius of the app menu */
-  --panel-separator-zap-gradient: linear-gradient(
-    90deg,
-    hsla(212, 97%, 54%, 1) 0%,
-    hsla(295, 70%, 58%, 1) 100%
+  --panel-separator-zap-gradient: var(
+    --gradient
   ) !important; /* The gradient used for the app menu separator */
 
   /* Panel variables */
@@ -37,6 +43,11 @@
 
   /* Dialog variables */
   --dialog-border-radius: 0; /* The border radius of the dialog */
+}
+
+.container.infobar::before {
+  --gradient-orientation: 0;
+  background-image: var(--gradient) !important;
 }
 
 #tabbrowser-arrowscrollbox .tabbrowser-tab {

@@ -1,0 +1,31 @@
+diff --git a/toolkit/content/widgets/message-bar.css b/toolkit/content/widgets/message-bar.css
+index 6a669883eb60c08878009ad2fdddd2d97822463a..5047a5974d19bd5718706d8c826d1a9ef18d362f 100644
+--- a/toolkit/content/widgets/message-bar.css
++++ b/toolkit/content/widgets/message-bar.css
+@@ -62,7 +62,7 @@
+ }
+ 
+ :host {
+-  border-radius: 4px;
++  border-radius: var(--border-radius-2);
+ }
+ 
+ /* Make the host to behave as a block by default, but allow hidden to hide it. */
+@@ -84,7 +84,7 @@
+   padding: 4px 8px;
+   position: relative;
+ 
+-  border-radius: 4px;
++  border-radius: var(--border-radius-2);
+ 
+   display: flex;
+   /* Ensure that the message bar shadow dom elements are vertically aligned. */
+@@ -186,7 +186,7 @@
+   display: block;
+   width: 2px;
+   position: absolute;
+-  background-image: linear-gradient(0, #9059ff 0%, #ff4aa2 52.08%, #ffbd4f 100%);
++  background-image: var(--gradient);
+   top: 0;
+   inset-inline-start: 0;
+   height: 100%;

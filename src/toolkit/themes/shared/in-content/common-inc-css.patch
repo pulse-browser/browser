@@ -1,8 +1,23 @@
 diff --git a/toolkit/themes/shared/in-content/common.inc.css b/toolkit/themes/shared/in-content/common.inc.css
-index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8f9379bc9 100644
+index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef1c952e29 100644
 --- a/toolkit/themes/shared/in-content/common.inc.css
 +++ b/toolkit/themes/shared/in-content/common.inc.css
-@@ -108,6 +108,9 @@
+@@ -8,6 +8,14 @@
+ 
+ :host,
+ :root {
++  /* Colors */
++  --gradient-orientation: 0;
++  --gradient: linear-gradient(
++    var(--gradient-orientation),
++    hsla(212, 97%, 54%, 1) 0%,
++    hsla(295, 70%, 58%, 1) 100%
++  );
++
+   --in-content-page-color: rgb(21, 20, 26);
+   --in-content-page-background: #fff;
+   --in-content-text-color: var(--in-content-page-color);
+@@ -108,6 +116,9 @@
    --card-shadow-hover: var(--card-shadow), 0 0 0 5px var(--card-outline-color);
  
    accent-color: var(--in-content-accent-color);
@@ -12,7 +27,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
  }
  
  @media (-moz-toolbar-prefers-color-scheme: dark) {
-@@ -340,7 +343,7 @@ xul|menulist {
+@@ -340,7 +351,7 @@ xul|menulist {
    min-height: 32px;
    color: var(--in-content-button-text-color);
    border: 1px solid var(--in-content-button-border-color);
@@ -21,7 +36,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    background-color: var(--in-content-button-background);
    font-weight: 400;
    padding: 7px 15px;
-@@ -537,7 +540,7 @@ xul|menulist > xul|menupopup {
+@@ -537,7 +548,7 @@ xul|menulist > xul|menupopup {
    background-color: transparent;
  
    --panel-border-color: var(--in-content-box-border-color);
@@ -30,7 +45,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    --panel-background: var(--in-content-box-background);
    --panel-color: var(--in-content-text-color);
    --panel-padding: 0;
-@@ -586,7 +589,7 @@ html|textarea,
+@@ -586,7 +597,7 @@ html|textarea,
  xul|search-textbox {
    appearance: none;
    border: 1px solid var(--in-content-box-border-color);
@@ -39,7 +54,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    color: inherit;
    background-color: var(--in-content-box-background);
  }
-@@ -657,7 +660,7 @@ html|a:-moz-focusring,
+@@ -657,7 +668,7 @@ html|a:-moz-focusring,
  .text-link:-moz-focusring {
    outline: 2px solid var(--in-content-focus-outline-color);
    outline-offset: 1px;
@@ -48,7 +63,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
  }
  
  button.text-link {
-@@ -683,7 +686,7 @@ html|input[type="checkbox"] {
+@@ -683,7 +694,7 @@ html|input[type="checkbox"] {
    width: 16px;
    border: 1px solid var(--checkbox-border-color);
    background-color: var(--checkbox-unchecked-bgcolor);
@@ -57,7 +72,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    margin-inline: 0 6px;
    flex-shrink: 0; /* avoid shrinking inside flex container */
  }
-@@ -850,7 +853,7 @@ html|*#categories {
+@@ -850,7 +861,7 @@ html|*#categories {
  }
  
  #categories > .category {
@@ -66,7 +81,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    min-height: 48px;
    appearance: none;
    color: inherit;
-@@ -1011,7 +1014,7 @@ xul|richlistbox {
+@@ -1011,7 +1022,7 @@ xul|richlistbox {
    margin-inline: 0;
    background-color: var(--in-content-box-background);
    border: 1px solid var(--in-content-box-border-color);
@@ -75,7 +90,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    color: var(--in-content-text-color);
  }
  
-@@ -1075,7 +1078,7 @@ xul|richlistitem[selected] xul|menulist:focus-visible {
+@@ -1075,7 +1086,7 @@ xul|richlistitem[selected] xul|menulist:focus-visible {
  @media (prefers-contrast) {
    xul|treechildren::-moz-tree-row(selected) {
       border: 2px solid currentColor;
@@ -84,7 +99,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    }
  }
  
-@@ -1091,7 +1094,7 @@ xul|tree {
+@@ -1091,7 +1102,7 @@ xul|tree {
    appearance: none;
    font-size: 1em;
    border: 1px solid var(--in-content-box-border-color);
@@ -93,7 +108,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    background-color: var(--in-content-box-background);
    color: inherit;
    margin: 0;
-@@ -1166,7 +1169,7 @@ xul|treechildren::-moz-tree-image(selected) {
+@@ -1166,7 +1177,7 @@ xul|treechildren::-moz-tree-image(selected) {
  /* Message bars */
  .message-bar {
    background-color: var(--in-content-box-info-background);
@@ -102,7 +117,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    min-height: 32px;
    -moz-box-align: center;
    padding: 4px;
-@@ -1187,7 +1190,7 @@ xul|treechildren::-moz-tree-image(selected) {
+@@ -1187,7 +1198,7 @@ xul|treechildren::-moz-tree-image(selected) {
  .message-bar-content > .message-bar-button {
    background-color: var(--grey-90-a10);
    border: none;
@@ -111,7 +126,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    height: 24px;
    margin-inline-start: 8px;
    padding: 0 8px;
-@@ -1232,7 +1235,7 @@ input[type="text"][warning]:enabled:not(:focus) {
+@@ -1232,7 +1243,7 @@ input[type="text"][warning]:enabled:not(:focus) {
    background: var(--in-content-box-background);
    /* Needed for high-contrast where the border will appear. */
    border: 1px solid transparent;
@@ -120,7 +135,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..1c7adcaf8f074f126652c919865ddbf8
    box-shadow: var(--card-shadow);
    margin: 0 0 8px;
    /* Remove the border from the overall padding. */
-@@ -1266,7 +1269,7 @@ input[type="text"][warning]:enabled:not(:focus) {
+@@ -1266,7 +1277,7 @@ input[type="text"][warning]:enabled:not(:focus) {
  .sidebar-footer-link {
    height: 36px;
    cursor: default;

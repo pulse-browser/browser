@@ -1,8 +1,8 @@
 ## Priority: High
 
 - [ ] Focus branding
-- [ ] Focus colors
-- [ ] Double check mozilla telemetry
+- [x] Focus colors
+- [x] Double check mozilla telemetry
 
 ## Priority: Medium
 
