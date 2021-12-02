@@ -9,3 +9,7 @@ pref('focus.welcome.seen', false);
 // be provided with permissions without asking
 // TODO: Documentation in melon for preference
 pref('extensions.installedDistroAddon.newtab@browser.fushra.com', true);
+
+pref('browser.discovery.enabled', false);
+
+#include better-fox.js

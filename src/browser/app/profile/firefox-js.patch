@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index e5844761ac37e5b368b25a23b030421c742c6a19..0dcedf94cb1a0cf69f8cc6aafb3e6e5c7603dee6 100644
+index e5844761ac37e5b368b25a23b030421c742c6a19..682d6483468b388f9e9c96680e22d13b9683e1e9 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -31,7 +31,19 @@ index e5844761ac37e5b368b25a23b030421c742c6a19..0dcedf94cb1a0cf69f8cc6aafb3e6e5c
  
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
-@@ -2591,3 +2594,4 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
+@@ -2102,11 +2105,6 @@ pref("fission.frontend.simulate-messages", false);
+ pref("toolkit.coverage.enabled", false);
+ pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
+ 
+-// Discovery prefs
+-pref("browser.discovery.enabled", true);
+-pref("browser.discovery.containers.enabled", true);
+-pref("browser.discovery.sites", "addons.mozilla.org");
+-
+ pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
+ pref("browser.engagement.downloads-button.has-used", false);
+ pref("browser.engagement.fxa-toolbar-menu-button.has-used", false);
+@@ -2591,3 +2589,4 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
  #ifdef NIGHTLY_BUILD
    pref("extensions.translations.disabled", true);
  #endif
