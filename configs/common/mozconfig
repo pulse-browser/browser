@@ -1,8 +1,8 @@
 # Browser branding
-ac_add_options --enable-update-channel=release
+ac_add_options --enable-update-channel=stable
 ac_add_options --with-ccache=sccache
 
-# ac_add_options --with-branding=branding/unofficial
+ac_add_options --with-branding=browser/branding/stable
 ac_add_options --with-app-name=focus-browser
 export MOZ_USER_DIR="Focus browser"
 export MOZ_APP_VENDOR="Focus browser"

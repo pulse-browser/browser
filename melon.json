@@ -8,7 +8,7 @@
     "displayVersion": "1.0.0"
   },
   "buildOptions": {
-    "generateBranding": false
+    "generateBranding": true
   },
   "addons": {
     "ublock": {
@@ -18,6 +18,14 @@
     "newtab": {
       "id": "newtab@browser.fushra.com",
       "url": "https://github.com/focus-browser/newtab/releases/download/v1.0.0-a.3/newtab.zip"
+    }
+  },
+  "brands": {
+    "stable": {
+      "backgroundColor": "#2B2A33",
+      "brandShorterName": "Focus",
+      "brandShortName": "Focus Browser",
+      "brandFullName": "Focus Browser"
     }
   }
 }
