@@ -1,0 +1,100 @@
+/* ------------------------------------ */
+/* Firefox Translucent Tabbar for macOS */
+/* ------------------------------------ */
+
+/* The following license is under the MIT license from the following repo: https://github.com/zvuc/firefox-macos-native-tabbar
+Copyright (c) 2020 Hansol Kim
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+*/
+
+:root:not(:-moz-window-inactive) #navigator-toolbox {
+  background-color: transparent !important;
+}
+
+:root[lwthemetextcolor='bright'] #navigator-toolbox {
+  background-image: linear-gradient(
+    to top,
+    hsla(280, 6%, 40%, 0.8) 0%,
+    hsla(280, 6%, 40%, 0.6) 46%,
+    hsla(280, 30%, 10%, 0.3) 46%,
+    hsla(280, 30%, 10%, 0.3) 65%
+  ) !important;
+}
+:root:not(:-moz-window-inactive)[lwthemetextcolor='bright'] #navigator-toolbox {
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    to top,
+    hsla(280, 6%, 40%, 0.8) 0%,
+    hsla(280, 6%, 40%, 0.6) 46%,
+    hsla(280, 30%, 10%, 0.3) 46%,
+    hsla(280, 30%, 10%, 0.3) 65%
+  ) !important;
+}
+
+:root #TabsToolbar,
+:root #titlebar,
+:root #tabbrowser-tabs {
+  -moz-appearance: -moz-mac-vibrant-titlebar-light !important;
+  background-color: transparent !important;
+}
+
+:root:not([lwthemetextcolor='bright']) #TabsToolbar,
+:root:not([lwthemetextcolor='bright']) #titlebar,
+:root:not([lwthemetextcolor='bright']) #tabbrowser-tabs {
+  color: #000 !important;
+}
+
+:root[lwthemetextcolor='dark'] #TabsToolbar,
+:root[lwthemetextcolor='dark'] #titlebar,
+:root[lwthemetextcolor='dark'] #tabbrowser-tabs {
+  -moz-appearance: -moz-mac-vibrant-titlebar-light !important;
+}
+
+:root[lwthemetextcolor='bright'] #TabsToolbar,
+:root[lwthemetextcolor='bright'] #titlebar,
+:root[lwthemetextcolor='bright'] #tabbrowser-tabs {
+  -moz-appearance: -moz-mac-vibrant-titlebar-dark !important;
+}
+
+:root:-moz-window-inactive #TabsToolbar,
+:root:-moz-window-inactive #titlebar,
+:root:-moz-window-inactive #tabbrowser-tabs {
+  -moz-appearance: none !important;
+}
+
+:root[lwthemetextcolor='bright']:-moz-window-inactive {
+  --lwt-accent-color-inactive: rgb(40, 40, 40) !important;
+}
+
+:root:not([lwthemetextcolor='bright']) .tabbrowser-tab:not([selected='true']) {
+  color: #000 !important;
+}
+
+:root[lwthemetextcolor='bright'] {
+  --tab-line-color: hsla(280, 30%, 80%, 0.9) !important;
+}
+
+/* improve border visiblity for selected tabs */
+:root:not(:-moz-window-inactive)[lwthemetextcolor='bright']
+  .tabbrowser-tab[selected='true']
+  .tab-background {
+  box-shadow: 0 0 2px hsla(280, 50%, 0%, 0.5),
+    0 0 0 1px hsla(280, 50%, 90%, 0.1) inset !important;
+}
+
+:root #nav-bar {
+  border-top: 1px solid hsla(280, 6%, 0%, 0.15);
+}
+
+:root[lwthemetextcolor='bright'] #nav-bar {
+  border-top: 1px solid hsla(280, 6%, 40%, 0.3);
+}
