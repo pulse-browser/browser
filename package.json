@@ -7,7 +7,7 @@
   "license": "MPL-2.0",
   "private": true,
   "dependencies": {
-    "melon-build": "^1.0.0-a.2"
+    "melon-build": "^1.0.0-a.10"
   },
   "scripts": {
     "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link melon-build",
