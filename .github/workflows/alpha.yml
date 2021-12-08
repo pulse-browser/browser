@@ -80,7 +80,7 @@ jobs:
 
       - name: Bootstrap
         run: |
-          cd src
+          cd engine
           ./mach bootstrap --application-choice browser --no-interactive
           cd ..
 
@@ -89,7 +89,7 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          cp ./src/obj-*/dist/focus-browser-*.tar.bz2 .
+          cp ./engine/obj-*/dist/focus-browser-*.tar.bz2 .
           mv dot-*.tar.bz2 "focus-browser.linux.tar.bz2"
 
       - name: Package
