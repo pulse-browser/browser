@@ -69,9 +69,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sccache-
 
-      - name: Start sccache server
-        run: sccache --start-server
-
       - name: Setup melon
         run: yarn && yarn setupLink
 
@@ -91,11 +88,6 @@ jobs:
 
       - name: Package
         run: yarn melon package
-
-      - name: Print sccache stats
-        run: sccache --show-stats
-      - name: Stop sccache server
-        run: sccache --stop-server || true
 
       - uses: 'marvinpinto/action-automatic-releases@latest'
         with:
