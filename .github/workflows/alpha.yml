@@ -2,9 +2,9 @@ name: Alpha builds
 
 on:
   push:
-    branches: [ alpha ]
+    branches: [alpha]
   pull_request:
-    branches: [ alpha ]
+    branches: [alpha]
 
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
       version: ${{ steps.data.outputs.dotversion }}
       sha: ${{ steps.data.outputs.shortsha }}
       build_date: ${{ steps.data.outputs.builddate }}
-      rust_version: "1.51.0" # update this every so often to match latest stable rust release
+      rust_version: '1.51.0' # update this every so often to match latest stable rust release
     steps:
       - uses: actions/checkout@v2
 
@@ -33,20 +33,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+        with:
+          submodules: recursive
+
       - name: Install system dependancies
         run: |
           sudo apt-get update --fix-missing
           sudo apt-get update
           sudo apt-get install dos2unix yasm nasm build-essential libgtk2.0-dev libpython3-dev m4 uuid libasound2-dev libcurl4-openssl-dev libdbus-1-dev libdrm-dev libdbus-glib-1-dev libdbus-glib-1-dev libgtk-3-dev libpulse-dev libx11-xcb-dev libxt-dev xvfb
-      
+
       - name: Free up space
         run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-      
+
       - name: Install sccache
         env:
           LINK: https://github.com/mozilla/sccache/releases/download
@@ -57,7 +59,7 @@ jobs:
           curl -L "$LINK/$SCCACHE_VERSION/$SCCACHE_FILE.tar.gz" | tar xz
           mv -f $SCCACHE_FILE/sccache $HOME/.local/bin/sccache
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-  
+
       - name: Save sccache
         uses: actions/cache@v2
         continue-on-error: false
@@ -69,19 +71,19 @@ jobs:
 
       - name: Start sccache server
         run: sccache --start-server
-      
+
       - name: Setup melon
         run: yarn && yarn setupLink
-      
+
       - name: Download firefox source and dependancies
         run: yarn download
-      
+
       - name: Import
         run: yarn imp
-            
+
       - name: Build
         run: yarn build
-      
+
       - name: Rename artifacts
         run: |
           cp ./src/obj-*/dist/focus-browser-*.tar.bz2 .
@@ -95,11 +97,11 @@ jobs:
       - name: Stop sccache server
         run: sccache --stop-server || true
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: 'marvinpinto/action-automatic-releases@latest'
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ needs.build-data.outputs.build_date }}-${{ needs.build-data.outputs.shortsha }}"
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          automatic_release_tag: '${{ needs.build-data.outputs.build_date }}-${{ needs.build-data.outputs.shortsha }}'
           prerelease: true
-          title: "Alpha build"
+          title: 'Alpha build'
           files: |
             focus-browser.linux.tar.bz2
