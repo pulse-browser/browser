@@ -78,6 +78,12 @@ jobs:
       - name: Import
         run: yarn imp
 
+      - name: Bootstrap
+        run: |
+          cd src
+          ./mach bootstrap --application-choice browser --no-interactive
+          cd ..
+
       - name: Build
         run: yarn build
 
