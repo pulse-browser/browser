@@ -87,13 +87,13 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Package
+        run: yarn melon package
+
       - name: Rename artifacts
         run: |
           cp ./engine/obj-*/dist/focus-browser-*.tar.bz2 .
           mv dot-*.tar.bz2 "focus-browser.linux.tar.bz2"
-
-      - name: Package
-        run: yarn melon package
 
       - uses: 'marvinpinto/action-automatic-releases@latest'
         with:
