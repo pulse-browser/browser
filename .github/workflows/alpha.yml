@@ -65,7 +65,7 @@ jobs:
         continue-on-error: false
         with:
           path: /home/runner/.cache/sccache
-          key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.shortsha }}
           restore-keys: |
             ${{ runner.os }}-sccache-
 
