@@ -1,11 +1,6 @@
 name: Alpha builds
 
 on:
-  push:
-    branches: [alpha]
-  pull_request:
-    branches: [alpha]
-
   workflow_dispatch:
 
 jobs:
