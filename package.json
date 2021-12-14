@@ -18,6 +18,7 @@
     "imp": "melon import",
     "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default",
     "download": "melon download",
-    "rebuild": "cd melon && yarn build && cd .."
+    "rebuild": "cd melon && yarn build && cd ..",
+    "package": "melon package"
   }
 }
