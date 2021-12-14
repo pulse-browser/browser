@@ -93,7 +93,7 @@ jobs:
       - name: Rename artifacts
         run: |
           cp ./engine/obj-*/dist/focus-browser-*.tar.bz2 .
-          mv dot-*.tar.bz2 "focus-browser.linux.tar.bz2"
+          mv focus-browser-*.tar.bz2 "focus-browser.linux.tar.bz2"
 
       - uses: 'marvinpinto/action-automatic-releases@latest'
         with:
