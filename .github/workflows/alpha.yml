@@ -98,7 +98,7 @@ jobs:
       - uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: '${{ needs.build-data.outputs.build_date }}-${{ needs.build-data.outputs.shortsha }}'
+          automatic_release_tag: 'alpha-${{ needs.build-data.outputs.build_date }}'
           prerelease: true
           title: 'Alpha build'
           files: |
