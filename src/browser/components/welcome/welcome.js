@@ -5,6 +5,7 @@ const { XPCOMUtils } = ChromeUtils.import(
 XPCOMUtils.defineLazyModuleGetters(this, {
   AddonManager: 'resource://gre/modules/AddonManager.jsm',
   Services: 'resource://gre/modules/Services.jsm',
+  MigrationUtils: 'resource:///modules/MigrationUtils.jsm',
 })
 
 ChromeUtils.defineModuleGetter(
@@ -202,6 +203,21 @@ class Search extends Page {
   }
 }
 
+class Import extends Page {
+  constructor(id) {
+    super(id)
+
+    const importButton = document.getElementById('importBrowser')
+    importButton.addEventListener('click', () => {
+      MigrationUtils.showMigrationWizard(window, [
+        MigrationUtils.MIGRATION_ENTRYPOINT_NEWTAB,
+        null,
+      ])
+      this.nextEl.click()
+    })
+  }
+}
+
 class Pages {
   /**
    * A wrapper around all pages
@@ -239,7 +255,7 @@ class Pages {
 
 const pages = new Pages([
   new Page('welcome'),
-  new Page('import'),
+  new Import('import'),
   new Themes('theme'),
   new Search('search'),
 ])
