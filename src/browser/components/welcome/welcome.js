@@ -1,6 +1,7 @@
 const { XPCOMUtils } = ChromeUtils.import(
   'resource://gre/modules/XPCOMUtils.jsm'
 )
+const { Services } = ChromeUtils.import('resource://gre/modules/Services.jsm')
 
 XPCOMUtils.defineLazyModuleGetters(this, {
   AddonManager: 'resource://gre/modules/AddonManager.jsm',
@@ -13,6 +14,8 @@ ChromeUtils.defineModuleGetter(
   'ExtensionSettingsStore',
   'resource://gre/modules/ExtensionSettingsStore.jsm'
 )
+
+const welcomeSeenPref = 'focus.welcome.seen'
 
 // =============================================================================
 // Util stuff copied from browser/components/preferences/search.js
@@ -236,7 +239,11 @@ class Pages {
     this.currentPage++
 
     if (this.currentPage >= this.pages.length) {
-      // We can use internal js apis to close the window
+      // We can use internal js apis to close the window. We also want to set
+      // the settings api for welcome seen to false to stop it showing again
+
+      Services.prefs.setBoolPref(welcomeSeenPref, true)
+
       close()
       return
     }
