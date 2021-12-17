@@ -7,7 +7,7 @@
 ## Priority: Medium
 
 - [ ] Welcome page imports
-- [ ] Make the welcome page only show once
+- [x] Make the welcome page only show once
 - [ ] Change branding from firefox/mozilla to focus browser/fushra
 
 ## Priority: Low
