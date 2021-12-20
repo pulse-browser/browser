@@ -1,4 +1,3 @@
-/* ------------------------------------ */
 /* Firefox Translucent Tabbar for macOS */
 /* ------------------------------------ */
 
@@ -20,7 +19,7 @@ copies or substantial portions of the Software.
   background-color: transparent !important;
 }
 
-:root[lwthemetextcolor='bright'] #navigator-toolbox {
+/* :root[lwthemetextcolor='bright'] #navigator-toolbox {
   background-image: linear-gradient(
     to top,
     hsla(280, 6%, 40%, 0.8) 0%,
@@ -37,8 +36,8 @@ copies or substantial portions of the Software.
     hsla(280, 6%, 40%, 0.6) 46%,
     hsla(280, 30%, 10%, 0.3) 46%,
     hsla(280, 30%, 10%, 0.3) 65%
-  ) !important;
-}
+  ) !important; */
+/* } */
 
 :root #TabsToolbar,
 :root #titlebar,
@@ -71,30 +70,30 @@ copies or substantial portions of the Software.
   -moz-appearance: none !important;
 }
 
-:root[lwthemetextcolor='bright']:-moz-window-inactive {
-  --lwt-accent-color-inactive: rgb(40, 40, 40) !important;
-}
+/* :root[lwthemetextcolor='bright']:-moz-window-inactive {
+  --lwt-accent-color-inactive: rgb(40, 40, 40) !important; */
+/* } */
 
-:root:not([lwthemetextcolor='bright']) .tabbrowser-tab:not([selected='true']) {
+/* :root:not([lwthemetextcolor='bright']) .tabbrowser-tab:not([selected='true']) {
   color: #000 !important;
-}
+} */
 
-:root[lwthemetextcolor='bright'] {
+/* :root[lwthemetextcolor='bright'] {
   --tab-line-color: hsla(280, 30%, 80%, 0.9) !important;
-}
+} */
 
 /* improve border visiblity for selected tabs */
-:root:not(:-moz-window-inactive)[lwthemetextcolor='bright']
+/* :root:not(:-moz-window-inactive)[lwthemetextcolor='bright']
   .tabbrowser-tab[selected='true']
   .tab-background {
   box-shadow: 0 0 2px hsla(280, 50%, 0%, 0.5),
     0 0 0 1px hsla(280, 50%, 90%, 0.1) inset !important;
-}
+} */
 
-:root #nav-bar {
+/* :root #nav-bar {
   border-top: 1px solid hsla(280, 6%, 0%, 0.15);
-}
+} */
 
-:root[lwthemetextcolor='bright'] #nav-bar {
+/* :root[lwthemetextcolor='bright'] #nav-bar {
   border-top: 1px solid hsla(280, 6%, 40%, 0.3);
-}
+} */
