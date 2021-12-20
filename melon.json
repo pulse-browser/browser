@@ -4,7 +4,7 @@
   "appId": "com.fushra.focus.desktop",
   "version": {
     "product": "firefox",
-    "version": "94.0.2",
+    "version": "95.0.2",
     "displayVersion": "1.0.0"
   },
   "buildOptions": {

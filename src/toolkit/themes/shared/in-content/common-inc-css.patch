@@ -1,8 +1,8 @@
 diff --git a/toolkit/themes/shared/in-content/common.inc.css b/toolkit/themes/shared/in-content/common.inc.css
-index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef1c952e29 100644
+index 859ba3310fcaeb90785ef0a751311c0e3fa22ed0..dcd4c01b5f3abd184e91f65a95988e3d98013953 100644
 --- a/toolkit/themes/shared/in-content/common.inc.css
 +++ b/toolkit/themes/shared/in-content/common.inc.css
-@@ -8,6 +8,14 @@
+@@ -8,6 +8,17 @@
  
  :host,
  :root {
@@ -14,20 +14,13 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
 +    hsla(295, 70%, 58%, 1) 100%
 +  );
 +
++  --border-radius-1: 0; /* Default: 2px */
++  --border-radius-2: 0; /* Default: 4px */
++
    --in-content-page-color: rgb(21, 20, 26);
    --in-content-page-background: #fff;
    --in-content-text-color: var(--in-content-page-color);
-@@ -108,6 +116,9 @@
-   --card-shadow-hover: var(--card-shadow), 0 0 0 5px var(--card-outline-color);
- 
-   accent-color: var(--in-content-accent-color);
-+
-+  --border-radius-1: 0; /* Default: 2px */
-+  --border-radius-2: 0; /* Default: 4px */
- }
- 
- @media (-moz-toolbar-prefers-color-scheme: dark) {
-@@ -340,7 +351,7 @@ xul|menulist {
+@@ -347,7 +358,7 @@ xul|menulist {
    min-height: 32px;
    color: var(--in-content-button-text-color);
    border: 1px solid var(--in-content-button-border-color);
@@ -36,7 +29,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    background-color: var(--in-content-button-background);
    font-weight: 400;
    padding: 7px 15px;
-@@ -537,7 +548,7 @@ xul|menulist > xul|menupopup {
+@@ -541,7 +552,7 @@ xul|menulist > xul|menupopup {
    background-color: transparent;
  
    --panel-border-color: var(--in-content-box-border-color);
@@ -45,7 +38,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    --panel-background: var(--in-content-box-background);
    --panel-color: var(--in-content-text-color);
    --panel-padding: 0;
-@@ -586,7 +597,7 @@ html|textarea,
+@@ -590,7 +601,7 @@ html|textarea,
  xul|search-textbox {
    appearance: none;
    border: 1px solid var(--in-content-box-border-color);
@@ -54,7 +47,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    color: inherit;
    background-color: var(--in-content-box-background);
  }
-@@ -657,7 +668,7 @@ html|a:-moz-focusring,
+@@ -661,7 +672,7 @@ html|a:-moz-focusring,
  .text-link:-moz-focusring {
    outline: 2px solid var(--in-content-focus-outline-color);
    outline-offset: 1px;
@@ -63,7 +56,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
  }
  
  button.text-link {
-@@ -683,7 +694,7 @@ html|input[type="checkbox"] {
+@@ -687,7 +698,7 @@ html|input[type="checkbox"] {
    width: 16px;
    border: 1px solid var(--checkbox-border-color);
    background-color: var(--checkbox-unchecked-bgcolor);
@@ -72,7 +65,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    margin-inline: 0 6px;
    flex-shrink: 0; /* avoid shrinking inside flex container */
  }
-@@ -850,7 +861,7 @@ html|*#categories {
+@@ -854,7 +865,7 @@ html|*#categories {
  }
  
  #categories > .category {
@@ -81,7 +74,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    min-height: 48px;
    appearance: none;
    color: inherit;
-@@ -1011,7 +1022,7 @@ xul|richlistbox {
+@@ -1015,7 +1026,7 @@ xul|richlistbox {
    margin-inline: 0;
    background-color: var(--in-content-box-background);
    border: 1px solid var(--in-content-box-border-color);
@@ -90,7 +83,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    color: var(--in-content-text-color);
  }
  
-@@ -1075,7 +1086,7 @@ xul|richlistitem[selected] xul|menulist:focus-visible {
+@@ -1080,7 +1091,7 @@ xul|richlistitem[selected] xul|menulist:focus-visible {
  @media (prefers-contrast) {
    xul|treechildren::-moz-tree-row(selected) {
       border: 2px solid currentColor;
@@ -99,7 +92,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    }
  }
  
-@@ -1091,7 +1102,7 @@ xul|tree {
+@@ -1096,7 +1107,7 @@ xul|tree {
    appearance: none;
    font-size: 1em;
    border: 1px solid var(--in-content-box-border-color);
@@ -108,7 +101,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    background-color: var(--in-content-box-background);
    color: inherit;
    margin: 0;
-@@ -1166,7 +1177,7 @@ xul|treechildren::-moz-tree-image(selected) {
+@@ -1171,7 +1182,7 @@ xul|treechildren::-moz-tree-image(selected) {
  /* Message bars */
  .message-bar {
    background-color: var(--in-content-box-info-background);
@@ -117,7 +110,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    min-height: 32px;
    -moz-box-align: center;
    padding: 4px;
-@@ -1187,7 +1198,7 @@ xul|treechildren::-moz-tree-image(selected) {
+@@ -1192,7 +1203,7 @@ xul|treechildren::-moz-tree-image(selected) {
  .message-bar-content > .message-bar-button {
    background-color: var(--grey-90-a10);
    border: none;
@@ -126,7 +119,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    height: 24px;
    margin-inline-start: 8px;
    padding: 0 8px;
-@@ -1232,7 +1243,7 @@ input[type="text"][warning]:enabled:not(:focus) {
+@@ -1237,7 +1248,7 @@ input[type="text"][warning]:enabled:not(:focus) {
    background: var(--in-content-box-background);
    /* Needed for high-contrast where the border will appear. */
    border: 1px solid transparent;
@@ -135,7 +128,7 @@ index 5fb3da2b312e99f762976f3e424227eb61f6657e..826011071f4fa20ced0778beeb38faef
    box-shadow: var(--card-shadow);
    margin: 0 0 8px;
    /* Remove the border from the overall padding. */
-@@ -1266,7 +1277,7 @@ input[type="text"][warning]:enabled:not(:focus) {
+@@ -1271,7 +1282,7 @@ input[type="text"][warning]:enabled:not(:focus) {
  .sidebar-footer-link {
    height: 36px;
    cursor: default;

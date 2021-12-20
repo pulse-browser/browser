@@ -1,34 +1,29 @@
 diff --git a/browser/components/customizableui/CustomizableUI.jsm b/browser/components/customizableui/CustomizableUI.jsm
-index a52c35c3810ca8ccbde97d932d34652d9ec728c1..6ee11a2cadcf254c608e066b3b97978b284f03c7 100644
+index 87aede1449d7ac4f30e13990f6d928fba3484162..32deb776daa5f4a353667e282f2ebfd904cefedb 100644
 --- a/browser/components/customizableui/CustomizableUI.jsm
 +++ b/browser/components/customizableui/CustomizableUI.jsm
 @@ -13,6 +13,10 @@ const { AppConstants } = ChromeUtils.import(
    "resource://gre/modules/AppConstants.jsm"
  );
  
-+const { ExtensionCommon } = ChromeUtils.import(
++const { makeWidgetId } = ChromeUtils.import(
 +  "resource://gre/modules/ExtensionCommon.jsm"
-+);
++).ExtensionCommon;
 +
  XPCOMUtils.defineLazyModuleGetters(this, {
    AddonManager: "resource://gre/modules/AddonManager.jsm",
    AddonManagerPrivate: "resource://gre/modules/AddonManager.jsm",
-@@ -38,7 +42,10 @@ XPCOMUtils.defineLazyPreferenceGetter(
-   false
- );
+@@ -32,6 +36,7 @@ XPCOMUtils.defineLazyGetter(this, "gWidgetsBundle", function() {
+ });
  
-+const { makeWidgetId } = ExtensionCommon;
-+
  const kDefaultThemeID = "default-theme@mozilla.org";
 +const kUBlockOriginID = "uBlock0@raymondhill.net";
  
  const kSpecialWidgetPfx = "customizableui-special-";
  
-@@ -238,16 +245,19 @@ var CustomizableUIInternal = {
-     );
+@@ -232,15 +237,15 @@ var CustomizableUIInternal = {
  
      let navbarPlacements = [
-+      // Focus Browser: Position the reload button between the back and forward button
        "back-button",
 -      "forward-button",
        "stop-reload-button",
@@ -41,8 +36,6 @@ index a52c35c3810ca8ccbde97d932d34652d9ec728c1..6ee11a2cadcf254c608e066b3b97978b
        "urlbar-container",
        "spring",
 -      "save-to-pocket-button",
-+      // Focus Browser: Remove pocket
-+      // "save-to-pocket-button",
        "downloads-button",
        AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
        "fxa-toolbar-menu-button",
