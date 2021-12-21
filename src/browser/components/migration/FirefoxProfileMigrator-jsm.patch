@@ -1,0 +1,115 @@
+diff --git a/browser/components/migration/FirefoxProfileMigrator.jsm b/browser/components/migration/FirefoxProfileMigrator.jsm
+index bba617374f2ff9bb2466826a884163b76ee4bb55..349a699a2b0778e4e00f16e933dc7ec8fc21da2e 100644
+--- a/browser/components/migration/FirefoxProfileMigrator.jsm
++++ b/browser/components/migration/FirefoxProfileMigrator.jsm
+@@ -13,6 +13,9 @@
+  * from the source profile.
+  */
+ 
++const { XPCOMUtils } = ChromeUtils.import(
++  "resource://gre/modules/XPCOMUtils.jsm"
++);
+ const { MigrationUtils, MigratorPrototype } = ChromeUtils.import(
+   "resource:///modules/MigrationUtils.jsm"
+ );
+@@ -40,13 +43,77 @@ ChromeUtils.defineModuleGetter(
+   "resource://gre/modules/ProfileAge.jsm"
+ );
+ 
++XPCOMUtils.defineLazyModuleGetters(this, {
++  AppConstants: "resource://gre/modules/AppConstants.jsm",
++  LoginHelper: "resource://gre/modules/LoginHelper.jsm",
++  MigrationUtils: "resource:///modules/MigrationUtils.jsm",
++  OS: "resource://gre/modules/osfile.jsm",
++});
++
+ function FirefoxProfileMigrator() {
+   this.wrappedJSObject = this; // for testing...
+ }
+ 
++// =============================================================================
++// Focus browser helper functions
++
++function getProfileStorageDir() {
++  /**
++   * The location in the filesystem where this folder is located. e.g. ULibDir
++   * (`/Users/<username>/Library/`)
++   * @type {string}
++   */
++  let rootDir;
++  let subFolders = [];
++
++  if (AppConstants.platform == "macosx") {
++    rootDir = "ULibDir"
++
++    subFolders.push("Application Support");
++    subFolders.push("Firefox");
++    subFolders.push("Profiles");
++  } else if (AppConstants.platform == "win") {
++    // TODO: Windows support for profile imports
++    throw new Error("Unimplemented: Windows doesn't support profile imports from other firefox instances")
++  } else {
++    // TODO: Linux / unix support for profile imports
++    throw new Error("Unimplemented: Linux / Unix doesn't support profile imports from other firefox instances")
++  }
++
++  // Try to use firefox's dirsvc to convert this to a path string
++  try {
++    let target = Services.dirsvc.get(rootDir, Ci.nsIFile);    
++    subFolders.forEach(dir => target.append(dir));
++
++    return target
++  } catch (e) {
++    // Some form of error occurred with the path logic, so log it to the console
++    // so we can debug it latter
++    Cu.reportError(e);
++  }
++
++  // Return null if nothing has been returned already. I would really love to use
++  // an option here but that would add significant complexity to this patch file
++  return null;
++}
++
+ FirefoxProfileMigrator.prototype = Object.create(MigratorPrototype);
+ 
+ FirefoxProfileMigrator.prototype._getAllProfiles = function() {
++  const profileStorageDirectory = getProfileStorageDir();
++
++  console.log("profileStorageDirectory: ", profileStorageDirectory);
++
++  const children = MigrationUtils.spinResolve(
++    IOUtils.getChildren(profileStorageDirectory.path)
++  );
++
++  const probablyValidProfiles = children
++    .filter(folder => !folder.includes('.DS_Store'))
++    .filter(folder => folder.split(".").length == 2);
++
++  console.log("children: ", probablyValidProfiles);
++
+   let allProfiles = new Map();
+   let profileService = Cc["@mozilla.org/toolkit/profile-service;1"].getService(
+     Ci.nsIToolkitProfileService
+@@ -54,10 +121,11 @@ FirefoxProfileMigrator.prototype._getAllProfiles = function() {
+   for (let profile of profileService.profiles) {
+     let rootDir = profile.rootDir;
+ 
++    console.log(rootDir)
++
+     if (
+       rootDir.exists() &&
+-      rootDir.isReadable() &&
+-      !rootDir.equals(MigrationUtils.profileStartup.directory)
++      rootDir.isReadable() 
+     ) {
+       allProfiles.set(profile.name, rootDir);
+     }
+@@ -370,7 +438,7 @@ FirefoxProfileMigrator.prototype._getResourcesInternal = function(
+ };
+ 
+ Object.defineProperty(FirefoxProfileMigrator.prototype, "startupOnlyMigrator", {
+-  get: () => true,
++  get: () => false,
+ });
+ 
+ FirefoxProfileMigrator.prototype.classDescription = "Firefox Profile Migrator";
