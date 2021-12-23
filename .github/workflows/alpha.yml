@@ -107,9 +107,9 @@ jobs:
           name: focus-browser.linux.tar.bz2
           path: ./focus-browser.linux.tar.bz2
 
-  flatpak-64:
-    name: 📦 Flatpak (64-bit)
-    needs: [build-data, linux-64]
+  flatpak:
+    name: 📦 Flatpak
+    needs: [build-data, linux]
     runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-3.38
