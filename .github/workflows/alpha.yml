@@ -101,11 +101,47 @@ jobs:
           cp ./engine/obj-*/dist/focus-browser-*.tar.bz2 .
           mv focus-browser-*.tar.bz2 "focus-browser.linux.tar.bz2"
 
-      - uses: 'marvinpinto/action-automatic-releases@latest'
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
-          repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: 'alpha-${{ needs.build-data.outputs.build_date }}'
-          prerelease: true
-          title: 'Alpha build'
-          files: |
-            focus-browser.linux.tar.bz2
+          name: focus-browser.linux.tar.bz2
+          path: ./focus-browser.linux.tar.bz2
+
+  flatpak-64:
+    name: 📦 Flatpak (64-bit)
+    needs: [build-data, linux-64]
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-3.38
+      options: --privileged
+
+    steps:
+      - name: Clone packaging scripts
+        run: git clone --recurse-submodules https://github.com/focus-browser/packages.git
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: focus-browser.linux.tar.bz2
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Download binaries
+        run: |
+          cd packages/flatpak
+          cp ../../focus-browser.linux.tar.bz2 ./focus-browser.tar.bz2
+          tar -xvf focus-browser.tar.bz2
+      - uses: bilelmoussaoui/flatpak-github-actions@v2
+        with:
+          bundle: focus-browser.linux.flatpak
+          manifest-path: './packages/flatpak/com.fushra.browser.desktop.yml'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: focus-browser.linux.flatpak
+          path: ./focus-browser.linux.flatpak
