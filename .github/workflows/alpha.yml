@@ -75,11 +75,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sccache-
 
-      - name: Setup melon
-        run: yarn && yarn setupLink
-
-      - name: Download firefox source and dependancies
-        run: yarn download
+      - name: Get System Info
+        run: |
+          llc --version
 
       - name: Import
         run: yarn imp
@@ -130,6 +128,15 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
+      - name: Save flatpak cache
+        uses: actions/cache@v2
+        continue-on-error: false
+        with:
+          path: ./packages/flatpak/.flatpak-builder/cache
+          key: ${{ runner.os }}-flatpak-${{ needs.build-data.outputs.shortsha }}
+          restore-keys: |
+            ${{ runner.os }}-flatpak-
+
       - name: Download binaries
         run: |
           cd packages/flatpak
@@ -145,3 +152,10 @@ jobs:
         with:
           name: focus-browser.linux.flatpak
           path: ./focus-browser.linux.flatpak
+
+      - name: Build for Alpha repo
+        run: |
+          export deploy_acc_key=$TRICKYPR_TOKEN
+          cd packages/flatpak
+          chmod +x ./build.sh
+          ./build.sh
