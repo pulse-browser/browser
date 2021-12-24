@@ -79,6 +79,12 @@ jobs:
         run: |
           llc --version
 
+      - name: Setup melon
+        run: yarn && yarn setupLink
+
+      - name: Download firefox source and dependancies
+        run: yarn download
+
       - name: Import
         run: yarn imp
 
