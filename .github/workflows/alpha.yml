@@ -78,6 +78,7 @@ jobs:
       - name: Get System Info
         run: |
           llc --version
+          wasm-ld --version
 
       - name: Setup melon
         run: yarn && yarn setupLink
