@@ -34,12 +34,14 @@ jobs:
           git config --global user.email "trickypr@users.noreply.github.com"
           git config --global user.name "TrickyPR"
 
-      - name: Install system dependancies
+      - name: Install system dependencies
         run: |
           sudo apt-get update --fix-missing
           sudo apt-get update
           sudo apt-get install dos2unix yasm nasm build-essential libgtk2.0-dev libpython3-dev m4 uuid libasound2-dev libcurl4-openssl-dev libdbus-1-dev libdrm-dev libdbus-glib-1-dev libdbus-glib-1-dev libgtk-3-dev libpulse-dev libx11-xcb-dev libxt-dev xvfb lld-10 llvm
           pip install pycairo testresources
+
+          echo "/usr/lib/llvm-10/bin" >> $GITHUB_PATH
 
       - name: Install WASI SDK
         run: |
