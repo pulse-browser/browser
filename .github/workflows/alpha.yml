@@ -85,6 +85,7 @@ jobs:
           llc --version
           ls /usr/lib/llvm-10/bin
           wasm-ld --version
+          cargo --version
 
       - name: Setup melon
         run: yarn && yarn setupLink
