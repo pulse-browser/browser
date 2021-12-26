@@ -10,8 +10,14 @@ jobs:
     outputs:
       sha: ${{ steps.data.outputs.shortsha }}
       build_date: ${{ steps.data.outputs.builddate }}
+      upstream: ${{ steps.data.outputs.upstream }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Setup melon
+        run: yarn && yarn setupLink
 
       - name: Export release data
         id: data
@@ -19,6 +25,7 @@ jobs:
         run: |
           echo "::set-output name=shortsha::$(git rev-parse --short HEAD)"
           echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
+          echo "::set-output name=upstream::$(yarn ff-version)"
 
   linux:
     runs-on: ubuntu-latest
@@ -73,12 +80,10 @@ jobs:
 
       - name: Save sccache
         uses: actions/cache@v2
-        continue-on-error: true
+        continue-on-error: false
         with:
           path: /home/runner/.cache/sccache
-          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.shortsha }}
-          restore-keys: |
-            ${{ runner.os }}-sccache-
+          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
 
       - name: Get System Info
         run: |
