@@ -11,5 +11,3 @@
 # Enable these to enable mozilla telemetry and tracking
 # mk_add_options MOZ_TELEMETRY_REPORTING=
 # mk_add_options MOZ_DATA_REPORTING=
-
-ac_add_options --with-wasi-sysroot=/opt/wasi-sdk/share/wasi-sysroot

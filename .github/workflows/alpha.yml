@@ -60,11 +60,15 @@ jobs:
           wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-14/libclang_rt.builtins-wasm32-wasi-14.0.tar.gz
           sudo tar -xf libclang_rt.builtins-wasm32-wasi-14.0.tar.gz --strip-components=1 -C /usr/lib/llvm-10/lib/clang/10.0.0/lib/
 
-      - name: Use an old rust version as a workaround
+      # - name: Use an old rust version as a workaround
+      #   run: |
+      #     rustup install 1.45.2
+      #     rustup default 1.45.2
+      #     rustup override set 1.45.2
+
+      - name: Disable wasm sandboxing for the sake of my sanity
         run: |
-          rustup install 1.45.2
-          rustup default 1.45.2
-          rustup override set 1.45.2
+          echo "ac_add_options --without-wasm-sandboxed-libraries" > mozconfig
 
       - name: Free up space
         run: |
@@ -73,23 +77,23 @@ jobs:
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
-      # - name: Install sccache
-      #   env:
-      #     LINK: https://github.com/mozilla/sccache/releases/download
-      #     SCCACHE_VERSION: 0.2.13
-      #   run: |
-      #     SCCACHE_FILE=sccache-$SCCACHE_VERSION-x86_64-unknown-linux-musl
-      #     mkdir -p $HOME/.local/bin
-      #     curl -L "$LINK/$SCCACHE_VERSION/$SCCACHE_FILE.tar.gz" | tar xz
-      #     mv -f $SCCACHE_FILE/sccache $HOME/.local/bin/sccache
-      #     echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install sccache
+        env:
+          LINK: https://github.com/mozilla/sccache/releases/download
+          SCCACHE_VERSION: 0.2.13
+        run: |
+          SCCACHE_FILE=sccache-$SCCACHE_VERSION-x86_64-unknown-linux-musl
+          mkdir -p $HOME/.local/bin
+          curl -L "$LINK/$SCCACHE_VERSION/$SCCACHE_FILE.tar.gz" | tar xz
+          mv -f $SCCACHE_FILE/sccache $HOME/.local/bin/sccache
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      # - name: Save sccache
-      #   uses: actions/cache@v2
-      #   continue-on-error: false
-      #   with:
-      #     path: /home/runner/.cache/sccache
-      #     key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+      - name: Save sccache
+        uses: actions/cache@v2
+        continue-on-error: false
+        with:
+          path: /home/runner/.cache/sccache
+          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
 
       - name: Get System Info
         run: |

@@ -107,3 +107,6 @@ dist
 engine/
 firefox-*/
 node_modules/
+
+# System mozconfig
+/mozconfig
