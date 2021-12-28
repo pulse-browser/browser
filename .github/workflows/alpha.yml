@@ -91,6 +91,7 @@ jobs:
           ls /usr/lib/llvm-10/bin
           wasm-ld --version
           cargo --version
+          ls /opt/wasi-sdk/share/wasi-sysroot
 
       - name: Setup melon
         run: yarn && yarn setupLink
