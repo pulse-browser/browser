@@ -58,3 +58,12 @@ h2,
 p {
   margin: 8px 0;
 }
+
+.logo {
+  background: url("chrome://branding/content/about-logo.png") no-repeat center;
+    background-size: auto;
+  background-size: 82px;
+  display: inline-block;
+  height: 82px;
+  width: 82px;
+}
