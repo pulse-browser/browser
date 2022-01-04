@@ -200,3 +200,10 @@ jobs:
           cd packages/flatpak
           chmod +x ./build.sh
           ./build.sh
+          
+      - name: Push to flatpak repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TRICKYPR_TOKEN }}
+          directory: './packages/flatpak/repo/'
+          repository: 'https://github.com/focus-browser/repo.git'
