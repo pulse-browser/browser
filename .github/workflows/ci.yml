@@ -1,0 +1,20 @@
+name: CI and tests
+
+on:
+  push: [alpha]
+
+jobs:
+  license-check:
+    name: License check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Setup Melon
+        run: yarn && yarn setupLink
+
+      - name: Check license
+        run: yarn licenseCheck
