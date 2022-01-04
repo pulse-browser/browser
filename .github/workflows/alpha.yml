@@ -155,6 +155,11 @@ jobs:
         with:
           name: focus-browser.linux.tar.bz2
 
+      - name: Setup git
+        run: |
+          git config --global user.email "trickypr@users.noreply.github.com"
+          git config --global user.name "TrickyPR"
+
       - name: Display structure of downloaded files
         run: ls -R
 
