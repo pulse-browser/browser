@@ -188,6 +188,12 @@ jobs:
           name: focus-browser.linux.flatpak
           path: ./focus-browser.linux.flatpak
 
+      - name: Import GPG key
+        run: |
+          echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+
       - name: Build for Alpha repo
         run: |
           export deploy_acc_key=$TRICKYPR_TOKEN
