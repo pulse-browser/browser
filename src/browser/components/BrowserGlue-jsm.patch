@@ -1,8 +1,8 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 84f98149552aedd0b787f1257fc415b6bbe790fa..771153fbf087621c03a7c0a555e25035530590cf 100644
+index 0c16eba15229d0003d62bb76307affe944d7c47b..c37ab06ae9bd6b4b00e97b35563456e9cf7b5cb7 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
-@@ -3981,6 +3981,18 @@ BrowserGlue.prototype = {
+@@ -4045,6 +4045,18 @@ BrowserGlue.prototype = {
      );
    },
  
@@ -14,14 +14,14 @@ index 84f98149552aedd0b787f1257fc415b6bbe790fa..771153fbf087621c03a7c0a555e25035
 +   */
 +  _showWelcomeDialog() {
 +    BrowserWindowTracker.getTopWindow().gDialogBox.open(
-+      "chrome://focus/content/welcome.html"
++      "chrome://browser/content/welcome/welcome.html"
 +    );
 +  },
 +
    async _maybeShowDefaultBrowserPrompt() {
      // Highest priority is the upgrade dialog, which can include a "primary
      // browser" request and is limited in various ways, e.g., major upgrades.
-@@ -4038,6 +4050,25 @@ BrowserGlue.prototype = {
+@@ -4102,6 +4114,25 @@ BrowserGlue.prototype = {
        return;
      }
  
