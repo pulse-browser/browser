@@ -6,50 +6,70 @@
       content="default-src chrome:; object-src 'none'"
     />
     <meta name="referrer" content="no-referrer" />
+
     <link
       rel="stylesheet"
       type="text/css"
       href="chrome://global/skin/in-content/common.css"
     />
-    <link rel="localization" href="branding/brand.ftl" />
-
     <link
       rel="stylesheet"
       href="chrome://browser/content/welcome/welcome.css"
     />
+
+    <link rel="localization" href="branding/brand.ftl" />
+    <link rel="localization" href="browser/welcome.ftl" />
   </head>
   <body>
     <div class="page" id="welcome">
       <div class="logo"></div>
-      <h2>Welcome to Focus Browser</h2>
+      <h2 data-l10n-id="welcome-dialog-welcome"></h2>
 
-      <p>Lets get you setup</p>
+      <p data-l10n-id="welcome-dialog-welcome-subtext"></p>
 
-      <button id="welcomeNext" class="primary">Get started</button>
+      <button
+        id="welcomeNext"
+        class="primary"
+        data-l10n-id="welcome-dialog-get-started"
+      ></button>
     </div>
 
     <div class="page" id="import">
-      <h2>Import your stuff</h2>
-      <p>Pick up where you left off in your last browser.</p>
+      <h2 data-l10n-id="welcome-dialog-import"></h2>
+      <p data-l10n-id="welcome-dialog-import-subtext"></p>
 
       <br />
 
-      <button class="primary" id="importBrowser">
-        Import from previous browser
-      </button>
-      <button class="text-link" id="importNext">Not now</button>
+      <button
+        class="primary"
+        id="importBrowser"
+        data-l10n-id="welcome-dialog-import-action"
+      ></button>
+      <button
+        class="text-link"
+        id="importNext"
+        data-l10n-id="welcome-dialog-skip"
+      ></button>
     </div>
 
     <div class="page" id="theme">
-      <h2>Chose a theme</h2>
+      <h2 data-l10n-id="welcome-dialog-theme"></h2>
       <div id="themeList" class="cardGroup"></div>
-      <button id="themeNext" class="primary">Continue</button>
+      <button
+        id="themeNext"
+        class="primary"
+        data-l10n-id="welcome-dialog-theme-action"
+      ></button>
     </div>
 
     <div class="page" id="search">
-      <h2>Chose a search engine</h2>
+      <h2 data-l10n-id="welcome-dialog-search"></h2>
       <div id="searchList" class="cardGroup"></div>
-      <button id="searchNext" class="primary">Done</button>
+      <button
+        id="searchNext"
+        class="primary"
+        data-l10n-id="welcome-dialog-search-action"
+      ></button>
     </div>
 
     <script src="./welcome.js"></script>
