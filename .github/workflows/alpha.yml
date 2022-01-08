@@ -207,3 +207,22 @@ jobs:
           github_token: ${{ secrets.TRICKYPR_TOKEN }}
           directory: './packages/flatpak/repo/'
           repository: 'focus-browser/repo'
+      
+  release:
+    name: Release
+    needs: [build-data, linux, flatpak]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+
+      - name: release-github
+        uses: 'marvinpinto/action-automatic-releases@latest'
+        with:
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          automatic_release_tag: 'alpha-${{ needs.build-data.outputs.build_date }}'
+          prerelease: true
+          title: 'Alpha build'
+          files: |
+            focus-browser.linux.flatpak 
+            focus-browser.linux.tar.bz2
+
