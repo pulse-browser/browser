@@ -1,7 +1,7 @@
 {
-  "name": "Focus",
+  "name": "Lepton",
   "vendor": "Fushra",
-  "appId": "com.fushra.focus.desktop",
+  "appId": "com.fushra.browser.desktop",
   "version": {
     "product": "firefox",
     "version": "95.0.2",
@@ -17,19 +17,19 @@
     },
     "newtab": {
       "id": "newtab@browser.fushra.com",
-      "url": "https://github.com/focus-browser/newtab/releases/download/v1.0.0-a.4/newtab.zip"
+      "url": "https://github.com/lepton-browser/newtab/releases/download/v1.0.0-a.4/newtab.zip"
     },
     "firepicker": {
       "id": "fire-picker@browser.fushra.com",
-      "url": "https://github.com/focus-browser/fire-picker/releases/download/v1.1.0/release.zip"
+      "url": "https://github.com/lepton-browser/fire-picker/releases/download/v1.1.0/release.zip"
     }  
   },
   "brands": {
     "stable": {
       "backgroundColor": "#2B2A33",
-      "brandShorterName": "Focus",
-      "brandShortName": "Focus Browser",
-      "brandFullName": "Focus Browser"
+      "brandShorterName": "Lepton",
+      "brandShortName": "Lepton Browser",
+      "brandFullName": "Lepton Browser"
     }
   }
 }
