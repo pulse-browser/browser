@@ -15,3 +15,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Border radius in settings is now consistent with the rest of the UI ([#6](https://github.com/lepton-browser/browser/pull/6))
+- Vertical centering of images on welcome pages cards ([#18](https://github.com/lepton-browser/browser/pull/18))
