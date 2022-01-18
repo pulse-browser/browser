@@ -10,17 +10,17 @@
     "melon-build": "^1.0.0-a.10"
   },
   "scripts": {
-    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link melon-build",
-    "build": "melon build",
-    "build:ui": "melon build --ui",
-    "start": "melon run",
-    "export": "melon export-file",
-    "imp": "melon import",
+    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link gluon-build",
+    "build": "gluon build",
+    "build:ui": "gluon build --ui",
+    "start": "gluon run",
+    "export": "gluon export-file",
+    "imp": "gluon import",
     "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default",
-    "download": "melon download",
-    "rebuild": "cd melon && yarn build && cd ..",
-    "package": "melon package",
-    "ff-version": "melon ff-version",
-    "licenseCheck": "melon license-check"
+    "download": "gluon download",
+    "rebuild": "cd gluon && yarn build && cd ..",
+    "package": "gluon package",
+    "ff-version": "gluon ff-version",
+    "licenseCheck": "gluon license-check"
   }
 }
