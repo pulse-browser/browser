@@ -135,7 +135,6 @@ class Themes extends Page {
 
       const img = document.createElement('img')
       img.src = theme.icons['32']
-      img.classList.add('card-heading-image')
 
       const name = document.createElement('h3')
       name.textContent = theme.name
@@ -194,7 +193,6 @@ class Search extends Page {
 
     const img = document.createElement('img')
     img.src = search.iconURI.spec
-    img.classList.add('card-heading-image')
 
     const name = document.createElement('h3')
     name.textContent = search.name
