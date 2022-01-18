@@ -10,7 +10,7 @@
     "melon-build": "^1.0.0-a.10"
   },
   "scripts": {
-    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link melon-build",
+    "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link gluon-build",
     "build": "melon build",
     "build:ui": "melon build --ui",
     "start": "melon run",
