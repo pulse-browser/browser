@@ -120,14 +120,14 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          cp ./engine/obj-*/dist/focus-browser-*.tar.bz2 .
-          mv focus-browser-*.tar.bz2 "focus-browser.linux.tar.bz2"
+          cp ./engine/obj-*/dist/pulse-browser-*.tar.bz2 .
+          mv pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: focus-browser.linux.tar.bz2
-          path: ./focus-browser.linux.tar.bz2
+          name: pulse-browser.linux.tar.bz2
+          path: ./pulse-browser.linux.tar.bz2
 
   flatpak:
     name: 📦 Flatpak
@@ -139,7 +139,7 @@ jobs:
 
     steps:
       - name: Clone packaging scripts
-        run: git clone --recurse-submodules https://github.com/focus-browser/packages.git
+        run: git clone --recurse-submodules https://github.com/pulse-browser/packages.git
 
       - uses: actions/setup-node@v2
         with:
@@ -147,7 +147,7 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: focus-browser.linux.tar.bz2
+          name: pulse-browser.linux.tar.bz2
 
       - name: Setup git
         run: |
@@ -169,18 +169,18 @@ jobs:
       - name: Download binaries
         run: |
           cd packages/flatpak
-          cp ../../focus-browser.linux.tar.bz2 ./focus-browser.tar.bz2
-          tar -xvf focus-browser.tar.bz2
+          cp ../../pulse-browser.linux.tar.bz2 ./pulse-browser.tar.bz2
+          tar -xvf pulse-browser.tar.bz2
       - uses: bilelmoussaoui/flatpak-github-actions@v2
         with:
-          bundle: focus-browser.linux.flatpak
+          bundle: pulse-browser.linux.flatpak
           manifest-path: './packages/flatpak/com.fushra.browser.desktop.yml'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: focus-browser.linux.flatpak
-          path: ./focus-browser.linux.flatpak
+          name: pulse-browser.linux.flatpak
+          path: ./pulse-browser.linux.flatpak
 
       - name: Import GPG key
         run: |
@@ -200,7 +200,7 @@ jobs:
         with:
           github_token: ${{ secrets.TRICKYPR_TOKEN }}
           directory: './packages/flatpak/repo/'
-          repository: 'focus-browser/repo'
+          repository: 'pulse-browser/repo'
 
   release:
     name: Release
@@ -217,5 +217,5 @@ jobs:
           prerelease: true
           title: 'Alpha build'
           files: |
-            focus-browser.linux.flatpak 
-            focus-browser.linux.tar.bz2
+            pulse-browser.linux.flatpak 
+            pulse-browser.linux.tar.bz2
