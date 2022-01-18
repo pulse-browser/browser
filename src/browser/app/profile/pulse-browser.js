@@ -1,5 +1,9 @@
 // Note: You must have semicolons at the end of each line in user setting files
 
+// Enable downloading drm
+pref('media.eme.enabled', true);
+
+// Disable firefox's about:welcome page
 pref('browser.aboutwelcome.enabled', false);
 
 pref('pulse.welcome.enabled', true);
