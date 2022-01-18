@@ -1,5 +1,5 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 0c16eba15229d0003d62bb76307affe944d7c47b..c37ab06ae9bd6b4b00e97b35563456e9cf7b5cb7 100644
+index 0c16eba15229d0003d62bb76307affe944d7c47b..48a9a8e615987ef64b4eb3bb99de793ddb6384fc 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
 @@ -4045,6 +4045,18 @@ BrowserGlue.prototype = {
@@ -29,8 +29,8 @@ index 0c16eba15229d0003d62bb76307affe944d7c47b..c37ab06ae9bd6b4b00e97b35563456e9
 +    // =========================================================================
 +    // Focus browser welcome
 +
-+    const welcomeEnabledPref = 'focus.welcome.enabled'
-+    const welcomeSeenPref = 'focus.welcome.seen'
++    const welcomeEnabledPref = 'pulse.welcome.enabled'
++    const welcomeSeenPref = 'pulse.welcome.seen'
 +
 +    // NOTE: Get bool prefs takes in two options, the pref string and a default
 +    // value if it is not defined

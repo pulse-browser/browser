@@ -2,8 +2,8 @@
 
 pref('browser.aboutwelcome.enabled', false);
 
-pref('focus.welcome.enabled', true);
-pref('focus.welcome.seen', false);
+pref('pulse.welcome.enabled', true);
+pref('pulse.welcome.seen', false);
 
 // This preference tells the browser that our addons are preinstalled and should
 // be provided with permissions without asking

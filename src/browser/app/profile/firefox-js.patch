@@ -1,17 +1,17 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index e5844761ac37e5b368b25a23b030421c742c6a19..682d6483468b388f9e9c96680e22d13b9683e1e9 100644
+index 065f691054409b0cc932138a7d3d2382f647092a..5f648fc2211ba7a30e2372a0ed6aa8ae0a93311a 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
    #endif
  #endif
  
-+#include focus-browser.js
++#include pulse-browser.js
 +
  pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
  
  // Enables some extra Extension System Logging (can reduce performance)
-@@ -1979,12 +1981,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
+@@ -2043,12 +2045,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -21,7 +21,7 @@ index e5844761ac37e5b368b25a23b030421c742c6a19..682d6483468b388f9e9c96680e22d13b
 -pref("extensions.pocket.site", "getpocket.com");
 -pref("extensions.pocket.onSaveRecs", true);
 -pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
-+// Focus Browser: Disable pocket
++// Pulse Browser: Disable pocket
 +// pref("extensions.pocket.api", "api.getpocket.com");
 +// pref("extensions.pocket.enabled", true);
 +// pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
@@ -31,7 +31,7 @@ index e5844761ac37e5b368b25a23b030421c742c6a19..682d6483468b388f9e9c96680e22d13b
  
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
-@@ -2102,11 +2105,6 @@ pref("fission.frontend.simulate-messages", false);
+@@ -2166,11 +2169,6 @@ pref("fission.frontend.simulate-messages", false);
  pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
@@ -43,7 +43,7 @@ index e5844761ac37e5b368b25a23b030421c742c6a19..682d6483468b388f9e9c96680e22d13b
  pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
  pref("browser.engagement.downloads-button.has-used", false);
  pref("browser.engagement.fxa-toolbar-menu-button.has-used", false);
-@@ -2591,3 +2589,4 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
+@@ -2650,3 +2648,4 @@ pref("svg.context-properties.content.allowed-domains", "profile.accounts.firefox
  #ifdef NIGHTLY_BUILD
    pref("extensions.translations.disabled", true);
  #endif

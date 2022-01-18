@@ -60,12 +60,6 @@ jobs:
           wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-14/libclang_rt.builtins-wasm32-wasi-14.0.tar.gz
           sudo tar -xf libclang_rt.builtins-wasm32-wasi-14.0.tar.gz --strip-components=1 -C /usr/lib/llvm-10/lib/clang/10.0.0/lib/
 
-      # - name: Use an old rust version as a workaround
-      #   run: |
-      #     rustup install 1.45.2
-      #     rustup default 1.45.2
-      #     rustup override set 1.45.2
-
       - name: Disable wasm sandboxing for the sake of my sanity
         run: |
           echo "ac_add_options --without-wasm-sandboxed-libraries" > mozconfig
@@ -200,14 +194,14 @@ jobs:
           cd packages/flatpak
           chmod +x ./build.sh
           ./build.sh
-          
+
       - name: Push to flatpak repo
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.TRICKYPR_TOKEN }}
           directory: './packages/flatpak/repo/'
           repository: 'focus-browser/repo'
-      
+
   release:
     name: Release
     needs: [build-data, linux, flatpak]
@@ -225,4 +219,3 @@ jobs:
           files: |
             focus-browser.linux.flatpak 
             focus-browser.linux.tar.bz2
-
