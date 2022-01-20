@@ -1,10 +1,19 @@
+
 <div align="center">
 
-# Focus Browser
+<img src="https://raw.githubusercontent.com/pulse-browser/assets/main/pulse-logo.png" height="180" length="180">
 
+# Pulse Browser
 An experimental firefox fork designed to minimize distractions and maximize focus.
 
+![Discord](https://img.shields.io/discord/835714549545828352?style=flat-square)  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pulse-browser/browser/Alpha%20builds?style=flat-square) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/pulse-browser/browser?style=flat-square) ![GitHub Repo stars](https://img.shields.io/github/stars/pulse-browser/browser?style=flat-square)
+
+
 </div>
+
+## Images
+
+<img src="https://raw.githubusercontent.com/pulse-browser/assets/main/preview.png" height="400" length="700">
 
 ## Goals
 
