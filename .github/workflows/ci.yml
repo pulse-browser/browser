@@ -1,7 +1,11 @@
 name: CI and tests
 
 on:
-  push: [alpha]
+  push:
+    branches: [alpha, beta]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [alpha, beta]
 
 jobs:
   license-check:
@@ -17,4 +21,4 @@ jobs:
         run: yarn && yarn setupLink
 
       - name: Check license
-        run: yarn licenseCheck
+        run: yarn licenseCheck --no-fix
