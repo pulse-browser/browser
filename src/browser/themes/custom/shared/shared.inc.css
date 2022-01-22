@@ -99,3 +99,12 @@ menulist:host(:not([native])) {
 .dialogBox {
   border-radius: var(--dialog-border-radius);
 }
+
+.sidebar-icon-item {
+  -moz-context-properties: fill;
+  fill: currentColor;
+  opacity: 0.8;
+  width: 16px;
+  height: 16px;
+  padding: 16px;
+}
