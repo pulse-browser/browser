@@ -218,7 +218,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          brew install sccache
+          brew install cairo sccache
           pip3 install pycairo testresources
 
       - name: Disable wasm sandboxing for the sake of my sanity
