@@ -269,9 +269,44 @@ jobs:
           name: pulse-browser.linux.tar.bz2
           path: ./pulse-browser.linux.tar.bz2
 
+  source:
+    runs-on: ubuntu-latest
+    needs: [build-data]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Setup git
+        run: |
+          git config --global user.email "trickypr@users.noreply.github.com"
+          git config --global user.name "TrickyPR"
+
+      - name: Setup melon
+        run: yarn && yarn setupLink
+
+      - name: Download firefox source and dependancies
+        run: yarn download
+
+      - name: Import
+        run: yarn imp
+
+      - name: Compress
+        run: |
+          cd engine
+          tar -czvf ../pulse-browser.source.tar.gz *
+          cd ..
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pulse-browser.source.tar.gz
+          path: ./pulse-browser.source.tar.gz
+
   release:
     name: Release
-    needs: [build-data, linux, flatpak]
+    needs: [build-data, linux, flatpak, source]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -286,3 +321,4 @@ jobs:
           files: |
             pulse-browser.linux.flatpak 
             pulse-browser.linux.tar.bz2
+            pulse-browser.source.tar.gz
