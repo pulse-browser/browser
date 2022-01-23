@@ -202,6 +202,73 @@ jobs:
           directory: './packages/flatpak/repo/'
           repository: 'pulse-browser/repo'
 
+  mac:
+    runs-on: macos-latest
+    needs: [build-data]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Setup git
+        run: |
+          git config --global user.email "trickypr@users.noreply.github.com"
+          git config --global user.name "TrickyPR"
+
+      - name: Install system dependencies
+        run: |
+          brew install sccache
+          pip3 install pycairo testresources
+
+      - name: Disable wasm sandboxing for the sake of my sanity
+        run: |
+          echo "ac_add_options --without-wasm-sandboxed-libraries" > mozconfig
+
+      - name: Save sccache
+        uses: actions/cache@v2
+        continue-on-error: false
+        with:
+          path: ~/Library/Caches/Mozilla.sccache
+          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+
+      - name: Get System Info
+        run: |
+          llc --version
+          cargo --version
+
+      - name: Setup melon
+        run: yarn && yarn setupLink
+
+      - name: Download firefox source and dependancies
+        run: yarn download
+
+      - name: Import
+        run: yarn imp
+
+      # - name: Bootstrap
+      #   run: |
+      #     cd engine
+      #     ./mach --no-interactive bootstrap --application-choice browser
+      #     cd ..
+
+      - name: Build
+        run: yarn build
+
+      - name: Package
+        run: yarn melon package
+
+      - name: Rename artifacts
+        run: |
+          cp ./engine/obj-*/dist/pulse-browser-*.tar.bz2 .
+          mv pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pulse-browser.linux.tar.bz2
+          path: ./pulse-browser.linux.tar.bz2
+
   release:
     name: Release
     needs: [build-data, linux, flatpak]
