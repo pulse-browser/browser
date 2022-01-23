@@ -108,3 +108,16 @@ menulist:host(:not([native])) {
   height: 16px;
   padding: 16px;
 }
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#sidebar-icon-settings {
+  background-image: url("chrome://global/skin/icons/settings.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+}
