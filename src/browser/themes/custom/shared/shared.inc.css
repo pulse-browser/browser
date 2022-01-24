@@ -99,3 +99,43 @@ menulist:host(:not([native])) {
 .dialogBox {
   border-radius: var(--dialog-border-radius);
 }
+
+/* ========================================================================== */
+/* SIDE BAR STYLES */
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--toolbar-bgcolor);
+}
+
+.sidebar-icon-item {
+  -moz-context-properties: fill;
+  fill: currentColor;
+  opacity: 0.8;
+  width: 16px;
+  height: 16px;
+  padding: 14px 12px;
+
+  /* Stops the border from changing the box's size */
+  margin: 0;
+}
+
+.sidebar-icon-item[checked] {
+  background-color: var(--lwt-sidebar-background-color);
+  border-left: 3px solid currentColor;
+}
+
+#sidebar-icon-settings {
+  background-image: url('chrome://global/skin/icons/settings.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  padding: 22px 12px;
+}
+
+#sidebar-box,
+#sidebar-splitter {
+  background-color: var(--lwt-sidebar-background-color) !important;
+}

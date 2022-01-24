@@ -1,0 +1,13 @@
+diff --git a/browser/themes/ThemeVariableMap.jsm b/browser/themes/ThemeVariableMap.jsm
+index dbd936100907ace650de67a7ca882067fb65f038..3f20307d018a5be1a7de0130d008496d58851c9a 100644
+--- a/browser/themes/ThemeVariableMap.jsm
++++ b/browser/themes/ThemeVariableMap.jsm
+@@ -130,7 +130,7 @@ const ThemeVariableMap = [
+     "--sidebar-background-color",
+     {
+       lwtProperty: "sidebar",
+-      optionalElementID: "sidebar-box",
++      optionalElementID: "browser",
+       processColor(rgbaChannels, element) {
+         if (!rgbaChannels) {
+           element.removeAttribute("lwt-sidebar");

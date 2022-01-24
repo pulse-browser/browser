@@ -1,0 +1,19 @@
+diff --git a/toolkit/modules/LightweightThemeConsumer.jsm b/toolkit/modules/LightweightThemeConsumer.jsm
+index b5b0da07cbcf503791bba1df9aa071181a857b70..e78b368532d2f8408d396585c1358218dc8b993a 100644
+--- a/toolkit/modules/LightweightThemeConsumer.jsm
++++ b/toolkit/modules/LightweightThemeConsumer.jsm
+@@ -209,6 +209,14 @@ const toolkitVariableMap = [
+       lwtProperty: "toolbar_field_highlight_text",
+     },
+   ],
++  // Pulse browser: Sidebar colors
++  // Expose some light weight theme variables to be available for use within css
++  [
++    '--lwt-sidebar-background-color',
++    {
++      lwtProperty: "sidebar",
++    }
++  ]
+ ];
+ 
+ function LightweightThemeConsumer(aDocument) {

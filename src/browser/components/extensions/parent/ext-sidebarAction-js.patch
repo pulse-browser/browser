@@ -1,0 +1,30 @@
+diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
+index 99aa63874bc6f1821baae6788fbba18f6861f9c6..a315d56e988f7143f0fc3be5f93c86effd876be9 100644
+--- a/browser/components/extensions/parent/ext-sidebarAction.js
++++ b/browser/components/extensions/parent/ext-sidebarAction.js
+@@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
+ 
+ var { IconDetails } = ExtensionParent;
+ 
++
+ // WeakMap[Extension -> SidebarAction]
+ let sidebarActionMap = new WeakMap();
+ 
+@@ -158,10 +159,17 @@ this.sidebarAction = class extends ExtensionAPI {
+     let { document, SidebarUI } = window;
+     let keyId = `ext-key-id-${this.id}`;
+ 
++    let getIcon = size =>
++      IconDetails.escapeUrl(
++        IconDetails.getPreferredIcon(details.icon, this.extension, size).icon
++      );
++
++
+     SidebarUI.sidebars.set(this.id, {
+       title: details.title,
+       url: sidebarURL,
+       menuId: this.menuId,
++      iconurl: getIcon(16),
+       buttonId: this.buttonId,
+       // The following properties are specific to extensions
+       extensionId: this.extension.id,

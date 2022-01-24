@@ -1,0 +1,115 @@
+diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc49659d1bc0a 100644
+--- a/browser/base/content/browser-sidebar.js
++++ b/browser/base/content/browser-sidebar.js
+@@ -19,6 +19,8 @@ var SidebarUI = {
+             .getAttribute("label"),
+           url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
+           menuId: "menu_bookmarksSidebar",
++          iconurl: "chrome://browser/skin/bookmark.svg",
++          bottom: false,
+         },
+       ],
+       [
+@@ -30,6 +32,8 @@ var SidebarUI = {
+           url: "chrome://browser/content/places/historySidebar.xhtml",
+           menuId: "menu_historySidebar",
+           triggerButtonId: "appMenuViewHistorySidebar",
++          iconurl: "chrome://browser/skin/history.svg",
++          bottom: false,
+         },
+       ],
+       [
+@@ -40,6 +44,8 @@ var SidebarUI = {
+             .getAttribute("label"),
+           url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
+           menuId: "menu_tabsSidebar",
++          iconurl: "chrome://browser/skin/tab.svg",
++          bottom: false,
+         },
+       ],
+     ]));
+@@ -71,6 +77,8 @@ var SidebarUI = {
+   },
+   _splitter: null,
+   _icon: null,
++  _sidebarIcons: null,
++  _sidebarBottomIcons: null,
+   _reversePositionButton: null,
+   _switcherPanel: null,
+   _switcherTarget: null,
+@@ -91,6 +99,10 @@ var SidebarUI = {
+     this._box = document.getElementById("sidebar-box");
+     this._splitter = document.getElementById("sidebar-splitter");
+     this._icon = document.getElementById("sidebar-icon");
++
++    this._sidebarIcons = document.getElementById("sidebar-icons");
++    this._sidebarBottomIcons = document.getElementById("sidebar-icons-bottom");
++
+     this._reversePositionButton = document.getElementById(
+       "sidebar-reverse-position"
+     );
+@@ -102,9 +114,15 @@ var SidebarUI = {
+       this.toggleSwitcherPanel();
+     });
+ 
++    const sidebaritems = this.sidebars.keys();
++    for (const sidebaritem of sidebaritems) {
++      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem).iconurl, this.sidebars.get(sidebaritem));
++    }
++
+     this._inited = true;
+ 
+     this._initDeferred.resolve();
++
+   },
+ 
+   uninit() {
+@@ -135,6 +153,27 @@ var SidebarUI = {
+     }
+   },
+ 
++  createSidebarItem(id, icon, config) {
++    console.log(id, icon)
++    var toolbar = document.createElement("img");
++    toolbar.setAttribute("id", `sidebar-icon-${id}`);
++    toolbar.setAttribute("src", `${icon}`);
++    toolbar.onclick = () => {
++      this.toggle(id);
++    };
++    if(config.bottom){
++      this._sidebarBottomIcons.appendChild(toolbar);
++      return;
++    }
++    this._sidebarIcons.appendChild(toolbar);
++    setTimeout(() => {
++      toolbar.setAttribute("class", "sidebar-icon-item");
++    }, 100);
++  },
++
++
++
++  
+   /**
+    * Opens the switcher panel if it's closed, or closes it if it's open.
+    */
+@@ -569,10 +608,9 @@ var SidebarUI = {
+    * none if the argument is an empty string.
+    */
+   selectMenuItem(commandID) {
+-    for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
++    for (let [id, { menuId }] of this.sidebars) {
+       let menu = document.getElementById(menuId);
+-      let triggerbutton =
+-        triggerButtonId && document.getElementById(triggerButtonId);
++      let triggerbutton = document.getElementById("sidebar-icon-" + id);
+       if (id == commandID) {
+         menu.setAttribute("checked", "true");
+         if (triggerbutton) {
+@@ -599,3 +637,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
+   true,
+   SidebarUI.setPosition.bind(SidebarUI)
+ );
++
++
++
