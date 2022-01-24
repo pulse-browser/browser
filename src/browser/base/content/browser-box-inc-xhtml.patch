@@ -1,0 +1,20 @@
+diff --git a/browser/base/content/browser-box.inc.xhtml b/browser/base/content/browser-box.inc.xhtml
+index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..f3ace170ddb0249dfb2a5dfe1f59a8d0a866c005 100644
+--- a/browser/base/content/browser-box.inc.xhtml
++++ b/browser/base/content/browser-box.inc.xhtml
+@@ -3,6 +3,15 @@
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+ <hbox flex="1" id="browser">
++  <vbox id="sidebar-container" class="sidebar-container"> 
++    <vbox id="sidebar-icons">
++      
++    </vbox>
++    <vbox id="sidebar-icons-bottom">
++      <img id="sidebar-icon-settings" class="sidebar-icon-item" onclick="openPreferences();" src="chrome://global/skin/icons/settings.svg" />
++    </vbox>
++  </vbox>
++
+   <vbox id="sidebar-box" hidden="true" class="chromeclass-extrachrome">
+     <box id="sidebar-header" align="center">
+       <toolbarbutton id="sidebar-switcher-target" flex="1" class="tabbable">
