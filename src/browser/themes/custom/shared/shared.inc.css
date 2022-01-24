@@ -100,6 +100,9 @@ menulist:host(:not([native])) {
   border-radius: var(--dialog-border-radius);
 }
 
+/* ========================================================================== */
+/* SIDE BAR STYLES */
+
 .sidebar-icon-item {
   -moz-context-properties: fill;
   fill: currentColor;
@@ -117,13 +120,18 @@ menulist:host(:not([native])) {
 }
 
 #sidebar-icon-settings {
-  background-image: url("chrome://global/skin/icons/settings.svg");
+  background-image: url('chrome://global/skin/icons/settings.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px 16px;
 }
 
+#sidebar-box,
+#sidebar-splitter {
+  background-color: var(--lwt-sidebar-background-color) !important;
+}
+
 .sidebar-icon-item[checked] {
-  background-color: var(--sidebar-background-color);
+  background-color: var(--lwt-sidebar-background-color);
   border-left: 3px solid currentColor;
 }
