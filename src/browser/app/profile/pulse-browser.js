@@ -19,4 +19,8 @@ pref('extensions.installedDistroAddon.newtab@browser.fushra.com', true);
 
 pref('browser.discovery.enabled', false);
 
+// This is great, I don't know why it's not default. This is required for parts
+// of the ntp page
+pref('svg.context-properties.content.enabled ', true);
+
 #include better-fox.js
