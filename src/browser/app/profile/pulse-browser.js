@@ -18,5 +18,6 @@ pref('pulse.welcome.seen', false);
 pref('extensions.installedDistroAddon.newtab@browser.fushra.com', true);
 
 pref('browser.discovery.enabled', false);
+pref('svg.context-properties.content.enabled', true);
 
 #include better-fox.js
