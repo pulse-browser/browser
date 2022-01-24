@@ -1,5 +1,5 @@
 diff --git a/browser/themes/BuiltInThemeConfig.jsm b/browser/themes/BuiltInThemeConfig.jsm
-index 05bc07ac54fa43dd6bcce1f4ab619bc054cb8084..97450a3eb533a45e538bb29a1823863730befdc9 100644
+index 05bc07ac54fa43dd6bcce1f4ab619bc054cb8084..8ace74cac976889ca0e92910388fb5128436d013 100644
 --- a/browser/themes/BuiltInThemeConfig.jsm
 +++ b/browser/themes/BuiltInThemeConfig.jsm
 @@ -32,6 +32,20 @@ const BuiltInThemeConfig = new Map([
@@ -7,14 +7,14 @@ index 05bc07ac54fa43dd6bcce1f4ab619bc054cb8084..97450a3eb533a45e538bb29a18238637
      },
    ],
 +  [
-+    "light@browser.fushra.com",
++    "pulse-light@browser.fushra.com",
 +    {
 +      version: "1.2",
 +      path: "resource://builtin-themes/pulse/light/",
 +    },
 +  ],
 +  [
-+    "dark@browser.fushra.com",
++    "pulse-dark@browser.fushra.com",
 +    {
 +      version: "1.2",
 +      path: "resource://builtin-themes/pulse/dark/",

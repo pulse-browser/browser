@@ -1,0 +1,13 @@
+diff --git a/toolkit/mozapps/extensions/internal/XPIDatabase.jsm b/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
+index f8c99c7f108c27bba0ac59e117371257456018b9..315defd14053049be5a4dcfc42b6a8c49dc65575 100644
+--- a/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
++++ b/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
+@@ -1484,7 +1484,7 @@ const updatedAddonFluentIds = new Map([
+       addon.type === "theme"
+     ) {
+       // Built-in themes are localized with Fluent instead of the WebExtension API.
+-      let addonIdPrefix = addon.id.replace("@mozilla.org", "");
++      let addonIdPrefix = addon.id.replace("@mozilla.org", "").replace('@browser.fushra.com', '');
+       if (addonIdPrefix.endsWith("colorway")) {
+         // Colorway themes combine an unlocalized color name with a localized
+         // variant name. Their ids have the format
