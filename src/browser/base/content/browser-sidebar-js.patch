@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..8bcc19de192e4683ee64b12cc4dc8c4e15f0d70e 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc49659d1bc0a 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -19,6 +19,8 @@ var SidebarUI = {
@@ -93,7 +93,20 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..8bcc19de192e4683ee64b12cc4dc8c4e
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -599,3 +638,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
+@@ -569,10 +608,9 @@ var SidebarUI = {
+    * none if the argument is an empty string.
+    */
+   selectMenuItem(commandID) {
+-    for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
++    for (let [id, { menuId }] of this.sidebars) {
+       let menu = document.getElementById(menuId);
+-      let triggerbutton =
+-        triggerButtonId && document.getElementById(triggerButtonId);
++      let triggerbutton = document.getElementById("sidebar-icon-" + id);
+       if (id == commandID) {
+         menu.setAttribute("checked", "true");
+         if (triggerbutton) {
+@@ -599,3 +637,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
    true,
    SidebarUI.setPosition.bind(SidebarUI)
  );
