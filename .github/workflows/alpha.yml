@@ -221,6 +221,12 @@ jobs:
           brew install cairo sccache gnu-tar
           pip3 install pycairo testresources
 
+      - name: Force usage fo gnu-tar
+        run: |
+          echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.bash_profile
+          echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
+          source ~/.bash_profile
+
       - name: Disable wasm sandboxing for the sake of my sanity
         run: |
           echo "ac_add_options --without-wasm-sandboxed-libraries" > mozconfig
