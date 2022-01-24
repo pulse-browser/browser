@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-box.inc.xhtml b/browser/base/content/browser-box.inc.xhtml
-index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..e1ab04fab107289b3ebc757ec496f42fdb88977a 100644
+index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..f3ace170ddb0249dfb2a5dfe1f59a8d0a866c005 100644
 --- a/browser/base/content/browser-box.inc.xhtml
 +++ b/browser/base/content/browser-box.inc.xhtml
 @@ -3,6 +3,15 @@
@@ -11,7 +11,7 @@ index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..e1ab04fab107289b3ebc757ec496f42f
 +      
 +    </vbox>
 +    <vbox id="sidebar-icons-bottom">
-+      <img id="sidebar-icon-settings" class="sidebar-icon-item" context="sidebar-item-context-menu" onclick="openPreferences();" src="chrome://global/skin/icons/settings.svg" />
++      <img id="sidebar-icon-settings" class="sidebar-icon-item" onclick="openPreferences();" src="chrome://global/skin/icons/settings.svg" />
 +    </vbox>
 +  </vbox>
 +

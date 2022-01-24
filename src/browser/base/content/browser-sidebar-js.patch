@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..0b373781ab476e7f1de1b0f4a431272913b63c8b 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..8bcc19de192e4683ee64b12cc4dc8c4e15f0d70e 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -19,6 +19,8 @@ var SidebarUI = {
@@ -69,13 +69,10 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..0b373781ab476e7f1de1b0f4a4312729
      }
    },
  
-+
 +  createSidebarItem(id, icon, config) {
 +    console.log(id, icon)
 +    var toolbar = document.createElement("img");
 +    toolbar.setAttribute("id", `sidebar-icon-${id}`);
-+    toolbar.setAttribute("class", "sidebar-icon-item");
-+    toolbar.setAttribute("context", "sidebar-item-context-menu");
 +    toolbar.setAttribute("src", `${icon}`);
 +    toolbar.onclick = () => {
 +      this.toggle(id);
@@ -85,6 +82,9 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..0b373781ab476e7f1de1b0f4a4312729
 +      return;
 +    }
 +    this._sidebarIcons.appendChild(toolbar);
++    setTimeout(() => {
++      toolbar.setAttribute("class", "sidebar-icon-item");
++    }, 100);
 +  },
 +
 +
