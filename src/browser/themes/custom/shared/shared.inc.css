@@ -132,6 +132,7 @@ menulist:host(:not([native])) {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px 16px;
+  padding: 22px 12px;
 }
 
 #sidebar-box,
