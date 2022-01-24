@@ -13,6 +13,8 @@
     "setupLink": "cd melon && yarn && yarn build && yarn link && cd .. && yarn link gluon-build",
     "build": "gluon build",
     "build:ui": "gluon build --ui",
+    "bs": "yarn build && yarn start",
+    "bus": "yarn build:ui && yarn start",
     "start": "gluon run",
     "export": "gluon export-file",
     "imp": "gluon import",
