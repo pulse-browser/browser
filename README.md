@@ -1,6 +1,3 @@
-
-
-
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/pulse-browser/assets/main/pulse-logo.png" height="180" width="180">
@@ -30,7 +27,6 @@ An experimental Firefox fork that enhances focus and increases work productivity
 |🍫|A sidebar to put tools you love within the reach of a click|
 |📖|Hyper minimalistic UI to increase pure focus|
 |⬆️|Adequately maintained repository and software|
-
 
 
 ## 🐛 Bugs, Support and Chat
