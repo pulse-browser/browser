@@ -227,10 +227,6 @@ jobs:
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
           source ~/.bash_profile
 
-      - name: Disable wasm sandboxing for the sake of my sanity
-        run: |
-          echo "ac_add_options --without-wasm-sandboxed-libraries" > mozconfig
-
       - name: Save sccache
         uses: actions/cache@v2
         continue-on-error: false
