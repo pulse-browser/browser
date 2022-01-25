@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index af088110a494141f3012f8dd1629cd89af32e3fa..8c5822061666845f688af684c9edacccda2c9a08 100644
+index af088110a494141f3012f8dd1629cd89af32e3fa..0f947ae7a61809261e5730a7509811b5fb97ceb9 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -11,7 +11,15 @@ index af088110a494141f3012f8dd1629cd89af32e3fa..8c5822061666845f688af684c9edaccc
  pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
  
  // Enables some extra Extension System Logging (can reduce performance)
-@@ -2036,12 +2038,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
+@@ -68,7 +70,6 @@ pref("extensions.webextensions.background-delayed-startup", true);
+ 
+ // Require signed add-ons by default
+ pref("extensions.langpacks.signatures.required", true);
+-pref("xpinstall.signatures.required", true);
+ pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
+ 
+ // Enable extensionStorage storage actor by default
+@@ -2036,12 +2037,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -31,7 +39,7 @@ index af088110a494141f3012f8dd1629cd89af32e3fa..8c5822061666845f688af684c9edaccc
  
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
-@@ -2159,11 +2162,6 @@ pref("fission.frontend.simulate-messages", false);
+@@ -2159,11 +2161,6 @@ pref("fission.frontend.simulate-messages", false);
  pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
