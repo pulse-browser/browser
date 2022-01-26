@@ -1,0 +1,25 @@
+diff --git a/browser/locales/en-US/browser/appExtensionFields.ftl b/browser/locales/en-US/browser/appExtensionFields.ftl
+index 09d7a076eccd4235fac66156770d8b9ae01a7d16..77030b1822149ce2d45f98c79efe61ee56775ffc 100644
+--- a/browser/locales/en-US/browser/appExtensionFields.ftl
++++ b/browser/locales/en-US/browser/appExtensionFields.ftl
+@@ -17,6 +17,20 @@ extension-firefox-compact-dark-description=A theme with a dark color scheme.
+ extension-firefox-alpenglow-name=Firefox Alpenglow
+ extension-firefox-alpenglow-description=Use a colorful appearance for buttons, menus, and windows.
+ 
++## Pulse themes
++extension-pulse-light-name=Pulse Light
++extension-pulse-light-description=A clean, minimalist, light theme
++
++extension-pulse-dark-name=Pulse Dark
++extension-pulse-dark-description=A clean, minimalist, dark theme
++
++# Duplicates here for legacy reasons
++extension-light-name=Pulse Light
++extension-light-description=A clean, minimalist, light theme
++
++extension-dark-name=Pulse Dark
++extension-dark-description=A clean, minimalist, dark theme
++
+ ## Colorway Themes
+ ## These themes are variants of a colorway. The colorway is specified in the
+ ## $colorway-name variable.
