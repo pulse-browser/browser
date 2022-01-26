@@ -1,3 +1,6 @@
+
+
+
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/pulse-browser/assets/main/pulse-logo.png" height="180" width="180">
@@ -28,9 +31,15 @@ An experimental Firefox fork that enhances focus and increases work productivity
 |📖|Hyper minimalistic UI to increase pure focus|
 |⬆️|Adequately maintained repository and software|
 
+## 👨‍💻 Install
+We (Pulse-Browser developers) support building open source software personally for security and comfort reasons. Although this is an option, we also have prebuilt installers available on our [Releases](https://github.com/pulse-browser/browser/releases) page. 
+
+
 
 ## 🐛 Bugs, Support and Chat
 For bug reports, support, and just having a friendly chat with the team, feel free to join the discord at https://discord.gg/xNkretH7sD or create an issue on the GitHub repository.
+
+
 
 
 ## 📋 Goals
