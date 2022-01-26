@@ -30,6 +30,18 @@
       "brandShorterName": "Pulse",
       "brandShortName": "Pulse Browser",
       "brandFullName": "Pulse Browser"
+    },
+    "beta": {
+      "backgroundColor": "#2B2A33",
+      "brandShorterName": "Pulse",
+      "brandShortName": "Pulse Browser",
+      "brandFullName": "Pulse Browser Beta"
+    },
+    "alpha": {
+      "backgroundColor": "#2B2A33",
+      "brandShorterName": "Pulse",
+      "brandShortName": "Pulse Browser",
+      "brandFullName": "Pulse Browser Alpha"
     }
   }
 }
