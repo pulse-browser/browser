@@ -68,6 +68,10 @@ jobs:
         run: |
           echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" > mozconfig
 
+      - name: Use alpha branding
+        run: |
+          echo "ac_add_options --with-branding=browser/branding/alpha" > mozconfig
+
       - name: Free up space
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -237,6 +241,10 @@ jobs:
         with:
           path: ~/Library/Caches/Mozilla.sccache
           key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+
+      - name: Use alpha branding
+        run: |
+          echo "ac_add_options --with-branding=browser/branding/alpha" > mozconfig
 
       - name: Get System Info
         run: |
