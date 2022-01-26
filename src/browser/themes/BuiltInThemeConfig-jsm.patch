@@ -1,0 +1,25 @@
+diff --git a/browser/themes/BuiltInThemeConfig.jsm b/browser/themes/BuiltInThemeConfig.jsm
+index 05bc07ac54fa43dd6bcce1f4ab619bc054cb8084..8ace74cac976889ca0e92910388fb5128436d013 100644
+--- a/browser/themes/BuiltInThemeConfig.jsm
++++ b/browser/themes/BuiltInThemeConfig.jsm
+@@ -32,6 +32,20 @@ const BuiltInThemeConfig = new Map([
+       path: "resource://builtin-themes/dark/",
+     },
+   ],
++  [
++    "pulse-light@browser.fushra.com",
++    {
++      version: "1.2",
++      path: "resource://builtin-themes/pulse/light/",
++    },
++  ],
++  [
++    "pulse-dark@browser.fushra.com",
++    {
++      version: "1.2",
++      path: "resource://builtin-themes/pulse/dark/",
++    },
++  ],
+   [
+     "firefox-alpenglow@mozilla.org",
+     {
