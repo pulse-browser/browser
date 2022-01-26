@@ -312,7 +312,7 @@ jobs:
 
   release:
     name: Release
-    needs: [build-data, linux, flatpak, source]
+    needs: [build-data, linux, flatpak, source, mac]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -328,3 +328,4 @@ jobs:
             pulse-browser.linux.flatpak 
             pulse-browser.linux.tar.bz2
             pulse-browser.source.tar.gz
+            pulse-browser.macos.dmg 
