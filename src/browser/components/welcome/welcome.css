@@ -4,15 +4,15 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 body {
-  width: 504px;
+  width: 750px;
   height: 504px;
 
   display: flex;
   position: relative;
   flex-flow: row nowrap;
-  height: 100%;
   min-height: 500px;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .page {
@@ -37,6 +37,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 8px;
 }
@@ -65,8 +66,8 @@ p {
 }
 
 .logo {
-  background: url("chrome://branding/content/about-logo.png") no-repeat center;
-    background-size: auto;
+  background: url('chrome://branding/content/about-logo.png') no-repeat center;
+  background-size: auto;
   background-size: 82px;
   display: inline-block;
   height: 82px;
