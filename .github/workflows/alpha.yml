@@ -261,14 +261,15 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          cp ./engine/obj-*/dist/pulse-browser-*.tar.bz2 .
-          mv pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
+          find ./engine/obj-*/dist/
+          cp ./engine/obj-*/dist/*.dmg .
+          mv *.dmg "pulse-browser.macos.dmg"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: pulse-browser.linux.tar.bz2
-          path: ./pulse-browser.linux.tar.bz2
+          name: pulse-browser.macos.dmg
+          path: ./pulse-browser.macos.dmg
 
   source:
     runs-on: ubuntu-latest
