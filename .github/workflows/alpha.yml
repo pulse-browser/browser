@@ -62,15 +62,15 @@ jobs:
 
       - name: Disable wasm sandboxing for the sake of my sanity
         run: |
-          echo "ac_add_options --without-wasm-sandboxed-libraries" > mozconfig
+          echo "ac_add_options --without-wasm-sandboxed-libraries" >> mozconfig
 
       - name: Use 2 threads to reduce memory usage
         run: |
-          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" > mozconfig
+          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
 
       - name: Use alpha branding
         run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" > mozconfig
+          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
 
       - name: Free up space
         run: |
@@ -244,7 +244,7 @@ jobs:
 
       - name: Use alpha branding
         run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" > mozconfig
+          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
 
       - name: Get System Info
         run: |
