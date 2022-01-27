@@ -2,6 +2,7 @@
 /* SIDE BAR STYLES */
 
 .sidebar-container {
+  /* If you change display, change browser/base/content/browser-sidebar.js as well */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
