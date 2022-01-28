@@ -1,0 +1,13 @@
+diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
+index 498b6aaf4bc60d3caa4d6a90423fd3dfb1c48b0b..38e0e608926c9119e936be63e1a2b453d7bb6425 100644
+--- a/browser/locales/en-US/browser/preferences/preferences.ftl
++++ b/browser/locales/en-US/browser/preferences/preferences.ftl
+@@ -1364,3 +1364,8 @@ choose-download-folder-title = Choose Download Folder:
+ #   $service-name (String) - Name of a cloud storage provider like Dropbox, Google Drive, etc...
+ save-files-to-cloud-storage =
+     .label = Save files to { $service-name }
++
++## Pulse browser: Settings enteries localization
++preferences-sidebar-header = Sidebar
++preferences-sidebar-visible =
++    .label = Show sidebar tabs 
