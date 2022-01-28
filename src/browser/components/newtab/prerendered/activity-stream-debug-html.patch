@@ -1,0 +1,12 @@
+diff --git a/browser/components/newtab/prerendered/activity-stream-debug.html b/browser/components/newtab/prerendered/activity-stream-debug.html
+index 0e44304bb713dd60f670b13c4478bce5a7b0c4cc..1a3501cf63f7f80896d40924f48dd1a984e34b79 100644
+--- a/browser/components/newtab/prerendered/activity-stream-debug.html
++++ b/browser/components/newtab/prerendered/activity-stream-debug.html
+@@ -21,6 +21,7 @@
+     <script src="chrome://browser/content/contentSearchUI.js"></script>
+     <script src="chrome://browser/content/contentSearchHandoffUI.js"></script>
+     <script src="chrome://browser/content/contentTheme.js"></script>
++    <script src="chrome://browser/content/pulseTheme/ntp.js"></script>
+     <script src="resource://activity-stream/vendor/react-dev.js"></script>
+     <script src="resource://activity-stream/vendor/react-dom-dev.js"></script>
+     <script src="resource://activity-stream/vendor/prop-types.js"></script>

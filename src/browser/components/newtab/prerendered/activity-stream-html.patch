@@ -1,0 +1,13 @@
+diff --git a/browser/components/newtab/prerendered/activity-stream.html b/browser/components/newtab/prerendered/activity-stream.html
+index e69f3c8971ddaa983450d65ce4e299c04f94e0e5..55fdc0db730afc40bf265ca0042dd6eadc62ebd3 100644
+--- a/browser/components/newtab/prerendered/activity-stream.html
++++ b/browser/components/newtab/prerendered/activity-stream.html
+@@ -14,6 +14,8 @@
+     <link rel="localization" href="browser/newtab/newtab.ftl" />
+     <link rel="stylesheet" href="chrome://browser/content/contentSearchUI.css" />
+     <link rel="stylesheet" href="chrome://activity-stream/content/css/activity-stream.css" />
++
++    <script src="chrome://browser/content/pulseTheme/ntp.js"></script>
+   </head>
+   <body class="activity-stream">
+     <div id="root"></div>

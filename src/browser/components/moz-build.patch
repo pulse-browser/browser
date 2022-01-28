@@ -1,5 +1,5 @@
 diff --git a/browser/components/moz.build b/browser/components/moz.build
-index aaae39b52f397623ba8153e5fdd079e43a16e09e..34bb8c3445ef292ffcd4a27e974465786dc147e6 100644
+index 945a55a1b216dac9f5b66d883bf94712a5994311..ae6853e34165a6b8fb4556c9fbfd701dccff1b50 100644
 --- a/browser/components/moz.build
 +++ b/browser/components/moz.build
 @@ -25,7 +25,6 @@ with Files("safebrowsing/**"):
@@ -10,12 +10,12 @@ index aaae39b52f397623ba8153e5fdd079e43a16e09e..34bb8c3445ef292ffcd4a27e97446578
  DIRS += [
      "about",
      "aboutlogins",
-@@ -61,6 +60,9 @@ DIRS += [
+@@ -60,6 +59,9 @@ DIRS += [
      "urlbar",
  ]
  
-+# Focus browser imports
-+DIRS += ["welcome"]
++# Pulse browser imports
++DIRS += ["pulseTheme", "welcome"]
 +
  DIRS += ["build"]
  
