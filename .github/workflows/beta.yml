@@ -75,7 +75,7 @@ jobs:
       - name: Optimise for modern hardware
         run: |
           echo "ac_add_options --disable-debug" >> mozconfig
-          echo 'ac_add_options --enable-optimize="-O3 -march=x86-64-v2 -mtune=haswell -w"' >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=haswell -mtune=haswell -w"' >> mozconfig
           echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
           echo "ac_add_options --enable-lto" >> mozconfig
@@ -259,7 +259,7 @@ jobs:
       - name: Optimise for modern hardware
         run: |
           echo "ac_add_options --disable-debug" >> mozconfig
-          echo 'ac_add_options --enable-optimize="-O3 -march=x86-64-v2 -mtune=haswell -w"' >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=haswell -mtune=haswell -w"' >> mozconfig
           echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
           echo "ac_add_options --enable-lto" >> mozconfig
