@@ -1,8 +1,16 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc49659d1bc0a 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..59d18182e1c0adba4e6147436a707f1bd61ec38b 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
-@@ -19,6 +19,8 @@ var SidebarUI = {
+@@ -2,6 +2,7 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
++
+ /**
+  * SidebarUI controls showing and hiding the browser sidebar.
+  */
+@@ -19,6 +20,8 @@ var SidebarUI = {
              .getAttribute("label"),
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
@@ -11,7 +19,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
          },
        ],
        [
-@@ -30,6 +32,8 @@ var SidebarUI = {
+@@ -30,6 +33,8 @@ var SidebarUI = {
            url: "chrome://browser/content/places/historySidebar.xhtml",
            menuId: "menu_historySidebar",
            triggerButtonId: "appMenuViewHistorySidebar",
@@ -20,7 +28,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
          },
        ],
        [
-@@ -40,6 +44,8 @@ var SidebarUI = {
+@@ -40,6 +45,8 @@ var SidebarUI = {
              .getAttribute("label"),
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
@@ -29,7 +37,17 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
          },
        ],
      ]));
-@@ -71,6 +77,8 @@ var SidebarUI = {
+@@ -53,7 +60,9 @@ var SidebarUI = {
+     }
+     return (this._browser = document.getElementById("sidebar"));
+   },
++
+   POSITION_START_PREF: "sidebar.position_start",
++  SIDEBAR_TABS_PREF: "pulse.sidebar.enabled",
+   DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
+ 
+   // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
+@@ -71,6 +80,8 @@ var SidebarUI = {
    },
    _splitter: null,
    _icon: null,
@@ -38,7 +56,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -91,6 +99,10 @@ var SidebarUI = {
+@@ -91,6 +102,10 @@ var SidebarUI = {
      this._box = document.getElementById("sidebar-box");
      this._splitter = document.getElementById("sidebar-splitter");
      this._icon = document.getElementById("sidebar-icon");
@@ -49,7 +67,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
      this._reversePositionButton = document.getElementById(
        "sidebar-reverse-position"
      );
-@@ -102,9 +114,15 @@ var SidebarUI = {
+@@ -102,9 +117,49 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
@@ -58,14 +76,48 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
 +      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem).iconurl, this.sidebars.get(sidebaritem));
 +    }
 +
++    const sidebarVisible = Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true)
++    this.setSidebarVisibility(sidebarVisible)
++
++    // Keep track on the changes of the sidebar visibility
++    Services.prefs.addObserver(this.SIDEBAR_TABS_PREF, this, true);
++
      this._inited = true;
  
      this._initDeferred.resolve();
 +
++  },
++
++  /**
++   * Set the sidebar tabs to be visible or not visible
++   * @param {boolean} visible Sets the sidebar to be visible or not visible
++   */
++  setSidebarVisibility(visible) {
++    const sidebarContainer = document.getElementById('sidebar-container')
++
++    if (visible) {
++      sidebarContainer.style.display = 'flex'
++    } else {
++      sidebarContainer.style.display = 'none'
++    }
++  },
++
++  // nsIObserver
++
++  observe(aSubject, aTopic, aData) {
++    switch (aTopic) {
++      case "nsPref:changed":
++        switch (aData) {
++          case this.SIDEBAR_TABS_PREF:
++            this.setSidebarVisibility(Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true))
++            break
++        }
++        break;
++    }
    },
  
    uninit() {
-@@ -135,6 +153,27 @@ var SidebarUI = {
+@@ -135,6 +190,27 @@ var SidebarUI = {
      }
    },
  
@@ -93,7 +145,25 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -569,10 +608,9 @@ var SidebarUI = {
+@@ -208,14 +284,14 @@ var SidebarUI = {
+   },
+ 
+   /**
+-   * Change the pref that will trigger a call to setPosition
++   * Change the Services.prefs that will trigger a call to setPosition
+    */
+   reversePosition() {
+-    Services.prefs.setBoolPref(this.POSITION_START_PREF, !this._positionStart);
++    Services.prefss.setBoolPref(this.POSITION_START_PREF, !this._positionStart);
+   },
+ 
+   /**
+-   * Read the positioning pref and position the sidebar and the splitter
++   * Read the positioning Services.prefs and position the sidebar and the splitter
+    * appropriately within the browser container.
+    */
+   setPosition() {
+@@ -569,10 +645,9 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -106,7 +176,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..014c27dc3e51cf858a90887d492bc496
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -599,3 +637,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
+@@ -599,3 +674,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
    true,
    SidebarUI.setPosition.bind(SidebarUI)
  );
