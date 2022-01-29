@@ -122,6 +122,10 @@ menulist:host(:not([native])) {
   margin: 0;
 }
 
+.sidebar-icon-item:hover {
+  background-color: var(--sidebar-background-color);
+}
+
 .sidebar-icon-item[checked] {
   background-color: var(--lwt-sidebar-background-color);
   border-left: 3px solid currentColor;
