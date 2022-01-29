@@ -78,7 +78,6 @@ jobs:
           echo 'ac_add_options --enable-optimize="-O3 -march=haswell -mtune=haswell -w"' >> mozconfig
           echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
-          echo "ac_add_options --enable-lto" >> mozconfig
 
           cat mozconfig
 
@@ -262,9 +261,9 @@ jobs:
           echo 'ac_add_options --enable-optimize="-O3 -march=haswell -mtune=haswell -w"' >> mozconfig
           echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
-          echo "ac_add_options --enable-lto" >> mozconfig
 
           cat mozconfig
+
       - name: Get System Info
         run: |
           cargo --version
