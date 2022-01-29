@@ -27,5 +27,7 @@ pref('svg.context-properties.content.enabled', true);
 // Allow the user to install unsigned addons from sources like our custom addon
 // store
 pref('xpinstall.signatures.required', false);
+// Allow the usage of theme experiments
+pref('extensions.experiments.enabled', true);
 
 #include better-fox.js
