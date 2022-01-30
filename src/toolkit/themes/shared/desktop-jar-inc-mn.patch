@@ -1,10 +1,11 @@
 diff --git a/toolkit/themes/shared/desktop-jar.inc.mn b/toolkit/themes/shared/desktop-jar.inc.mn
-index 03119bae9cc7179f5aaa0eee730e9fcbc27117db..767fec07e3723939bd9020f178a8a55ce8b24a04 100644
+index 03119bae9cc7179f5aaa0eee730e9fcbc27117db..43f6b88b7762ec3a65f6c1eef6c969ff8b31b8da 100644
 --- a/toolkit/themes/shared/desktop-jar.inc.mn
 +++ b/toolkit/themes/shared/desktop-jar.inc.mn
-@@ -120,3 +120,4 @@
+@@ -120,3 +120,5 @@
    skin/classic/global/pictureinpicture/player.css           (../../shared/pictureinpicture/player.css)
    skin/classic/global/media/picture-in-picture-open.svg     (../../shared/media/picture-in-picture-open.svg)
    skin/classic/global/media/picture-in-picture-closed.svg   (../../shared/media/picture-in-picture-closed.svg)
 +  skin/classic/global/icons/paint.svg              (../../shared/icons/paint.svg)
++  skin/classic/global/icons/bookmark-outline.svg             (../../shared/icons/bookmark-outline.svg)
 \ No newline at end of file
