@@ -262,9 +262,9 @@ jobs:
       - name: Optimise for modern hardware
         run: |
           echo "ac_add_options --disable-debug" >> mozconfig
-          echo 'ac_add_options --enable-optimize="-O3 -march=haswell -mtune=haswell -w"' >> mozconfig
-          echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=nehalem -mtune=haswell -w"' >> mozconfig
+          echo "ac_add_options --enable-rust-simd" >> mozconfig
 
           cat mozconfig
 
