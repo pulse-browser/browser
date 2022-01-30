@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..59d18182e1c0adba4e6147436a707f1bd61ec38b 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..ce7ee95d5f2e186a4635b5b6c915ba7cf1b0894c 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,6 +2,7 @@
@@ -80,7 +80,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..59d18182e1c0adba4e6147436a707f1b
 +    this.setSidebarVisibility(sidebarVisible)
 +
 +    // Keep track on the changes of the sidebar visibility
-+    Services.prefs.addObserver(this.SIDEBAR_TABS_PREF, this, true);
++    Services.prefs.addObserver(this.SIDEBAR_TABS_PREF, this);
 +
      this._inited = true;
  
