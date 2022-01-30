@@ -1,4 +1,4 @@
-name: Alpha builds
+name: Beta builds
 
 on:
   workflow_dispatch:
@@ -68,9 +68,19 @@ jobs:
         run: |
           echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
 
-      - name: Use alpha branding
+      - name: Use beta branding
         run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
+          echo "ac_add_options --with-branding=browser/branding/beta" >> mozconfig
+
+      - name: Optimise for modern hardware
+        run: |
+          echo "ac_add_options --disable-debug" >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=x86-64-v2 -mtune=haswell -w"' >> mozconfig
+          echo "ac_add_options --enable-rust-simd" >> mozconfig
+          echo "ac_add_options --enable-release" >> mozconfig
+          echo "ac_add_options --enable-lto" >> mozconfig
+
+          cat mozconfig
 
       - name: Free up space
         run: |
@@ -242,10 +252,19 @@ jobs:
           path: ~/Library/Caches/Mozilla.sccache
           key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
 
-      - name: Use alpha branding
+      - name: Use beta branding
         run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
+          echo "ac_add_options --with-branding=browser/branding/beta" >> mozconfig
 
+      - name: Optimise for modern hardware
+        run: |
+          echo "ac_add_options --disable-debug" >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=x86-64-v2 -mtune=haswell -w"' >> mozconfig
+          echo "ac_add_options --enable-rust-simd" >> mozconfig
+          echo "ac_add_options --enable-release" >> mozconfig
+          echo "ac_add_options --enable-lto" >> mozconfig
+
+          cat mozconfig
       - name: Get System Info
         run: |
           cargo --version
@@ -329,11 +348,11 @@ jobs:
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: 'alpha-${{ needs.build-data.outputs.build_date }}'
+          automatic_release_tag: 'beta-${{ needs.build-data.outputs.build_date }}'
           prerelease: true
           title: 'Alpha build'
           files: |
             pulse-browser.linux.flatpak 
             pulse-browser.linux.tar.bz2
             pulse-browser.source.tar.gz
-            pulse-browser.macos.dmg 
+            pulse-browser.macos.dmg
