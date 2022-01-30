@@ -353,7 +353,7 @@ jobs:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           automatic_release_tag: 'beta-${{ needs.build-data.outputs.build_date }}'
           prerelease: true
-          title: 'Alpha build'
+          title: 'Beta build'
           files: |
             pulse-browser.linux.flatpak 
             pulse-browser.linux.tar.bz2
