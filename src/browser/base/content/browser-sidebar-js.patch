@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..ce7ee95d5f2e186a4635b5b6c915ba7cf1b0894c 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628baeae0e50 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,6 +2,7 @@
@@ -14,7 +14,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..ce7ee95d5f2e186a4635b5b6c915ba7c
              .getAttribute("label"),
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
-+          iconurl: "chrome://browser/skin/bookmark.svg",
++          iconurl: "chrome://global/skin/icons/bookmark-outline.svg",
 +          bottom: false,
          },
        ],
