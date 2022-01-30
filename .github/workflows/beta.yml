@@ -255,9 +255,9 @@ jobs:
         run: |
           echo "ac_add_options --with-branding=browser/branding/beta" >> mozconfig
 
-      - name: Use 1 thread to reduce memory usage
+      - name: Use 2 thread to reduce memory usage
         run: |
-          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j1\"" >> mozconfig
+          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
 
       - name: Optimise for modern hardware
         run: |
