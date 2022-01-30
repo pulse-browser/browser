@@ -64,9 +64,9 @@ jobs:
         run: |
           echo "ac_add_options --without-wasm-sandboxed-libraries" >> mozconfig
 
-      - name: Use 2 threads to reduce memory usage
+      - name: Use 1 thread to reduce memory usage
         run: |
-          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
+          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j1\"" >> mozconfig
 
       - name: Use beta branding
         run: |
@@ -254,6 +254,10 @@ jobs:
       - name: Use beta branding
         run: |
           echo "ac_add_options --with-branding=browser/branding/beta" >> mozconfig
+
+      - name: Use 1 thread to reduce memory usage
+        run: |
+          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j1\"" >> mozconfig
 
       - name: Optimise for modern hardware
         run: |
