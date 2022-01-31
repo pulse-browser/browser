@@ -16,7 +16,7 @@ pref('pulse.welcome.seen', false);
 // Sidebar pref
 pref('pulse.sidebar.enabled', true);
 
-//PIP
+//PIP pref
 pref('media.videocontrols.picture-in-picture.audio-toggle.enabled', true);
 
 // This preference tells the browser that our addons are preinstalled and should
