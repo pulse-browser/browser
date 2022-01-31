@@ -64,9 +64,9 @@ jobs:
         run: |
           echo "ac_add_options --without-wasm-sandboxed-libraries" >> mozconfig
 
-      - name: Use 2 threads to reduce memory usage
+      - name: Use 1 thread to reduce memory usage
         run: |
-          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
+          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j1\"" >> mozconfig
 
       - name: Use beta branding
         run: |
@@ -75,10 +75,9 @@ jobs:
       - name: Optimise for modern hardware
         run: |
           echo "ac_add_options --disable-debug" >> mozconfig
-          echo 'ac_add_options --enable-optimize="-O3 -march=x86-64-v2 -mtune=haswell -w"' >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=haswell -mtune=haswell -w"' >> mozconfig
           echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
-          echo "ac_add_options --enable-lto" >> mozconfig
 
           cat mozconfig
 
@@ -256,15 +255,19 @@ jobs:
         run: |
           echo "ac_add_options --with-branding=browser/branding/beta" >> mozconfig
 
+      - name: Use 2 thread to reduce memory usage
+        run: |
+          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
+
       - name: Optimise for modern hardware
         run: |
           echo "ac_add_options --disable-debug" >> mozconfig
-          echo 'ac_add_options --enable-optimize="-O3 -march=x86-64-v2 -mtune=haswell -w"' >> mozconfig
-          echo "ac_add_options --enable-rust-simd" >> mozconfig
           echo "ac_add_options --enable-release" >> mozconfig
-          echo "ac_add_options --enable-lto" >> mozconfig
+          echo 'ac_add_options --enable-optimize="-O3 -march=nehalem -mtune=haswell -w"' >> mozconfig
+          echo "ac_add_options --enable-rust-simd" >> mozconfig
 
           cat mozconfig
+
       - name: Get System Info
         run: |
           cargo --version
@@ -350,7 +353,7 @@ jobs:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           automatic_release_tag: 'beta-${{ needs.build-data.outputs.build_date }}'
           prerelease: true
-          title: 'Alpha build'
+          title: 'Beta build'
           files: |
             pulse-browser.linux.flatpak 
             pulse-browser.linux.tar.bz2
