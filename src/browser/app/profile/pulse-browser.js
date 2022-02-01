@@ -15,6 +15,7 @@ pref('pulse.welcome.seen', false);
 
 // Sidebar pref
 pref('pulse.sidebar.enabled', true);
+pref('pulse.sidebar.extensions.enabled', true);
 
 //PIP pref
 pref('media.videocontrols.picture-in-picture.audio-toggle.enabled', true);
