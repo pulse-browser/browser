@@ -1,15 +1,16 @@
 diff --git a/browser/components/preferences/main.js b/browser/components/preferences/main.js
-index ceee50df3743724f1d59cebb0fec244639e65405..19ab21a02822fd94f5c9d0b32a92bb4d0762b7df 100644
+index ceee50df3743724f1d59cebb0fec244639e65405..8e065ec0aec2ec86ad2d51ccd828afd36cd0e212 100644
 --- a/browser/components/preferences/main.js
 +++ b/browser/components/preferences/main.js
-@@ -154,6 +154,10 @@ Preferences.addAll([
+@@ -154,6 +154,11 @@ Preferences.addAll([
  
    // Media
    { id: "media.hardwaremediakeys.enabled", type: "bool" },
 +
 +
 +  // Pulse browser: custom settings
-+  { id: 'pulse.sidebar.enabled', type: 'bool' }
++  { id: 'pulse.sidebar.enabled', type: 'bool' },
++  { id: 'pulse.sidebar.extensions.enabled', type: 'bool' }
  ]);
  
  if (AppConstants.HAVE_SHELL_SERVICE) {
