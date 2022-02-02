@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628baeae0e50 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..f59c0ac6d468430fc5d0d116b0b488a322aa35bf 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,6 +2,7 @@
@@ -37,17 +37,18 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
          },
        ],
      ]));
-@@ -53,7 +60,9 @@ var SidebarUI = {
+@@ -53,7 +60,10 @@ var SidebarUI = {
      }
      return (this._browser = document.getElementById("sidebar"));
    },
 +
    POSITION_START_PREF: "sidebar.position_start",
 +  SIDEBAR_TABS_PREF: "pulse.sidebar.enabled",
++  SIDEBAR_EXTENSIONS_PREF: "pulse.sidebar.extensions.enabled",
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -71,6 +80,8 @@ var SidebarUI = {
+@@ -71,6 +81,8 @@ var SidebarUI = {
    },
    _splitter: null,
    _icon: null,
@@ -56,7 +57,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -91,6 +102,10 @@ var SidebarUI = {
+@@ -91,6 +103,10 @@ var SidebarUI = {
      this._box = document.getElementById("sidebar-box");
      this._splitter = document.getElementById("sidebar-splitter");
      this._icon = document.getElementById("sidebar-icon");
@@ -67,12 +68,16 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
      this._reversePositionButton = document.getElementById(
        "sidebar-reverse-position"
      );
-@@ -102,9 +117,49 @@ var SidebarUI = {
+@@ -102,9 +118,53 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
 +    const sidebaritems = this.sidebars.keys();
++    const sidebarExtensionVis = Services.prefs.getBoolPref(this.SIDEBAR_EXTENSIONS_PREF);
 +    for (const sidebaritem of sidebaritems) {
++      if(this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
++        return;
++      }
 +      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem).iconurl, this.sidebars.get(sidebaritem));
 +    }
 +
@@ -117,12 +122,11 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
    },
  
    uninit() {
-@@ -135,6 +190,27 @@ var SidebarUI = {
+@@ -135,6 +195,26 @@ var SidebarUI = {
      }
    },
  
 +  createSidebarItem(id, icon, config) {
-+    console.log(id, icon)
 +    var toolbar = document.createElement("img");
 +    toolbar.setAttribute("id", `sidebar-icon-${id}`);
 +    toolbar.setAttribute("src", `${icon}`);
@@ -145,7 +149,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -208,14 +284,14 @@ var SidebarUI = {
+@@ -208,14 +288,14 @@ var SidebarUI = {
    },
  
    /**
@@ -163,7 +167,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
     * appropriately within the browser container.
     */
    setPosition() {
-@@ -569,10 +645,9 @@ var SidebarUI = {
+@@ -569,10 +649,9 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -176,7 +180,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..99148b161abb29cb27968339dcb1628b
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -599,3 +674,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
+@@ -599,3 +678,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
    true,
    SidebarUI.setPosition.bind(SidebarUI)
  );
