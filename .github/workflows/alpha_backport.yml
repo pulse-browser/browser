@@ -1,7 +1,7 @@
 # This automated work flow is responsible for backporting changes from the beta
 # branch to the alpha branch.
 
-name: Alpha Backport
+name: Backport
 
 on:
   workflow_dispatch:
@@ -9,24 +9,24 @@ on:
     # You can setup schedule here
     - cron: '0 0 * * *'
 
-env:
-  # replace "github_username" with your GitHub username
-  # replace "github.com/username/repo.git" with your GitHub repo path
-  # do NOT replace ${{secrets.GITHUB_TOKEN}}, GitHub will take care of it
-  MY_REPO: https://fushra-bot:${{secrets.GITHUB_TOKEN}}@github.com/lepton-browser/browser.git
-
-  # replace "long-lived_branch_name" with your branch name
-  MY_BRANCH: alpha
-
-  # replace it with the path to master repo
-  MASTER_REPO: https://github.com/lepton-browser/browser.git
-
-  # replace "master" with your master branch name
-  MASTER_BRANCH: beta
-
 jobs:
-  merge:
+  stable:
     runs-on: ubuntu-latest
+    
+    env:
+      # replace "github_username" with your GitHub username
+      # replace "github.com/username/repo.git" with your GitHub repo path
+      # do NOT replace ${{secrets.GITHUB_TOKEN}}, GitHub will take care of it
+      MY_REPO: https://fushra-bot:${{secrets.GITHUB_TOKEN}}@github.com/pulse-browser/browser.git
+
+      # replace "long-lived_branch_name" with your branch name
+      MY_BRANCH: beta
+
+      # replace it with the path to master repo
+      MASTER_REPO: https://github.com/pulse-browser/browser.git
+
+      # replace "master" with your master branch name
+      MASTER_BRANCH: stable
 
     steps:
       - name: Merge with master
@@ -35,7 +35,38 @@ jobs:
           cd tmp
           git config user.name "Fushra Bot"
           git config user.email "fushra-bot@users.noreply.github.com"
-          git config pull.rebase false
+          git config pull.rebase true
+          git pull ${{env.MASTER_REPO}} ${{env.MASTER_BRANCH}}
+          git commit --amend -m "🔀 Backport changes from ${{env.MASTER_BRANCH}} to ${{env.MY_BRANCH}}"
+          git push
+
+  beta:
+    runs-on: ubuntu-latest
+    needs: [stable]
+    
+    env:
+      # replace "github_username" with your GitHub username
+      # replace "github.com/username/repo.git" with your GitHub repo path
+      # do NOT replace ${{secrets.GITHUB_TOKEN}}, GitHub will take care of it
+      MY_REPO: https://fushra-bot:${{secrets.GITHUB_TOKEN}}@github.com/pulse-browser/browser.git
+
+      # replace "long-lived_branch_name" with your branch name
+      MY_BRANCH: alpha
+
+      # replace it with the path to master repo
+      MASTER_REPO: https://github.com/pulse-browser/browser.git
+
+      # replace "master" with your master branch name
+      MASTER_BRANCH: beta
+
+    steps:
+      - name: Merge with master
+        run: |
+          git clone ${{env.MY_REPO}} -b ${{env.MY_BRANCH}} tmp
+          cd tmp
+          git config user.name "Fushra Bot"
+          git config user.email "fushra-bot@users.noreply.github.com"
+          git config pull.rebase true
           git pull ${{env.MASTER_REPO}} ${{env.MASTER_BRANCH}}
           git commit --amend -m "🔀 Backport changes from ${{env.MASTER_BRANCH}} to ${{env.MY_BRANCH}}"
           git push
