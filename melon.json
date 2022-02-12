@@ -13,7 +13,7 @@
   "addons": {
     "ublock": {
       "id": "uBlock0@raymondhill.net",
-      "url": "https://github.com/gorhill/uBlock/releases/download/1.39.2/uBlock0_1.39.2.firefox.xpi"
+      "url": "https://github.com/gorhill/uBlock/releases/download/1.41.2/uBlock0_1.41.2.firefox.xpi"
     },
     "newtab": {
       "id": "newtab@browser.fushra.com",
