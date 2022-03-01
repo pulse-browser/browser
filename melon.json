@@ -4,7 +4,7 @@
   "appId": "com.fushra.browser.desktop",
   "version": {
     "product": "firefox",
-    "version": "96.0.1",
+    "version": "97.0",
     "displayVersion": "1.0.0"
   },
   "buildOptions": {
@@ -13,7 +13,7 @@
   "addons": {
     "ublock": {
       "id": "uBlock0@raymondhill.net",
-      "url": "https://github.com/gorhill/uBlock/releases/download/1.39.2/uBlock0_1.39.2.firefox.xpi"
+      "url": "https://github.com/gorhill/uBlock/releases/download/1.41.2/uBlock0_1.41.2.firefox.xpi"
     },
     "tabliss": {
       "id": "extension@tabliss.io",
