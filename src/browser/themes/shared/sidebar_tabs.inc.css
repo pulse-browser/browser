@@ -13,17 +13,20 @@
   -moz-context-properties: fill;
   fill: currentColor;
   opacity: 0.8;
-  width: 16px;
-  height: 16px;
-  padding: 14px 12px;
+  padding: 22px 20px;
   color: var(--toolbarbutton-icon-fill);
+
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
 
   /* Stops the border from changing the box's size */
   margin: 0;
 }
 
 .sidebar-icon-item:hover {
-  background-color: var(--sidebar-background-color);
+  background-color: rgba(0.5, 0.5, 0.5, 0.1);
 }
 
 .sidebar-icon-item[checked] {
@@ -51,3 +54,12 @@
 #sidebar-splitter {
   background-color: var(--lwt-sidebar-background-color) !important;
 }
+
+/* Make it feel native on macos */
+%ifdef XP_MACOSX
+#sidebar-container:not([lwt-sidebar]) {
+  appearance: auto;
+  -moz-default-appearance: -moz-mac-source-list;
+  -moz-font-smoothing-background-color: -moz-mac-source-list;
+}
+%endif

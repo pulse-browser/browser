@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..f59c0ac6d468430fc5d0d116b0b488a322aa35bf 100644
+index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..d1caf94024116dc198404835e3c2f11069067eba 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,6 +2,7 @@
@@ -122,14 +122,15 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..f59c0ac6d468430fc5d0d116b0b488a3
    },
  
    uninit() {
-@@ -135,6 +195,26 @@ var SidebarUI = {
+@@ -135,6 +195,27 @@ var SidebarUI = {
      }
    },
  
 +  createSidebarItem(id, icon, config) {
-+    var toolbar = document.createElement("img");
++    var toolbar = document.createElement("html:img");
 +    toolbar.setAttribute("id", `sidebar-icon-${id}`);
 +    toolbar.setAttribute("src", `${icon}`);
++    toolbar.style.backgroundImage = `url(${icon})`;
 +    toolbar.onclick = () => {
 +      this.toggle(id);
 +    };
@@ -149,7 +150,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..f59c0ac6d468430fc5d0d116b0b488a3
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -208,14 +288,14 @@ var SidebarUI = {
+@@ -208,14 +289,14 @@ var SidebarUI = {
    },
  
    /**
@@ -167,7 +168,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..f59c0ac6d468430fc5d0d116b0b488a3
     * appropriately within the browser container.
     */
    setPosition() {
-@@ -569,10 +649,9 @@ var SidebarUI = {
+@@ -569,10 +650,9 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -180,7 +181,7 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..f59c0ac6d468430fc5d0d116b0b488a3
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -599,3 +678,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
+@@ -599,3 +679,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
    true,
    SidebarUI.setPosition.bind(SidebarUI)
  );
