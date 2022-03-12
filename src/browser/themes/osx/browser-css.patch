@@ -1,0 +1,16 @@
+diff --git a/browser/themes/osx/browser.css b/browser/themes/osx/browser.css
+index 31d2698e78e5b9c47f107f5c139c0b55aadaf90f..7afdbc698222dd19516c71e6d93088611a79cd6d 100644
+--- a/browser/themes/osx/browser.css
++++ b/browser/themes/osx/browser.css
+@@ -4,6 +4,11 @@
+ 
+ @namespace html url("http://www.w3.org/1999/xhtml");
+ 
++%define XP_MACOSX
++
++/* Pulse vibrancy themes */
++%include ./vibrancy.inc.css
++
+ %include ../shared/browser.inc.css
+ %include ../shared/browser-custom-colors.inc.css
+ 
