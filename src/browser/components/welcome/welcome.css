@@ -4,7 +4,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 body {
-  width: 504px;
+  width: 670px;
   height: 504px;
 
   display: flex;
@@ -49,10 +49,6 @@ body {
   border: 2px solid transparent;
   transition: all 250ms ease-in-out;
   margin: 0;
-}
-
-#searchList .card {
-  width: 80px;
 }
 
 .cardGroup .card.selected {
