@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index af088110a494141f3012f8dd1629cd89af32e3fa..ee790d861af52a170d0df8e7a20dd5b9da820254 100644
+index 6bbc26eb86e6d923473d35105c3ba73d4be336fb..0634af38d40b3620f5090d2e4a3cb80bc351161d 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -19,31 +19,30 @@ index af088110a494141f3012f8dd1629cd89af32e3fa..ee790d861af52a170d0df8e7a20dd5b9
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
-@@ -1737,14 +1738,6 @@ pref("media.videocontrols.picture-in-picture.enabled", true);
- pref("media.videocontrols.picture-in-picture.video-toggle.enabled", true);
- pref("media.videocontrols.picture-in-picture.keyboard-controls.enabled", true);
- 
+@@ -271,11 +272,6 @@ pref("browser.shell.setDefaultPDFHandler", false);
+ // The behavior of option 3 is detailed at: http://wiki.mozilla.org/Session_Restore
+ pref("browser.startup.page",                1);
+ pref("browser.startup.homepage",            "about:home");
 -#ifdef NIGHTLY_BUILD
--  // Show the audio toggle for Picture-in-Picture.
--  pref("media.videocontrols.picture-in-picture.audio-toggle.enabled", true);
--  // Enable keyboard controls for Picture-in-Picture.
+-pref("browser.startup.homepage.abouthome_cache.enabled", true);
 -#else
--  pref("media.videocontrols.picture-in-picture.audio-toggle.enabled", false);
+-pref("browser.startup.homepage.abouthome_cache.enabled", false);
 -#endif
--
- pref("browser.translation.detectLanguage", false);
- pref("browser.translation.neverForLanguages", "");
- // Show the translation UI bits, like the info bar, notification icon and preferences.
-@@ -1992,7 +1985,7 @@ pref("browser.tabs.crashReporting.includeURL", false);
+ pref("browser.startup.homepage.abouthome_cache.loglevel", "Warn");
  
- // If true, unprivileged extensions may use experimental APIs on
- // nightly and developer edition.
+ // Whether we should skip the homepage when opening the first-run page
+@@ -1998,10 +1994,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
+ pref("browser.tabs.crashReporting.sendReport", true);
+ pref("browser.tabs.crashReporting.includeURL", false);
+ 
+-// If true, unprivileged extensions may use experimental APIs on
+-// nightly and developer edition.
 -pref("extensions.experiments.enabled", false);
-+// pref("extensions.experiments.enabled", false);
- 
+-
  #if defined(XP_WIN)
    // Allows us to deprioritize the processes of background tabs at an OS level
-@@ -2036,12 +2029,13 @@ pref("browser.migrate.chrome.history.limit", 2000);
+   pref("dom.ipc.processPriorityManager.enabled", true);
+@@ -2044,13 +2036,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -53,17 +52,11 @@ index af088110a494141f3012f8dd1629cd89af32e3fa..ee790d861af52a170d0df8e7a20dd5b9
 -pref("extensions.pocket.site", "getpocket.com");
 -pref("extensions.pocket.onSaveRecs", true);
 -pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
-+// Pulse Browser: Disable pocket
-+// pref("extensions.pocket.api", "api.getpocket.com");
-+// pref("extensions.pocket.enabled", true);
-+// pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
-+// pref("extensions.pocket.site", "getpocket.com");
-+// pref("extensions.pocket.onSaveRecs", true);
-+// pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
- 
+-
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
-@@ -2159,11 +2153,6 @@ pref("fission.frontend.simulate-messages", false);
+ 
+@@ -2172,11 +2157,6 @@ pref("fission.frontend.simulate-messages", false);
  pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  

@@ -1,0 +1,29 @@
+#main-window {
+  background: transparent !important;
+}
+
+#TabsToolbar:-moz-lwtheme-darktext,
+.table-widget-empty-text:-moz-lwtheme-darktext {
+  -moz-appearance: -moz-mac-vibrant-titlebar-light !important;
+}
+
+#TabsToolbar:-moz-lwtheme-brighttext,
+.table-widget-empty-text:-moz-lwtheme-brighttext {
+  -moz-appearance: -moz-mac-vibrant-titlebar-dark !important;
+}
+
+.tabbrowser-tab[selected='true'] .tab-label:-moz-lwtheme-brighttext {
+  color: white !important;
+}
+
+.tabbrowser-tab .tab-label:-moz-lwtheme-brighttext {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.tabbrowser-tab[selected='true'] .tab-background:-moz-lwtheme-brighttext {
+  box-shadow: inset 0em -4em 0em var(--toolbar-bgcolor) !important;
+}
+
+#navigator-toolbox {
+  background-color: transparent !important;
+}
