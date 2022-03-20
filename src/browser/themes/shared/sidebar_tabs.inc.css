@@ -1,58 +1,75 @@
 /* ========================================================================== */
 /* SIDE BAR STYLES */
 
+:root {
+  --sidebar-inside-padding: 8px; 
+  --sidebar-tab-hover-color: color-mix(in srgb, currentColor 11%, transparent);
+}
+
 .sidebar-container {
   /* If you change display, change browser/base/content/browser-sidebar.js as well */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--toolbar-bgcolor);
+  overflow: hidden;
 }
 
 .sidebar-icon-item {
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: block;
+  width: 16px;
+  height: 16px;
   -moz-context-properties: fill;
   fill: currentColor;
   opacity: 0.8;
-  padding: 22px 20px;
   color: var(--toolbarbutton-icon-fill);
 
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 16px 16px;
-
-  /* Stops the border from changing the box's size */
-  margin: 0;
+  padding: var(--sidebar-inside-padding);
 }
 
-.sidebar-icon-item:hover {
-  background-color: rgba(0.5, 0.5, 0.5, 0.1);
+.sidebar-item-background {
+  border-radius: var(--tab-border-radius);
+  margin: var(--tab-block-margin);
 }
 
-.sidebar-icon-item[checked] {
-  background-color: var(--lwt-sidebar-background-color);
-  border-left: 3px solid currentColor;
+.sidebar-item-background:hover {
+  background-color: var(--sidebar-tab-hover-color);
+}
+
+.sidebar-item-background[checked] {
+  background-attachment: scroll, scroll, fixed;
+  background-color: transparent;
+  background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none);
+  background-position: 0 0, 0 0, right top;
+  background-repeat: repeat-x, repeat-x, no-repeat;
+  background-size: auto 100%, auto 100%, auto auto;
+
+  box-shadow: 0 0 4px rgba(0,0,0,.4);
+}
+
+#sidebar-icon-paint,
+#sidebar-icon-settings {
+  width: 32px;
+  height: 32px;
 }
 
 #sidebar-icon-paint {
   background-image: url('chrome://global/skin/icons/paint.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 22px 22px;
-  padding: 22px 12px;
 }
 
 #sidebar-icon-settings {
   background-image: url('chrome://global/skin/icons/settings.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 16px 16px;
-  padding: 22px 12px;
 }
 
 #sidebar-box,
 #sidebar-splitter {
-  background-color: var(--lwt-sidebar-background-color) !important;
+  background-color: var(--lwt-selected-tab-background-color, --lwt-sidebar-background-color) !important;
+  -moz-default-appearance: auto !important;
+  -moz-font-smoothing-background-color: auto !important;
 }
 
 /* Make it feel native on macos */
