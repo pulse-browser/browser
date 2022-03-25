@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 6bbc26eb86e6d923473d35105c3ba73d4be336fb..0634af38d40b3620f5090d2e4a3cb80bc351161d 100644
+index 33a2ff36a7d87eaf9668c97fcb13dbc4df9c2f5b..8e314b0542024f79723289a816a202578834bfb2 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -19,7 +19,7 @@ index 6bbc26eb86e6d923473d35105c3ba73d4be336fb..0634af38d40b3620f5090d2e4a3cb80b
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
-@@ -271,11 +272,6 @@ pref("browser.shell.setDefaultPDFHandler", false);
+@@ -283,11 +284,6 @@ pref("browser.shell.setDefaultPDFHandler", false);
  // The behavior of option 3 is detailed at: http://wiki.mozilla.org/Session_Restore
  pref("browser.startup.page",                1);
  pref("browser.startup.homepage",            "about:home");
@@ -31,7 +31,17 @@ index 6bbc26eb86e6d923473d35105c3ba73d4be336fb..0634af38d40b3620f5090d2e4a3cb80b
  pref("browser.startup.homepage.abouthome_cache.loglevel", "Warn");
  
  // Whether we should skip the homepage when opening the first-run page
-@@ -1998,10 +1994,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
+@@ -1888,9 +1884,6 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
+ // We're currently blocking all of Ukraine (ua), but would prefer to block just Crimea (ua-43). Currently, the Mozilla Location Service APIs used by Region.jsm only exposes the country, not the subdivision.
+ pref("browser.vpn_promo.disallowed_regions", "ae,by,cn,cu,iq,ir,kp,om,ru,sd,sy,tm,tr,ua");
+ 
+-// Default to enabling VPN promo messages to be shown when specified and allowed
+-pref("browser.vpn_promo.enabled", true);
+-
+ // Enable the vpn card by default.
+ pref("browser.contentblocking.report.vpn.enabled", true);
+ // Only show vpn card to certain regions. Comma separated string of two letter ISO 3166-1 country codes.
+@@ -2003,10 +1996,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
  pref("browser.tabs.crashReporting.sendReport", true);
  pref("browser.tabs.crashReporting.includeURL", false);
  
@@ -42,7 +52,7 @@ index 6bbc26eb86e6d923473d35105c3ba73d4be336fb..0634af38d40b3620f5090d2e4a3cb80b
  #if defined(XP_WIN)
    // Allows us to deprioritize the processes of background tabs at an OS level
    pref("dom.ipc.processPriorityManager.enabled", true);
-@@ -2044,13 +2036,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
+@@ -2049,13 +2038,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -56,7 +66,7 @@ index 6bbc26eb86e6d923473d35105c3ba73d4be336fb..0634af38d40b3620f5090d2e4a3cb80b
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
  
-@@ -2172,11 +2157,6 @@ pref("fission.frontend.simulate-messages", false);
+@@ -2183,11 +2165,6 @@ pref("fission.frontend.simulate-messages", false);
  pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  

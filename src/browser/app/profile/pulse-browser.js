@@ -34,4 +34,7 @@ pref('xpinstall.signatures.required', false);
 // Allow the usage of theme experiments
 pref('extensions.experiments.enabled', true);
 
+// Disable VPN promos
+pref('browser.vpn_promo.enabled', false);
+
 #include better-fox.js
