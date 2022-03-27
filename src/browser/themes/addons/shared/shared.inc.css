@@ -54,6 +54,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
   /* Dialog variables */
   --dialog-border-radius: 0; /* The border radius of the dialog */
+
+  /* Make the tabs a touch wider */
+  --tab-min-height: 40px;
 }
 
 .container.infobar::before {

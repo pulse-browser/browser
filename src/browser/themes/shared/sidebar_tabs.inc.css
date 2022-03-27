@@ -34,6 +34,12 @@
 .sidebar-item-background {
   border-radius: var(--tab-border-radius);
   margin: var(--tab-block-margin);
+
+  width: var(--tab-min-height);
+  height: var(--tab-min-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sidebar-item-background:hover {
