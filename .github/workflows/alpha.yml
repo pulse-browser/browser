@@ -193,7 +193,7 @@ jobs:
           cd ..
 
       - name: Build
-        run: yarn build
+        run: yarn build --verbose
 
       - name: Package
         run: yarn melon package
