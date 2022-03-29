@@ -1,6 +1,7 @@
 # Browser branding
 ac_add_options --enable-update-channel=stable
 ac_add_options --with-ccache=sccache
+ac_add_options --without-wasm-sandboxed-libraries
 
 ac_add_options --with-app-name=pulse-browser
 export MOZ_USER_DIR="Pulse browser"
