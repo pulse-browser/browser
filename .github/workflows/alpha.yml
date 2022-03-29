@@ -197,6 +197,12 @@ jobs:
         continue-on-error: true
         run: yarn build --verbose
       
+      - name: Log
+        continue-on-error: true
+        run: |
+          cat engine/mozbuild
+          cat engine/.mozbuild
+      
       - name: Mach build
         run: |
           cd engine
