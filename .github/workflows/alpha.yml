@@ -192,8 +192,16 @@ jobs:
           ./mach --no-interactive bootstrap --application-choice browser
           cd ..
 
-      - name: Build
+        # Note: We still need this to generate our .mozconfig
+      - name: Gluon build
+        continue-on-error: true
         run: yarn build --verbose
+      
+      - name: Mach build
+        run: |
+          cd engine
+          ./mach build
+          cd ..
 
       - name: Package
         run: yarn melon package
