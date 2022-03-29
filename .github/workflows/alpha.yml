@@ -200,8 +200,8 @@ jobs:
       - name: Log
         continue-on-error: true
         run: |
-          cat engine/mozbuild
-          cat engine/.mozbuild
+          cat engine/mozconfig
+          cat engine/.mozconfig
       
       - name: Mach build
         run: |
