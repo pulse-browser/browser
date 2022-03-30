@@ -207,6 +207,7 @@ jobs:
       - name: Mach build
         run: |
           cd engine
+          export MACH_USE_SYSTEM_PYTHON=true
           ./mach build
           cd ..
 
