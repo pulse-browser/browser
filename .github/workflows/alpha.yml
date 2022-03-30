@@ -200,6 +200,7 @@ jobs:
       - name: Log
         continue-on-error: true
         run: |
+          ls engine
           cat engine/mozconfig
           cat engine/.mozconfig
       
