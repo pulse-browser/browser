@@ -212,7 +212,7 @@ jobs:
           cd ..
 
       - name: Package
-        run: yarn melon package
+        run: gluon package
 
       - name: Rename artifacts
         run: |
