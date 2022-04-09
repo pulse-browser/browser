@@ -22,6 +22,7 @@
     "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default",
     "download": "gluon download",
     "rebuild": "cd gluon && yarn build && cd ..",
+    "rebuild:win": "cd gluon && yarn build:win && cd ..",
     "package": "gluon package",
     "ff-version": "gluon ff-version",
     "licenseCheck": "gluon license-check"
