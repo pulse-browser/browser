@@ -11,6 +11,7 @@
   },
   "scripts": {
     "setupLink": "cd gluon && yarn && yarn build && yarn link && cd .. && yarn link gluon-build",
+    "setupLink:win": "cd gluon && yarn && yarn build:win && yarn link && cd .. && yarn link gluon-build",
     "build": "gluon build",
     "build:ui": "gluon build --ui",
     "bs": "yarn build && yarn start",
