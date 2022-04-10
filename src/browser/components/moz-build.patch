@@ -1,22 +1,14 @@
 diff --git a/browser/components/moz.build b/browser/components/moz.build
-index aaae39b52f397623ba8153e5fdd079e43a16e09e..34bb8c3445ef292ffcd4a27e974465786dc147e6 100644
+index 5a45200d348199e6bf0aa1e49c37a7d6129a376a..c7bf38f4341f939e38b23de7eb814a794af4a798 100644
 --- a/browser/components/moz.build
 +++ b/browser/components/moz.build
-@@ -25,7 +25,6 @@ with Files("safebrowsing/**"):
- with Files("controlcenter/**"):
-     BUG_COMPONENT = ("Firefox", "General")
- 
--
- DIRS += [
-     "about",
-     "aboutlogins",
-@@ -61,6 +60,9 @@ DIRS += [
+@@ -60,6 +60,9 @@ DIRS += [
      "urlbar",
  ]
  
-+# Focus browser imports
++# Pulse: Custom components
 +DIRS += ["welcome"]
 +
  DIRS += ["build"]
  
- if CONFIG["NIGHTLY_BUILD"]:
+ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "cocoa":

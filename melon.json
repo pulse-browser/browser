@@ -4,7 +4,7 @@
   "appId": "com.fushra.browser.desktop",
   "version": {
     "product": "firefox",
-    "version": "98.0.2",
+    "version": "99.0",
     "displayVersion": "1.0.0"
   },
   "buildOptions": {
