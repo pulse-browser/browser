@@ -1,8 +1,8 @@
 diff --git a/netwerk/protocol/http/nsHttpHandler.cpp b/netwerk/protocol/http/nsHttpHandler.cpp
-index da2c5fa31cfa8e87cf007e8a0e03a526f3646ed7..1042b350cb0e63fd0017da4a722b587a2d380d8f 100644
+index 09f4e79c263540b58fb5670baaef0bc221e2abba..c967ca8d65492938e88a289122c93fb352e1ddb9 100644
 --- a/netwerk/protocol/http/nsHttpHandler.cpp
 +++ b/netwerk/protocol/http/nsHttpHandler.cpp
-@@ -826,19 +826,14 @@ void nsHttpHandler::BuildUserAgent() {
+@@ -874,19 +874,17 @@ void nsHttpHandler::BuildUserAgent() {
    mUserAgent += '/';
    mUserAgent += mProductSub;
  
@@ -23,6 +23,9 @@ index da2c5fa31cfa8e87cf007e8a0e03a526f3646ed7..1042b350cb0e63fd0017da4a722b587a
 +  // which reduces the fingerprinting footprint and makes the browser function
 +  // correctly on mozilla sites like addons.mozilla.org. It also provides an
 +  // insignificant performance boost because we are removing a branching section
++  //
++  // TODO: Should be able to use mCompatFirefoxEnabled insead of this patch,
++  // which will reduce code complexity.
 +
 +  // "Firefox/x.y" (compatibility) app token
 +  mUserAgent += ' ';
