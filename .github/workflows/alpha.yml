@@ -196,14 +196,14 @@ jobs:
       - name: Gluon build
         continue-on-error: true
         run: yarn build --verbose
-      
+
       - name: Log
         continue-on-error: true
         run: |
           ls engine
           cat engine/mozconfig
           cat engine/.mozconfig
-      
+
       - name: Mach build
         run: |
           cd engine
@@ -260,6 +260,56 @@ jobs:
         with:
           name: pulse-browser.source.tar.gz
           path: ./pulse-browser.source.tar.gz
+
+  windows-from-source:
+    runs-on: windows-latest
+    needs: [build-data, source]
+
+    steps:
+      - uses: action/checkout@v2
+        with:
+          submodule: recursive
+
+      - name: Setup git
+        run: |
+          git config --global user.email "trickypr@users.noreply.github.com"
+          git config --global user.name "TrickyPR"
+
+      - name: Setup gluon
+        run: |
+          yarn
+          yarn setupLink
+
+          cd gluon
+          npm i -g .
+          cd ..
+
+      - uses: actions/download-artifact@v2
+        name: pulse-browser.source.tar.gz
+
+      - name: Load source
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          tar -xf pulse-browser.source.tar.gz -C engine
+          rm -rf pulse-browser
+
+      - name: Build
+        run: yarn build
+
+      - name: Package
+        run: yarn package
+
+      - name: Make artifact available
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          cp engine/obj-*/dist/install/sea/pulse-browser-*.installer.exe .
+          mv *.installer.exe pulse-browser.installer.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pulse-browser.windows.installer.exe
+          path: ./pulse-browser.installer.exe
 
   release:
     name: Release
