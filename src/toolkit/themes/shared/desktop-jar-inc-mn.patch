@@ -1,11 +1,10 @@
 diff --git a/toolkit/themes/shared/desktop-jar.inc.mn b/toolkit/themes/shared/desktop-jar.inc.mn
-index 8658ca96084856eeeb58640de81d4e543f57c6d8..85233df5464477960c3d63fef6cd4714268cc128 100644
+index 8658ca96084856eeeb58640de81d4e543f57c6d8..fb2893170cbda0e077714f5cd1e3dafa813ce02c 100644
 --- a/toolkit/themes/shared/desktop-jar.inc.mn
 +++ b/toolkit/themes/shared/desktop-jar.inc.mn
-@@ -131,4 +131,6 @@
+@@ -131,4 +131,5 @@
    skin/classic/global/reader/RM-Content-Width-Plus-44x16.svg           (../../shared/reader/RM-Content-Width-Plus-44x16.svg)
    skin/classic/global/reader/RM-Line-Height-Minus-38x14.svg            (../../shared/reader/RM-Line-Height-Minus-38x14.svg)
    skin/classic/global/reader/RM-Line-Height-Plus-38x24.svg             (../../shared/reader/RM-Line-Height-Plus-38x24.svg)
-+  skin/classic/global/icons/paint.svg              (../../shared/icons/paint.svg)
 +  skin/classic/global/icons/bookmark-outline.svg             (../../shared/icons/bookmark-outline.svg)  
  
