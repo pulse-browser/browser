@@ -295,7 +295,7 @@ jobs:
           rm -rf pulse-browser.source.tar.gz
 
       - name: Build
-        run: yarn build
+        run: yarn build --skip-patch-check
 
       - name: Package
         run: yarn package
