@@ -252,7 +252,7 @@ jobs:
       - name: Compress
         run: |
           cd engine
-          tar -czvf ../pulse-browser.source.tar.gz *
+          tar -hczvf ../pulse-browser.source.tar.gz *
           cd ..
 
       - name: Upload artifact
