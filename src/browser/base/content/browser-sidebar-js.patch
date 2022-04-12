@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..75d4510ef2c7af98ff9e5ce0433ff2a9606721f5 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a7852db07 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -129,11 +129,15 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..75d4510ef2c7af98ff9e5ce0433ff2a9
    },
  
    uninit() {
-@@ -135,6 +198,35 @@ var SidebarUI = {
+@@ -135,6 +198,49 @@ var SidebarUI = {
      }
    },
  
 +  createSidebarItem(id, icon, config) {
++    // if the sidebar item is already created, do nothing
++    if (document.getElementById(`sidebar-background-${id}`)) {
++      return;
++    }
 +
 +    const background = document.createElement("div")
 +    background.classList.add("sidebar-item-background")
@@ -159,13 +163,23 @@ index 88f7ed1afbb0f25130ae9b2c6d5058da1fc3a21e..75d4510ef2c7af98ff9e5ce0433ff2a9
 +    }, 100);
 +  },
 +
++  deleteSidebarItem(id) {
++    const background = document.getElementById(`sidebar-background-${id}`)
++    const icon = document.getElementById(`sidebar-icon-${id}`)
++    if(background){
++      background.remove()
++    }
++    if(icon){
++      icon.remove()
++    }
++  },
 +
 +
 +  
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -569,21 +661,31 @@ var SidebarUI = {
+@@ -575,21 +681,31 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
