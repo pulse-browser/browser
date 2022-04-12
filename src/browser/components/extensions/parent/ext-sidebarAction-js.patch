@@ -1,5 +1,5 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 99aa63874bc6f1821baae6788fbba18f6861f9c6..d0de0a5d595f5232f089af65b89991981a7c544c 100644
+index 99aa63874bc6f1821baae6788fbba18f6861f9c6..b2261282bfe53ab4420352c29ec4a74e8c694395 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
 @@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
@@ -10,7 +10,17 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..d0de0a5d595f5232f089af65b8999198
  // WeakMap[Extension -> SidebarAction]
  let sidebarActionMap = new WeakMap();
  
-@@ -157,11 +158,16 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -95,6 +96,9 @@ this.sidebarAction = class extends ExtensionAPI {
+ 
+     this.tabContext.shutdown();
+ 
++    // Delete sidebar item
++    SidebarUI.deleteSidebarItem(this.id);
++
+     // Don't remove everything on app shutdown so session restore can handle
+     // restoring open sidebars.
+     if (isAppShutdown) {
+@@ -157,11 +161,16 @@ this.sidebarAction = class extends ExtensionAPI {
      }
      let { document, SidebarUI } = window;
      let keyId = `ext-key-id-${this.id}`;
@@ -27,7 +37,7 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..d0de0a5d595f5232f089af65b8999198
        buttonId: this.buttonId,
        // The following properties are specific to extensions
        extensionId: this.extension.id,
-@@ -169,9 +175,13 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -169,9 +178,13 @@ this.sidebarAction = class extends ExtensionAPI {
        browserStyle: this.browserStyle,
      });
  
