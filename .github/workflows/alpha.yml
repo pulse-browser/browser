@@ -290,8 +290,8 @@ jobs:
       - name: Load source
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
-          tar -xf pulse-browser.source.tar.gz -C engine
-          rm -rf pulse-browser
+          tar -xf pulse-browser.source.tar.gz/pulse-browser.source.tar.gz -C engine
+          rm -rf pulse-browser.source.tar.gz
 
       - name: Build
         run: yarn build
