@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..0eff93a2aa146212d5af5f3538d8bc02261f7416 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a7852db07 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -129,7 +129,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..0eff93a2aa146212d5af5f3538d8bc02
    },
  
    uninit() {
-@@ -135,6 +198,50 @@ var SidebarUI = {
+@@ -135,6 +198,49 @@ var SidebarUI = {
      }
    },
  
@@ -139,7 +139,6 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..0eff93a2aa146212d5af5f3538d8bc02
 +      return;
 +    }
 +
-+    console.log("Creating sidebar item: " + id);
 +    const background = document.createElement("div")
 +    background.classList.add("sidebar-item-background")
 +    background.setAttribute("id", `sidebar-background-${id}`);
@@ -180,7 +179,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..0eff93a2aa146212d5af5f3538d8bc02
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -575,21 +682,31 @@ var SidebarUI = {
+@@ -575,21 +681,31 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
