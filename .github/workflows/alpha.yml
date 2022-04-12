@@ -268,7 +268,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodule: recursive
+          submodules: recursive
 
       - name: Setup git
         run: |
@@ -278,7 +278,7 @@ jobs:
       - name: Setup gluon
         run: |
           yarn
-          yarn setupLink
+          yarn setupLink:win
 
           cd gluon
           npm i -g .
