@@ -1,8 +1,8 @@
 diff --git a/browser/components/newtab/aboutwelcome/content/aboutwelcome.html b/browser/components/newtab/aboutwelcome/content/aboutwelcome.html
-index 9957e350a3192ca6ef8d83f7604d0120ab16fb7f..36a86f4deadd5af09c9d916d6eb40d7ca0da053c 100644
+index 9957e350a3192ca6ef8d83f7604d0120ab16fb7f..655c95e4269bd9a66cd034d769051e93091a736e 100644
 --- a/browser/components/newtab/aboutwelcome/content/aboutwelcome.html
 +++ b/browser/components/newtab/aboutwelcome/content/aboutwelcome.html
-@@ -11,18 +11,14 @@
+@@ -11,18 +11,21 @@
      <title data-l10n-id="onboarding-welcome-header"></title>
      <link rel="icon" type="image/png" href="chrome://branding/content/icon32.png">
      <link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
@@ -15,7 +15,14 @@ index 9957e350a3192ca6ef8d83f7604d0120ab16fb7f..36a86f4deadd5af09c9d916d6eb40d7c
    </head>
    <body>
 -    <div id="root" class="welcome-container" role="presentation">
-+    <div id="root" class="">
++    <div id="root">
++      <div class="grid-container">
++        <div class="grid-item">
++          <h1>Welcome to Pulse</h1>
++          <p>An experimental Firefox fork that enhances focus and increases work productivity due to its hyper minimalistic UI and built-in tools.</p>
++        </div>
++        <div class="grid-item"><img class="preview" src="chrome://activity-stream/content/aboutwelcome/browser-preview.png"></div>
++      </div>
      </div>
 -    <script src="resource://activity-stream/vendor/react.js"></script>
 -    <script src="resource://activity-stream/vendor/react-dom.js"></script>

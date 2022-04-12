@@ -36,9 +36,26 @@ html {
 }
 
 body {
-    --grey-subtitle-1: #696977;
-    --newtab-button-secondary-color: #0060DF;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Helvetica Neue", sans-serif;
     font-size: 15px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 100px;
     position: relative;
+}
+
+.grid-item {
+    width: auto;
+    padding-left: 200px;
+    margin: 0;
+    transform: translateY(50%);
+}
+
+.preview {
+    height: 500px;
+    width: 900px;
 }
