@@ -277,7 +277,7 @@ jobs:
       - name: Install Mozillabuild
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
-          curl -L https://github.com/pulse-browser/mozillabuild-cli/releases/download/4.0/mozilla-build.tar.gz
+          curl -L -o mozilla-build.tar.gz https://github.com/pulse-browser/mozillabuild-cli/releases/download/4.0/mozilla-build.tar.gz
           tar -xf mozilla-build.tar.gz -C mozillabuild
           cd mozillabuild
           ./install.sh
