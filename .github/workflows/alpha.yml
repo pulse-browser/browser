@@ -105,6 +105,10 @@ jobs:
           cargo --version
           ls /opt/wasi-sdk/share/wasi-sysroot
 
+      - name: Log memory usage
+        run: |
+          ps aux | sort -rnk 4
+
       - name: Setup melon
         run: yarn && yarn setupLink
 
