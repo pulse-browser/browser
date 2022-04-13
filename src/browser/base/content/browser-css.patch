@@ -1,0 +1,12 @@
+diff --git a/browser/base/content/browser.css b/browser/base/content/browser.css
+index 681d79f75f630e9812cb894a46aadc9374c7cd58..9d3ed9904d371b5aae68d0db25b10e7cf0d20cc1 100644
+--- a/browser/base/content/browser.css
++++ b/browser/base/content/browser.css
+@@ -384,6 +384,7 @@ toolbarpaletteitem {
+ :root[inDOMFullscreen] #navigator-toolbox,
+ :root[inDOMFullscreen] #fullscr-toggler,
+ :root[inDOMFullscreen] #sidebar-box,
++:root[inDOMFullscreen] #sidebar-container,
+ :root[inDOMFullscreen] #sidebar-splitter,
+ :root[inFullscreen]:not([macOSNativeFullscreen]) toolbar:not([fullscreentoolbar=true]),
+ :root[inFullscreen] .global-notificationbox {
