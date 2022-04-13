@@ -297,7 +297,7 @@ jobs:
       - name: Bootstrap
         run: |
           cd .\engine
-          mach --no-interactive bootstrap --application-choice browser
+          .\mach --no-interactive bootstrap --application-choice browser
           cd ..
 
       - name: Build
