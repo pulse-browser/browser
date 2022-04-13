@@ -294,6 +294,12 @@ jobs:
           tar -xf pulse-browser.source.tar.gz/pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
+      - name: Bootstrap
+        run: |
+          cd .\engine
+          mach --no-interactive bootstrap --application-choice browser
+          cd ..
+
       - name: Build
         run: yarn build --skip-patch-check
 
