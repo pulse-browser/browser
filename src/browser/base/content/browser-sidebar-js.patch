@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a7852db07 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..c370962eb9b27ab59614d3ab4218f60b59b423f8 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -12,39 +12,36 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
   */
  var SidebarUI = {
 +  /**
-+   * @returns {Map<string, { title: string, url?: string, menuId: string, triggerButtonId?: string, iconurl: string, bottom?: string }>}
++   * @returns {Map<string, { title: string, url?: string, menuId: string, triggerButtonId?: string, iconurl: string }>}
 +   */
    get sidebars() {
      if (this._sidebars) {
        return this._sidebars;
-@@ -19,6 +23,8 @@ var SidebarUI = {
+@@ -19,6 +23,7 @@ var SidebarUI = {
              .getAttribute("label"),
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
 +          iconurl: "chrome://global/skin/icons/bookmark-outline.svg",
-+          bottom: false,
          },
        ],
        [
-@@ -30,6 +36,8 @@ var SidebarUI = {
+@@ -30,6 +35,7 @@ var SidebarUI = {
            url: "chrome://browser/content/places/historySidebar.xhtml",
            menuId: "menu_historySidebar",
            triggerButtonId: "appMenuViewHistorySidebar",
 +          iconurl: "chrome://browser/skin/history.svg",
-+          bottom: false,
          },
        ],
        [
-@@ -40,6 +48,8 @@ var SidebarUI = {
+@@ -40,6 +46,7 @@ var SidebarUI = {
              .getAttribute("label"),
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
 +          iconurl: "chrome://browser/skin/tab.svg",
-+          bottom: false,
          },
        ],
      ]));
-@@ -53,7 +63,10 @@ var SidebarUI = {
+@@ -53,7 +60,10 @@ var SidebarUI = {
      }
      return (this._browser = document.getElementById("sidebar"));
    },
@@ -55,7 +52,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -71,6 +84,8 @@ var SidebarUI = {
+@@ -71,6 +81,8 @@ var SidebarUI = {
    },
    _splitter: null,
    _icon: null,
@@ -64,7 +61,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -91,6 +106,10 @@ var SidebarUI = {
+@@ -91,6 +103,10 @@ var SidebarUI = {
      this._box = document.getElementById("sidebar-box");
      this._splitter = document.getElementById("sidebar-splitter");
      this._icon = document.getElementById("sidebar-icon");
@@ -75,18 +72,25 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
      this._reversePositionButton = document.getElementById(
        "sidebar-reverse-position"
      );
-@@ -102,9 +121,53 @@ var SidebarUI = {
+@@ -102,9 +118,60 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
 +    const sidebaritems = this.sidebars.keys();
 +    const sidebarExtensionVis = Services.prefs.getBoolPref(this.SIDEBAR_EXTENSIONS_PREF);
++
++
 +    for (const sidebaritem of sidebaritems) {
 +      if(this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
 +        return;
 +      }
 +      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem).iconurl, this.sidebars.get(sidebaritem));
 +    }
++
++    //Add divider
++    const divider = document.createElement("hr")
++    divider.classList.add("sidebar-divider");
++    this._sidebarIcons.appendChild(divider);
 +
 +    const sidebarVisible = Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true)
 +    this.setSidebarVisibility(sidebarVisible)
@@ -129,7 +133,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
    },
  
    uninit() {
-@@ -135,6 +198,49 @@ var SidebarUI = {
+@@ -135,6 +202,49 @@ var SidebarUI = {
      }
    },
  
@@ -175,11 +179,11 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
 +  },
 +
 +
-+  
++
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -575,21 +681,31 @@ var SidebarUI = {
+@@ -575,21 +685,31 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {

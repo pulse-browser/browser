@@ -86,3 +86,8 @@
   -moz-font-smoothing-background-color: -moz-mac-source-list;
 }
 %endif
+
+.sidebar-divider{
+  margin: 6px;
+  /* border-top: 1px solid var(--toolbarbutton-icon-fill); */
+}
