@@ -278,6 +278,7 @@ jobs:
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           curl -L -o mozilla-build.tar.gz https://github.com/pulse-browser/mozillabuild-cli/releases/download/4.0/mozilla-build.tar.gz
+          mkdir -p mozillabuild
           tar -xf mozilla-build.tar.gz -C mozillabuild
           cd mozillabuild
           ./install.sh
