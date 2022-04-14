@@ -248,10 +248,10 @@ jobs:
         run: yarn && yarn setupLink
 
       - name: Download firefox source and dependancies
-        run: yarn download
+        run: yarn download --verbose
 
       - name: Import
-        run: yarn imp
+        run: yarn imp --verbose
 
       - name: Compress
         run: |
