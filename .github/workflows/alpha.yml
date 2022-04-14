@@ -314,7 +314,7 @@ jobs:
         run: |
           cd engine/
           type nul > C:\script
-          echo cd /d/a/windows-artifacts/windows-artifacts/mozilla-central >> C:\script
+          echo cd ${cd} >> C:\script
           echo ls >> C:\script
           echo ./mach bootstrap --application-choice browser >> C:\script
           C:\mozilla-build\start-shell.bat "C:\script"
