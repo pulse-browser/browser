@@ -309,10 +309,11 @@ jobs:
           tar -xf pulse-browser.source.tar.gz/pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
-      - name: Bootstrap
+      - name: Bootstrap 
+        shell: bash --noprofile --norc -eo pipefail {0}
         run: |
-          cd .\engine
-          .\mach --no-interactive bootstrap --application-choice browser
+          cd ./engine
+          ./mach --no-interactive bootstrap --application-choice browser
           cd ..
 
       - name: Build
