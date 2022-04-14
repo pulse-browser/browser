@@ -268,6 +268,8 @@ jobs:
   windows-from-source:
     runs-on: windows-latest
     needs: [build-data, source]
+    env:
+      engine: ./engine
 
     steps:
       - uses: actions/checkout@v2
@@ -312,9 +314,9 @@ jobs:
       - name: Bootstrap
         shell: cmd
         run: |
-          cd engine/
           type nul > C:\script
-          echo cd ${cd} >> C:\script
+          echo cd ${{ env.engine }} >> C:\script
+          echo cd >> C:\script
           echo ls >> C:\script
           echo ./mach bootstrap --application-choice browser >> C:\script
           C:\mozilla-build\start-shell.bat "C:\script"
