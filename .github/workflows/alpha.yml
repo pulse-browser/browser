@@ -316,7 +316,7 @@ jobs:
         run: |
           cd engine
           type nul > C:\script
-          echo cd ${{ cd }} >> C:\script
+          echo cd %cd% >> C:\script
           echo cd >> C:\script
           echo ls >> C:\script
           echo ./mach bootstrap --application-choice browser >> C:\script
