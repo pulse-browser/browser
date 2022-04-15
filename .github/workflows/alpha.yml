@@ -315,8 +315,17 @@ jobs:
         shell: cmd
         run: |
           cd engine
+          
+          :: Get a bunch of details about the current directory
+          set "cwd_path=%cd%"
+          set "cwd_path=%cwd_path:\=/%"
+          set "cwd_path=%cwd_path:C:/=/c/%"
+          
+          echo "Using %cwd_path% as the working directory"
+          echo ""
+          
           type nul > C:\script
-          echo cd %cd% >> C:\script
+          echo cd %cwd_path% >> C:\script
           echo cd >> C:\script
           echo ls >> C:\script
           echo ./mach bootstrap --application-choice browser >> C:\script
