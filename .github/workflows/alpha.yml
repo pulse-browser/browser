@@ -294,10 +294,9 @@ jobs:
         run: |
           bash -c "mkdir -p /tmp"
 
-          type nul > C:\script
-          echo mkdir -p /tmp >> C:\script
-          type C:\script
-          C:\mozilla-build\start-shell.bat "C:\script"
+          echo mkdir -p /tmp >> C:\mktmp
+          type C:\mktmp
+          C:\mozilla-build\start-shell.bat "C:\mktmp"
 
       - name: Setup gluon
         run: |
