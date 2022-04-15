@@ -268,8 +268,6 @@ jobs:
   windows-from-source:
     runs-on: windows-latest
     needs: [build-data, source]
-    env:
-      engine: ./engine
 
     steps:
       - uses: actions/checkout@v2
@@ -320,7 +318,7 @@ jobs:
           :: Get a bunch of details about the current directory
           set "cwd_path=%cd%"
           set "cwd_path=%cwd_path:\=/%"
-          set "cwd_path=%cwd_path:C:/=/c/%"
+          set "cwd_path=%cwd_path:D:/=/d/%"
           
           echo "Using %cwd_path% as the working directory"
           echo ""
