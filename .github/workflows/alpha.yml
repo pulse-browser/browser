@@ -288,7 +288,7 @@ jobs:
         # TODO: Cache between builds to improve performance
       - name: Install sccache
         run: |
-          scoop install sccache
+          cargo install sccache
 
       - name: Setup git
         run: |
