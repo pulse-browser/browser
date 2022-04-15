@@ -293,6 +293,7 @@ jobs:
       - name: Create tmp
         run: |
           bash -c "mkdir -p /tmp"
+          mkdir C:\mozilla-build\msys2\tmp
 
       - name: Setup gluon
         run: |
