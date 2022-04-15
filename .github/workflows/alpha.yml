@@ -290,6 +290,15 @@ jobs:
           git config --global user.email "trickypr@users.noreply.github.com"
           git config --global user.name "TrickyPR"
 
+      - name: Create tmp
+        run: |
+          bash -c "mkdir -p /tmp"
+
+          type nul > C:\script
+          echo mkdir -p /tmp >> C:\script
+          type C:\script
+          C:\mozilla-build\start-shell.bat "C:\script"
+
       - name: Setup gluon
         run: |
           yarn
@@ -310,25 +319,25 @@ jobs:
           tar -xf pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
-#       - name: Bootstrap
-#         shell: cmd
-#         run: |
-#           cd engine
-          
-#           :: Get a bunch of details about the current directory
-#           set "cwd_path=%cd%"
-#           set "cwd_path=%cwd_path:\=/%"
-#           set "cwd_path=%cwd_path:D:/=/d/%"
-          
-#           echo "Using %cwd_path% as the working directory"
-#           echo ""
-          
-#           type nul > C:\script
-#           echo cd %cwd_path% >> C:\script
-#           echo ls >> C:\script
-#           echo ./mach -v bootstrap --application-choice browser >> C:\script
-#           type C:\script
-#           C:\mozilla-build\start-shell.bat "C:\script"
+      #       - name: Bootstrap
+      #         shell: cmd
+      #         run: |
+      #           cd engine
+
+      #           :: Get a bunch of details about the current directory
+      #           set "cwd_path=%cd%"
+      #           set "cwd_path=%cwd_path:\=/%"
+      #           set "cwd_path=%cwd_path:D:/=/d/%"
+
+      #           echo "Using %cwd_path% as the working directory"
+      #           echo ""
+
+      #           type nul > C:\script
+      #           echo cd %cwd_path% >> C:\script
+      #           echo ls >> C:\script
+      #           echo ./mach -v bootstrap --application-choice browser >> C:\script
+      #           type C:\script
+      #           C:\mozilla-build\start-shell.bat "C:\script"
 
       - name: Boostrap - manual edition
         run: |
