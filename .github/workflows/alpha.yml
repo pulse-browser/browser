@@ -285,6 +285,11 @@ jobs:
           cd ..
           rm -rf mozilla-build.tar.gz mozillabuild/
 
+        # TODO: Cache between builds to improve performance
+      - name: Install sccache
+        run: |
+          scoop install sccache
+
       - name: Setup git
         run: |
           git config --global user.email "trickypr@users.noreply.github.com"
