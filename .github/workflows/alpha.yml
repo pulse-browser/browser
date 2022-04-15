@@ -266,7 +266,7 @@ jobs:
           path: ./pulse-browser.source.tar.gz
 
   windows-from-source:
-    runs-on: windows-latest
+    runs-on: windows-2019
     needs: [build-data, source]
 
     steps:
