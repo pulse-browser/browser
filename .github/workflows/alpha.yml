@@ -302,7 +302,8 @@ jobs:
           cd ..
 
       - uses: actions/download-artifact@v2
-        name: pulse-browser.source.tar.gz
+        with:
+          name: pulse-browser.source.tar.gz
 
       - name: Load source
         shell: bash --noprofile --norc -eo pipefail {0}
