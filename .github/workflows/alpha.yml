@@ -327,6 +327,7 @@ jobs:
           echo "cd %cwd_path%" >> C:\script
           echo ls >> C:\script
           echo ./mach bootstrap --application-choice browser >> C:\script
+          type C:\script
           C:\mozilla-build\start-shell.bat "C:\script"
 
       - name: Build
