@@ -294,10 +294,6 @@ jobs:
         run: |
           bash -c "mkdir -p /tmp"
 
-          echo mkdir -p /tmp >> C:\mktmp
-          type C:\mktmp
-          C:\mozilla-build\start-shell.bat "C:\mktmp"
-
       - name: Setup gluon
         run: |
           yarn
