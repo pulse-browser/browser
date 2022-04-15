@@ -313,7 +313,7 @@ jobs:
       - name: Bootstrap
         shell: cmd
         run: |
-          :: cd engine
+          cd engine
           
           :: Get a bunch of details about the current directory
           set "cwd_path=%cd%"
