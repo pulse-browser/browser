@@ -324,7 +324,7 @@ jobs:
           echo ""
           
           type nul > C:\script
-          echo "cd %cwd_path%" >> C:\script
+          echo cd %cwd_path% >> C:\script
           echo ls >> C:\script
           echo ./mach bootstrap --application-choice browser >> C:\script
           type C:\script
