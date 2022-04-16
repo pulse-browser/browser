@@ -274,11 +274,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Setup git
-        run: |
-          git config --global user.email "trickypr@users.noreply.github.com"
-          git config --global user.name "TrickyPR"
-
       - name: Setup gluon
         run: |
           yarn
