@@ -266,7 +266,7 @@ jobs:
           path: ./pulse-browser.source.tar.gz
 
   windows-from-source:
-    runs-on: windows-2019
+    runs-on: tricky-win
     needs: [build-data, source]
 
     steps:
@@ -274,31 +274,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install Mozillabuild
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          curl -L -o mozilla-build.tar.gz https://github.com/pulse-browser/mozillabuild-cli/releases/download/4.0/mozilla-build.tar.gz
-          mkdir -p mozillabuild
-          tar -xf mozilla-build.tar.gz -C mozillabuild
-          cd mozillabuild
-          ./install.sh
-          cd ..
-          rm -rf mozilla-build.tar.gz mozillabuild/
-
-        # TODO: Cache between builds to improve performance
-      - name: Install sccache
-        run: |
-          cargo install sccache
-
       - name: Setup git
         run: |
           git config --global user.email "trickypr@users.noreply.github.com"
           git config --global user.name "TrickyPR"
-
-      - name: Create tmp
-        run: |
-          bash -c "mkdir -p /tmp"
-          mkdir C:\mozilla-build\msys2\tmp
 
       - name: Setup gluon
         run: |
@@ -320,30 +299,25 @@ jobs:
           tar -xf pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
-      - name: Boostrap - manual edition
-        run: |
-          cd engine
-          ./mach python -m pip install glean-sdk cffi glean-parser pycparser
+      # - name: Bootstrap
+      #   shell: cmd
+      #   run: |
+      #     cd engine
 
-      - name: Bootstrap
-        shell: cmd
-        run: |
-          cd engine
+      #     :: Get a bunch of details about the current directory
+      #     set "cwd_path=%cd%"
+      #     set "cwd_path=%cwd_path:\=/%"
+      #     set "cwd_path=%cwd_path:D:/=/d/%"
 
-          :: Get a bunch of details about the current directory
-          set "cwd_path=%cd%"
-          set "cwd_path=%cwd_path:\=/%"
-          set "cwd_path=%cwd_path:D:/=/d/%"
+      #     echo "Using %cwd_path% as the working directory"
+      #     echo ""
 
-          echo "Using %cwd_path% as the working directory"
-          echo ""
-
-          type nul > C:\script
-          echo cd %cwd_path% >> C:\script
-          echo ls >> C:\script
-          echo ./mach --verbose --no-interactive bootstrap --application-choice browser >> C:\script
-          type C:\script
-          C:\mozilla-build\start-shell.bat "C:\script"
+      #     type nul > C:\script
+      #     echo cd %cwd_path% >> C:\script
+      #     echo ls >> C:\script
+      #     echo ./mach --verbose --no-interactive bootstrap --application-choice browser >> C:\script
+      #     type C:\script
+      #     C:\mozilla-build\start-shell.bat "C:\script"
 
       - name: Build
         run: yarn build --skip-patch-check
