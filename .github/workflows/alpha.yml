@@ -330,10 +330,10 @@ jobs:
 #           type C:\script
 #           C:\mozilla-build\start-shell.bat "C:\script"
 
-      - name: Boostrap windows edition
+      - name: Boostrap - manual edition
         run: |
           cd engine
-          mach --no-interactive --verbose bootstrap --application-choice browser
+          ./mach python -m pip install glean-sdk cffi glean-parser pycparser
 
       - name: Build
         run: yarn build --skip-patch-check
