@@ -320,6 +320,11 @@ jobs:
           tar -xf pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
+      - name: Boostrap - manual edition
+        run: |
+          cd engine
+          ./mach python -m pip install glean-sdk cffi glean-parser pycparser
+
       - name: Bootstrap
         shell: cmd
         run: |
@@ -339,11 +344,6 @@ jobs:
           echo ./mach --verbose --no-interactive bootstrap --application-choice browser >> C:\script
           type C:\script
           C:\mozilla-build\start-shell.bat "C:\script"
-
-      - name: Boostrap - manual edition
-        run: |
-          cd engine
-          ./mach python -m pip install glean-sdk cffi glean-parser pycparser
 
       - name: Build
         run: yarn build --skip-patch-check
