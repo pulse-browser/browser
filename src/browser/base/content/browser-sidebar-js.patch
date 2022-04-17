@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..de15d451f90a150874c0ffbba72ac9c7b9307e15 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..88256e288d1974266f373ff1b1354f074d45ede9 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -153,7 +153,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..de15d451f90a150874c0ffbba72ac9c7
    },
  
    uninit() {
-@@ -135,6 +222,58 @@ var SidebarUI = {
+@@ -135,6 +222,60 @@ var SidebarUI = {
      }
    },
  
@@ -169,10 +169,17 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..de15d451f90a150874c0ffbba72ac9c7
 +    const background = document.createElement("div")
 +    background.classList.add("sidebar-item-background")
 +    background.setAttribute("id", `sidebar-background-${id}`);
-+    background.onclick = () => {
-+      this.toggle(id)
++
++    if(config.url){
++      background.onclick = () => {
++        this.toggle(id)
++      }
 +    }
 +    
++    if(config.onclick){
++      background.setAttribute("onclick", config.onclick);
++    }
++
 +    const iconEl = document.createElement("image");
 +    iconEl.setAttribute("id", `sidebar-icon-${id}`);
 +    iconEl.setAttribute("src", `${config.iconurl}`);
@@ -185,11 +192,6 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..de15d451f90a150874c0ffbba72ac9c7
 +      this._sidebarIconsBottom.appendChild(background);
 +    }else{
 +      this._sidebarIcons.appendChild(background);
-+    }
-+
-+    //Add onclick event to the button
-+    if(config.onclick){
-+      background.setAttribute("onclick", config.onclick);
 +    }
 +
 +    setTimeout(() => {
@@ -212,27 +214,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..de15d451f90a150874c0ffbba72ac9c7
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -499,6 +638,11 @@ var SidebarUI = {
-   _show(commandID) {
-     return new Promise(resolve => {
-       this.selectMenuItem(commandID);
-+      let { url, title } = this.sidebars.get(commandID);
-+      if(!url) {
-+        // If the sidebar is not defined, then we should not open it.
-+        return;
-+      }
- 
-       this._box.hidden = this._splitter.hidden = false;
-       this.setPosition();
-@@ -509,7 +653,6 @@ var SidebarUI = {
-       this._box.setAttribute("sidebarcommand", commandID);
-       this.lastOpenedId = commandID;
- 
--      let { url, title } = this.sidebars.get(commandID);
-       this.title = title;
-       this.browser.setAttribute("src", url); // kick off async load
- 
-@@ -575,21 +718,32 @@ var SidebarUI = {
+@@ -575,21 +716,32 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
