@@ -1,17 +1,14 @@
 diff --git a/browser/base/content/browser-box.inc.xhtml b/browser/base/content/browser-box.inc.xhtml
-index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..7c75669384aab64bdd87d11300f96b86fab4af03 100644
+index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..16898ef8c3d1ef797a8fed17e9e8ce50992c364f 100644
 --- a/browser/base/content/browser-box.inc.xhtml
 +++ b/browser/base/content/browser-box.inc.xhtml
-@@ -3,6 +3,14 @@
+@@ -3,6 +3,11 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  <hbox flex="1" id="browser">
 +  <div id="sidebar-container" class="sidebar-container"> 
 +    <vbox id="sidebar-icons"></vbox>
-+    <vbox id="sidebar-icons-bottom">
-+      <div class="sidebar-item-background"><image id="sidebar-icon-paint" class="sidebar-icon-item" onclick="BrowserOpenAddonsMgr();" src="chrome://mozapps/skin/extensions/category-themes.svg" /></div>
-+      <div class="sidebar-item-background"><image id="sidebar-icon-settings" class="sidebar-icon-item" onclick="openPreferences();" src="chrome://global/skin/icons/settings.svg" /></div>
-+    </vbox>
++    <vbox id="sidebar-icons-bottom"></vbox>
 +  </div>
 +
    <vbox id="sidebar-box" hidden="true" class="chromeclass-extrachrome">

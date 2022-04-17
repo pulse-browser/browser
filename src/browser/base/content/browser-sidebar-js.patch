@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50d110290b 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..de15d451f90a150874c0ffbba72ac9c7b9307e15 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -12,36 +12,57 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50
   */
  var SidebarUI = {
 +  /**
-+   * @returns {Map<string, { title: string, url?: string, menuId: string, triggerButtonId?: string, iconurl: string }>}
++   * @returns {Map<string, { title: string, url?: string, onclick?: string, menuId?: string, triggerButtonId?: string, iconurl: string, isBottom: boolean }>}
 +   */
    get sidebars() {
      if (this._sidebars) {
        return this._sidebars;
-@@ -19,6 +23,7 @@ var SidebarUI = {
+@@ -19,6 +23,8 @@ var SidebarUI = {
              .getAttribute("label"),
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
 +          iconurl: "chrome://global/skin/icons/bookmark-outline.svg",
++          isBottom: false,
          },
        ],
        [
-@@ -30,6 +35,7 @@ var SidebarUI = {
+@@ -30,6 +36,8 @@ var SidebarUI = {
            url: "chrome://browser/content/places/historySidebar.xhtml",
            menuId: "menu_historySidebar",
            triggerButtonId: "appMenuViewHistorySidebar",
 +          iconurl: "chrome://browser/skin/history.svg",
++          isBottom: false,
          },
        ],
        [
-@@ -40,6 +46,7 @@ var SidebarUI = {
+@@ -40,6 +48,26 @@ var SidebarUI = {
              .getAttribute("label"),
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
 +          iconurl: "chrome://browser/skin/tab.svg",
++          isBottom: false,
++        },
++      ],
++      [
++        "sidebar-view-addons",
++        {
++          title: "Add-ons",
++          onclick: "BrowserOpenAddonsMgr();",
++          iconurl: "chrome://mozapps/skin/extensions/category-themes.svg",
++          isBottom: true,
++        },
++      ],
++      [
++        "sidebar-view-preferances",
++        {
++          title: "Preferences",
++          onclick: "openPreferences();",
++          iconurl: "chrome://global/skin/icons/settings.svg",
++          isBottom: true,
          },
        ],
      ]));
-@@ -53,7 +60,10 @@ var SidebarUI = {
+@@ -53,7 +81,10 @@ var SidebarUI = {
      }
      return (this._browser = document.getElementById("sidebar"));
    },
@@ -52,27 +73,27 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -71,6 +81,8 @@ var SidebarUI = {
+@@ -71,6 +102,8 @@ var SidebarUI = {
    },
    _splitter: null,
    _icon: null,
 +  _sidebarIcons: null,
-+  _sidebarBottomIcons: null,
++  _sidebarIconsBottom: null,
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -91,6 +103,10 @@ var SidebarUI = {
+@@ -91,6 +124,10 @@ var SidebarUI = {
      this._box = document.getElementById("sidebar-box");
      this._splitter = document.getElementById("sidebar-splitter");
      this._icon = document.getElementById("sidebar-icon");
 +
 +    this._sidebarIcons = document.getElementById("sidebar-icons");
-+    this._sidebarBottomIcons = document.getElementById("sidebar-icons-bottom");
++    this._sidebarIconsBottom = document.getElementById("sidebar-icons-bottom");
 +
      this._reversePositionButton = document.getElementById(
        "sidebar-reverse-position"
      );
-@@ -102,9 +118,59 @@ var SidebarUI = {
+@@ -102,9 +139,59 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
@@ -132,7 +153,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50
    },
  
    uninit() {
-@@ -135,6 +201,51 @@ var SidebarUI = {
+@@ -135,6 +222,58 @@ var SidebarUI = {
      }
    },
  
@@ -159,11 +180,18 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50
 +    
 +    background.append(iconEl)
 +
-+    if(config.bottom){
-+      this._sidebarBottomIcons.appendChild(background);
-+      return;
++    //If the item is meant to be on bottom, add it to the bottom
++    if(config.isBottom){
++      this._sidebarIconsBottom.appendChild(background);
++    }else{
++      this._sidebarIcons.appendChild(background);
 +    }
-+    this._sidebarIcons.appendChild(background);
++
++    //Add onclick event to the button
++    if(config.onclick){
++      background.setAttribute("onclick", config.onclick);
++    }
++
 +    setTimeout(() => {
 +      iconEl.setAttribute("class", "sidebar-icon-item");
 +    }, 100);
@@ -184,7 +212,27 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -575,21 +686,31 @@ var SidebarUI = {
+@@ -499,6 +638,11 @@ var SidebarUI = {
+   _show(commandID) {
+     return new Promise(resolve => {
+       this.selectMenuItem(commandID);
++      let { url, title } = this.sidebars.get(commandID);
++      if(!url) {
++        // If the sidebar is not defined, then we should not open it.
++        return;
++      }
+ 
+       this._box.hidden = this._splitter.hidden = false;
+       this.setPosition();
+@@ -509,7 +653,6 @@ var SidebarUI = {
+       this._box.setAttribute("sidebarcommand", commandID);
+       this.lastOpenedId = commandID;
+ 
+-      let { url, title } = this.sidebars.get(commandID);
+       this.title = title;
+       this.browser.setAttribute("src", url); // kick off async load
+ 
+@@ -575,21 +718,32 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -193,6 +241,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50
 +    // method.
 +    
      for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
++      if (!menuId) continue;
        let menu = document.getElementById(menuId);
 -      let triggerbutton =
 -        triggerButtonId && document.getElementById(triggerButtonId);
