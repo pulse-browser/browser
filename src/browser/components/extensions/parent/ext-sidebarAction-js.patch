@@ -1,5 +1,5 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 99aa63874bc6f1821baae6788fbba18f6861f9c6..371b48d77e814479c6d32264120c70a942b6fbbb 100644
+index 99aa63874bc6f1821baae6788fbba18f6861f9c6..baa85eae1b458a3187838336eada4b4a32504cd5 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
 @@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
@@ -41,7 +41,7 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..371b48d77e814479c6d32264120c70a9
        browserStyle: this.browserStyle,
      });
 +    
-+    SidebarUI.createSidebarItem(this.id, getIcon(16), SidebarUI.sidebars.get(this.id));
++    SidebarUI.createSidebarItem(this.id, SidebarUI.sidebars.get(this.id));
  
      let header = document.getElementById("sidebar-switcher-target");
      header.addEventListener("SidebarShown", this.updateHeader);
