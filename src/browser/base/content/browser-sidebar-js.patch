@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..5eaefbd2ef0672bd35c78ad53d205cb7cd70392e 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..839b38d33bcc3c733deed1959a472e50d110290b 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -83,7 +83,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..5eaefbd2ef0672bd35c78ad53d205cb7
 +      if(this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
 +        return;
 +      }
-+      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem).iconurl, this.sidebars.get(sidebaritem), true);
++      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem), true);
 +    }
 +
 +    //Add divider
@@ -136,7 +136,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..5eaefbd2ef0672bd35c78ad53d205cb7
      }
    },
  
-+  async createSidebarItem(id, icon, config, isinit=false) {
++  async createSidebarItem(id, config, isinit=false) {
 +    if(!isinit){
 +      await this.promiseDeferred;
 +    }
@@ -154,8 +154,8 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..5eaefbd2ef0672bd35c78ad53d205cb7
 +    
 +    const iconEl = document.createElement("image");
 +    iconEl.setAttribute("id", `sidebar-icon-${id}`);
-+    iconEl.setAttribute("src", `${icon}`);
-+    iconEl.style.backgroundImage = `url(${icon})`;
++    iconEl.setAttribute("src", `${config.iconurl}`);
++    iconEl.style.backgroundImage = `url(${config.iconurl})`;
 +    
 +    background.append(iconEl)
 +
