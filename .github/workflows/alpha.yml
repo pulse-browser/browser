@@ -275,16 +275,20 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Setup gluon
+      - name: Install dependencies
         shell: cmd
         run: |
           npm i
+
+      - name: Build gluon
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
           cd gluon
           npm i
           npm build
           npm link
           cd ..
-          
+
           npm link gluon-build
 
           cd gluon
