@@ -285,7 +285,7 @@ jobs:
         run: |
           cd gluon
           npm i
-          npm build
+          npm run build:win
           npm link
           cd ..
 
