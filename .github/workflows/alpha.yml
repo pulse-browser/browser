@@ -275,6 +275,7 @@ jobs:
           submodules: recursive
 
       - name: Setup gluon
+        shell: cmd
         run: |
           yarn
           yarn setupLink:win
@@ -315,9 +316,11 @@ jobs:
       #     C:\mozilla-build\start-shell.bat "C:\script"
 
       - name: Build
+        shell: cmd
         run: yarn build --skip-patch-check
 
       - name: Package
+        shell: cmd
         run: yarn package
 
       - name: Make artifact available
