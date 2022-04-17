@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..58e47588d7c083c560e3f9f2657dd4b7f241f122 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..5eaefbd2ef0672bd35c78ad53d205cb7cd70392e 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -72,14 +72,13 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..58e47588d7c083c560e3f9f2657dd4b7
      this._reversePositionButton = document.getElementById(
        "sidebar-reverse-position"
      );
-@@ -102,9 +118,64 @@ var SidebarUI = {
+@@ -102,9 +118,59 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
 +    const sidebaritems = this.sidebars.keys();
 +    const sidebarExtensionVis = Services.prefs.getBoolPref(this.SIDEBAR_EXTENSIONS_PREF);
 +
-+    console.log("Before forEach");
 +    for (const sidebaritem of sidebaritems) {
 +      if(this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
 +        return;
@@ -91,10 +90,6 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..58e47588d7c083c560e3f9f2657dd4b7
 +    const divider = document.createElement("hr")
 +    divider.classList.add("sidebar-divider");
 +    this._sidebarIcons.appendChild(divider);
-+    
-+    console.log("After foreach and seperator");
-+    console.log(this.sidebars);
-+
 +
 +    const sidebarVisible = Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true)
 +    this.setSidebarVisibility(sidebarVisible)
@@ -137,12 +132,11 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..58e47588d7c083c560e3f9f2657dd4b7
    },
  
    uninit() {
-@@ -135,6 +206,52 @@ var SidebarUI = {
+@@ -135,6 +201,51 @@ var SidebarUI = {
      }
    },
  
 +  async createSidebarItem(id, icon, config, isinit=false) {
-+    console.log(id);
 +    if(!isinit){
 +      await this.promiseDeferred;
 +    }
@@ -190,7 +184,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..58e47588d7c083c560e3f9f2657dd4b7
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -575,21 +692,31 @@ var SidebarUI = {
+@@ -575,21 +686,31 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
