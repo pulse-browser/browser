@@ -268,7 +268,7 @@ jobs:
 
   windows-from-source:
     runs-on: tricky-win
-    needs: [build-data, source]
+    needs: [build-data]
 
     steps:
       - uses: actions/checkout@v2
@@ -297,37 +297,12 @@ jobs:
           cd gluon
           npm i -g .
           cd ..
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: pulse-browser.source.tar.gz
-
-      - name: Load source
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          mkdir engine
-          tar --use-compress-program=zstd -xf pulse-browser.source.tar.gz -C engine
-          rm -rf pulse-browser.source.tar.gz
-
-      # - name: Bootstrap
-      #   shell: cmd
-      #   run: |
-      #     cd engine
-
-      #     :: Get a bunch of details about the current directory
-      #     set "cwd_path=%cd%"
-      #     set "cwd_path=%cwd_path:\=/%"
-      #     set "cwd_path=%cwd_path:D:/=/d/%"
-
-      #     echo "Using %cwd_path% as the working directory"
-      #     echo ""
-
-      #     type nul > C:\script
-      #     echo cd %cwd_path% >> C:\script
-      #     echo ls >> C:\script
-      #     echo ./mach --verbose --no-interactive bootstrap --application-choice browser >> C:\script
-      #     type C:\script
-      #     C:\mozilla-build\start-shell.bat "C:\script"
+      
+      - name: Download
+        run: npm run download
+      
+      - name: Import
+        run: npm run imp
 
       - name: Build
         shell: cmd
