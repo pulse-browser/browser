@@ -298,7 +298,7 @@ jobs:
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           mkdir engine
-          tar -xf pulse-browser.source.tar.gz -C engine
+          tar -xf --use-compress-program=zstd pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
       # - name: Bootstrap
