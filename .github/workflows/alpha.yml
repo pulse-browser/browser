@@ -256,7 +256,7 @@ jobs:
       - name: Compress
         run: |
           cd engine
-          tar -hczvf --use-compress-program=zstd ../pulse-browser.source.tar.gz *
+          tar --use-compress-program=zstd -hczvf ../pulse-browser.source.tar.gz *
           cd ..
 
       - name: Upload artifact
@@ -298,7 +298,7 @@ jobs:
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           mkdir engine
-          tar -xf --use-compress-program=zstd pulse-browser.source.tar.gz -C engine
+          tar --use-compress-program=zstd -xf pulse-browser.source.tar.gz -C engine
           rm -rf pulse-browser.source.tar.gz
 
       # - name: Bootstrap
