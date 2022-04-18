@@ -275,6 +275,9 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Get user
+        run: whoami
+
       - name: Install dependencies
         shell: cmd
         run: |
