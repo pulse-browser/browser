@@ -6,3 +6,15 @@
 # Enable these to enable mozilla telemetry and tracking
 # mk_add_options MOZ_TELEMETRY_REPORTING=
 # mk_add_options MOZ_DATA_REPORTING=
+
+# Provide the mozilla stub installer. This is basicly an IE8 window that
+# installs pulse in the background
+# TODO: rebrand this to look more like pulse
+export MOZ_STUB_INSTALLER=1
+export MAKENSISU=1
+
+# This disables autoupdates. When we need to reimplement autoupdates, we will
+# need to enable this and go though the steps provided by mozilla
+# - https://firefox-source-docs.mozilla.org/toolkit/mozapps/update/docs/BackgroundUpdates.html
+# - https://firefox-source-docs.mozilla.org/taskcluster/setting-up-an-update-server.html
+export MOZ_MAINTENANCE_SERVICE=

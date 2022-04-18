@@ -18,7 +18,6 @@ ac_add_options --disable-profiling
 ac_add_options --disable-tests
 
 # Misc
-export MOZ_STUB_INSTALLER=1
 export MOZ_INCLUDE_SOURCE_INFO=1
 export MOZ_REQUIRE_SIGNING=
 export MOZ_SOURCE_REPO=https://github.com/pulse-browser/browser
