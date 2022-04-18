@@ -256,7 +256,8 @@ jobs:
       - name: Compress
         run: |
           cd engine
-          tar --use-compress-program=zstd -cf ../pulse-browser.source.tar.gz *
+          # -h is used to dereference symlinks
+          tar --use-compress-program=zstd -hcf ../pulse-browser.source.tar.gz *
           cd ..
 
       - name: Upload artifact
