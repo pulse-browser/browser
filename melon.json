@@ -2,6 +2,7 @@
   "name": "Pulse",
   "vendor": "Fushra",
   "appId": "com.fushra.browser.desktop",
+  "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
     "version": "99.0.1",
