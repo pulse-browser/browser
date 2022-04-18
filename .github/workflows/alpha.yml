@@ -256,7 +256,7 @@ jobs:
       - name: Compress
         run: |
           cd engine
-          tar -hczvf ../pulse-browser.source.tar.gz *
+          tar -hczvf --use-compress-program=zstd ../pulse-browser.source.tar.gz *
           cd ..
 
       - name: Upload artifact
