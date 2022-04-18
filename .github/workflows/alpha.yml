@@ -277,8 +277,14 @@ jobs:
       - name: Setup gluon
         shell: cmd
         run: |
-          yarn
-          yarn setupLink:win
+          npm i
+          cd gluon
+          npm i
+          npm build
+          npm link
+          cd ..
+          
+          npm link gluon-build
 
           cd gluon
           npm i -g .
@@ -317,11 +323,11 @@ jobs:
 
       - name: Build
         shell: cmd
-        run: yarn build --skip-patch-check
+        run: npm build --skip-patch-check
 
       - name: Package
         shell: cmd
-        run: yarn package
+        run: npm run package
 
       - name: Make artifact available
         shell: bash --noprofile --norc -eo pipefail {0}
