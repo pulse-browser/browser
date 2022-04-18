@@ -312,17 +312,11 @@ jobs:
         shell: cmd
         run: npm run package
 
-      - name: Make artifact available
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          cp engine/obj-*/dist/install/sea/pulse-browser-*.installer.exe .
-          mv *.installer.exe pulse-browser.installer.exe
-
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: pulse-browser.windows.installer.exe
-          path: ./pulse-browser.installer.exe
+          name: pulse-browser.installer.exe
+          path: ./dist/pulse-browser.installer.exe
 
   release:
     name: Release
@@ -342,3 +336,4 @@ jobs:
             pulse-browser.linux.tar.bz2
             pulse-browser.source.tar.gz
             pulse-browser.macos.dmg
+            pulse-browser.installer.exe
