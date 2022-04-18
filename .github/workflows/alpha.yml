@@ -328,7 +328,7 @@ jobs:
 
       - name: Build
         shell: cmd
-        run: npm run build --skip-patch-check
+        run: npm run build -- --skip-patch-check
 
       - name: Package
         shell: cmd
