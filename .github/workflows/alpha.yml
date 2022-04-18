@@ -266,7 +266,7 @@ jobs:
           name: pulse-browser.source.tar.gz
           path: ./pulse-browser.source.tar.gz
 
-  windows-from-source:
+  windows:
     runs-on: tricky-win
     needs: [build-data]
 
@@ -297,10 +297,10 @@ jobs:
           cd gluon
           npm i -g .
           cd ..
-      
+
       - name: Download
         run: npm run download
-      
+
       - name: Import
         run: npm run imp
 
@@ -326,7 +326,7 @@ jobs:
 
   release:
     name: Release
-    needs: [build-data, linux, source, mac]
+    needs: [build-data, linux, source, mac, windows]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
