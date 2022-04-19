@@ -304,6 +304,11 @@ jobs:
       - name: Import
         run: npm run imp
 
+      - name: Use alpha branding
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
+
       - name: Build
         shell: cmd
         run: npm run build -- --skip-patch-check
