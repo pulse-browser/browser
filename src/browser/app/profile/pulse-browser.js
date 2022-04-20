@@ -8,7 +8,7 @@
 pref('media.eme.enabled', true);
 
 // Disable firefox's about:welcome page
-pref('browser.aboutwelcome.enabled', false);
+pref('browser.aboutwelcome.enabled', true);
 
 pref('pulse.welcome.enabled', true);
 pref('pulse.welcome.seen', false);
