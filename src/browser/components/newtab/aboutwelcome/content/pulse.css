@@ -44,7 +44,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-gap: 100px;
+    grid-gap: 70px;
     position: relative;
 }
 
@@ -56,6 +56,16 @@ body {
 }
 
 .preview {
-    height: 500px;
-    width: 900px;
+    height: 400px;
+    width: 780px;
+}
+
+.logo {
+    height: 120px;
+    width: 120px;
+}
+
+.version-container {
+    display: inline-flex;
+    padding-top: 100px;
 }

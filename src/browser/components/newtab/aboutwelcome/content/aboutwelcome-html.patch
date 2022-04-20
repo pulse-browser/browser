@@ -1,8 +1,8 @@
 diff --git a/browser/components/newtab/aboutwelcome/content/aboutwelcome.html b/browser/components/newtab/aboutwelcome/content/aboutwelcome.html
-index 9957e350a3192ca6ef8d83f7604d0120ab16fb7f..655c95e4269bd9a66cd034d769051e93091a736e 100644
+index 9957e350a3192ca6ef8d83f7604d0120ab16fb7f..46db5e730995781d965491ad9f807f97d8d413e4 100644
 --- a/browser/components/newtab/aboutwelcome/content/aboutwelcome.html
 +++ b/browser/components/newtab/aboutwelcome/content/aboutwelcome.html
-@@ -11,18 +11,21 @@
+@@ -11,18 +11,32 @@
      <title data-l10n-id="onboarding-welcome-header"></title>
      <link rel="icon" type="image/png" href="chrome://branding/content/icon32.png">
      <link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
@@ -12,14 +12,25 @@ index 9957e350a3192ca6ef8d83f7604d0120ab16fb7f..655c95e4269bd9a66cd034d769051e93
      <link rel="localization" href="browser/branding/sync-brand.ftl"/>
      <link rel="localization" href="browser/branding/brandings.ftl"/>
      <link rel="localization" href="browser/newtab/onboarding.ftl"/>
++
++    <link rel="localization" href="browser/welcome.ftl" />
    </head>
    <body>
 -    <div id="root" class="welcome-container" role="presentation">
 +    <div id="root">
 +      <div class="grid-container">
 +        <div class="grid-item">
-+          <h1>Welcome to Pulse</h1>
-+          <p>An experimental Firefox fork that enhances focus and increases work productivity due to its hyper minimalistic UI and built-in tools.</p>
++          <h1 data-l10n-id="welcome-dialog-welcome"></h1>
++          <p data-l10n-id="welcome-page-description"></p>
++          <div class="version-container">
++            <div>
++              <img class="logo" src="chrome://branding/content/about-logo.png"/>
++            </div>
++            <div>
++              <h3 data-l10n-id="welcome-page-version"></h3>
++              <p data-l10n-id="welcome-page-other-downloads"></p>
++            </div>
++          </div>
 +        </div>
 +        <div class="grid-item"><img class="preview" src="chrome://activity-stream/content/aboutwelcome/browser-preview.png"></div>
 +      </div>
