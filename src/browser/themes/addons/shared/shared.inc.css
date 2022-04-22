@@ -98,6 +98,36 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   right: var(--tab-rounding-size-neg);
 }
 
+/* ========================================================================== */
+/* Sidebar tabs */
+.sidebar-item-background[checked="true"]::before, .sidebar-item-background[checked="true"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+
+  background-size: cover;
+  color: var(--lwt-selected-tab-background-color);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+
+  /* HACK: Stops the hoverstate from the next tab over from intersecting with the current tab */
+  z-index: 10;
+}
+
+.sidebar-item-background[checked="true"]::before {
+  background-image: url("chrome://global/skin/icons/tab-rising-edge.svg");
+  top: var(--tab-rounding-size-neg);
+}
+
+.sidebar-item-background[checked="true"]::after {
+  background-image: url("chrome://global/skin/icons/tab-falling-edge.svg");
+  bottom: var(--tab-rounding-size-neg);
+  transform: rotate(180deg);
+}
+
 #tabbrowser-arrowscrollbox .tabbrowser-tab {
   /* Specifies the padding to the left and right of the tab */
   padding-inline: var(--tab-padding-inline) !important;
