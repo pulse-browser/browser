@@ -29,6 +29,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
   --tab-border-radius: 0 !important; /* The border radius of the tab */
   --tab-padding-inline: 0 !important; /* Padding to the left and right of the tab. **Focus Browser custom** */
+  
+  --toolbarbutton-border-radius: 4px;
 
   /* Toolbar area */
   --toolbar-field-border-color: transparent !important; /* The border color of the search input */
@@ -56,10 +58,21 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   --menulist-border-radius: 8px; /* The border radius of the menulist */
 
   /* Dialog variables */
-  --dialog-border-radius: 16px; /* The border radius of the dialog */
+  --dialog-border-radius: 8px; /* The border radius of the dialog */
 
   /* Make the tabs a touch wider */
-  --tab-min-height: 40px;
+  --tab-min-height: 38px;
+}
+
+#tabs-newtab-button .toolbarbutton-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 4px !important;
+}
+
+.toolbarbutton-icon, .tab-close-button  {
+  border-radius: 4px !important;
 }
 
 .container.infobar::before {
