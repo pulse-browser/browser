@@ -9,6 +9,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 %include ./macos.inc.css
 %endif
 
+/* Pulse specific variables */
+:root {
+  --tab-rounding-size: 8px;
+  --tab-rounding-size-neg: -8px;
+}
+
+
 :root {
   /* Colors */
   --gradient-orientation: 90deg;
@@ -62,6 +69,33 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 .container.infobar::before {
   --gradient-orientation: 0;
   background-image: var(--gradient) !important;
+}
+
+/* ========================================================================== */
+/* Tab style */
+
+.tab-background[selected="true"]::before, .tab-background[selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  
+  background-size: cover;
+  color: var(--lwt-selected-tab-background-color);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+}
+
+.tab-background[selected="true"]::before {
+  background-image: url("chrome://global/skin/icons/tab-rising-edge.svg");
+  left: var(--tab-rounding-size-neg);
+}
+
+.tab-background[selected="true"]::after {
+  background-image: url("chrome://global/skin/icons/tab-falling-edge.svg");
+  right: var(--tab-rounding-size-neg);
 }
 
 #tabbrowser-arrowscrollbox .tabbrowser-tab {
