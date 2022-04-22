@@ -13,6 +13,9 @@
   justify-content: space-between;
   background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
   overflow: hidden;
+
+  max-width: var(--tab-min-height);
+  min-width: var(--tab-min-height);
 }
 
 .sidebar-icon-item {
