@@ -94,6 +94,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   right: var(--tab-rounding-size-neg);
 }
 
+#tabbrowser-arrowscrollbox .tabbrowser-tab {
+  /* Specifies the padding to the left and right of the tab */
+  padding-inline: var(--tab-padding-inline) !important;
+}
+
 /* ========================================================================== */
 /* Sidebar tabs */
 .sidebar-item-background[checked="true"]::before, .sidebar-item-background[checked="true"]::after {
@@ -124,9 +129,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   transform: rotate(180deg);
 }
 
-#tabbrowser-arrowscrollbox .tabbrowser-tab {
-  /* Specifies the padding to the left and right of the tab */
-  padding-inline: var(--tab-padding-inline) !important;
+/* =========================================================================- */
+/* General sidebar stuff */
+.sidebar-splitter {
+  border-style: none;
 }
 
 /* Panel footer styles */
