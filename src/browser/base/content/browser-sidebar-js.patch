@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a7852db07 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..4a4f2e926d2954003cd4b8cbacc318dc820f8cc8 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -179,7 +179,54 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..faa86a8037a36652e8507d631354e11a
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -575,21 +681,31 @@ var SidebarUI = {
+@@ -457,6 +563,10 @@ var SidebarUI = {
+     return this._show(commandID).then(() => {
+       this._loadSidebarExtension(commandID);
+ 
++      // Pulse: Reset sidebar margin to zero to allow for correct animations to 
++      // take place (adapted from dot browser, se below)
++      this._box.style.marginLeft = '0px'
++
+       if (triggerNode) {
+         updateToggleControlLabel(triggerNode);
+       }
+@@ -552,6 +662,25 @@ var SidebarUI = {
+ 
+     this.selectMenuItem("");
+ 
++    // The below code was, in part, based on Dot Browser's source code
++    // https://github.com/dothq/browser-desktop/blob/3c6b992af8946e1c30180cc824a78d4bb85ba868/patches/browser-base-content-browser-sidebar-js.patch#L183
++
++    // Pulse Browser: Helper stuff for sidebar animation. We can fake sliding in
++    // and out by changing the left margin to be a negative value. Then, inside
++    // of our css code, we can animate it to close.
++    this._box.style.marginLeft = `${-Math.abs(this._box.getBoundingClientRect().width)}px`
++    
++    // We want to fully set it to hidden to slightly improve browser performance
++    // when it is hidden. Note that this replaces some of Mozilla's code that
++    // would generally be down below
++    setTimeout(() => {
++      this._box.hidden = true
++      this._splitter.hidden = true
++
++      this._box.removeAttribute("checked")
++    }, 170);
++
++
+     // Replace the document currently displayed in the sidebar with about:blank
+     // so that we can free memory by unloading the page. We need to explicitly
+     // create a new content viewer because the old one doesn't get destroyed
+@@ -560,9 +689,6 @@ var SidebarUI = {
+     this.browser.setAttribute("src", "about:blank");
+     this.browser.docShell.createAboutBlankContentViewer(null, null);
+ 
+-    this._box.removeAttribute("checked");
+-    this._box.hidden = this._splitter.hidden = true;
+-
+     let selBrowser = gBrowser.selectedBrowser;
+     selBrowser.focus();
+     if (triggerNode) {
+@@ -575,21 +701,31 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
