@@ -70,6 +70,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 /* ========================================================================== */
 /* Tab style */
 
+/* BUG GH#54: The container color does not show up in the pulse theme */
+.tabbrowser-tab {
+  border-top: 2px solid var(--identity-tab-color);
+}
+
 .tab-background[selected="true"]::before, .tab-background[selected="true"]::after {
   content: "";
   position: absolute;
@@ -194,11 +199,7 @@ menulist:host(:not([native])) {
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/unload-tabs
  */
 
-@-moz-document url(chrome://browser/content/browser.xhtml),
- url(chrome://browser/content/browser.xul)
-{
-  tab[pending],
-  #alltabs-popup menuitem[pending] {
-    opacity: 0.6 !important;
-  }
+tab[pending],
+#alltabs-popup menuitem[pending] {
+  opacity: 0.6 !important;
 }
