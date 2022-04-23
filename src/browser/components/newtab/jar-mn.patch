@@ -1,0 +1,13 @@
+diff --git a/browser/components/newtab/jar.mn b/browser/components/newtab/jar.mn
+index 59ccd0ca577f5947b4ce8077b444673b80b7be67..b439efb9bbc3dadd317aa753145cf30df8e2de4e 100644
+--- a/browser/components/newtab/jar.mn
++++ b/browser/components/newtab/jar.mn
+@@ -8,6 +8,8 @@ browser.jar:
+   res/activity-stream/lib/ (./lib/*)
+   res/activity-stream/common/ (./common/*)
+   content/activity-stream/aboutwelcome/aboutwelcome.css (./aboutwelcome/content/aboutwelcome.css)
++  content/activity-stream/aboutwelcome/pulse.css (./aboutwelcome/content/pulse.css)
++    content/activity-stream/aboutwelcome/browser-preview.png (./aboutwelcome/content/browser-preview.png)
+   res/activity-stream/aboutwelcome/aboutwelcome.bundle.js (./aboutwelcome/content/aboutwelcome.bundle.js)
+   res/activity-stream/aboutwelcome/aboutwelcome.html (./aboutwelcome/content/aboutwelcome.html)
+   res/activity-stream/aboutwelcome/lib/ (./aboutwelcome/lib/*)

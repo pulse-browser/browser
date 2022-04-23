@@ -194,7 +194,7 @@ pref('browser.privatebrowsing.vpnpromourl', '');
 pref('extensions.getAddons.showPane', false);
 pref('extensions.htmlaboutaddons.recommendations.enabled', false);
 pref('browser.shell.checkDefaultBrowser', false);
-pref('browser.aboutwelcome.enabled', false);
+pref('browser.aboutwelcome.enabled', true);
 pref('browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons', false);
 pref(
   'browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features',
