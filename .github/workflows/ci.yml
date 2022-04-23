@@ -1,6 +1,7 @@
 name: CI and tests
 
 on:
+  workflow_dispatch:
   push:
     branches: [alpha, beta]
   pull_request:
