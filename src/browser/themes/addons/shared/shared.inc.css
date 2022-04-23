@@ -9,6 +9,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 %include ./macos.inc.css
 %endif
 
+/* Pulse specific variables */
+:root {
+  --tab-rounding-size: 8px;
+  --tab-rounding-size-neg: -8px;
+}
+
+
 :root {
   /* Colors */
   --gradient-orientation: 90deg;
@@ -22,25 +29,23 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
   --tab-border-radius: 0 !important; /* The border radius of the tab */
   --tab-padding-inline: 0 !important; /* Padding to the left and right of the tab. **Focus Browser custom** */
+  
+  --toolbarbutton-border-radius: 4px;
 
   /* Toolbar area */
   --toolbar-field-border-color: transparent !important; /* The border color of the search input */
-  --toolbarbutton-border-radius: 0 !important; /* The border radius of the search input */
-  --urlbar-icon-border-radius: 0 !important; /* The border radius of the identity box icon */
 
   /* App Menu styling */
-  --arrowpanel-menuitem-border-radius: 0 !important; /* The border radius of the app menu items */
-  --arrowpanel-border-radius: 0 !important; /* The border radius of the app menu */
   --panel-separator-zap-gradient: var(
     --gradient
   ) !important; /* The gradient used for the app menu separator */
 
   /* Panel variables */
-  --panel-footer-item-border-radius: 0; /* The border radius of the panel footer items */
+  --panel-footer-item-border-radius: 8px; /* The border radius of the panel footer items */
 
   /* Bookmark panel */
-  --bookmark-panel-image-border-radius: 0; /* The border radius of the bookmark panel image */
-  --bookmark-panel-favicon-border-radius: 0; /* The border radius of the bookmark panel favicon */
+  --bookmark-panel-image-border-radius: 8px; /* The border radius of the bookmark panel image */
+  --bookmark-panel-favicon-border-radius: 8px; /* The border radius of the bookmark panel favicon */
   --bookmark-panel-menulist-padding: 5px;
   --bookmark-panel-input-border-radius: 0; /* The border radius of the bookmark panel input */
   --bookmark-panel-border-radius: var(
@@ -50,13 +55,24 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   /* Custom elements */
 
   /* Menulist */
-  --menulist-border-radius: 0; /* The border radius of the menulist */
+  --menulist-border-radius: 8px; /* The border radius of the menulist */
 
   /* Dialog variables */
-  --dialog-border-radius: 0; /* The border radius of the dialog */
+  --dialog-border-radius: 8px; /* The border radius of the dialog */
 
   /* Make the tabs a touch wider */
-  --tab-min-height: 40px;
+  --tab-min-height: 38px;
+}
+
+#tabs-newtab-button .toolbarbutton-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 4px !important;
+}
+
+.toolbarbutton-icon, .tab-close-button  {
+  border-radius: 4px !important;
 }
 
 .container.infobar::before {
@@ -64,9 +80,77 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   background-image: var(--gradient) !important;
 }
 
+/* ========================================================================== */
+/* Tab style */
+
+/* BUG GH#54: The container color does not show up in the pulse theme */
+.tabbrowser-tab {
+  border-top: 2px solid var(--identity-tab-color);
+}
+
+.tab-background[selected="true"]::before, .tab-background[selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  
+  background-size: cover;
+  color: var(--lwt-selected-tab-background-color);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+}
+
+.tab-background[selected="true"]::before {
+  background-image: url("chrome://global/skin/icons/tab-rising-edge.svg");
+  left: var(--tab-rounding-size-neg);
+}
+
+.tab-background[selected="true"]::after {
+  background-image: url("chrome://global/skin/icons/tab-falling-edge.svg");
+  right: var(--tab-rounding-size-neg);
+}
+
 #tabbrowser-arrowscrollbox .tabbrowser-tab {
   /* Specifies the padding to the left and right of the tab */
   padding-inline: var(--tab-padding-inline) !important;
+}
+
+/* ========================================================================== */
+/* Sidebar tabs */
+.sidebar-item-background[checked="true"]::before, .sidebar-item-background[checked="true"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+
+  background-size: cover;
+  color: var(--lwt-selected-tab-background-color);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+
+  /* HACK: Stops the hoverstate from the next tab over from intersecting with the current tab */
+  z-index: 10;
+}
+
+.sidebar-item-background[checked="true"]::before {
+  background-image: url("chrome://global/skin/icons/tab-rising-edge.svg");
+  top: var(--tab-rounding-size-neg);
+}
+
+.sidebar-item-background[checked="true"]::after {
+  background-image: url("chrome://global/skin/icons/tab-falling-edge.svg");
+  bottom: var(--tab-rounding-size-neg);
+  transform: rotate(180deg);
+}
+
+/* =========================================================================- */
+/* General sidebar stuff */
+.sidebar-splitter {
+  border-style: none;
 }
 
 /* Panel footer styles */
@@ -75,7 +159,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   border-radius: var(--panel-footer-item-border-radius);
 }
 
+/* ========================================================================== */
 /* Bookmark styles */
+
+/* Remove messy seperators */
+#editBookmarkHeaderSeparator, #editBookmarkSeparator {
+  display: none;
+}
 
 #editBookmarkPanelImage {
   /* The border radius of the bookmark panel image */
@@ -122,11 +212,7 @@ menulist:host(:not([native])) {
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/unload-tabs
  */
 
-@-moz-document url(chrome://browser/content/browser.xhtml),
- url(chrome://browser/content/browser.xul)
-{
-  tab[pending],
-  #alltabs-popup menuitem[pending] {
-    opacity: 0.6 !important;
-  }
+tab[pending],
+#alltabs-popup menuitem[pending] {
+  opacity: 0.6 !important;
 }
