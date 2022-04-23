@@ -1,0 +1,42 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; object-src 'none'; script-src resource: chrome:; media-src resource: chrome:; connect-src https:; img-src https: data: blob:; style-src resource: chrome:;">
+    <title data-l10n-id="onboarding-welcome-header"></title>
+    <link rel="icon" type="image/png" href="chrome://branding/content/icon32.png">
+    <link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
+    <link rel="stylesheet" href="chrome://activity-stream/content/aboutwelcome/pulse.css">
+    <link rel="localization" href="branding/brand.ftl"/>
+    <link rel="localization" href="browser/branding/sync-brand.ftl"/>
+    <link rel="localization" href="browser/branding/brandings.ftl"/>
+    <link rel="localization" href="browser/newtab/onboarding.ftl"/>
+
+    <link rel="localization" href="browser/welcome.ftl" />
+  </head>
+  <body>
+    <div id="root">
+      <div class="grid-container">
+        <div class="grid-item">
+          <h1 data-l10n-id="welcome-dialog-welcome"></h1>
+          <p data-l10n-id="welcome-page-description"></p>
+          <div class="version-container">
+            <div>
+              <img class="logo" src="chrome://branding/content/about-logo.png"/>
+            </div>
+            <div>
+              <h3 data-l10n-id="welcome-page-version"></h3>
+              <p data-l10n-id="welcome-page-other-downloads"></p>
+            </div>
+          </div>
+        </div>
+        <div class="grid-item"><img class="preview" src="chrome://activity-stream/content/aboutwelcome/browser-preview.png"></div>
+      </div>
+    </div>
+  </body>
+</html>
