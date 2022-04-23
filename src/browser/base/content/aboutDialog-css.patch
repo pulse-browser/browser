@@ -1,0 +1,30 @@
+diff --git a/browser/base/content/aboutDialog.css b/browser/base/content/aboutDialog.css
+index 37b8ef98737e9a160badefc64e67c6004c752484..8cd00639560e2e644c2c764c5995796421e24b9a 100644
+--- a/browser/base/content/aboutDialog.css
++++ b/browser/base/content/aboutDialog.css
+@@ -11,17 +11,23 @@
+   line-height: 1.5;
+ }
+ 
+-#rightBox {
++/* #rightBox {
+   background-image: url("chrome://branding/content/about-wordmark.svg");
+   background-repeat: no-repeat;
+   background-size: 288px auto;
+-  /* padding-top creates room for the wordmark */
++  /* padding-top creates room for the wordmark
+   padding-top: 38px;
+   margin-top: 20px;
+ }
+ 
+ #rightBox:-moz-locale-dir(rtl) {
+   background-position: 100% 0;
++}*/
++
++#logo {
++  padding-top: -200px;
++  font-size: 40px;
++  font-weight: 650;
+ }
+ 
+ #bottomBox {

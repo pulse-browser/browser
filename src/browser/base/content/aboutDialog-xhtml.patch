@@ -1,0 +1,12 @@
+diff --git a/browser/base/content/aboutDialog.xhtml b/browser/base/content/aboutDialog.xhtml
+index 90a568a17dd6f1690ccc55a2f927d5cfec6c722b..e5738526c7b240cfd7cb5c5a95f390fc09baaca0 100644
+--- a/browser/base/content/aboutDialog.xhtml
++++ b/browser/base/content/aboutDialog.xhtml
+@@ -41,6 +41,7 @@
+     <hbox id="clientBox">
+       <vbox id="leftBox" flex="1"/>
+       <vbox id="rightBox" flex="1">
++        <label id="logo" data-l10n-id="aboutDialog-header"></label>
+         <label id="release" hidden="true">
+         <!-- This string is explicitly not translated -->
+           Extended Support Release
