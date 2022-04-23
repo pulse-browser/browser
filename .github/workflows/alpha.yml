@@ -190,6 +190,9 @@ jobs:
       - name: Import
         run: yarn imp
 
+      - name: Unlink git
+        run: brew unlink git@2.35.1
+
       - name: Bootstrap
         run: |
           cd engine
