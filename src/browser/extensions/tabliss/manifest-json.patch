@@ -1,5 +1,5 @@
 diff --git a/browser/extensions/tabliss/manifest.json b/browser/extensions/tabliss/manifest.json
-index b22be5737d450e9f7fa2c55dac44432505e293f4..2e6fc77ad046544fb3dda676ff29323326458f06 100644
+index b22be5737d450e9f7fa2c55dac44432505e293f4..9f64d286dab8be040b24c4fdf4456b3a76163591 100644
 --- a/browser/extensions/tabliss/manifest.json
 +++ b/browser/extensions/tabliss/manifest.json
 @@ -13,6 +13,10 @@
@@ -7,7 +7,7 @@ index b22be5737d450e9f7fa2c55dac44432505e293f4..2e6fc77ad046544fb3dda676ff293233
      "newtab": "index.html"
    },
 +  "chrome_settings_overrides": {
-+    // Pulse: We want tabliss to appear on the home screen as well as new tabpages
++    "_Pulse": "We want tabliss to appear on the home screen as well as new tabpages",
 +    "homepage": "index.html"
 +  },
    "icons": {
