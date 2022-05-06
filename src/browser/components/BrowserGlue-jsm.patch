@@ -1,9 +1,9 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 0c16eba15229d0003d62bb76307affe944d7c47b..48a9a8e615987ef64b4eb3bb99de793ddb6384fc 100644
+index 89651a029abc4f41205f099950a0a21eddb26cc1..9b793db6fc17848670cf18ca1d9552960a57f0ea 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
-@@ -4045,6 +4045,18 @@ BrowserGlue.prototype = {
-     );
+@@ -4183,6 +4183,18 @@ BrowserGlue.prototype = {
+     SpecialMessageActions.handleAction(config, browser);
    },
  
 +  /**
@@ -21,13 +21,12 @@ index 0c16eba15229d0003d62bb76307affe944d7c47b..48a9a8e615987ef64b4eb3bb99de793d
    async _maybeShowDefaultBrowserPrompt() {
      // Highest priority is the upgrade dialog, which can include a "primary
      // browser" request and is limited in various ways, e.g., major upgrades.
-@@ -4102,6 +4114,25 @@ BrowserGlue.prototype = {
+@@ -4236,6 +4248,23 @@ BrowserGlue.prototype = {
        return;
      }
  
-+
 +    // =========================================================================
-+    // Focus browser welcome
++    // Pulse browser welcome
 +
 +    const welcomeEnabledPref = 'pulse.welcome.enabled'
 +    const welcomeSeenPref = 'pulse.welcome.seen'
@@ -42,7 +41,6 @@ index 0c16eba15229d0003d62bb76307affe944d7c47b..48a9a8e615987ef64b4eb3bb99de793d
 +      this._showWelcomeDialog()
 +
 +    // =========================================================================
-+
 +
      const willPrompt = await DefaultBrowserCheck.willCheckDefaultBrowser(
        /* isStartupCheck */ true
