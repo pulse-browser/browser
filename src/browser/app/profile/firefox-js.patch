@@ -1,8 +1,17 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 76b495ea6c9e6b5cf15099389e17b54df212f61c..3c49e7d7930b234590a1974ccc928f8a83de63d2 100644
+index 76b495ea6c9e6b5cf15099389e17b54df212f61c..c7b15a2c3abfc08e2bd907f6a34baf1c036aeb8d 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -67,7 +67,6 @@ pref("extensions.webextensions.remote", true);
+@@ -19,6 +19,8 @@
+   #endif
+ #endif
+ 
++#include pulse-browser.js
++
+ pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
+ 
+ // Enables some extra Extension System Logging (can reduce performance)
+@@ -67,7 +69,6 @@ pref("extensions.webextensions.remote", true);
  
  // Require signed add-ons by default
  pref("extensions.langpacks.signatures.required", true);
@@ -10,7 +19,7 @@ index 76b495ea6c9e6b5cf15099389e17b54df212f61c..3c49e7d7930b234590a1974ccc928f8a
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
-@@ -1895,7 +1894,6 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
+@@ -1895,7 +1896,6 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
  pref("browser.vpn_promo.disallowed_regions", "ae,by,cn,cu,iq,ir,kp,om,ru,sd,sy,tm,tr,ua");
  
  // Default to enabling VPN promo messages to be shown when specified and allowed
@@ -18,7 +27,7 @@ index 76b495ea6c9e6b5cf15099389e17b54df212f61c..3c49e7d7930b234590a1974ccc928f8a
  // Only show vpn card to certain regions. Comma separated string of two letter ISO 3166-1 country codes.
  // The most recent list of supported countries can be found at https://support.mozilla.org/en-US/kb/mozilla-vpn-countries-available-subscribe
  // The full list of supported country codes can also be found at https://github.com/mozilla/bedrock/search?q=VPN_COUNTRY_CODES
-@@ -2015,7 +2013,6 @@ pref("browser.tabs.crashReporting.includeURL", false);
+@@ -2015,7 +2015,6 @@ pref("browser.tabs.crashReporting.includeURL", false);
  
  // If true, unprivileged extensions may use experimental APIs on
  // nightly and developer edition.
@@ -26,7 +35,7 @@ index 76b495ea6c9e6b5cf15099389e17b54df212f61c..3c49e7d7930b234590a1974ccc928f8a
  
  #if defined(XP_WIN)
    // Allows us to deprioritize the processes of background tabs at an OS level
-@@ -2059,13 +2056,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
+@@ -2059,13 +2058,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -40,7 +49,7 @@ index 76b495ea6c9e6b5cf15099389e17b54df212f61c..3c49e7d7930b234590a1974ccc928f8a
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
  
-@@ -2206,9 +2196,6 @@ pref("toolkit.coverage.enabled", false);
+@@ -2206,9 +2198,6 @@ pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
  // Discovery prefs
