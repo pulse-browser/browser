@@ -1,12 +1,13 @@
 diff --git a/browser/themes/shared/jar.inc.mn b/browser/themes/shared/jar.inc.mn
-index 26f209ad704739db88ead4ccfc7075d23b4b666d..0e73c385e8d0d032ca104eb31a985ce41ee6c6d9 100644
+index 26f209ad704739db88ead4ccfc7075d23b4b666d..31a1e45a8f7729f50b95fb4ea68962faaee02446 100644
 --- a/browser/themes/shared/jar.inc.mn
 +++ b/browser/themes/shared/jar.inc.mn
-@@ -7,6 +7,7 @@
+@@ -7,6 +7,8 @@
  # be specified once. As a result, the source file paths are relative
  # to the location of the actual manifest.
  
-+  skin/classic/browser/sidebar_tabs.css                                (../shared/sidebar_tabs.css)
++#include ../pulse/jar.inc.mn
++
    skin/classic/browser/aboutFrameCrashed.css                   (../shared/aboutFrameCrashed.css)
    skin/classic/browser/aboutNetError.css                       (../shared/aboutNetError.css)
    skin/classic/browser/aboutRestartRequired.css                (../shared/aboutRestartRequired.css)
