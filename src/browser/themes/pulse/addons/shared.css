@@ -4,11 +4,6 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-%ifdef XP_MACOSX
-/* Include MacOS theme on that OS */
-%include ./macos.inc.css
-%endif
-
 /* Pulse specific variables */
 :root {
   --tab-rounding-size: 8px;
@@ -88,16 +83,20 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   border-top: 2px solid var(--identity-tab-color);
 }
 
+/* #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
+  -moz-context-properties: fill;
+  fill: var(--lwt-selected-tab-background-color);
+} */
+
 .tab-background[selected="true"]::before, .tab-background[selected="true"]::after {
   content: "";
   position: absolute;
   bottom: 0;
   
+  -moz-context-properties: fill;
+  fill: var(--lwt-selected-tab-background-color);
   background-size: cover;
-  color: var(--lwt-selected-tab-background-color);
-  -moz-context-properties: fill, fill-opacity;
-  fill: currentColor;
-
+  
   width: var(--tab-rounding-size);
   height: var(--tab-rounding-size);
 }

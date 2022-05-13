@@ -278,34 +278,20 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Get user
-        run: whoami
-
       - name: Install dependencies
-        shell: cmd
         run: |
-          npm i
+          yarn
 
       - name: Build gluon
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
-          cd gluon
-          npm i
-          npm run build:win
-          npm link
-          cd ..
-
-          npm link gluon-build
-
-          cd gluon
-          npm i -g .
-          cd ..
+          yarn setupLink:win
 
       - name: Download
-        run: npm run download
+        run: yarn download
 
       - name: Import
-        run: npm run imp
+        run: yarn imp
 
       - name: Use alpha branding
         shell: bash --noprofile --norc -eo pipefail {0}
@@ -313,12 +299,10 @@ jobs:
           echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
 
       - name: Build
-        shell: cmd
-        run: npm run build -- --skip-patch-check
+        run: yarn build -- --skip-patch-check
 
       - name: Package
-        shell: cmd
-        run: npm run package
+        run: yarn package
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
