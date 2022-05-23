@@ -12,7 +12,7 @@ export MOZ_APP_PROFILE=pulse-browser
 export MOZ_APP_DISPLAYNAME="Pulse browser"
 export MOZ_MACBUNDLE_ID=com.fushra.browser.desktop
 export MOZ_DISTRIBUTION_ID=com.fushra.browser.desktop
-export MOZ_MACBUNDLE_NAME="Pulse browser"
+export MOZ_MACBUNDLE_NAME="Pulse browser.app"
 
 # Speed up builds by disabling components we don't care about
 ac_add_options --disable-geckodriver
