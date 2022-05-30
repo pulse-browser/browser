@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Sidebar test",
+    "version": "1.0",
+
+    "description": "Demos the usage of the sidebar api",
+    
+    "permissions": ["sidebars"],
+  
+    "background": {
+      "scripts": ["test.js"]
+    },
+
+    "web_accessible_resources": [
+      "icon.svg","test.html"
+    ],
+
+
+    "applications" : {
+      "gecko" : {
+        "id" : "sidebars_extended_example@experiments.browser.fushra.com"
+      }
+    },
+
+    "icons": {
+      "48": "full.svg"
+    }
+  }

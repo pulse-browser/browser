@@ -1,0 +1,12 @@
+diff --git a/browser/components/extensions/schemas/jar.mn b/browser/components/extensions/schemas/jar.mn
+index 79bbae8ff31f728abcff12f9d4ed7f8c41270e14..f27c814abefc708610d7f9c2a65b267111c76534 100644
+--- a/browser/components/extensions/schemas/jar.mn
++++ b/browser/components/extensions/schemas/jar.mn
+@@ -3,6 +3,7 @@
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+ browser.jar:
++    content/browser/schemas/sidebars.json
+     content/browser/schemas/bookmarks.json
+     content/browser/schemas/chrome_settings_overrides.json
+     content/browser/schemas/commands.json

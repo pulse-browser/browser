@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Extended Sidebar API",
+    "description": "Provides more complex sidebar webextention interface",
+    "version": "1.0",
+    "applications": {
+      "gecko": {
+        "id": "sidebars@experiments.addons.mozilla.org"
+      }
+    },
+  
+    "experiment_apis": {
+      "sidebars": {
+        // identifier from the script. __FORMERLY__ COULD BE ANY matching the one within the script. NOW it MUS match API name !!!
+        "schema": "schema.json", // Schema is cached, you have to restart the browser if you encounter any errors in it.
+        "parent": {
+          "scopes": ["addon_parent"],
+          "script": "api.js",
+          "paths": [["experiments", "sidebars"]] //must begin from "experiments" and must match to permission name
+        }
+      }
+    }
+  }
