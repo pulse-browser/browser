@@ -1,11 +1,11 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index 498b6aaf4bc60d3caa4d6a90423fd3dfb1c48b0b..bef1ecadb886bdda03217405537e8a5b66256a8f 100644
+index b10403800c7aafe97471474f6bddb6098ce21a82..7e0c5cd111d735606671ad5fd8f25a397f8daf83 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
-@@ -1364,3 +1364,11 @@ choose-download-folder-title = Choose Download Folder:
- #   $service-name (String) - Name of a cloud storage provider like Dropbox, Google Drive, etc...
- save-files-to-cloud-storage =
-     .label = Save files to { $service-name }
+@@ -1413,3 +1413,11 @@ httpsonly-radio-disabled =
+ desktop-folder-name = Desktop
+ downloads-folder-name = Downloads
+ choose-download-folder-title = Choose Download Folder:
 +
 +## Pulse browser: Settings enteries localization
 +preferences-sidebar-header = Sidebar

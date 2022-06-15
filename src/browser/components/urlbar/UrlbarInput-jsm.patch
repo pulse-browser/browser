@@ -1,19 +1,22 @@
 diff --git a/browser/components/urlbar/UrlbarInput.jsm b/browser/components/urlbar/UrlbarInput.jsm
-index 023379d716644231555b26b5956c8d09c2637452..d92cf8745efc33648a1ffb04bd1c9557e48aff81 100644
+index 880674f6aeb41cd06557246e8137f65704d2a512..79232ff5c17a09e69f01a537f3d4e17a261d9277 100644
 --- a/browser/components/urlbar/UrlbarInput.jsm
 +++ b/browser/components/urlbar/UrlbarInput.jsm
-@@ -357,6 +357,14 @@ class UrlbarInput {
- 
-       valid =
-         !this.window.isBlankPageURL(uri.spec) || uri.schemeIs("moz-extension");
+@@ -365,6 +365,17 @@ class UrlbarInput {
+         !dueToSessionRestore &&
+         (!this.window.isBlankPageURL(uri.spec) ||
+           uri.schemeIs("moz-extension"));
 +
++      // Check if the addon is tabliss (our new tab) and stop if from showing up
++      // as such
 +      try {
 +        const { WebExtensionPolicy } = Cu.getGlobalForObject(Services);
 +        const policy = WebExtensionPolicy.getByURI(uri);
-+        if (policy.id === "newtab@browser.fushra.com") {
-+          valid = false;
++        if (policy.id === 'extension@tabliss.io') {
++          valid = false
 +        }
 +      } catch (e) {}
++
      } else if (
        this.window.isInitialPage(value) &&
        BrowserUIUtils.checkEmptyPageOrigin(this.window.gBrowser.selectedBrowser)
