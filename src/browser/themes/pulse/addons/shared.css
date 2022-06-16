@@ -78,6 +78,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 /* ========================================================================== */
 /* Tab style */
 
+/* This keeps the curve visible on the other sides of the tab */
+tab.tabbrowser-tab:nth-child(1) {
+  margin-left: 16px;
+}
+
 /* BUG GH#54: The container color does not show up in the pulse theme */
 .tabbrowser-tab {
   border-top: 2px solid var(--identity-tab-color);
