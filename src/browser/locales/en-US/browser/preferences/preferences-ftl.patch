@@ -1,5 +1,5 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index b10403800c7aafe97471474f6bddb6098ce21a82..7e0c5cd111d735606671ad5fd8f25a397f8daf83 100644
+index b10403800c7aafe97471474f6bddb6098ce21a82..b39593816149a71a1e6b40626e304e367359fd02 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
 @@ -1413,3 +1413,11 @@ httpsonly-radio-disabled =
@@ -7,7 +7,7 @@ index b10403800c7aafe97471474f6bddb6098ce21a82..7e0c5cd111d735606671ad5fd8f25a39
  downloads-folder-name = Downloads
  choose-download-folder-title = Choose Download Folder:
 +
-+## Pulse browser: Settings enteries localization
++## Pulse browser: Settings entries localization
 +preferences-sidebar-header = Sidebar
 +preferences-sidebar-visible =
 +    .label = Show sidebar tabs 
