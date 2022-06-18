@@ -78,6 +78,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 /* ========================================================================== */
 /* Tab style */
 
+/* This keeps the curve visible on the other sides of the tab */
+tab.tabbrowser-tab:nth-child(1) {
+  margin-left: 16px;
+}
+
 /* BUG GH#54: The container color does not show up in the pulse theme */
 .tabbrowser-tab {
   border-top: 2px solid var(--identity-tab-color);
@@ -114,6 +119,20 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #tabbrowser-arrowscrollbox .tabbrowser-tab {
   /* Specifies the padding to the left and right of the tab */
   padding-inline: var(--tab-padding-inline) !important;
+}
+
+/* Fixing toolbar buttons when the tab box is present */
+.toolbar-items toolbarbutton image, .toolbar-items toolbarbutton stack {
+  width: 24px !important;
+  height: 24px !important;
+  padding: 4px !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+.toolbar-items toolbarbutton image {
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
 }
 
 /* ========================================================================== */

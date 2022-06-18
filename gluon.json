@@ -5,7 +5,7 @@
   "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
-    "version": "100.0.2",
+    "version": "101.0.1",
     "displayVersion": "1.0.0"
   },
   "buildOptions": {
@@ -14,11 +14,11 @@
   "addons": {
     "ublock": {
       "id": "uBlock0@raymondhill.net",
-      "url": "https://github.com/gorhill/uBlock/releases/download/1.41.8/uBlock0_1.41.8.firefox.signed.xpi"
+      "url": "https://github.com/gorhill/uBlock/releases/download/1.43.0/uBlock0_1.43.0.firefox.signed.xpi"
     },
     "tabliss": {
       "id": "extension@tabliss.io",
-      "url": "https://addons.mozilla.org/firefox/downloads/file/3716637/tabliss_new_tab-2.1.0-fx.xpi"
+      "url": "https://addons.mozilla.org/firefox/downloads/file/3940751/tabliss-2.6.0.xpi"
     },
     "firepicker": {
       "id": "fire-picker@browser.fushra.com",
