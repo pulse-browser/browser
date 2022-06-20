@@ -40,7 +40,7 @@ jobs:
       - name: Set Swap Space
         uses: pierotofy/set-swap-space@v1.0
         with:
-          swap-size-gb: 0.5
+          swap-size-gb: 4
 
       - name: Setup git
         run: |
