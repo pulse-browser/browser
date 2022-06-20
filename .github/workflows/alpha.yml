@@ -36,6 +36,12 @@ jobs:
         with:
           submodules: recursive
 
+        # Give the runner some swap space in an attempt to stop gkrust from crashing the build
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@v1.0
+        with:
+          swap-size-gb: 0.5
+
       - name: Setup git
         run: |
           git config --global user.email "trickypr@users.noreply.github.com"
