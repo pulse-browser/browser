@@ -25,6 +25,7 @@
     "rebuild:win": "cd gluon && yarn build:win && cd ..",
     "package": "gluon package",
     "ff-version": "gluon ff-version",
-    "licenseCheck": "gluon license-check"
+    "licenseCheck": "gluon license-check",
+    "gluon": "gluon"
   }
 }
