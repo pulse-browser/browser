@@ -35,6 +35,12 @@ jobs:
           echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
           echo "::set-output name=version::$(gluon get version | xargs)
 
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🔖 Update version to ${{ steps.data.output.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+
   linux:
     runs-on: ubuntu-latest
     needs: [build-data]
