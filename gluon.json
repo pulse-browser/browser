@@ -3,6 +3,7 @@
   "vendor": "Fushra",
   "appId": "com.fushra.browser.desktop",
   "binaryName": "pulse-browser",
+  "updateHostname": "updates.pulsebrowser.app",
   "version": {
     "product": "firefox",
     "version": "101.0.1"
