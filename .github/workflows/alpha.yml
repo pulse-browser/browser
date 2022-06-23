@@ -116,7 +116,7 @@ jobs:
           yarn && yarn setupLink
 
       - name: Load gluon CI setup
-        run: yarn gluon ci -- --brand alpha --version ${{ needs.build-data.outputs.version }}
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependencies
         run: yarn download
@@ -195,7 +195,7 @@ jobs:
         run: yarn && yarn setupLink
 
       - name: Load gluon CI setup
-        run: yarn gluon ci -- --brand alpha --version ${{ needs.build-data.outputs.version }}
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependancies
         run: yarn download
@@ -272,7 +272,7 @@ jobs:
         run: yarn && yarn setupLink
 
       - name: Load gluon CI setup
-        run: yarn gluon ci -- --brand alpha --version ${{ needs.build-data.outputs.version }}
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependancies
         run: yarn download --verbose
@@ -312,7 +312,7 @@ jobs:
           yarn setupLink:win
 
       - name: Load gluon CI setup
-        run: yarn gluon ci -- --brand alpha --version ${{ needs.build-data.outputs.version }}
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download
         run: yarn download
