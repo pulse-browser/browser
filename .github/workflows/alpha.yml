@@ -36,6 +36,12 @@ jobs:
         with:
           submodules: recursive
 
+        # Give the runner some swap space in an attempt to stop gkrust from crashing the build
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@v1.0
+        with:
+          swap-size-gb: 6
+
       - name: Setup git
         run: |
           git config --global user.email "trickypr@users.noreply.github.com"
@@ -104,6 +110,10 @@ jobs:
           wasm-ld --version
           cargo --version
           ls /opt/wasi-sdk/share/wasi-sysroot
+
+      - name: Log memory usage
+        run: |
+          ps aux | sort -rnk 4
 
       - name: Setup melon
         run: yarn && yarn setupLink
@@ -244,15 +254,16 @@ jobs:
         run: yarn && yarn setupLink
 
       - name: Download firefox source and dependancies
-        run: yarn download
+        run: yarn download --verbose
 
       - name: Import
-        run: yarn imp
+        run: yarn imp --verbose
 
       - name: Compress
         run: |
           cd engine
-          tar -hczvf ../pulse-browser.source.tar.gz *
+          # -h is used to dereference symlinks
+          tar --use-compress-program=zstd -hcf ../pulse-browser.source.tar.gz *
           cd ..
 
       - name: Upload artifact
@@ -261,60 +272,50 @@ jobs:
           name: pulse-browser.source.tar.gz
           path: ./pulse-browser.source.tar.gz
 
-  windows-from-source:
-    runs-on: windows-latest
-    needs: [build-data, source]
+  windows:
+    runs-on: tricky-win
+    needs: [build-data]
 
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      - name: Setup git
-        run: |
-          git config --global user.email "trickypr@users.noreply.github.com"
-          git config --global user.name "TrickyPR"
-
-      - name: Setup gluon
+      - name: Install dependencies
         run: |
           yarn
-          yarn setupLink:win
 
-          cd gluon
-          npm i -g .
-          cd ..
-
-      - uses: actions/download-artifact@v2
-        name: pulse-browser.source.tar.gz
-
-      - name: Load source
+      - name: Build gluon
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
-          mkdir engine
-          tar -xf pulse-browser.source.tar.gz/pulse-browser.source.tar.gz -C engine
-          rm -rf pulse-browser.source.tar.gz
+          yarn setupLink:win
+
+      - name: Download
+        run: yarn download
+
+      - name: Import
+        run: yarn imp
+
+      - name: Use alpha branding
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
 
       - name: Build
-        run: yarn build --skip-patch-check
+        run: yarn build -- --skip-patch-check
 
       - name: Package
         run: yarn package
 
-      - name: Make artifact available
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          cp engine/obj-*/dist/install/sea/pulse-browser-*.installer.exe .
-          mv *.installer.exe pulse-browser.installer.exe
-
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: pulse-browser.windows.installer.exe
-          path: ./pulse-browser.installer.exe
+          name: pulse-browser.installer.exe
+          path: ./dist/pulse-browser.installer.exe
 
   release:
     name: Release
-    needs: [build-data, linux, source, mac]
+    needs: [build-data, linux, source, mac, windows]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -330,3 +331,4 @@ jobs:
             pulse-browser.linux.tar.bz2
             pulse-browser.source.tar.gz
             pulse-browser.macos.dmg
+            pulse-browser.installer.exe

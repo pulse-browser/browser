@@ -11,8 +11,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--toolbar-bgcolor);
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
   overflow: hidden;
+
+  max-width: var(--tab-min-height);
+  min-width: var(--tab-min-height);
+
+  /* Makes the sidebar slide out from below */
+  position: relative;
+  z-index: 10;
 }
 
 .sidebar-icon-item {
@@ -40,6 +47,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
 }
 
 .sidebar-item-background:hover {
@@ -76,6 +85,11 @@
   background-color: var(--lwt-selected-tab-background-color, --lwt-sidebar-background-color) !important;
   -moz-default-appearance: auto !important;
   -moz-font-smoothing-background-color: auto !important;
+}
+
+/* Make it slide in smoothy rather than just appearing */
+#sidebar-box {
+  transition: margin-left 200ms ease-in-out;
 }
 
 /* Make it feel native on macos */

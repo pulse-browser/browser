@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..88256e288d1974266f373ff1b1354f074d45ede9 100644
+index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..98517743c0b28014e31342fad951a5b0fa9d2159 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -2,10 +2,14 @@
@@ -82,23 +82,28 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..88256e288d1974266f373ff1b1354f07
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -91,6 +124,10 @@ var SidebarUI = {
+@@ -91,20 +124,74 @@ var SidebarUI = {
      this._box = document.getElementById("sidebar-box");
      this._splitter = document.getElementById("sidebar-splitter");
      this._icon = document.getElementById("sidebar-icon");
 +
-+    this._sidebarIcons = document.getElementById("sidebar-icons");
-+    this._sidebarIconsBottom = document.getElementById("sidebar-icons-bottom");
-+
      this._reversePositionButton = document.getElementById(
        "sidebar-reverse-position"
      );
-@@ -102,9 +139,59 @@ var SidebarUI = {
++
+     this._switcherPanel = document.getElementById("sidebarMenu-popup");
+     this._switcherTarget = document.getElementById("sidebar-switcher-target");
+     this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
+-
++    this._sidebarIcons = document.getElementById("sidebar-icons");
++    this._sidebarBottomIcons = document.getElementById("sidebar-icons-bottom");
++ 
+     this._switcherTarget.addEventListener("command", () => {
        this.toggleSwitcherPanel();
      });
  
 +    const sidebaritems = this.sidebars.keys();
-+    const sidebarExtensionVis = Services.prefs.getBoolPref(this.SIDEBAR_EXTENSIONS_PREF);
++    const sidebarExtensionVis = Services.prefs.getBoolPref(this.SIDEBAR_EXTENSIONS_PREF, false);
 +
 +    for (const sidebaritem of sidebaritems) {
 +      if(this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
@@ -157,7 +162,7 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..88256e288d1974266f373ff1b1354f07
      }
    },
  
-+  async createSidebarItem(id, config, isinit=false) {
++  async createSidebarItem(id, icon, config) {
 +    if(!isinit){
 +      await this.promiseDeferred;
 +    }
@@ -214,7 +219,29 @@ index eb1ee9e2b868fa06af4ed88e1d54583cd4196880..88256e288d1974266f373ff1b1354f07
    /**
     * Opens the switcher panel if it's closed, or closes it if it's open.
     */
-@@ -575,21 +716,32 @@ var SidebarUI = {
+@@ -552,6 +693,21 @@ var SidebarUI = {
+ 
+     this.selectMenuItem("");
+ 
++    // Pulse Browser: Helper stuff for sidebar animation. We can fake sliding in
++    // and out by changing the left margin to be a negative value. Then, inside
++    // of our css code, we can animate it to close.
++    this._box.style.marginLeft = `${-Math.abs(this._box.getBoundingClientRect().width)}px`
++    
++    // We want to fully set it to hidden to slightly improve browser performance
++    // when it is hidden. Note that this replaces some of Mozilla's code that
++    // would generally be down below
++    setTimeout(() => {
++      this._box.hidden = true
++      this._splitter.hidden = true
++
++      this._box.removeAttribute("checked")
++    }, 170);
++
+     // Replace the document currently displayed in the sidebar with about:blank
+     // so that we can free memory by unloading the page. We need to explicitly
+     // create a new content viewer because the old one doesn't get destroyed
+@@ -575,21 +731,32 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {

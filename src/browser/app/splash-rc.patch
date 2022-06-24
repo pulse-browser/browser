@@ -1,5 +1,5 @@
 diff --git a/browser/app/splash.rc b/browser/app/splash.rc
-index a5d418e812ecf83f0f5f694e2d0d53e0321b483b..b0d45706f1ab5668deaa534ed9fe79a5b02b785f 100644
+index a5d418e812ecf83f0f5f694e2d0d53e0321b483b..8e78627d04a12a47301adf6c4a21e808f677b097 100644
 --- a/browser/app/splash.rc
 +++ b/browser/app/splash.rc
 @@ -6,6 +6,15 @@
@@ -13,7 +13,7 @@ index a5d418e812ecf83f0f5f694e2d0d53e0321b483b..b0d45706f1ab5668deaa534ed9fe79a5
 +// RT_MANIFEST
 +//
 +
-+1                       RT_MANIFEST             MANIFEST_PATH
++CREATEPROCESS_MANIFEST_RESOURCE_ID  RT_MANIFEST             MANIFEST_PATH
 +
  IDI_APPICON ICON FIREFOX_ICO
  IDI_DOCUMENT ICON DOCUMENT_ICO

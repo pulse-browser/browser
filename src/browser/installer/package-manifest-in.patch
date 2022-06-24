@@ -1,0 +1,20 @@
+diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
+index 73a41dc25b9ad674750ce5849a9db8f9878e5e11..9a970a8823912dd237e82e6b10a1dcb13f883a07 100644
+--- a/browser/installer/package-manifest.in
++++ b/browser/installer/package-manifest.in
+@@ -391,11 +391,13 @@ bin/libfreebl_64int_3.so
+ #endif
+ #endif
+ 
++; Pulse: Removed because we do not use it at the moment and we just want the 
++; bloody installer to work properly :(
+ ; [MaintenanceService]
+ ;
+ #ifdef MOZ_MAINTENANCE_SERVICE
+-@BINPATH@/maintenanceservice.exe
+-@BINPATH@/maintenanceservice_installer.exe
++; @BINPATH@/maintenanceservice.exe
++; @BINPATH@/maintenanceservice_installer.exe
+ #endif
+ 
+ ; [Crash Reporter]

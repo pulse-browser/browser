@@ -1,5 +1,5 @@
 diff --git a/browser/components/moz.build b/browser/components/moz.build
-index 5a45200d348199e6bf0aa1e49c37a7d6129a376a..c7bf38f4341f939e38b23de7eb814a794af4a798 100644
+index 38f6b2c0ca72f55985a27256a028ba5d552c03ec..4bdc2faebce245267fac031a6fa93f0ad198b50a 100644
 --- a/browser/components/moz.build
 +++ b/browser/components/moz.build
 @@ -60,6 +60,9 @@ DIRS += [
@@ -11,4 +11,4 @@ index 5a45200d348199e6bf0aa1e49c37a7d6129a376a..c7bf38f4341f939e38b23de7eb814a79
 +
  DIRS += ["build"]
  
- if CONFIG["MOZ_WIDGET_TOOLKIT"] == "cocoa":
+ if CONFIG["NIGHTLY_BUILD"]:
