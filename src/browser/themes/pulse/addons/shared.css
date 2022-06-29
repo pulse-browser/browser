@@ -83,9 +83,12 @@ tab.tabbrowser-tab:nth-child(1) {
   margin-left: 16px;
 }
 
-/* BUG GH#54: The container color does not show up in the pulse theme */
 .tabbrowser-tab {
+  /* BUG GH#54: The container color does not show up in the pulse theme */
   border-top: 2px solid var(--identity-tab-color);
+  /* Expand the overflow margin to contain the tab curves 
+    https://searchfox.org/mozilla-central/diff/b269ed31009c9a01be532c9afc0a836e0ad86ed6/browser/themes/shared/tabs.css#103 */
+  overflow-clip-margin: 8px !important;
 }
 
 /* #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
