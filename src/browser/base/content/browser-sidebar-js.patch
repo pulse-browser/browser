@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..ec45c95b25a4b90035203bd6dd790de4431a8f14 100644
+index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..adf47400015a7b265de3b9716ed1b3c180e8f354 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -144,7 +144,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..ec45c95b25a4b90035203bd6dd790de4
 +    }
 +  },
 +
-+  createSidebarItem(id, config, isinit=false) {
++  async createSidebarItem(id, config, isinit=false) {
 +    console.log("creating item")
 +    if(!isinit){
 +      await this.promiseDeferred;
