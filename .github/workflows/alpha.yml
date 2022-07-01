@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       build_date: ${{ steps.data.outputs.builddate }}
-      version: ${{ steps.data.output.version }}
+      version: ${{ steps.data.outputs.version }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -35,7 +35,7 @@ jobs:
           gluon get version | xargs
           echo "$(gluon get version | xargs)"
 
-      - name: Export release data
+      - name: Export release date
         id: data
         shell: bash
         run: |
@@ -44,7 +44,7 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 🔖 Update version to ${{ steps.data.output.version }}
+          commit_message: 🔖 Update version to ${{ steps.data.outputs.version }}
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
 
