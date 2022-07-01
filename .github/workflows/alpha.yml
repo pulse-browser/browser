@@ -33,7 +33,7 @@ jobs:
         shell: bash
         run: |
           echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
-          echo "::set-output name=version::$(gluon get version | xargs)
+          echo "::set-output name=version::$(gluon get version | xargs)"
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
