@@ -29,6 +29,12 @@ jobs:
         run: |
           gluon ci --brand alpha --bump prerelease
 
+      - name: Debug
+        run: |
+        gluon get version
+        gluon get version | xargs
+          echo "$(gluon get version | xargs)"
+
       - name: Export release data
         id: data
         shell: bash
