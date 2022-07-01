@@ -8,24 +8,38 @@ jobs:
     name: Generate build data
     runs-on: ubuntu-latest
     outputs:
-      sha: ${{ steps.data.outputs.shortsha }}
       build_date: ${{ steps.data.outputs.builddate }}
-      upstream: ${{ steps.data.outputs.upstream }}
+      version: ${{ steps.data.output.version }}
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
 
-      - name: Setup melon
-        run: yarn && yarn setupLink
+      - name: Setup gluon
+        run: |
+          yarn
+          yarn setupLink
+
+          cd gluon 
+          npm i -g .
+          cd ..
+
+      - name: Bump version
+        run: |
+          gluon ci --brand alpha --bump prerelease
 
       - name: Export release data
         id: data
         shell: bash
         run: |
-          echo "::set-output name=shortsha::$(git rev-parse --short HEAD)"
           echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
-          echo "::set-output name=upstream::$(yarn melon ff-version)"
+          echo "::set-output name=version::$(gluon get version | xargs)
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🔖 Update version to ${{ steps.data.output.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
 
   linux:
     runs-on: ubuntu-latest
@@ -70,14 +84,6 @@ jobs:
         run: |
           echo "ac_add_options --without-wasm-sandboxed-libraries" >> mozconfig
 
-      - name: Use 2 threads to reduce memory usage
-        run: |
-          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
-
-      - name: Use alpha branding
-        run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
-
       - name: Free up space
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -101,7 +107,7 @@ jobs:
         continue-on-error: false
         with:
           path: /home/runner/.cache/sccache
-          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+          key: ${{ runner.os }}-sccache
 
       - name: Get System Info
         run: |
@@ -111,14 +117,14 @@ jobs:
           cargo --version
           ls /opt/wasi-sdk/share/wasi-sysroot
 
-      - name: Log memory usage
+      - name: Setup gluon
         run: |
-          ps aux | sort -rnk 4
+          yarn && yarn setupLink
 
-      - name: Setup melon
-        run: yarn && yarn setupLink
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
-      - name: Download firefox source and dependancies
+      - name: Download firefox source and dependencies
         run: yarn download
 
       - name: Import
@@ -134,18 +140,30 @@ jobs:
         run: yarn build
 
       - name: Package
-        run: yarn melon package
+        run: yarn package
 
       - name: Rename artifacts
         run: |
-          cp ./engine/obj-*/dist/pulse-browser-*.tar.bz2 .
-          mv pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
+          mv dist/pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
+          mv dist/output.mar linux.mar
 
-      - name: Upload artifact
+      - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
           name: pulse-browser.linux.tar.bz2
           path: ./pulse-browser.linux.tar.bz2
+
+      - name: Upload mar
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux.mar
+          path: ./linux.mar
+
+      - name: Upload update manifests
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux_update_manifest
+          path: ./dist/update
 
   mac:
     runs-on: macos-latest
@@ -177,18 +195,13 @@ jobs:
         continue-on-error: false
         with:
           path: ~/Library/Caches/Mozilla.sccache
-          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+          key: ${{ runner.os }}-sccache
 
-      - name: Use alpha branding
-        run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
-
-      - name: Get System Info
-        run: |
-          cargo --version
-
-      - name: Setup melon
+      - name: Setup gluon
         run: yarn && yarn setupLink
+
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependancies
         run: yarn download
@@ -226,15 +239,26 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          find ./engine/obj-*/dist/
-          cp ./engine/obj-*/dist/*.dmg .
-          mv *.dmg "pulse-browser.macos.dmg"
+          mv ./dist/*.dmg "pulse-browser.macos.dmg"
+          mv ./dist/output.mar macos.mar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: pulse-browser.macos.dmg
           path: ./pulse-browser.macos.dmg
+
+      - name: Upload mar
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos.mar
+          path: ./macos.mar
+
+      - name: Upload update manifests
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos_update_manifest
+          path: ./dist/update
 
   source:
     runs-on: ubuntu-latest
@@ -250,8 +274,11 @@ jobs:
           git config --global user.email "trickypr@users.noreply.github.com"
           git config --global user.name "TrickyPR"
 
-      - name: Setup melon
+      - name: Setup gluon
         run: yarn && yarn setupLink
+
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependancies
         run: yarn download --verbose
@@ -290,28 +317,40 @@ jobs:
         run: |
           yarn setupLink:win
 
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
+
       - name: Download
         run: yarn download
 
       - name: Import
         run: yarn imp
 
-      - name: Use alpha branding
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
-
       - name: Build
         run: yarn build -- --skip-patch-check
 
       - name: Package
-        run: yarn package
+        run: |
+          yarn package
+          mv ./dist/output.mar windows.mar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: pulse-browser.installer.exe
           path: ./dist/pulse-browser.installer.exe
+
+      - name: Upload mar
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows.mar
+          path: ./windows.mar
+
+      - name: Upload update manifests
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows_update_manifest
+          path: ./dist/update
 
   release:
     name: Release
@@ -332,3 +371,9 @@ jobs:
             pulse-browser.source.tar.gz
             pulse-browser.macos.dmg
             pulse-browser.installer.exe
+            windows.mar
+            macos.mar
+            linux.mar
+
+      - name: List
+        run: find .
