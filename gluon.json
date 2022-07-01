@@ -3,7 +3,6 @@
   "vendor": "Fushra",
   "appId": "com.fushra.browser.desktop",
   "binaryName": "pulse-browser",
-  "updateHostname": "updates.pulsebrowser.app",
   "version": {
     "product": "firefox",
     "version": "102.0"
@@ -66,7 +65,6 @@
       "brandShortName": "Pulse Browser",
       "brandFullName": "Pulse Browser Alpha",
       "release": {
-        "displayVersion": "1.0.0-a.0",
         "github": {
           "repo": "pulse-browser/browser"
         },
@@ -77,5 +75,12 @@
         }
       }
     }
-  }
+  },
+  "license": {
+    "ignoredFiles": [
+      ".*\\.json"
+    ],
+    "licenseType": "MPL-2.0"
+  },
+  "updateHostname": "updates.pulsebrowser.app"
 }
