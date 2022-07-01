@@ -21,7 +21,7 @@ jobs:
           yarn setupLink
 
           cd gluon 
-          npm i -g .
+          npm i -g . --force
           cd ..
 
       - name: Bump version
