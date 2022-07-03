@@ -23,7 +23,11 @@
     "firepicker": {
       "id": "fire-picker@browser.fushra.com",
       "url": "https://github.com/pulse-browser/fire-picker/releases/download/v1.1.0/release.zip"
-    }
+    },
+    "sidebar-tabs": {
+      "id": "sidebartabs@browser.fushra.com",
+      "url": "https://github.com/pulse-browser/sidebar-tabs/releases/download/v0.0.0/release.zip"
+    } 
   },
   "brands": {
     "stable": {
