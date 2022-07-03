@@ -398,4 +398,10 @@ jobs:
           cp -a macos_update_manifest/. updates/browser/
           cp -a linux_update_manifest/. updates/browser/
           cp -a windows_update_manifest/. updates/browser/
+      
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🔖 Upload update manifests ${{ steps.data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
           
