@@ -8,10 +8,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 :root {
   --tab-rounding-size: 8px;
   --tab-rounding-size-neg: -8px;
-}
 
-
-:root {
   /* Colors */
   --gradient-orientation: 90deg;
   --gradient: linear-gradient(
@@ -83,9 +80,13 @@ tab.tabbrowser-tab:nth-child(1) {
   margin-left: 16px;
 }
 
-/* BUG GH#54: The container color does not show up in the pulse theme */
 .tabbrowser-tab {
+  /* BUG GH#54: The container color does not show up in the pulse theme */
   border-top: 2px solid var(--identity-tab-color);
+  
+  /* Expand the overflow margin to contain the tab curves
+    https://searchfox.org/mozilla-central/diff/b269ed31009c9a01be532c9afc0a836e0ad86ed6/browser/themes/shared/tabs.css#103 */
+  overflow-clip-margin: 8px !important;
 }
 
 /* #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
@@ -93,7 +94,8 @@ tab.tabbrowser-tab:nth-child(1) {
   fill: var(--lwt-selected-tab-background-color);
 } */
 
-.tab-background[selected="true"]::before, .tab-background[selected="true"]::after {
+.tab-background[selected="true"]::before,
+.tab-background[selected="true"]::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -122,7 +124,8 @@ tab.tabbrowser-tab:nth-child(1) {
 }
 
 /* Fixing toolbar buttons when the tab box is present */
-.toolbar-items toolbarbutton image, .toolbar-items toolbarbutton stack {
+.toolbar-items toolbarbutton image,
+.toolbar-items toolbarbutton stack {
   width: 24px !important;
   height: 24px !important;
   padding: 4px !important;
@@ -137,7 +140,8 @@ tab.tabbrowser-tab:nth-child(1) {
 
 /* ========================================================================== */
 /* Sidebar tabs */
-.sidebar-item-background[checked="true"]::before, .sidebar-item-background[checked="true"]::after {
+.sidebar-item-background[checked="true"]::before,
+.sidebar-item-background[checked="true"]::after {
   content: "";
   position: absolute;
   right: 0;
@@ -181,7 +185,8 @@ tab.tabbrowser-tab:nth-child(1) {
 /* Bookmark styles */
 
 /* Remove messy seperators */
-#editBookmarkHeaderSeparator, #editBookmarkSeparator {
+#editBookmarkHeaderSeparator,
+#editBookmarkSeparator {
   display: none;
 }
 
