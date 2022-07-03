@@ -384,3 +384,18 @@ jobs:
 
       - name: List
         run: find .
+      
+      - name: Checkout tools repo
+        uses: actions/checkout@v3
+        with:
+          repository: pulse-browser/updates
+          path: updates
+          token: ${{ secrets.ROBOT_TOKEN }}
+      
+      - name: Copy update manifests
+        run: |
+          mkdir -p updates/browser
+          cp -a macos_update_manifest/. updates/browser/
+          cp -a linux_update_manifest/. updates/browser/
+          cp -a windows_update_manifest/. updates/browser/
+          
