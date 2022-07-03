@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..adf47400015a7b265de3b9716ed1b3c180e8f354 100644
+index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..e42644d213b19b39cf0d8bab33b0cebfa21cdc7e 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -17,7 +17,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..adf47400015a7b265de3b9716ed1b3c1
            elementId: "sidebar-switcher-bookmarks",
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
-+          iconurl: "chrome://browser/skin/history.svg",
++          iconurl: "chrome://browser/skin/bookmark.svg",
 +          isBottom: false,
          }),
        ],
@@ -201,7 +201,18 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..adf47400015a7b265de3b9716ed1b3c1
    uninit() {
      // If this is the last browser window, persist various values that should be
      // remembered for after a restart / reopening a browser window.
-@@ -618,6 +755,24 @@ var SidebarUI = {
+@@ -573,6 +710,10 @@ var SidebarUI = {
+       this._box.setAttribute("sidebarcommand", commandID);
+       this.lastOpenedId = commandID;
+ 
++      // Pulse: Reset sidebar margin to zero to allow for correct animations to 
++      // take place (adapted from dot browser, se below)
++      this._box.style.marginLeft = '0px'
++
+       let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
+       this.title = title;
+       // Keep the title element in sync with any l10n changes.
+@@ -618,6 +759,24 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -226,7 +237,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..adf47400015a7b265de3b9716ed1b3c1
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,21 +796,32 @@ var SidebarUI = {
+@@ -641,21 +800,32 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
