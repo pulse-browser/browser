@@ -1,0 +1,47 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+@namespace html 'http://www.w3.org/1999/xhtml';
+
+window {
+  width: 800px !important;
+  height: 300px !important;
+}
+
+#leftBox {
+  margin: 0 !important;
+}
+
+#container #rightBox {
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top: 0 !important;
+}
+
+h1 {
+  font-size: xxx-large;
+  font-weight: bold;
+}
+
+#container {
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  width: 800px !important;
+  height: 300px !important;
+}
+
+p {
+  display: block;
+}
+
+.hContainer {
+  display: flex;
+  gap: 8px;
+}
+
+#rightBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

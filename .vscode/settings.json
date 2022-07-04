@@ -16,5 +16,8 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "files.exclude": {
     "**/node_modules": true
+  },
+  "[html]": {
+    "editor.formatOnSave": false
   }
 }
