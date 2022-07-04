@@ -5,7 +5,22 @@
 
 window {
   width: 800px !important;
-  height: 400px !important;
+  height: 300px !important;
+}
+
+#leftBox {
+  margin: 0 !important;
+}
+
+#container #rightBox {
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-top: 0 !important;
+}
+
+h1 {
+  font-size: xxx-large;
+  font-weight: bold;
 }
 
 #container {
@@ -13,7 +28,7 @@ window {
   display: flex;
   justify-content: space-between;
   width: 800px !important;
-  height: 400px !important;
+  height: 300px !important;
 }
 
 p {
