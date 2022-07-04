@@ -13,6 +13,7 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   id="aboutDialog"
   windowtype="Browser:About"
+  onload="init(event);"
 #ifdef XP_MACOSX
   inwindowmenu="false"
 #else
@@ -58,4 +59,7 @@
   <keyset>
     <key keycode="VK_ESCAPE" oncommand="window.close();" />
   </keyset>
+
+  <script src="chrome://browser/content/aboutDialog.js"/>
+
 </window>
