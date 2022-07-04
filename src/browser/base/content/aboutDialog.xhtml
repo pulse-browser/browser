@@ -1,0 +1,61 @@
+<?xml version="1.0"?> <!-- -*- Mode: HTML -*- -->
+
+# This Source Code Form is subject to the terms of the Mozilla Public 
+# License, v. 2.0. If a copy of the MPL was not distributed with this 
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/content/aboutDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://branding/content/aboutDialog.css" type="text/css"?>
+
+<window
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="aboutDialog"
+  windowtype="Browser:About"
+#ifdef XP_MACOSX
+  inwindowmenu="false"
+#else
+  data-l10n-id="aboutDialog-title"
+#endif
+  role="dialog"
+>
+#ifdef XP_MACOSX
+#include macWindow.inc.xhtml
+#else
+  <script src="chrome://browser/content/utilityOverlay.js" />
+#endif
+
+  <linkset>
+    <html:link rel="localization" href="branding/brand.ftl" />
+    <html:link rel="localization" href="browser/aboutDialog.ftl" />
+  </linkset>
+
+  <div id="container">
+    <div id="leftBox"></div>
+    <div id="rightBox">
+        <h1 data-l10n-id="about-dialog-browser-name"></h1>
+        <div class="hContainer">
+          <span data-l10n-id="about-dialog-version"></span>
+          <span id="version"></span>
+          ·
+          <span data-l10n-id="about-dialog-channel"></span>
+          <span id="channel"></span>
+        </div>
+
+        <p data-l10n-id="about-dialog-project-description"></p>
+
+        <div class="hContainer">
+          <label class="text-link" is="text-link" href="https://github.com/pulse-browser/browser/blob/alpha/LICENSE" data-l10n-id="about-dialog-license"></label>
+          ·
+          <label class="text-link" is="text-link" href="" data-l10n-id="about-dialog-privacy-policy"></label>
+          ·
+          <label class="text-link" is="text-link" href="https://github.com/pulse-browser/browser" data-l10n-id="about-dialog-github"></label>
+        </div>
+    </div>
+  </div>
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="window.close();" />
+  </keyset>
+</window>
