@@ -57,8 +57,8 @@
 
 .sidebar-item-background[checked] {
   background-attachment: scroll, scroll, fixed;
-  background-color: transparent;
-  background-image: linear-gradient(var(--lwt-selected-tab-background-color, transparent), var(--lwt-selected-tab-background-color, transparent)), linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, none);
+  background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
   background-position: 0 0, 0 0, right top;
   background-repeat: repeat-x, repeat-x, no-repeat;
   background-size: auto 100%, auto 100%, auto auto;
@@ -82,7 +82,8 @@
 
 #sidebar-box,
 #sidebar-splitter {
-  background-color: var(--lwt-selected-tab-background-color, --lwt-sidebar-background-color) !important;
+  background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
   -moz-default-appearance: auto !important;
   -moz-font-smoothing-background-color: auto !important;
 }
