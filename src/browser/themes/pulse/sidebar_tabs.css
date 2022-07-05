@@ -14,12 +14,8 @@
   background-color: -moz-Dialog;
   overflow: hidden;
 
-  max-width: var(--tab-min-height);
-  min-width: var(--tab-min-height);
-
   /* Makes the sidebar slide out from below */
   position: relative;
-  z-index: 10;
 }
 
 .sidebar-icon-item {
