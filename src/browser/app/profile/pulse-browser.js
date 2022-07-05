@@ -23,7 +23,7 @@ pref('media.videocontrols.picture-in-picture.audio-toggle.enabled', true);
 // This preference tells the browser that our addons are preinstalled and should
 // be provided with permissions without asking
 // TODO: Documentation in melon for preference
-pref('extensions.installedDistroAddon.newtab@browser.fushra.com', true);
+pref('extensions.installedDistroAddon.extension@tabliss.io', true);
 
 pref('browser.discovery.enabled', false);
 pref('svg.context-properties.content.enabled', true);
