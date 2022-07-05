@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.sidebar-container:-moz-lwtheme {
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
 .sidebar-icon-item {
   background-size: 16px 16px;
   background-repeat: no-repeat;
