@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+  background-color: -moz-Dialog;
   overflow: hidden;
 
   max-width: var(--tab-min-height);
