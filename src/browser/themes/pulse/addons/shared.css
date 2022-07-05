@@ -21,7 +21,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
   --tab-border-radius: 0 !important; /* The border radius of the tab */
   --tab-padding-inline: 0 !important; /* Padding to the left and right of the tab. **Focus Browser custom** */
-  
+
   --toolbarbutton-border-radius: 4px;
 
   /* Toolbar area */
@@ -63,7 +63,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   padding: 4px !important;
 }
 
-.toolbarbutton-icon, .tab-close-button  {
+.toolbarbutton-icon,
+.tab-close-button {
   border-radius: 4px !important;
 }
 
@@ -83,7 +84,7 @@ tab.tabbrowser-tab:nth-child(1) {
 .tabbrowser-tab {
   /* BUG GH#54: The container color does not show up in the pulse theme */
   border-top: 2px solid var(--identity-tab-color);
-  
+
   /* Expand the overflow margin to contain the tab curves
     https://searchfox.org/mozilla-central/diff/b269ed31009c9a01be532c9afc0a836e0ad86ed6/browser/themes/shared/tabs.css#103 */
   overflow-clip-margin: 8px !important;
@@ -94,27 +95,27 @@ tab.tabbrowser-tab:nth-child(1) {
   fill: var(--lwt-selected-tab-background-color);
 } */
 
-.tab-background[selected="true"]::before,
-.tab-background[selected="true"]::after {
-  content: "";
+.tab-background[selected='true']::before,
+.tab-background[selected='true']::after {
+  content: '';
   position: absolute;
   bottom: 0;
-  
+
   -moz-context-properties: fill;
   fill: var(--lwt-selected-tab-background-color);
   background-size: cover;
-  
+
   width: var(--tab-rounding-size);
   height: var(--tab-rounding-size);
 }
 
-.tab-background[selected="true"]::before {
-  background-image: url("chrome://global/skin/icons/tab-rising-edge.svg");
+.tab-background[selected='true']::before {
+  background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
   left: var(--tab-rounding-size-neg);
 }
 
-.tab-background[selected="true"]::after {
-  background-image: url("chrome://global/skin/icons/tab-falling-edge.svg");
+.tab-background[selected='true']::after {
+  background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
   right: var(--tab-rounding-size-neg);
 }
 
@@ -140,9 +141,9 @@ tab.tabbrowser-tab:nth-child(1) {
 
 /* ========================================================================== */
 /* Sidebar tabs */
-.sidebar-item-background[checked="true"]::before,
-.sidebar-item-background[checked="true"]::after {
-  content: "";
+.sidebar-item-background[checked='true']::before,
+.sidebar-item-background[checked='true']::after {
+  content: '';
   position: absolute;
   right: 0;
 
@@ -158,13 +159,13 @@ tab.tabbrowser-tab:nth-child(1) {
   z-index: 10;
 }
 
-.sidebar-item-background[checked="true"]::before {
-  background-image: url("chrome://global/skin/icons/tab-rising-edge.svg");
+.sidebar-item-background[checked='true']::before {
+  background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
   top: var(--tab-rounding-size-neg);
 }
 
-.sidebar-item-background[checked="true"]::after {
-  background-image: url("chrome://global/skin/icons/tab-falling-edge.svg");
+.sidebar-item-background[checked='true']::after {
+  background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
   bottom: var(--tab-rounding-size-neg);
   transform: rotate(180deg);
 }
