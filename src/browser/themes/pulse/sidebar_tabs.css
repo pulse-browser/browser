@@ -80,6 +80,10 @@
   background-image: url('chrome://global/skin/icons/settings.svg');
 }
 
+#sidebar-header {
+  border-bottom: none;
+}
+
 #sidebar-box,
 #sidebar-splitter {
   background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
