@@ -10,7 +10,7 @@ welcome-dialog-skip = Not now
 
 welcome-dialog-import = Import your stuff
 welcome-dialog-import-subtext = Pick up where you left off in your last browser.
-welcome-dialog-import-action = Import from previous browser
+welcome-dialog-import-action = Import
 
 welcome-dialog-theme = Choose a theme
 welcome-dialog-theme-action = Continue
