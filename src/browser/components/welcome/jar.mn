@@ -4,6 +4,8 @@
 
 browser.jar:
 % content browser %content/browser/ contentaccessible=yes
-  content/browser/welcome/welcome.html (welcome.html)
-  content/browser/welcome/welcome.css (welcome.css)
-  content/browser/welcome/welcome.js (welcome.js)
+  content/browser/welcome/welcome.html        (welcome.html)
+  content/browser/welcome/welcome.css         (welcome.css)
+  content/browser/welcome/welcome.js          (welcome.js)
+  content/browser/welcome/migrate.light.svg   (migrate.light.svg)
+  content/browser/welcome/migrate.dark.svg    (migrate.dark.svg)
