@@ -1,0 +1,13 @@
+diff --git a/browser/themes/shared/preferences/preferences.css b/browser/themes/shared/preferences/preferences.css
+index 74493f3c59c4824c0873d278a47be649e4e90ffa..f1446090abbca1bf1a004e59721bf2c7ce5c9afc 100644
+--- a/browser/themes/shared/preferences/preferences.css
++++ b/browser/themes/shared/preferences/preferences.css
+@@ -1603,3 +1603,8 @@ richlistitem .text-link:hover {
+     appearance: none;
+   }
+ }
++
++#category-more-from-mozilla {
++  /* Don't show from mozilla in settings */
++  display: none;
++}
