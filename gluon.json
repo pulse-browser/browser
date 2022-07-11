@@ -65,7 +65,7 @@
       "brandShortName": "Pulse Browser",
       "brandFullName": "Pulse Browser Alpha",
       "release": {
-        "displayVersion": "1.0.0-a.12",
+        "displayVersion": "1.0.0-a.11",
         "github": {
           "repo": "pulse-browser/browser"
         },
@@ -78,9 +78,7 @@
     }
   },
   "license": {
-    "ignoredFiles": [
-      ".*\\.json"
-    ],
+    "ignoredFiles": [".*\\.json"],
     "licenseType": "MPL-2.0"
   },
   "updateHostname": "updates.pulsebrowser.app"

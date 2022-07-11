@@ -222,24 +222,8 @@ jobs:
           ./mach --no-interactive bootstrap --application-choice browser
           cd ..
 
-        # Note: We still need this to generate our .mozconfig
       - name: Gluon build
-        continue-on-error: true
         run: yarn build --verbose
-
-      - name: Log
-        continue-on-error: true
-        run: |
-          ls engine
-          cat engine/mozconfig
-          cat engine/.mozconfig
-
-      - name: Mach build
-        run: |
-          cd engine
-          export MACH_USE_SYSTEM_PYTHON=true
-          ./mach build
-          cd ..
 
       - name: Package
         run: gluon package
