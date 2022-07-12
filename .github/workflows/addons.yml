@@ -2,7 +2,8 @@ name: Addon updates
 
 on:
   workflow_dispatch:
-  push: [alpha, beta, stable]
+  push:
+    branches: [alpha, beta, stable]
 
 jobs:
   generate:
@@ -16,6 +17,9 @@ jobs:
 
       - name: Setup Gluon
         run: yarn && yarn setupLink
+
+      - name: Load config
+        run: yarn gluon ci --brand ${GITHUB_REF##*/}
 
       - name: Generate update manifest
         run: yarn gluon updates-addons
