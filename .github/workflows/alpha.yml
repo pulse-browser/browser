@@ -129,7 +129,7 @@ jobs:
           yarn && yarn setupLink
 
       - name: Load gluon CI setup
-        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
+        run: yarn gluon ci --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependencies
         run: yarn download
@@ -354,7 +354,7 @@ jobs:
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: ${{ steps.data.outputs.version }}
+          automatic_release_tag: ${{ needs.build-data.outputs.version }}
           prerelease: true
           title: 'Alpha build'
           files: |
@@ -385,7 +385,7 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 🔖 Upload update manifests ${{ steps.data.outputs.version }}
+          commit_message: 🔖 Upload update manifests ${{ needs.build-data.outputs.version }}
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: ./updates
