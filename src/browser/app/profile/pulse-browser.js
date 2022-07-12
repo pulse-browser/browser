@@ -42,7 +42,7 @@ pref('browser.vpn_promo.enabled', false);
 pref('dom.webmidi.enabled', true);
 
 // Check for system add-on updates.
-pref("extensions.systemAddon.update.url", "https://aus5.mozilla.org/update/3/SystemAddons/%CHANNEL%/update.xml");
+pref("extensions.systemAddon.update.url", "https://updates.pulsebrowser.app/browser/addons/%CHANNEL%/update.xml");
 pref("extensions.systemAddon.update.enabled", true);
 
 
