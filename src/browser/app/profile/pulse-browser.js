@@ -41,4 +41,9 @@ pref('browser.vpn_promo.enabled', false);
 // will also provide us with the benefit of more features
 pref('dom.webmidi.enabled', true);
 
+// Check for system add-on updates.
+pref("extensions.systemAddon.update.url", "https://updates.pulsebrowser.app/browser/addons/%CHANNEL%/update.xml");
+pref("extensions.systemAddon.update.enabled", true);
+
+
 #include better-fox.js
