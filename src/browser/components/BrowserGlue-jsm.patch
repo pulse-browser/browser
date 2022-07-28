@@ -1,11 +1,11 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 64ac529d54270758b6dfa7a0a04b604b89a92402..59845d228da66c087e59f09052b1e482ddbac6cb 100644
+index 64ac529d54270758b6dfa7a0a04b604b89a92402..e4b7844fd1df5c3ff09432c6d1664f72dba02320 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
-@@ -4373,6 +4373,23 @@ BrowserGlue.prototype = {
-       return;
-     }
+@@ -4321,6 +4321,23 @@ BrowserGlue.prototype = {
+   },
  
+   async _maybeShowDefaultBrowserPrompt() {
 +    // =========================================================================
 +    // Pulse browser welcome
 +
@@ -23,9 +23,9 @@ index 64ac529d54270758b6dfa7a0a04b604b89a92402..59845d228da66c087e59f09052b1e482
 +
 +    // =========================================================================
 +
-     const willPrompt = await DefaultBrowserCheck.willCheckDefaultBrowser(
-       /* isStartupCheck */ true
-     );
+     // Highest priority is the upgrade dialog, which can include a "primary
+     // browser" request and is limited in various ways, e.g., major upgrades.
+     const dialogVersion = 100;
 @@ -4780,6 +4797,18 @@ BrowserGlue.prototype = {
      "nsIObserver",
      "nsISupportsWeakReference",
@@ -38,7 +38,7 @@ index 64ac529d54270758b6dfa7a0a04b604b89a92402..59845d228da66c087e59f09052b1e482
 +   * @patch Pulse Browser
 +   */
 +  _showWelcomeDialog() {
-+    BrowserWindowTracker.getTopWindow().gDialogBox.open(
++    lazy.BrowserWindowTracker.getTopWindow().gDialogBox.open(
 +      "chrome://browser/content/welcome/welcome.html"
 +    );
 +  },
