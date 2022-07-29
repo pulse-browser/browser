@@ -1,5 +1,5 @@
 diff --git a/browser/themes/addons/jar.mn b/browser/themes/addons/jar.mn
-index 271106757c7f60cdf78ff89c2dff375b524d197c..999049782628d501296a76990484fa29a5c3d5a9 100644
+index 69bb3000d6d2d249d1d77262dc2a0057d0318308..68fc1df73672c271990b6d2eca489093569ec0fb 100644
 --- a/browser/themes/addons/jar.mn
 +++ b/browser/themes/addons/jar.mn
 @@ -16,6 +16,14 @@ browser.jar:
@@ -14,6 +14,6 @@ index 271106757c7f60cdf78ff89c2dff375b524d197c..999049782628d501296a76990484fa29
 +  content/builtin-themes/pulse/light/experiment.css      (pulse/light/experiment.css)
 +  content/builtin-themes/pulse/light/manifest.json       (pulse/light/manifest.json)
 +
-   content/builtin-themes/monochromatic/lush/soft                          (monochromatic/lush/soft/*.svg)
-   content/builtin-themes/monochromatic/lush/soft/manifest.json            (monochromatic/lush/soft/manifest.json)
-   content/builtin-themes/monochromatic/lush/balanced                      (monochromatic/lush/balanced/*.svg)
+   content/builtin-themes/colorways/2021lush/soft                          (colorways/2021-life-in-color/lush/soft/*.svg)
+   content/builtin-themes/colorways/2021lush/soft/manifest.json            (colorways/2021-life-in-color/lush/soft/manifest.json)
+   content/builtin-themes/colorways/2021lush/balanced                      (colorways/2021-life-in-color/lush/balanced/*.svg)

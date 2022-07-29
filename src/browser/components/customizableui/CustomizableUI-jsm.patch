@@ -1,19 +1,16 @@
 diff --git a/browser/components/customizableui/CustomizableUI.jsm b/browser/components/customizableui/CustomizableUI.jsm
-index 87aede1449d7ac4f30e13990f6d928fba3484162..32deb776daa5f4a353667e282f2ebfd904cefedb 100644
+index 00e8533bc51245f3d55cefa3f20fc588c0e49c70..fd11b297a715f8861fc34c89861f726d1fd9336f 100644
 --- a/browser/components/customizableui/CustomizableUI.jsm
 +++ b/browser/components/customizableui/CustomizableUI.jsm
-@@ -13,6 +13,10 @@ const { AppConstants } = ChromeUtils.import(
-   "resource://gre/modules/AppConstants.jsm"
- );
- 
-+const { makeWidgetId } = ChromeUtils.import(
-+  "resource://gre/modules/ExtensionCommon.jsm"
-+).ExtensionCommon;
-+
- XPCOMUtils.defineLazyModuleGetters(this, {
+@@ -18,6 +18,7 @@ const lazy = {};
+ XPCOMUtils.defineLazyModuleGetters(lazy, {
    AddonManager: "resource://gre/modules/AddonManager.jsm",
    AddonManagerPrivate: "resource://gre/modules/AddonManager.jsm",
-@@ -32,6 +36,7 @@ XPCOMUtils.defineLazyGetter(this, "gWidgetsBundle", function() {
++  ExtensionCommon: "resource://gre/modules/ExtensionCommon.jsm",
+   SearchWidgetTracker: "resource:///modules/SearchWidgetTracker.jsm",
+   CustomizableWidgets: "resource:///modules/CustomizableWidgets.jsm",
+   PanelMultiView: "resource:///modules/PanelMultiView.jsm",
+@@ -34,6 +35,7 @@ XPCOMUtils.defineLazyGetter(lazy, "gWidgetsBundle", function() {
  });
  
  const kDefaultThemeID = "default-theme@mozilla.org";
@@ -21,8 +18,12 @@ index 87aede1449d7ac4f30e13990f6d928fba3484162..32deb776daa5f4a353667e282f2ebfd9
  
  const kSpecialWidgetPfx = "customizableui-special-";
  
-@@ -232,15 +237,15 @@ var CustomizableUIInternal = {
+@@ -231,17 +233,21 @@ var CustomizableUIInternal = {
+       true
+     );
  
++    const { makeWidgetId } = lazy.ExtensionCommon;
++
      let navbarPlacements = [
        "back-button",
 -      "forward-button",
@@ -32,6 +33,8 @@ index 87aede1449d7ac4f30e13990f6d928fba3484162..32deb776daa5f4a353667e282f2ebfd9
          ? null
          : "home-button",
        "spring",
++      // TODO: Would be nice if this was moved to an extension API rather than
++      // manually being edited here...
 +      `${makeWidgetId(kUBlockOriginID)}-browser-action`,
        "urlbar-container",
        "spring",

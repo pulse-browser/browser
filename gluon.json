@@ -5,7 +5,7 @@
   "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
-    "version": "102.0.1"
+    "version": "103.0"
   },
   "buildOptions": {
     "generateBranding": true
@@ -86,9 +86,7 @@
     }
   },
   "license": {
-    "ignoredFiles": [
-      ".*\\.json"
-    ],
+    "ignoredFiles": [".*\\.json"],
     "licenseType": "MPL-2.0"
   },
   "updateHostname": "updates.pulsebrowser.app"

@@ -1,0 +1,19 @@
+diff --git a/browser/components/preferences/preferences.js b/browser/components/preferences/preferences.js
+index d3a1fce03d4f2109532f32cbaa027600505de5a6..6c14b0079f5677bf8f4b465473d4909da65d33bb 100644
+--- a/browser/components/preferences/preferences.js
++++ b/browser/components/preferences/preferences.js
+@@ -156,7 +156,13 @@ function register_module(categoryName, categoryObject) {
+       if (template) {
+         // Replace the template element with the nodes inside of it.
+         let frag = template.content;
+-        await document.l10n.translateFragment(frag);
++
++        // Pulse Browser
++        // Something seems to be bugged out here, but it doesn't matter. So, the
++        // simple solution is to silent catch the error...
++        try {
++          await document.l10n.translateFragment(frag);
++        } catch (e) {}
+ 
+         // Actually insert them into the DOM.
+         document.l10n.pauseObserving();
