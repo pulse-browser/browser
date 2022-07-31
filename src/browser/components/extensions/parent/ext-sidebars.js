@@ -53,6 +53,8 @@ class Sidebar {
     };
     this.globals = Object.create(this.defaults);
 
+    this.onRemoveEvents = [];
+
     this.tabContext = new TabContext(target => {
       let window = target.ownerGlobal;
       if (target === window) {
@@ -79,6 +81,7 @@ class Sidebar {
           this.removeFromBrowserWindow(window)
         }
       }
+      this.onRemoveEvents.filter(e => e).forEach(e => e(this.extentionIndex))
     })
   }
 
@@ -174,6 +177,8 @@ class ConfigAPI extends ExtensionAPI {
   constructor(extension) {
     super(extension);
 
+    this.onRemoveEvents = [];
+
     this.currentIndex = 0;
     /** @type {Map<number, Sidebar>} */
     this.sidebars = new Map();
@@ -223,6 +228,8 @@ class ConfigAPI extends ExtensionAPI {
             config.browserStyle || false
           );
 
+          sidebar.onRemoveEvents = this.onRemoveEvents;
+            
           for (let window of windowTracker.browserWindows()) {
             sidebar.addToBrowserWindow(window);
           }
@@ -250,9 +257,35 @@ class ConfigAPI extends ExtensionAPI {
           for (let window of windowTracker.browserWindows()) {
             sidebar.removeFromBrowserWindow(window)
           }
-
+          
           this.sidebars.delete(id);
+          
         },
+        
+        onRemove: new EventManager({
+          context,
+          name: "sidebars.onRemove",
+          register: (fire) => {
+            const callback = value => {
+              fire.async(value);
+            };
+            const eventId = this.onRemoveEvents.length;
+            this.onRemoveEvents.push(callback);
+
+            for (const sidebar of this.sidebars.values()){
+              sidebar.onRemoveEvents = this.onRemoveEvents;
+            }
+
+            return () => {
+              this.onRemoveEvents[eventId] = null;
+              for (const sidebar of this.sidebars.values()){
+                sidebar.onRemoveEvents = this.onRemoveEvents;
+              }
+            }
+          }
+
+        }).api(),
+
       },
     };
   }

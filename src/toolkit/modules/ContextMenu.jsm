@@ -50,7 +50,7 @@ class ContextMenu {
       const itemEl = window.document.createXULElement('menuitem')
       itemEl?.setAttribute(
         'id',
-        `pulseInternalContextMenu${this.id}Item${item.}`
+        `pulseInternalContextMenu${this.id}Item${item.callId}`
       )
 
       window.document.l10n.setAttributes(itemEl, item.l10nId)

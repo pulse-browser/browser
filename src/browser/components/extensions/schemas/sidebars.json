@@ -96,15 +96,14 @@
     ],
     "events": [
       {
-        "name": "onClicked",
+        "name": "onRemove",
         "type": "function",
-        "description": "Fired when the user clicks on the sidebar",
+        "description": "Fired when the user removes an item from the sidebar",
         "parameters": [
           {
             "name": "id",
             "type": "number",
-            "description": "Id of sidebar that was clicked",
-            "optional": false
+            "description": "Id of sidebar that was removed"
           }
         ]
       }
