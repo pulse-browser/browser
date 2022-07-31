@@ -13,6 +13,8 @@ var { ExtensionParent } = ChromeUtils.import(
   "resource://gre/modules/ExtensionParent.jsm"
 );
 
+var { ContextMenu } = ChromeUtils.import("resource://gre/modules/ContextMenu.jsm")
+
 var { IconDetails, StartupCache } = ExtensionParent;
 
 class Sidebar {
@@ -37,7 +39,7 @@ class Sidebar {
     this.isBottom = isBottom;
     this.browserStyle = browserStyle;
 
-    this.baseId = `${this.extensionName}-index-${this.extentionIndex}`;
+    this.baseId = `${this.extensionName.replaceAll(' ', '-')}-index-${this.extentionIndex}`;
     this.keyId = `ext-key-id-${this.baseId}`;
     this.menuId = `ext-menu-id-${this.baseId}`;
     this.buttonId = `ext-button-id-${this.baseId}`;
@@ -58,6 +60,26 @@ class Sidebar {
       }
       return this.tabContext.get(window);
     });
+
+    /**
+     * @type {ContextMenu}
+     */
+    this.contextMenu = new ContextMenu([
+      {
+        l10nId: 'sidebar-context-delete',
+        callId: 'delete'
+      }
+    ])
+
+    
+
+    this.contextMenu.addEvent(callId => {
+      if (callId === 'delete') {
+        for (let window of windowTracker.browserWindows()) {
+          this.removeFromBrowserWindow(window)
+        }
+      }
+    })
   }
 
   updateHeader(event) {
@@ -86,15 +108,15 @@ class Sidebar {
     );
   }
 
-  removeFromBrowserWindow(window) {
-    let {document, SidebarUI} = window
-
+  async removeFromBrowserWindow(window) {
+    let { document, SidebarUI } = window;
     SidebarUI.sidebars.delete(this.keyId)
-    document.getElementById(this.menuId)
+    document.getElementById("sidebar-background-" + this.keyId).remove()
     document.getElementById('sidebar-switcher-target').removeEventListener('SidebarShown', this.updateHeader.bind(this))
+    SidebarUI.hide()
   }
 
-  addToBrowserWindow(window) {
+  async addToBrowserWindow(window) {
     // Theft the sidebar UI from the window object
     let { document, SidebarUI } = window;
 
@@ -131,10 +153,18 @@ class Sidebar {
     document.getElementById('viewSidebarMenu').appendChild(menuitem)
 
     // Add to the sidebar tabs on the side of the window
-    SidebarUI.createSidebarItem(this.keyId, SidebarUI.sidebars.get(this.keyId));
+    await SidebarUI.createSidebarItem(this.keyId, SidebarUI.sidebars.get(this.keyId));
+
+    // Get the element based on the id of `sidebar-background-${this.keyId}`
+    // Set the attribute 'context' to 'hello'
+    this.contextMenu.addToBrowser(window)
+    console.log(`sidebar-background-${this.keyId}`)
+    let sidebar = window.document.getElementById(`sidebar-background-${this.keyId}`)
+    sidebar.setAttribute('context', this.contextMenu.contextMenuId)
 
     return menuitem;
   }
+  
 }
 
 class ConfigAPI extends ExtensionAPI {

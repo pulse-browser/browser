@@ -97,6 +97,11 @@
   transition: margin-left 200ms ease-in-out;
 }
 
+#sidebar-icons {
+  overflow: scroll;
+  max-height: 820px;
+}
+
 /* Make it feel native on macos */
 %ifdef XP_MACOSX
 #sidebar-container:not([lwt-sidebar]) {

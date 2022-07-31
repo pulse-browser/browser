@@ -24,4 +24,5 @@ declare global {
 
 declare namespace ChromeUtils {
     function defineModuleGetter(currentScope: any, exportName: string, url: string)
+    function import(path: string)
 }
