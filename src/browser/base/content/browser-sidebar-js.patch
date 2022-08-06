@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..c8f638f79201719f5fae1aad985159c0ccf02dc5 100644
+index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..1c3bdcd454b1e4118d3a85bbb1926c619a5e9efd 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -154,7 +154,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..c8f638f79201719f5fae1aad985159c0
 +      document.getElementById(`sidebar-background-${id}`).remove();
 +    }
 +
-+    const background = document.createElement("div")
++    const background = document.createXULElement("vbox")
 +    background.classList.add("sidebar-item-background")
 +    background.setAttribute("id", `sidebar-background-${id}`);
 +
