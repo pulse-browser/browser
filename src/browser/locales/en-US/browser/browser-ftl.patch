@@ -1,0 +1,11 @@
+diff --git a/browser/locales/en-US/browser/browser.ftl b/browser/locales/en-US/browser/browser.ftl
+index fbbac29b6a73f99b01bb1354b75b2300262d7396..27030c2c401a7f4ec255d3f113cf75ded1c0de28 100644
+--- a/browser/locales/en-US/browser/browser.ftl
++++ b/browser/locales/en-US/browser/browser.ftl
+@@ -836,3 +836,6 @@ data-reporting-notification-message = { -brand-short-name } automatically sends
+ data-reporting-notification-button =
+     .label = Choose What I Share
+     .accesskey = C
++
++sidebar-context-delete = 
++  .label = Delete
