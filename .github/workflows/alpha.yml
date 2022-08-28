@@ -196,6 +196,13 @@ jobs:
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.bash_profile
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
           source ~/.bash_profile
+      
+      # There are bugs in python 3.10 which prevent firefox from building correctly. This should
+      # fix it for the moment until mozilla or Python fix it
+      - name: Hotfix for bug 1766497 & 1786419
+        run: |
+          brew unlink python@3.10
+          brew link python@3.9
 
       - name: Save sccache
         uses: actions/cache@v2
