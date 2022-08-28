@@ -224,12 +224,6 @@ jobs:
       - name: Import
         run: yarn imp
 
-      - name: Bootstrap
-        run: |
-          cd engine
-          ./mach --no-interactive bootstrap --application-choice browser
-          cd ..
-
       - name: Gluon build
         run: yarn build --verbose
 
