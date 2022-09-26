@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f09e37fc42f7754f7f3687884ead25124c1b2076..13bbd5de6fcf0e4ffad06f4451c74d52c6f336ba 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..e6dc68b21acd1652889b04ed79152f92bd1d1d1a 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -6,6 +6,9 @@
@@ -101,6 +101,15 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..13bbd5de6fcf0e4ffad06f4451c74d52
      this._inited = true;
  
      Services.obs.addObserver(this, "intl:app-locales-changed");
+@@ -159,7 +197,7 @@ var SidebarUI = {
+   /**
+    * The handler for Services.obs.addObserver.
+    **/
+-  observe(_subject, topic, _data) {
++  observe(_subject, topic, data) {
+     switch (topic) {
+       case "intl:app-locales-changed": {
+         if (this.isOpen) {
 @@ -168,8 +206,19 @@ var SidebarUI = {
            // invalidate any old text.
            this.hide();
