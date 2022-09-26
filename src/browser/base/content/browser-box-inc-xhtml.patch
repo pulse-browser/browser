@@ -1,8 +1,8 @@
 diff --git a/browser/base/content/browser-box.inc.xhtml b/browser/base/content/browser-box.inc.xhtml
-index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..16898ef8c3d1ef797a8fed17e9e8ce50992c364f 100644
+index ae5b1979921a9390ee899d72b04bc4ff293b39d8..7a18f16b76a5a7fa9566e1f02fbae9d80e1212b5 100644
 --- a/browser/base/content/browser-box.inc.xhtml
 +++ b/browser/base/content/browser-box.inc.xhtml
-@@ -3,6 +3,11 @@
+@@ -3,9 +3,13 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  <hbox flex="1" id="browser">
@@ -10,7 +10,10 @@ index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..16898ef8c3d1ef797a8fed17e9e8ce50
 +    <vbox id="sidebar-icons"></vbox>
 +    <vbox id="sidebar-icons-bottom"></vbox>
 +  </div>
-+
    <vbox id="sidebar-box" hidden="true" class="chromeclass-extrachrome">
      <box id="sidebar-header" align="center">
-       <toolbarbutton id="sidebar-switcher-target" flex="1" class="tabbable">
+-      <toolbarbutton id="sidebar-switcher-target" class="tabbable">
++      <toolbarbutton id="sidebar-switcher-target" flex="1" class="tabbable">
+         <image id="sidebar-icon" consumeanchor="sidebar-switcher-target"/>
+         <label id="sidebar-title" crop="end" control="sidebar"/>
+         <image id="sidebar-switcher-arrow"/>

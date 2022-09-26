@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..c958b4e40d47783ec5f8209f7a1f44726e34a1ae 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f44726e34a1ae 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -216,8 +216,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..c958b4e40d47783ec5f8209f7a1f4472
 -          // support live switching the app locale. Reload the entire sidebar to
            // invalidate any old text.
            this.hide();
--          this._show(this.lastOpenedId);
-+          this.showInitially(this.lastOpenedId);
+           this.showInitially(this.lastOpenedId);
            break;
          }
 +        break;
