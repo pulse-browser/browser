@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..a08db41af1a11c0c435a0b0ca1d3ecd0633dce23 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..13bbd5de6fcf0e4ffad06f4451c74d52c6f336ba 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -6,6 +6,9 @@
@@ -101,47 +101,16 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..a08db41af1a11c0c435a0b0ca1d3ecd0
      this._inited = true;
  
      Services.obs.addObserver(this, "intl:app-locales-changed");
-@@ -121,6 +159,20 @@ var SidebarUI = {
-     this._initDeferred.resolve();
-   },
- 
-+  /**
-+   * Set the sidebar tabs to be visible or not visible
-+   * @param {boolean} visible Sets the sidebar to be visible or not visible
-+   */
-+  setSidebarVisibility(visible) {
-+    const sidebarContainer = document.getElementById("sidebar-container");
-+
-+    if (visible) {
-+      sidebarContainer.style.display = "flex";
-+    } else {
-+      sidebarContainer.style.display = "none";
-+    }
-+  },
-+
-   uninit() {
-     // If this is the last browser window, persist various values that should be
-     // remembered for after a restart / reopening a browser window.
-@@ -159,9 +211,9 @@ var SidebarUI = {
-   /**
-    * The handler for Services.obs.addObserver.
-    **/
--  observe(_subject, topic, _data) {
-+  observe(_subject, topic, data) {
-     switch (topic) {
--      case "intl:app-locales-changed": {
-+      case "intl:app-locales-changed":
-         if (this.isOpen) {
-           // The <tree> component used in history and bookmarks, but it does not
-           // support live switching the app locale. Reload the entire sidebar to
-@@ -170,7 +222,58 @@ var SidebarUI = {
-           this._show(this.lastOpenedId);
-           break;
+@@ -168,8 +206,19 @@ var SidebarUI = {
+           // invalidate any old text.
+           this.hide();
+           this.showInitially(this.lastOpenedId);
+-          break;
          }
--      }
 +        break;
++      }
 +
-+      case "nsPref:changed":
++      case "nsPref:changed": {
 +        switch (data) {
 +          case this.SIDEBAR_TABS_PREF:
 +            this.setSidebarVisibility(
@@ -150,8 +119,87 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..a08db41af1a11c0c435a0b0ca1d3ecd0
 +            break;
 +        }
 +        break;
+       }
+     }
+   },
+@@ -521,6 +570,10 @@ var SidebarUI = {
+     return this._show(commandID).then(() => {
+       this._loadSidebarExtension(commandID);
+ 
++      // Pulse: Reset sidebar margin to zero to allow for correct animations to
++      // take place (adapted from dot browser, se below)
++      this._box.style.marginLeft = "0px";
++
+       if (triggerNode) {
+         updateToggleControlLabel(triggerNode);
+       }
+@@ -618,6 +671,26 @@ var SidebarUI = {
+ 
+     this.selectMenuItem("");
+ 
++    // The below code was, in part, based on Dot Browser's source code
++    // https://github.com/dothq/browser-desktop/blob/3c6b992af8946e1c30180cc824a78d4bb85ba868/patches/browser-base-content-browser-sidebar-js.patch#L183
++
++    // Pulse Browser: Helper stuff for sidebar animation. We can fake sliding in
++    // and out by changing the left margin to be a negative value. Then, inside
++    // of our css code, we can animate it to close.
++    this._box.style.marginLeft = `${-Math.abs(
++      this._box.getBoundingClientRect().width
++    )}px`;
++
++    // We want to fully set it to hidden to slightly improve browser performance
++    // when it is hidden. Note that this replaces some of Mozilla's code that
++    // would generally be down below
++    setTimeout(() => {
++      this._box.hidden = true;
++      this._splitter.hidden = true;
++
++      this._box.removeAttribute("checked");
++    }, 170);
++
+     // Replace the document currently displayed in the sidebar with about:blank
+     // so that we can free memory by unloading the page. We need to explicitly
+     // create a new content viewer because the old one doesn't get destroyed
+@@ -626,9 +699,6 @@ var SidebarUI = {
+     this.browser.setAttribute("src", "about:blank");
+     this.browser.docShell.createAboutBlankContentViewer(null, null);
+ 
+-    this._box.removeAttribute("checked");
+-    this._box.hidden = this._splitter.hidden = true;
+-
+     let selBrowser = gBrowser.selectedBrowser;
+     selBrowser.focus();
+     if (triggerNode) {
+@@ -641,10 +711,21 @@ var SidebarUI = {
+    * none if the argument is an empty string.
+    */
+   selectMenuItem(commandID) {
++    // Pulse modification: This needs to update both which sidebar item is
++    // checked and which dropdown item is checked. Hence, we are overriding this
++    // method.
++
+     for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
+       let menu = document.getElementById(menuId);
+-      let triggerbutton =
++      let dropdownTriggerButton =
+         triggerButtonId && document.getElementById(triggerButtonId);
++      const sidebarTriggerButton = document.getElementById(`sidebar-background-${id}`)
++
++      setCheckedFroItem(id, menu, dropdownTriggerButton);
++      setCheckedFroItem(id, menu, sidebarTriggerButton);
 +    }
-+  },
++
++    function setCheckedFroItem(id, menu, triggerbutton) {
+       if (id == commandID) {
+         menu.setAttribute("checked", "true");
+         if (triggerbutton) {
+@@ -660,6 +741,61 @@ var SidebarUI = {
+       }
+     }
+   },
++
++  // ===========================================================================
++  // Pulse browser changes
 +
 +  createSidebarItem(id, icon, config) {
 +    // if the sidebar item is already created, do nothing
@@ -186,83 +234,24 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..a08db41af1a11c0c435a0b0ca1d3ecd0
 +  deleteSidebarItem(id) {
 +    const background = document.getElementById(`sidebar-background-${id}`);
 +    const icon = document.getElementById(`sidebar-icon-${id}`);
-+    if (background) {
-+      background.remove();
++
++    if (background) background.remove();
++    if (icon) icon.remove();_loadSidebarExtension
++   },
++
++  /**
++   * Set the sidebar tabs to be visible or not visible
++   * @param {boolean} visible Sets the sidebar to be visible or not visible
++   */
++  setSidebarVisibility(visible) {
++    const sidebarContainer = document.getElementById("sidebar-container");
++
++    if (visible) {
++      sidebarContainer.style.display = "flex";
++    } else {
++      sidebarContainer.style.display = "none";
 +    }
-+    if (icon) {
-+      icon.remove();
-     }
-   },
++  },
+ };
  
-@@ -521,6 +624,10 @@ var SidebarUI = {
-     return this._show(commandID).then(() => {
-       this._loadSidebarExtension(commandID);
- 
-+      // Pulse: Reset sidebar margin to zero to allow for correct animations to
-+      // take place (adapted from dot browser, se below)
-+      this._box.style.marginLeft = "0px";
-+
-       if (triggerNode) {
-         updateToggleControlLabel(triggerNode);
-       }
-@@ -618,6 +725,26 @@ var SidebarUI = {
- 
-     this.selectMenuItem("");
- 
-+    // The below code was, in part, based on Dot Browser's source code
-+    // https://github.com/dothq/browser-desktop/blob/3c6b992af8946e1c30180cc824a78d4bb85ba868/patches/browser-base-content-browser-sidebar-js.patch#L183
-+
-+    // Pulse Browser: Helper stuff for sidebar animation. We can fake sliding in
-+    // and out by changing the left margin to be a negative value. Then, inside
-+    // of our css code, we can animate it to close.
-+    this._box.style.marginLeft = `${-Math.abs(
-+      this._box.getBoundingClientRect().width
-+    )}px`;
-+
-+    // We want to fully set it to hidden to slightly improve browser performance
-+    // when it is hidden. Note that this replaces some of Mozilla's code that
-+    // would generally be down below
-+    setTimeout(() => {
-+      this._box.hidden = true;
-+      this._splitter.hidden = true;
-+
-+      this._box.removeAttribute("checked");
-+    }, 170);
-+
-     // Replace the document currently displayed in the sidebar with about:blank
-     // so that we can free memory by unloading the page. We need to explicitly
-     // create a new content viewer because the old one doesn't get destroyed
-@@ -626,9 +753,6 @@ var SidebarUI = {
-     this.browser.setAttribute("src", "about:blank");
-     this.browser.docShell.createAboutBlankContentViewer(null, null);
- 
--    this._box.removeAttribute("checked");
--    this._box.hidden = this._splitter.hidden = true;
--
-     let selBrowser = gBrowser.selectedBrowser;
-     selBrowser.focus();
-     if (triggerNode) {
-@@ -641,10 +765,22 @@ var SidebarUI = {
-    * none if the argument is an empty string.
-    */
-   selectMenuItem(commandID) {
-+    // Pulse modification: This needs to update both which sidebar item is
-+    // checked and which dropdown item is checked. Hence, we are overriding this
-+    // method.
-     for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
-       let menu = document.getElementById(menuId);
--      let triggerbutton =
-+      let dropdownTriggerButton =
-         triggerButtonId && document.getElementById(triggerButtonId);
-+      let sidebarTriggerButton = document.getElementById(
-+        "sidebar-background-" + id
-+      );
-+
-+      setCheckedForItem(id, menu, dropdownTriggerButton);
-+      setCheckedForItem(id, menu, sidebarTriggerButton);
-+    }
-+
-+    function setCheckedForItem(id, menu, triggerbutton) {
-       if (id == commandID) {
-         menu.setAttribute("checked", "true");
-         if (triggerbutton) {
+ // Add getters related to the position here, since we will want them

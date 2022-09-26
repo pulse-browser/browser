@@ -1,12 +1,12 @@
 diff --git a/browser/base/content/browser-box.inc.xhtml b/browser/base/content/browser-box.inc.xhtml
-index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..7c75669384aab64bdd87d11300f96b86fab4af03 100644
+index ae5b1979921a9390ee899d72b04bc4ff293b39d8..53245028b775309d8c3bdb8bcef84d99d256a601 100644
 --- a/browser/base/content/browser-box.inc.xhtml
 +++ b/browser/base/content/browser-box.inc.xhtml
 @@ -3,6 +3,14 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  <hbox flex="1" id="browser">
-+  <div id="sidebar-container" class="sidebar-container"> 
++  <div id="sidebar-container" class="sidebar-container">
 +    <vbox id="sidebar-icons"></vbox>
 +    <vbox id="sidebar-icons-bottom">
 +      <div class="sidebar-item-background"><image id="sidebar-icon-paint" class="sidebar-icon-item" onclick="BrowserOpenAddonsMgr();" src="chrome://mozapps/skin/extensions/category-themes.svg" /></div>
@@ -16,4 +16,4 @@ index 2c8edad944b52e2c8752cbeb55b8a1c62f01a961..7c75669384aab64bdd87d11300f96b86
 +
    <vbox id="sidebar-box" hidden="true" class="chromeclass-extrachrome">
      <box id="sidebar-header" align="center">
-       <toolbarbutton id="sidebar-switcher-target" flex="1" class="tabbable">
+       <toolbarbutton id="sidebar-switcher-target" class="tabbable">
