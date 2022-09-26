@@ -5,27 +5,38 @@
   "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
-    "version": "102.0"
+    "version": "105.0.1"
   },
   "buildOptions": {
     "generateBranding": true
   },
   "addons": {
     "ublock": {
+      "platform": "github",
       "id": "uBlock0@raymondhill.net",
-      "url": "https://github.com/gorhill/uBlock/releases/download/1.43.0/uBlock0_1.43.0.firefox.signed.xpi"
+      "repo": "gorhill/uBlock",
+      "version": "1.44.4",
+      "fileGlob": "uBlock0_*.firefox.xpi"
     },
     "tabliss": {
+      "platform": "amo",
       "id": "extension@tabliss.io",
-      "url": "https://addons.mozilla.org/firefox/downloads/file/3940751/tabliss-2.6.0.xpi"
+      "amoId": "850407",
+      "version": "2.6.0"
     },
     "firepicker": {
       "id": "fire-picker@browser.fushra.com",
-      "url": "https://github.com/pulse-browser/fire-picker/releases/download/v1.1.0/release.zip"
+      "platform": "github",
+      "repo": "pulse-browser/fire-picker",
+      "version": "v1.1.2",
+      "fileGlob": "release.zip"
     },
     "sidebar-tabs": {
       "id": "sidebartabs@browser.fushra.com",
-      "url": "https://github.com/pulse-browser/sidebar-tabs/releases/download/v0.0.0/release.zip"
+      "platform": "github",
+      "repo": "pulse-browser/sidebar-tabs",
+      "version": "v0.0.0",
+      "fileGlob": "release.zip"
     } 
   },
   "brands": {
@@ -69,7 +80,7 @@
       "brandShortName": "Pulse Browser",
       "brandFullName": "Pulse Browser Alpha",
       "release": {
-        "displayVersion": "1.0.0-a.10",
+        "displayVersion": "1.0.0-a.22",
         "github": {
           "repo": "pulse-browser/browser"
         },
@@ -82,9 +93,7 @@
     }
   },
   "license": {
-    "ignoredFiles": [
-      ".*\\.json"
-    ],
+    "ignoredFiles": [".*\\.json"],
     "licenseType": "MPL-2.0"
   },
   "updateHostname": "updates.pulsebrowser.app"

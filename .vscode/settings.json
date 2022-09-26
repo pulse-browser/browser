@@ -19,5 +19,6 @@
   },
   "[html]": {
     "editor.formatOnSave": false
-  }
+  },
+  "github-actions.workflows.pinned.workflows": [".github/workflows/addons.yml"]
 }

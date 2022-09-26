@@ -1,30 +1,11 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 89651a029abc4f41205f099950a0a21eddb26cc1..9b793db6fc17848670cf18ca1d9552960a57f0ea 100644
+index 64ac529d54270758b6dfa7a0a04b604b89a92402..e4b7844fd1df5c3ff09432c6d1664f72dba02320 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
-@@ -4183,6 +4183,18 @@ BrowserGlue.prototype = {
-     SpecialMessageActions.handleAction(config, browser);
+@@ -4321,6 +4321,23 @@ BrowserGlue.prototype = {
    },
  
-+  /**
-+   * Displays the welcome dialog. Trigured `_maybeShowDefaultBrowserPrompt`.
-+   *
-+   * @todo Provide documentation for implementing custom popups
-+   * @patch FocusBrowser
-+   */
-+  _showWelcomeDialog() {
-+    BrowserWindowTracker.getTopWindow().gDialogBox.open(
-+      "chrome://browser/content/welcome/welcome.html"
-+    );
-+  },
-+
    async _maybeShowDefaultBrowserPrompt() {
-     // Highest priority is the upgrade dialog, which can include a "primary
-     // browser" request and is limited in various ways, e.g., major upgrades.
-@@ -4236,6 +4248,23 @@ BrowserGlue.prototype = {
-       return;
-     }
- 
 +    // =========================================================================
 +    // Pulse browser welcome
 +
@@ -42,6 +23,25 @@ index 89651a029abc4f41205f099950a0a21eddb26cc1..9b793db6fc17848670cf18ca1d955296
 +
 +    // =========================================================================
 +
-     const willPrompt = await DefaultBrowserCheck.willCheckDefaultBrowser(
-       /* isStartupCheck */ true
-     );
+     // Highest priority is the upgrade dialog, which can include a "primary
+     // browser" request and is limited in various ways, e.g., major upgrades.
+     const dialogVersion = 100;
+@@ -4780,6 +4797,18 @@ BrowserGlue.prototype = {
+     "nsIObserver",
+     "nsISupportsWeakReference",
+   ]),
++
++  /**
++   * Displays the welcome dialog. Trigured `_maybeShowDefaultBrowserPrompt`.
++   *
++   * @todo Add gluon docs for how to show custom popups on startup
++   * @patch Pulse Browser
++   */
++  _showWelcomeDialog() {
++    lazy.BrowserWindowTracker.getTopWindow().gDialogBox.open(
++      "chrome://browser/content/welcome/welcome.html"
++    );
++  },
+ };
+ 
+ var ContentBlockingCategoriesPrefs = {

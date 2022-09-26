@@ -129,7 +129,7 @@ jobs:
           yarn && yarn setupLink
 
       - name: Load gluon CI setup
-        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
+        run: yarn gluon ci --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependencies
         run: yarn download
@@ -196,6 +196,14 @@ jobs:
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.bash_profile
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
           source ~/.bash_profile
+      
+      # There are bugs in python 3.10 which prevent firefox from building correctly. This should
+      # fix it for the moment until mozilla or Python fix it
+      - name: Hotfix for bug 1766497 & 1786419
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' 
+
 
       - name: Save sccache
         uses: actions/cache@v2
@@ -216,30 +224,8 @@ jobs:
       - name: Import
         run: yarn imp
 
-      - name: Bootstrap
-        run: |
-          cd engine
-          ./mach --no-interactive bootstrap --application-choice browser
-          cd ..
-
-        # Note: We still need this to generate our .mozconfig
       - name: Gluon build
-        continue-on-error: true
         run: yarn build --verbose
-
-      - name: Log
-        continue-on-error: true
-        run: |
-          ls engine
-          cat engine/mozconfig
-          cat engine/.mozconfig
-
-      - name: Mach build
-        run: |
-          cd engine
-          export MACH_USE_SYSTEM_PYTHON=true
-          ./mach build
-          cd ..
 
       - name: Package
         run: gluon package
@@ -370,7 +356,7 @@ jobs:
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: 'alpha-${{ needs.build-data.outputs.build_date }}'
+          automatic_release_tag: ${{ needs.build-data.outputs.version }}
           prerelease: true
           title: 'Alpha build'
           files: |
@@ -384,25 +370,24 @@ jobs:
 
       - name: List
         run: find .
-      
+
       - name: Checkout tools repo
         uses: actions/checkout@v3
         with:
           repository: pulse-browser/updates
           path: updates
           token: ${{ secrets.ROBOT_TOKEN }}
-      
+
       - name: Copy update manifests
         run: |
           mkdir -p updates/browser
           cp -a macos_update_manifest/. updates/browser/
           cp -a linux_update_manifest/. updates/browser/
           cp -a windows_update_manifest/. updates/browser/
-      
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 🔖 Upload update manifests ${{ steps.data.outputs.version }}
+          commit_message: 🔖 Upload update manifests ${{ needs.build-data.outputs.version }}
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: ./updates
-          

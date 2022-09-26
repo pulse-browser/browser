@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..1c3bdcd454b1e4118d3a85bbb1926c619a5e9efd 100644
+index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..c958b4e40d47783ec5f8209f7a1f44726e34a1ae 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -201,7 +201,41 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..1c3bdcd454b1e4118d3a85bbb1926c61
    uninit() {
      // If this is the last browser window, persist various values that should be
      // remembered for after a restart / reopening a browser window.
-@@ -573,6 +710,10 @@ var SidebarUI = {
+@@ -158,18 +295,28 @@ var SidebarUI = {
+ 
+   /**
+    * The handler for Services.obs.addObserver.
+-   **/
+-  observe(_subject, topic, _data) {
++  **/
++  observe(_subject, topic, data) {
+     switch (topic) {
+       case "intl:app-locales-changed": {
+         if (this.isOpen) {
+-          // The <tree> component used in history and bookmarks, but it does not
+-          // support live switching the app locale. Reload the entire sidebar to
+           // invalidate any old text.
+           this.hide();
+-          this._show(this.lastOpenedId);
++          this.showInitially(this.lastOpenedId);
+           break;
+         }
++        break;
++      }
++
++      case "nsPref:changed": {
++        switch (data) {
++          case this.SIDEBAR_TABS_PREF:
++            this.setSidebarVisibility(
++              Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true)
++            );
++            break;
++        }
++        break;
+       }
+     }
+   },
+@@ -573,6 +720,10 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -212,7 +246,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..1c3bdcd454b1e4118d3a85bbb1926c61
        let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
        this.title = title;
        // Keep the title element in sync with any l10n changes.
-@@ -618,6 +759,24 @@ var SidebarUI = {
+@@ -618,6 +769,24 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -237,7 +271,7 @@ index 78afa499b4a93fc75e8706a9afb077e2b5ca7428..1c3bdcd454b1e4118d3a85bbb1926c61
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,21 +800,32 @@ var SidebarUI = {
+@@ -641,21 +810,32 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
