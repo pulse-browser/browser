@@ -1,8 +1,8 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index ba03cfb09c21654233a8da7c47a168b3a2613ffd..fed5d0bcb451a07ec2c42339c6f36f2f6b8e40ba 100644
+index 3d4035690d38f4d851cc86749ebeec7b7ca9aaf2..e9136a52427d7f3ada87803373f16c20a25b066a 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
-@@ -125,6 +125,19 @@
+@@ -125,6 +125,15 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  
@@ -13,10 +13,6 @@ index ba03cfb09c21654233a8da7c47a168b3a2613ffd..fed5d0bcb451a07ec2c42339c6f36f2f
 +  <checkbox id="sidebarVisible"
 +    preference="pulse.sidebar.enabled"
 +    data-l10n-id="preferences-sidebar-visible"/>
-+
-+    <checkbox id="sidebarExtensionsVisible"
-+    preference="pulse.sidebar.extensions.enabled"
-+    data-l10n-id="preferences-sidebar-extensions-visible"/>
 +</groupbox>
 +
  <!-- Website appearance -->
