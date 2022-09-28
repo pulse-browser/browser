@@ -124,7 +124,7 @@ class Sidebar {
     // Add sidebar information to SidebarUI
     SidebarUI.sidebars.set(this.keyId, {
       title: this.title,
-      url: sidebarURL,
+      url: sidebargetaroundUrl,
       menuId: this.menuId,
       buttonId: this.buttonId,
       // The following properties are specific to extensions
