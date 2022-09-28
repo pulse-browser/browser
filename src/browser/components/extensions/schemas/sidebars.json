@@ -1,0 +1,112 @@
+[
+  {
+    "namespace": "manifest",
+    "types": [
+      {
+        "$extend": "OptionalPermission",
+        "choices": [{
+          "type": "string",
+          "enum": [
+            "sidebars"
+          ]
+        }]
+      }
+    ]
+  },
+  {
+    "namespace": "sidebars",
+    "description": "Allows for extended sidebar intergration",
+    "permissions": ["sidebars"],
+    "functions": [
+      {
+        "name": "add",
+        "type": "function",
+        "description": "Register a sidebar",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The string the sidebar action should display when active",
+                "optional": false
+              },
+              "iconUrl": {
+                "type": "string",
+                "description": "The icon that will be used, Must be a web accessable resource",
+                "optional": false
+              },
+              "webviewUrl": {
+                "type": "string",
+                "descirption": "The webview that will be put in the frame, must also be a web accessable resource",
+                "optional": false
+              },
+              "isBottom": {
+                "type": "boolean",
+                "description": "If the icon is on the bottom of the sidebar",
+                "optional": true
+              },
+              "browserStyle": {
+                "type": "boolean",
+                "description": "If the browser's stylesheet should be injected into the sidebar",
+                "optional": true
+              }
+            },
+            "optional": false
+          }
+        ]
+      },
+      {
+        "name": "get",
+        "type": "function",
+        "description": "Returns the data stored for this sidebar",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id",
+            "type": "number",
+            "description": "Name of param to get",
+            "optional": false
+          }
+        ]
+      },
+      {
+        "name": "list",
+        "type": "function",
+        "description": "List the sidebars created by the extension",
+        "async": true,
+        "parameters": []
+      },
+      {
+        "name": "remove",
+        "type": "function",
+        "description": "Remove the sidebar with given id",
+        "async": true,
+        "parameters": [
+          {
+            "name": "id",
+            "type": "number",
+            "description": "Id of sidebar to remove",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "events": [
+      {
+        "name": "onRemove",
+        "type": "function",
+        "description": "Fired when the user removes an item from the sidebar",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "number",
+            "description": "Id of sidebar that was removed"
+          }
+        ]
+      }
+    ]
+  }
+]

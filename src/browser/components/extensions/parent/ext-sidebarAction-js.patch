@@ -1,5 +1,5 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 99aa63874bc6f1821baae6788fbba18f6861f9c6..b2261282bfe53ab4420352c29ec4a74e8c694395 100644
+index 99aa63874bc6f1821baae6788fbba18f6861f9c6..baa85eae1b458a3187838336eada4b4a32504cd5 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
 @@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
@@ -20,7 +20,7 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..b2261282bfe53ab4420352c29ec4a74e
      // Don't remove everything on app shutdown so session restore can handle
      // restoring open sidebars.
      if (isAppShutdown) {
-@@ -157,11 +161,16 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -157,21 +161,30 @@ this.sidebarAction = class extends ExtensionAPI {
      }
      let { document, SidebarUI } = window;
      let keyId = `ext-key-id-${this.id}`;
@@ -37,12 +37,12 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..b2261282bfe53ab4420352c29ec4a74e
        buttonId: this.buttonId,
        // The following properties are specific to extensions
        extensionId: this.extension.id,
-@@ -169,9 +178,13 @@ this.sidebarAction = class extends ExtensionAPI {
+       panel: details.panel,
        browserStyle: this.browserStyle,
      });
++    
++    SidebarUI.createSidebarItem(this.id, SidebarUI.sidebars.get(this.id));
  
-+    SidebarUI.createSidebarItem(this.id, getIcon(16), SidebarUI.sidebars.get(this.id));
-+
      let header = document.getElementById("sidebar-switcher-target");
      header.addEventListener("SidebarShown", this.updateHeader);
  

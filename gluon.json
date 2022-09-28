@@ -30,7 +30,14 @@
       "repo": "pulse-browser/fire-picker",
       "version": "v1.1.2",
       "fileGlob": "release.zip"
-    }
+    },
+    "sidebar-tabs": {
+      "id": "sidebartabs@browser.fushra.com",
+      "platform": "github",
+      "repo": "pulse-browser/sidebar-tabs",
+      "version": "v0.2.0",
+      "fileGlob": "release.zip"
+    } 
   },
   "brands": {
     "stable": {
