@@ -11,7 +11,9 @@ var { ExtensionParent } = ChromeUtils.import(
   "resource://gre/modules/ExtensionParent.jsm"
 );
 
-var { ContextMenu } = ChromeUtils.import("resource://gre/modules/ContextMenu.jsm")
+var { ContextMenu } = ChromeUtils.import(
+  "resource://gre/modules/ContextMenu.jsm"
+);
 
 var { IconDetails, StartupCache } = ExtensionParent;
 
@@ -27,7 +29,15 @@ class Sidebar {
    *
    * @todo Move this to the builder patern
    */
-  constructor(id, extention, name, webviewUrl, iconUrl, isBottom, browserStyle) {
+  constructor(
+    id,
+    extention,
+    name,
+    webviewUrl,
+    iconUrl,
+    isBottom,
+    browserStyle
+  ) {
     this.extentionIndex = id;
     this.extension = extention;
     this.extensionName = extention.name;
@@ -37,7 +47,9 @@ class Sidebar {
     this.isBottom = isBottom;
     this.browserStyle = browserStyle;
 
-    this.baseId = `${this.extensionName.replaceAll(' ', '-')}-index-${this.extentionIndex}`;
+    this.baseId = `${this.extensionName.replaceAll(" ", "-")}-index-${
+      this.extentionIndex
+    }`;
     this.keyId = `ext-key-id-${this.baseId}`;
     this.menuId = `ext-menu-id-${this.baseId}`;
     this.buttonId = `ext-button-id-${this.baseId}`;
@@ -66,29 +78,27 @@ class Sidebar {
      */
     this.contextMenu = new ContextMenu([
       {
-        l10nId: 'sidebar-context-delete',
-        callId: 'delete'
-      }
-    ])
-
-    
+        l10nId: "sidebar-context-delete",
+        callId: "delete",
+      },
+    ]);
 
     this.contextMenu.addEvent(callId => {
-      if (callId === 'delete') {
+      if (callId === "delete") {
         for (let window of windowTracker.browserWindows()) {
-          this.removeFromBrowserWindow(window)
+          this.removeFromBrowserWindow(window);
         }
       }
-      this.onRemoveEvents.filter(e => e).forEach(e => e(this.extentionIndex))
-    })
+      this.onRemoveEvents.filter(e => e).forEach(e => e(this.extentionIndex));
+    });
   }
 
   updateHeader(event) {
-    let window = event.target.ownerGlobal
-    let details = this.tabContext.get(window.gBrowser.selectedTab)
-    let header = window.document.getElementById('sidebar-switcher-target')
+    let window = event.target.ownerGlobal;
+    let details = this.tabContext.get(window.gBrowser.selectedTab);
+    let header = window.document.getElementById("sidebar-switcher-target");
     if (window.SidebarUI.currentID === this.keyId) {
-      this.setMenuIcon(header, details)
+      this.setMenuIcon(header, details);
     }
   }
 
@@ -97,7 +107,6 @@ class Sidebar {
       IconDetails.getPreferredIcon(this.iconUrl, this.extension, size).icon
     );
   }
-
 
   setMenuIcon(menuitem, icon) {
     menuitem.setAttribute(
@@ -111,10 +120,12 @@ class Sidebar {
 
   async removeFromBrowserWindow(window) {
     let { document, SidebarUI } = window;
-    SidebarUI.sidebars.delete(this.keyId)
-    document.getElementById("sidebar-background-" + this.keyId).remove()
-    document.getElementById('sidebar-switcher-target').removeEventListener('SidebarShown', this.updateHeader.bind(this))
-    SidebarUI.hide()
+    SidebarUI.sidebars.delete(this.keyId);
+    document.getElementById("sidebar-background-" + this.keyId).remove();
+    document
+      .getElementById("sidebar-switcher-target")
+      .removeEventListener("SidebarShown", this.updateHeader.bind(this));
+    SidebarUI.hide();
   }
 
   async addToBrowserWindow(window) {
@@ -132,12 +143,12 @@ class Sidebar {
       browserStyle: this.browserStyle,
       iconurl: this.getIcon(32),
       panel: this.webviewUrl,
-      isBottom: this.isBottom
+      isBottom: this.isBottom,
     });
 
     // Generate the header information
-    let header = document.getElementById('sidebar-switcher-target')
-    header.addEventListener('SidebarShown', this.updateHeader.bind(this))
+    let header = document.getElementById("sidebar-switcher-target");
+    header.addEventListener("SidebarShown", this.updateHeader.bind(this));
 
     // Insert a menuitem for View->Show Sidebars.
     let menuitem = document.createXULElement("menuitem");
@@ -151,20 +162,24 @@ class Sidebar {
     menuitem.setAttribute("class", "menuitem-iconic webextension-menuitem");
     menuitem.setAttribute("key", this.keyId);
     this.setMenuIcon(menuitem, this.iconUrl);
-    document.getElementById('viewSidebarMenu').appendChild(menuitem)
+    document.getElementById("viewSidebarMenu").appendChild(menuitem);
 
     // Add to the sidebar tabs on the side of the window
-    await SidebarUI.createSidebarItem(this.keyId, SidebarUI.sidebars.get(this.keyId));
+    await SidebarUI.createSidebarItem(
+      this.keyId,
+      SidebarUI.sidebars.get(this.keyId)
+    );
 
     // Get the element based on the id of `sidebar-background-${this.keyId}`
     // Set the attribute 'context' to 'hello'
-    this.contextMenu.addToBrowser(window)
-    let sidebar = window.document.getElementById(`sidebar-background-${this.keyId}`)
-    sidebar.setAttribute('context', this.contextMenu.contextMenuId)
+    this.contextMenu.addToBrowser(window);
+    let sidebar = window.document.getElementById(
+      `sidebar-background-${this.keyId}`
+    );
+    sidebar.setAttribute("context", this.contextMenu.contextMenuId);
 
     return menuitem;
   }
-  
 }
 
 class ConfigAPI extends ExtensionAPI {
@@ -185,26 +200,29 @@ class ConfigAPI extends ExtensionAPI {
    * @param {any} context
    */
   getAPI(context) {
-    let { extension } = context
+    let { extension } = context;
 
     return {
       sidebars: {
         /**
          * @param {{ title: string, iconUrl: string, webviewUrl: string, isBottom?: boolean, browserStyle?: boolean }} config The config provided by the programer
          */
-        add: async (config) => {
-          // Get a url that can be used by the browser for this specific panel 
+        add: async config => {
+          // Get a url that can be used by the browser for this specific panel
           // to work correctly
 
-          const url = context.uri.resolve(config.webviewUrl)
+          const url = context.uri.resolve(config.webviewUrl);
           if (!context.checkLoadURL(url)) {
             return Promise.reject({
-              message: `Access to the url ${url} (from ${config.webviewUrl}) was denied`
-            })
+              message: `Access to the url ${url} (from ${config.webviewUrl}) was denied`,
+            });
           }
-  
+
           // Get the icon url
-          const iconUrl = IconDetails.normalize({ path: config.iconUrl }, extension)
+          const iconUrl = IconDetails.normalize(
+            { path: config.iconUrl },
+            extension
+          );
 
           const id = ++this.currentIndex;
           const sidebar = new Sidebar(
@@ -217,7 +235,7 @@ class ConfigAPI extends ExtensionAPI {
             config.browserStyle || false
           );
           sidebar.onRemoveEvents = this.onRemoveEvents;
-            
+
           for (let window of windowTracker.browserWindows()) {
             sidebar.addToBrowserWindow(window);
           }
@@ -228,50 +246,45 @@ class ConfigAPI extends ExtensionAPI {
         },
 
         get: async (/** @type {any} */ id) => {
-
           return this.sidebars.get(id);
         },
 
         list: async () => {
-
           return [...this.sidebars.keys()];
         },
 
         remove: async (/** @type {any} */ id) => {
-          const sidebar = this.sidebars.get(id)
+          const sidebar = this.sidebars.get(id);
 
           for (let window of windowTracker.browserWindows()) {
-            sidebar.removeFromBrowserWindow(window)
+            sidebar.removeFromBrowserWindow(window);
           }
-          
+
           this.sidebars.delete(id);
-          
         },
-        
+
         onRemove: new EventManager({
           context,
           name: "sidebars.onRemove",
-          register: (fire) => {
+          register: fire => {
             const callback = value => {
               fire.async(value);
             };
             const eventId = this.onRemoveEvents.length;
             this.onRemoveEvents.push(callback);
 
-            for (const sidebar of this.sidebars.values()){
+            for (const sidebar of this.sidebars.values()) {
               sidebar.onRemoveEvents = this.onRemoveEvents;
             }
 
             return () => {
               this.onRemoveEvents[eventId] = null;
-              for (const sidebar of this.sidebars.values()){
+              for (const sidebar of this.sidebars.values()) {
                 sidebar.onRemoveEvents = this.onRemoveEvents;
               }
-            }
-          }
-
+            };
+          },
         }).api(),
-
       },
     };
   }
