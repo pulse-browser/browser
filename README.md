@@ -55,4 +55,4 @@ For bug reports, support, and just having a friendly chat with the team, feel fr
 - [uBlock](https://github.com/gorhill/uBlock) extension from GitHub for blocking ads. - [GNU General Public License v3.0](https://github.com/gorhill/uBlock/blob/master/LICENSE.txt)
 - [Fire-Picker](https://github.com/pulse-browser/fire-picker) extension from GitHub for light-weight emoji management. - [MPL-2.0 License](https://github.com/pulse-browser/fire-picker/blob/main/LICENSE)
 - [Tabliss](https://github.com/joelshepherd/tabliss) extension to provide a better new-tab experience. - [GNU General Public License v3.0](hhttps://github.com/joelshepherd/tabliss/blob/main/LICENSE.txt)
-- [Firefox](https://fireofox.com) and the rest of the mozilla team. - [MPL Version 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
+- [Firefox](https://firefox.com) and the rest of the mozilla team. - [MPL Version 2.0](https://www.mozilla.org/en-US/MPL/2.0/)
