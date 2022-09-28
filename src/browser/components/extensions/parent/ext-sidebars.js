@@ -6,9 +6,9 @@
 /// <reference types="./experiment.d.ts">
 
 "use strict";
-
-const sidebarURL = "chrome://browser/content/webext-panels.xhtml";
-
+console.log("ext-sidebars.js loaded");
+const sidebargetaroundUrl = "chrome://browser/content/webext-panels.xhtml";
+console.log("ext-sidebars.js loaded for good measure");
 var { ExtensionParent } = ChromeUtils.import(
   "resource://gre/modules/ExtensionParent.jsm"
 );
@@ -30,6 +30,7 @@ class Sidebar {
    * @todo Move this to the builder patern
    */
   constructor(id, extention, name, webviewUrl, iconUrl, isBottom, browserStyle) {
+    console.log("Creating sidebar")
     this.extentionIndex = id;
     this.extension = extention;
     this.extensionName = extention.name;
@@ -188,6 +189,7 @@ class ConfigAPI extends ExtensionAPI {
    * @param {any} context
    */
   getAPI(context) {
+    console.log("Getting API")
     let { extension } = context
 
     return {
@@ -203,31 +205,33 @@ class ConfigAPI extends ExtensionAPI {
          * @param {{ title: string, iconUrl: string, webviewUrl: string, isBottom?: boolean, browserStyle?: boolean }} config The config provided by the programer
          */
         add: async (config) => {
+          console.log("do you even work?")
           // Get a url that can be used by the browser for this specific panel 
           // to work correctly
+
           const url = context.uri.resolve(config.webviewUrl)
           if (!context.checkLoadURL(url)) {
             return Promise.reject({
               message: `Access to the url ${url} (from ${config.webviewUrl}) was denied`
             })
           }
-
+  
           // Get the icon url
           const iconUrl = IconDetails.normalize({ path: config.iconUrl }, extension)
           console.log(iconUrl)
 
           const id = ++this.currentIndex;
-
+          console.log("NOT FAILED YET")
           const sidebar = new Sidebar(
             id,
             extension,
             config.title,
             url,
             iconUrl,
-            config.isBottom,
+            config.isBottom || false,
             config.browserStyle || false
           );
-
+          console.log("NOT FAILED YET 2")
           sidebar.onRemoveEvents = this.onRemoveEvents;
             
           for (let window of windowTracker.browserWindows()) {
