@@ -6,9 +6,7 @@
 /// <reference types="./experiment.d.ts">
 
 "use strict";
-console.log("ext-sidebars.js loaded");
 const sidebargetaroundUrl = "chrome://browser/content/webext-panels.xhtml";
-console.log("ext-sidebars.js loaded for good measure");
 var { ExtensionParent } = ChromeUtils.import(
   "resource://gre/modules/ExtensionParent.jsm"
 );
@@ -30,7 +28,6 @@ class Sidebar {
    * @todo Move this to the builder patern
    */
   constructor(id, extention, name, webviewUrl, iconUrl, isBottom, browserStyle) {
-    console.log("Creating sidebar")
     this.extentionIndex = id;
     this.extension = extention;
     this.extensionName = extention.name;
@@ -162,7 +159,6 @@ class Sidebar {
     // Get the element based on the id of `sidebar-background-${this.keyId}`
     // Set the attribute 'context' to 'hello'
     this.contextMenu.addToBrowser(window)
-    console.log(`sidebar-background-${this.keyId}`)
     let sidebar = window.document.getElementById(`sidebar-background-${this.keyId}`)
     sidebar.setAttribute('context', this.contextMenu.contextMenuId)
 
@@ -189,7 +185,6 @@ class ConfigAPI extends ExtensionAPI {
    * @param {any} context
    */
   getAPI(context) {
-    console.log("Getting API")
     let { extension } = context
 
     return {
@@ -205,7 +200,6 @@ class ConfigAPI extends ExtensionAPI {
          * @param {{ title: string, iconUrl: string, webviewUrl: string, isBottom?: boolean, browserStyle?: boolean }} config The config provided by the programer
          */
         add: async (config) => {
-          console.log("do you even work?")
           // Get a url that can be used by the browser for this specific panel 
           // to work correctly
 
@@ -218,10 +212,8 @@ class ConfigAPI extends ExtensionAPI {
   
           // Get the icon url
           const iconUrl = IconDetails.normalize({ path: config.iconUrl }, extension)
-          console.log(iconUrl)
 
           const id = ++this.currentIndex;
-          console.log("NOT FAILED YET")
           const sidebar = new Sidebar(
             id,
             extension,
@@ -231,7 +223,6 @@ class ConfigAPI extends ExtensionAPI {
             config.isBottom || false,
             config.browserStyle || false
           );
-          console.log("NOT FAILED YET 2")
           sidebar.onRemoveEvents = this.onRemoveEvents;
             
           for (let window of windowTracker.browserWindows()) {
@@ -244,13 +235,11 @@ class ConfigAPI extends ExtensionAPI {
         },
 
         get: async (/** @type {any} */ id) => {
-          console.log(id);
 
           return this.sidebars.get(id);
         },
 
         list: async () => {
-          console.log(self.sidebars);
 
           return [...this.sidebars.keys()];
         },
