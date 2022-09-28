@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f44726e34a1ae 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafcf1d66f5a 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -7,18 +7,25 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
      }
  
 +    /**
-+    * @returns {Map<string, { title: string, url?: string, onclick?: string, menuId?: string, triggerButtonId?: string, iconurl: string, isBottom: boolean }>}
-+    */
++     * @returns {Map<string, { title: string, url?: string, onclick?: string, menuId?: string, triggerButtonId?: string, iconurl: string, isBottom: boolean }>}
++     */
 +
      function makeSidebar({ elementId, ...rest }) {
        return {
          get sourceL10nEl() {
-@@ -30,6 +34,8 @@ var SidebarUI = {
+@@ -19,6 +23,7 @@ var SidebarUI = {
+         get title() {
+           return document.getElementById(elementId).getAttribute("label");
+         },
++        isBottom: false,
+         ...rest,
+       };
+     }
+@@ -30,6 +35,7 @@ var SidebarUI = {
            elementId: "sidebar-switcher-bookmarks",
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
 +          iconurl: "chrome://global/skin/icons/bookmark-outline.svg",
-+          isBottom: false,
          }),
        ],
        [
@@ -26,16 +33,15 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
            url: "chrome://browser/content/places/historySidebar.xhtml",
            menuId: "menu_historySidebar",
            triggerButtonId: "appMenuViewHistorySidebar",
-+          iconurl: "chrome://browser/skin/history.svg"
++          iconurl: "chrome://browser/skin/history.svg",
          }),
        ],
        [
-@@ -47,8 +54,28 @@ var SidebarUI = {
+@@ -47,8 +54,27 @@ var SidebarUI = {
            elementId: "sidebar-switcher-tabs",
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
 +          iconurl: "chrome://browser/skin/tab.svg",
-+          isBottom: false,
          }),
        ],
 +      [
@@ -45,7 +51,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
 +          onclick: "BrowserOpenAddonsMgr();",
 +          iconurl: "chrome://mozapps/skin/extensions/category-themes.svg",
 +          isBottom: true,
-+        }
++        },
 +      ],
 +      [
 +        "sidebar-view-preferances",
@@ -54,12 +60,12 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
 +          onclick: "openPreferences();",
 +          iconurl: "chrome://global/skin/icons/settings.svg",
 +          isBottom: true,
-+        }
++        },
 +      ],
      ]));
    },
  
-@@ -61,6 +88,8 @@ var SidebarUI = {
+@@ -61,6 +87,8 @@ var SidebarUI = {
      return (this._browser = document.getElementById("sidebar"));
    },
    POSITION_START_PREF: "sidebar.position_start",
@@ -68,7 +74,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -78,6 +107,8 @@ var SidebarUI = {
+@@ -78,6 +106,8 @@ var SidebarUI = {
    },
    _splitter: null,
    _icon: null,
@@ -77,7 +83,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,10 +141,34 @@ var SidebarUI = {
+@@ -110,10 +140,40 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
@@ -89,22 +95,28 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
      });
  
 +    const sidebaritems = this.sidebars.keys();
-+    const sidebarExtensionVis = Services.prefs.getBoolPref(this.SIDEBAR_EXTENSIONS_PREF, false);
++    const sidebarExtensionVis = Services.prefs.getBoolPref(
++      this.SIDEBAR_EXTENSIONS_PREF,
++      false
++    );
 +
 +    for (const sidebaritem of sidebaritems) {
-+      if(this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
++      if (this.sidebars.get(sidebaritem).extensionId && !sidebarExtensionVis) {
 +        return;
 +      }
 +      this.createSidebarItem(sidebaritem, this.sidebars.get(sidebaritem), true);
 +    }
 +
 +    //Add divider
-+    const divider = document.createElement("hr")
++    const divider = document.createElement("hr");
 +    divider.classList.add("sidebar-divider");
 +    this._sidebarIcons.appendChild(divider);
 +
-+    const sidebarVisible = Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true)
-+    this.setSidebarVisibility(sidebarVisible)
++    const sidebarVisible = Services.prefs.getBoolPref(
++      this.SIDEBAR_TABS_PREF,
++      true
++    );
++    this.setSidebarVisibility(sidebarVisible);
 +
 +    // Keep track on the changes of the sidebar visibility
 +    Services.prefs.addObserver(this.SIDEBAR_TABS_PREF, this);
@@ -112,102 +124,11 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
      this._inited = true;
  
      Services.obs.addObserver(this, "intl:app-locales-changed");
-@@ -121,6 +176,88 @@ var SidebarUI = {
-     this._initDeferred.resolve();
-   },
- 
-+  /**
-+  * Set the sidebar tabs to be visible or not visible
-+  * @param {boolean} visible Sets the sidebar to be visible or not visible
-+  */
-+  setSidebarVisibility(visible) {
-+    const sidebarContainer = document.getElementById('sidebar-container')
-+
-+    if (visible) {
-+      sidebarContainer.style.display = 'flex'
-+    } else {
-+      sidebarContainer.style.display = 'none'
-+    }
-+  },
-+  
-+  // nsIObserver
-+
-+  observe(aSubject, aTopic, aData) {
-+    switch (aTopic) {
-+      case "nsPref:changed":
-+        switch (aData) {
-+          case this.SIDEBAR_TABS_PREF:
-+            this.setSidebarVisibility(Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true))
-+            break
-+        }
-+        break;
-+    }
-+  },
-+
-+  async createSidebarItem(id, config, isinit=false) {
-+    console.log("creating item")
-+    if(!isinit){
-+      await this.promiseDeferred;
-+    }
-+    // if the sidebar item is already created, do nothing
-+    if (document.getElementById(`sidebar-background-${id}`)) {
-+      document.getElementById(`sidebar-background-${id}`).remove();
-+    }
-+
-+    const background = document.createXULElement("vbox")
-+    background.classList.add("sidebar-item-background")
-+    background.setAttribute("id", `sidebar-background-${id}`);
-+
-+    if(config.url){
-+      background.onclick = () => {
-+        this.toggle(id)
-+      }
-+    }
-+    
-+    if(config.onclick){
-+      background.setAttribute("onclick", config.onclick);
-+    }
-+
-+    const iconEl = document.createElement("image");
-+    iconEl.setAttribute("id", `sidebar-icon-${id}`);
-+    iconEl.setAttribute("src", `${config.iconurl}`);
-+    iconEl.style.backgroundImage = `url(${config.iconurl})`;
-+    
-+    background.append(iconEl)
-+
-+    //If the item is meant to be on bottom, add it to the bottom
-+    if(config.isBottom){
-+      this._sidebarIconsBottom.appendChild(background);
-+    }else{
-+      this._sidebarIcons.appendChild(background);
-+    }
-+
-+    setTimeout(() => {
-+      iconEl.setAttribute("class", "sidebar-icon-item");
-+    }, 100);
-+  },
-+
-+  deleteSidebarItem(id) {
-+    const background = document.getElementById(`sidebar-background-${id}`)
-+    const icon = document.getElementById(`sidebar-icon-${id}`)
-+    if(background){
-+      background.remove()
-+    }
-+    if(icon){
-+      icon.remove()
-+    }
-+  },
-+
-   uninit() {
-     // If this is the last browser window, persist various values that should be
-     // remembered for after a restart / reopening a browser window.
-@@ -158,18 +295,28 @@ var SidebarUI = {
- 
+@@ -159,17 +219,26 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
--   **/
+    **/
 -  observe(_subject, topic, _data) {
-+  **/
 +  observe(_subject, topic, data) {
      switch (topic) {
        case "intl:app-locales-changed": {
@@ -217,7 +138,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
            // invalidate any old text.
            this.hide();
            this.showInitially(this.lastOpenedId);
-           break;
+-          break;
          }
 +        break;
 +      }
@@ -234,18 +155,18 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
        }
      }
    },
-@@ -573,6 +720,10 @@ var SidebarUI = {
+@@ -573,6 +642,10 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
-+      // Pulse: Reset sidebar margin to zero to allow for correct animations to 
++      // Pulse: Reset sidebar margin to zero to allow for correct animations to
 +      // take place (adapted from dot browser, se below)
-+      this._box.style.marginLeft = '0px'
++      this._box.style.marginLeft = "0px";
 +
        let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
        this.title = title;
        // Keep the title element in sync with any l10n changes.
-@@ -618,6 +769,24 @@ var SidebarUI = {
+@@ -618,6 +691,26 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -255,22 +176,24 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
 +    // Pulse Browser: Helper stuff for sidebar animation. We can fake sliding in
 +    // and out by changing the left margin to be a negative value. Then, inside
 +    // of our css code, we can animate it to close.
-+    this._box.style.marginLeft = `${-Math.abs(this._box.getBoundingClientRect().width)}px`
-+    
++    this._box.style.marginLeft = `${-Math.abs(
++      this._box.getBoundingClientRect().width
++    )}px`;
++
 +    // We want to fully set it to hidden to slightly improve browser performance
 +    // when it is hidden. Note that this replaces some of Mozilla's code that
 +    // would generally be down below
 +    setTimeout(() => {
-+      this._box.hidden = true
-+      this._splitter.hidden = true
++      this._box.hidden = true;
++      this._splitter.hidden = true;
 +
-+      this._box.removeAttribute("checked")
++      this._box.removeAttribute("checked");
 +    }, 170);
 +
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,21 +810,32 @@ var SidebarUI = {
+@@ -641,25 +734,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -278,18 +201,22 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
 +    // checked and which dropdown item is checked. Hence, we are overriding this
 +    // method.
      for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
-+      if (!menuId) continue;
++      if (!menuId) {
++        continue;
++      }
        let menu = document.getElementById(menuId);
 -      let triggerbutton =
--        triggerButtonId && document.getElementById(triggerButtonId);
-+      
-+      const dropdownTriggerButton = triggerButtonId && document.getElementById(triggerButtonId);
-+      let sidebarTriggerButton = document.getElementById("sidebar-background-" + id);
++
++      const dropdownTriggerButton =
+         triggerButtonId && document.getElementById(triggerButtonId);
++      let sidebarTriggerButton = document.getElementById(
++        "sidebar-background-" + id
++      );
 +
 +      setCheckedForItem(id, menu, sidebarTriggerButton);
 +      setCheckedForItem(id, menu, dropdownTriggerButton);
 +    }
-+      
++
 +    function setCheckedForItem(id, menu, sidebarTriggureButton) {
        if (id == commandID) {
          menu.setAttribute("checked", "true");
@@ -311,3 +238,78 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..c958b4e40d47783ec5f8209f7a1f4472
          }
        }
      }
+   },
++
++  // ===========================================================================
++  // Pulse sidebar
++
++  /**
++   * Set the sidebar tabs to be visible or not visible
++   * @param {boolean} visible Sets the sidebar to be visible or not visible
++   */
++  setSidebarVisibility(visible) {
++    const sidebarContainer = document.getElementById("sidebar-container");
++
++    if (visible) {
++      sidebarContainer.style.display = "flex";
++    } else {
++      sidebarContainer.style.display = "none";
++    }
++  },
++
++  async createSidebarItem(id, config, isinit = false) {
++    if (!isinit) {
++      await this.promiseDeferred;
++    }
++
++    // if the sidebar item is already created, do nothing
++    if (document.getElementById(`sidebar-background-${id}`)) {
++      document.getElementById(`sidebar-background-${id}`).remove();
++    }
++
++    const background = document.createXULElement("vbox");
++    background.classList.add("sidebar-item-background");
++    background.setAttribute("id", `sidebar-background-${id}`);
++
++    if (config.url) {
++      background.onclick = () => {
++        this.toggle(id);
++      };
++    }
++
++    if (config.onclick) {
++      background.setAttribute("onclick", config.onclick);
++    }
++
++    const iconEl = document.createElement("image");
++    iconEl.setAttribute("id", `sidebar-icon-${id}`);
++    iconEl.setAttribute("src", `${config.iconurl}`);
++    iconEl.style.backgroundImage = `url(${config.iconurl})`;
++
++    background.append(iconEl);
++
++    //If the item is meant to be on bottom, add it to the bottom
++    if (config.isBottom) {
++      this._sidebarIconsBottom.appendChild(background);
++    } else {
++      this._sidebarIcons.appendChild(background);
++    }
++
++    setTimeout(() => {
++      iconEl.setAttribute("class", "sidebar-icon-item");
++    }, 100);
++  },
++
++  deleteSidebarItem(id) {
++    const background = document.getElementById(`sidebar-background-${id}`);
++    const icon = document.getElementById(`sidebar-icon-${id}`);
++    if (background) {
++      background.remove();
++    }
++    if (icon) {
++      icon.remove();
++    }
++  },
+ };
+ 
+ // Add getters related to the position here, since we will want them
