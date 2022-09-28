@@ -37,7 +37,7 @@
       "repo": "pulse-browser/sidebar-tabs",
       "version": "v0.2.0",
       "fileGlob": "release.zip"
-    } 
+    }
   },
   "brands": {
     "stable": {
@@ -80,7 +80,7 @@
       "brandShortName": "Pulse Browser",
       "brandFullName": "Pulse Browser Alpha",
       "release": {
-        "displayVersion": "1.0.0-a.22",
+        "displayVersion": "1.0.0-a.23",
         "github": {
           "repo": "pulse-browser/browser"
         },
@@ -93,7 +93,9 @@
     }
   },
   "license": {
-    "ignoredFiles": [".*\\.json"],
+    "ignoredFiles": [
+      ".*\\.json"
+    ],
     "licenseType": "MPL-2.0"
   },
   "updateHostname": "updates.pulsebrowser.app"
