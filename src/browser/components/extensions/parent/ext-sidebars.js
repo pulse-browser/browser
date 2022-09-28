@@ -189,13 +189,6 @@ class ConfigAPI extends ExtensionAPI {
 
     return {
       sidebars: {
-        // What do we want?
-        // - [ ] Register sidebar - returns an ID
-        // - [ ] Get a sidebar using an ID
-        // - [ ] List the sidebars created by the extension
-        // - [ ] Modify sidebar with ID <- Split into seperate functions
-        // - [ ] Remove a sidebar
-
         /**
          * @param {{ title: string, iconUrl: string, webviewUrl: string, isBottom?: boolean, browserStyle?: boolean }} config The config provided by the programer
          */
@@ -284,5 +277,5 @@ class ConfigAPI extends ExtensionAPI {
   }
 }
 
-var sidebars; // identifier from the manifest (key in experiment_apis). __FORMERLY__ COULD BE ANY matching the key in experiment_apis within the manifest. NOW it MUST match API name !!!
-sidebars = ConfigAPI; //let, const, class, export or without var don't work.
+var sidebars;
+sidebars = ConfigAPI;
