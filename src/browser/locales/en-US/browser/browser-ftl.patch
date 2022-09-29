@@ -1,0 +1,11 @@
+diff --git a/browser/locales/en-US/browser/browser.ftl b/browser/locales/en-US/browser/browser.ftl
+index 9dde80d165f5815e557c5a050b6edd6568617b95..6778abd79a9c68ff8c457393df1e04c81c29d9b8 100644
+--- a/browser/locales/en-US/browser/browser.ftl
++++ b/browser/locales/en-US/browser/browser.ftl
+@@ -919,3 +919,6 @@ private-browsing-indicator-label = Private browsing
+ unified-extensions-button =
+     .label = Extensions
+     .tooltiptext = Extensions
++
++sidebar-context-delete = 
++    .label = Delete
