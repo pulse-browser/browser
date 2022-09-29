@@ -45,5 +45,10 @@ pref('dom.webmidi.enabled', true);
 pref("extensions.systemAddon.update.url", "https://updates.pulsebrowser.app/browser/addons/%CHANNEL%/update.xml");
 pref("extensions.systemAddon.update.enabled", true);
 
+//Update Routes (Download page for manual download and Temperoraliy Discord Invite Link for Release Notes)
+pref("app.update.url.manual", "https://pulsebrowser.app/download");
+pref("app.update.url.details", "hhttps://pulsebrowser.app/download");
+pref("app.releaseNotesURL", "https://discord.gg/Y3khyEtAgS");
+pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
 
 #include better-fox.js
