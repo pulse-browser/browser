@@ -1,0 +1,120 @@
+/* ========================================================================== */
+/* SIDE BAR STYLES */
+
+:root {
+  --sidebar-inside-padding: 8px; 
+  --sidebar-tab-hover-color: color-mix(in srgb, currentColor 11%, transparent);
+}
+
+.sidebar-container {
+  /* If you change display, change browser/base/content/browser-sidebar.js as well */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: -moz-Dialog;
+  overflow: hidden;
+
+  max-width: var(--tab-min-height);
+
+  /* Makes the sidebar slide out from below */
+  position: relative;
+}
+
+.sidebar-container:-moz-lwtheme {
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+.sidebar-icon-item {
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: block;
+  width: 16px;
+  height: 16px;
+  -moz-context-properties: fill;
+  fill: currentColor;
+  opacity: 0.8;
+  color: var(--toolbarbutton-icon-fill);
+
+  padding: var(--sidebar-inside-padding);
+}
+
+.sidebar-item-background {
+  border-radius: var(--tab-border-radius);
+  margin: var(--tab-block-margin);
+
+  width: var(--tab-min-height);
+  height: var(--tab-min-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.sidebar-item-background:hover {
+  background-color: var(--sidebar-tab-hover-color);
+}
+
+.sidebar-item-background[checked] {
+  background-attachment: scroll, scroll, fixed;
+  background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
+  background-position: 0 0, 0 0, right top;
+  background-repeat: repeat-x, repeat-x, no-repeat;
+  background-size: auto 100%, auto 100%, auto auto;
+
+  box-shadow: 0 0 4px rgba(0,0,0,.4);
+}
+
+#sidebar-icon-paint,
+#sidebar-icon-settings {
+  width: 32px;
+  height: 32px;
+}
+
+#sidebar-icon-paint {
+  background-image: url('chrome://mozapps/skin/extensions/category-themes.svg');
+}
+
+#sidebar-icon-settings {
+  background-image: url('chrome://global/skin/icons/settings.svg');
+}
+
+#sidebar-header {
+  border-bottom: none;
+}
+
+#sidebar-box,
+#sidebar-splitter {
+  background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
+  -moz-default-appearance: auto !important;
+  -moz-font-smoothing-background-color: auto !important;
+}
+
+/* Make it slide in smoothy rather than just appearing */
+#sidebar-box {
+  transition: margin-left 200ms ease-in-out;
+  max-width: none;
+}
+
+#sidebar-icons {
+  overflow: scroll;
+  max-height: 820px;
+}
+
+/* Make it feel native on macos */
+%ifdef XP_MACOSX
+#sidebar-container:not([lwt-sidebar]) {
+  appearance: auto;
+  -moz-default-appearance: -moz-mac-source-list;
+  -moz-font-smoothing-background-color: -moz-mac-source-list;
+}
+%endif
+
+.sidebar-divider{
+  margin: 6px;
+  /* border-top: 1px solid var(--toolbarbutton-icon-fill); */
+}

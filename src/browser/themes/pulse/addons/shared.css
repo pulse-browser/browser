@@ -1,0 +1,238 @@
+/*
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*/
+
+/* Pulse specific variables */
+:root {
+  --tab-rounding-size: 8px;
+  --tab-rounding-size-neg: -8px;
+
+  /* Colors */
+  --gradient-orientation: 90deg;
+  --gradient: linear-gradient(
+    var(--gradient-orientation),
+    hsla(212, 97%, 54%, 1) 0%,
+    hsla(295, 70%, 58%, 1) 100%
+  );
+
+  /* Tabs */
+  --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
+  --tab-border-radius: 0 !important; /* The border radius of the tab */
+  --tab-padding-inline: 0 !important; /* Padding to the left and right of the tab. **Focus Browser custom** */
+
+  --toolbarbutton-border-radius: 4px;
+
+  /* Toolbar area */
+  --toolbar-field-border-color: transparent !important; /* The border color of the search input */
+
+  /* App Menu styling */
+  --panel-separator-zap-gradient: var(
+    --gradient
+  ) !important; /* The gradient used for the app menu separator */
+
+  /* Panel variables */
+  --panel-footer-item-border-radius: 8px; /* The border radius of the panel footer items */
+
+  /* Bookmark panel */
+  --bookmark-panel-image-border-radius: 8px; /* The border radius of the bookmark panel image */
+  --bookmark-panel-favicon-border-radius: 8px; /* The border radius of the bookmark panel favicon */
+  --bookmark-panel-menulist-padding: 5px;
+  --bookmark-panel-input-border-radius: 0; /* The border radius of the bookmark panel input */
+  --bookmark-panel-border-radius: var(
+    --menulist-border-radius
+  ); /* The border radius of the bookmark panel */
+
+  /* Custom elements */
+
+  /* Menulist */
+  --menulist-border-radius: 8px; /* The border radius of the menulist */
+
+  /* Dialog variables */
+  --dialog-border-radius: 8px; /* The border radius of the dialog */
+
+  /* Make the tabs a touch wider */
+  --tab-min-height: 38px;
+}
+
+#tabs-newtab-button .toolbarbutton-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 4px !important;
+}
+
+.toolbarbutton-icon,
+.tab-close-button {
+  border-radius: 4px !important;
+}
+
+.container.infobar::before {
+  --gradient-orientation: 0;
+  background-image: var(--gradient) !important;
+}
+
+/* ========================================================================== */
+/* Tab style */
+
+/* This keeps the curve visible on the other sides of the tab */
+tab.tabbrowser-tab:nth-child(1) {
+  margin-left: 16px;
+}
+
+.tabbrowser-tab {
+  /* BUG GH#54: The container color does not show up in the pulse theme */
+  border-top: 2px solid var(--identity-tab-color);
+
+  /* Expand the overflow margin to contain the tab curves
+    https://searchfox.org/mozilla-central/diff/b269ed31009c9a01be532c9afc0a836e0ad86ed6/browser/themes/shared/tabs.css#103 */
+  overflow-clip-margin: 8px !important;
+}
+
+/* #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
+  -moz-context-properties: fill;
+  fill: var(--lwt-selected-tab-background-color);
+} */
+
+.tab-background[selected='true']::before,
+.tab-background[selected='true']::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+
+  -moz-context-properties: fill;
+  fill: var(--lwt-selected-tab-background-color);
+  background-size: cover;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+}
+
+.tab-background[selected='true']::before {
+  background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
+  left: var(--tab-rounding-size-neg);
+}
+
+.tab-background[selected='true']::after {
+  background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
+  right: var(--tab-rounding-size-neg);
+}
+
+#tabbrowser-arrowscrollbox .tabbrowser-tab {
+  /* Specifies the padding to the left and right of the tab */
+  padding-inline: var(--tab-padding-inline) !important;
+}
+
+/* Fixing toolbar buttons when the tab box is present */
+#TabsToolbar-customization-target toolbarbutton > .toolbarbutton-icon,
+#TabsToolbar-customization-target toolbarbutton > .toolbarbutton-badge-stack {
+  margin-left: 8px;
+  padding: 4px !important;
+  margin-inline-end: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+/* ========================================================================== */
+/* Sidebar tabs */
+.sidebar-item-background[checked='true']::before,
+.sidebar-item-background[checked='true']::after {
+  content: '';
+  position: absolute;
+  right: 0;
+
+  background-size: cover;
+  color: var(--lwt-selected-tab-background-color);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+
+  /* HACK: Stops the hoverstate from the next tab over from intersecting with the current tab */
+  z-index: 10;
+}
+
+.sidebar-item-background[checked='true']::before {
+  background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
+  top: var(--tab-rounding-size-neg);
+}
+
+.sidebar-item-background[checked='true']::after {
+  background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
+  bottom: var(--tab-rounding-size-neg);
+  transform: rotate(180deg);
+}
+
+/* =========================================================================- */
+/* General sidebar stuff */
+.sidebar-splitter {
+  border-style: none;
+}
+
+/* Panel footer styles */
+.panel-footer > button {
+  /* The border radius of the panel footer items */
+  border-radius: var(--panel-footer-item-border-radius);
+}
+
+/* ========================================================================== */
+/* Bookmark styles */
+
+/* Remove messy seperators */
+#editBookmarkHeaderSeparator,
+#editBookmarkSeparator {
+  display: none;
+}
+
+#editBookmarkPanelImage {
+  /* The border radius of the bookmark panel image */
+  border-radius: var(--bookmark-panel-image-border-radius) !important;
+}
+
+html|img#editBookmarkPanelFavicon[src] {
+  /* The border radius of the bookmark panel favicon */
+  border-radius: var(--bookmark-panel-favicon-border-radius) !important;
+}
+
+#editBookmarkPanel menulist {
+  /* Block padding */
+  padding-block: var(--bookmark-panel-menulist-padding);
+  border-radius: var(--bookmark-panel-menulist-padding);
+}
+
+#editBookmarkPanelRows > vbox > html|input,
+#editBookmarkPanelRows > vbox > hbox > html|input {
+  /* The border radius of the bookmark panel input */
+  border-radius: var(--bookmark-panel-input-border-radius);
+}
+
+/* Custom elements */
+menulist:host(:not([native])) {
+  /* The border radius of the menulist */
+  border-radius: var(--menulist-border-radius);
+}
+
+.dialogBox {
+  border-radius: var(--dialog-border-radius);
+}
+
+/**
+ * @name Dim Unloaded Tabs
+ * @author Niklas Gollenstede
+ * @licence CC-BY-SA-4.0 or MIT or MPL 2.0
+ * @description
+ *     This style dims not loaded tabs in Firefox.
+ *     It is complementary to the UnloadTabs WebExtension and can either:
+ *     * be manually added to the `chrome/user.chrome.css` file in Firefox's profile directory
+ *     * or installed with the reStyle Firefox extension (and NativeExt).
+ *
+ *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/unload-tabs
+ */
+
+tab[pending],
+#alltabs-popup menuitem[pending] {
+  opacity: 0.6 !important;
+}

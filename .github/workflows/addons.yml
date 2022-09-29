@@ -1,0 +1,44 @@
+name: Addon updates
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [alpha, beta, stable]
+
+jobs:
+  generate:
+    name: Generate Addon Update Manifests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Setup Gluon
+        run: yarn && yarn setupLink
+
+      - name: Load config
+        run: yarn gluon ci --brand ${GITHUB_REF##*/}
+
+      - name: Generate update manifest
+        run: yarn gluon updates-addons
+
+      - name: Checkout tools repo
+        uses: actions/checkout@v3
+        with:
+          repository: pulse-browser/updates
+          path: updates
+          token: ${{ secrets.ROBOT_TOKEN }}
+
+      - name: Copy update manifests
+        run: |
+          mkdir -p updates/browser
+          cp -a dist/update/. updates/
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🔖 Upload update addon manifests
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+          repository: ./updates

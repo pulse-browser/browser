@@ -1,8 +1,8 @@
 diff --git a/toolkit/mozapps/extensions/internal/XPIDatabase.jsm b/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
-index a2a86fc2b06166269d5af250999d3c9cdaec2696..4a8677c6625268c69a9e52003fb5c97a27337b99 100644
+index ae514dfea6ba51e1409b1b08983628df54079643..841f601e85d46672deaf0e38362a05fda05068c2 100644
 --- a/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
 +++ b/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
-@@ -1492,7 +1492,7 @@ const updatedAddonFluentIds = new Map([
+@@ -1542,7 +1542,7 @@ const updatedAddonFluentIds = new Map([
        addon.type === "theme"
      ) {
        // Built-in themes are localized with Fluent instead of the WebExtension API.
@@ -10,4 +10,4 @@ index a2a86fc2b06166269d5af250999d3c9cdaec2696..4a8677c6625268c69a9e52003fb5c97a
 +      let addonIdPrefix = addon.id.replace("@mozilla.org", "").replace('@browser.fushra.com', '');
        const colorwaySuffix = "colorway";
        if (addonIdPrefix.endsWith(colorwaySuffix)) {
-         if (aProp == "description") {
+         // FIXME: Depending on BuiltInThemes here is sort of a hack. Bug 1733466

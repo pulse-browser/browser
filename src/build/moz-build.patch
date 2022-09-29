@@ -1,0 +1,13 @@
+diff --git a/build/moz.build b/build/moz.build
+index 671e77e97b351148a871022769e41798db3781eb..284d3bcdec8a139f9881a4df24cbae846e2f44f3 100644
+--- a/build/moz.build
++++ b/build/moz.build
+@@ -91,7 +91,7 @@ if CONFIG["MOZ_APP_BASENAME"]:
+         if CONFIG[var]:
+             appini_defines[var] = True
+ 
+-    appini_defines["MOZ_APPUPDATE_HOST"] = "aus5.mozilla.org"
++    appini_defines["MOZ_APPUPDATE_HOST"] = "updates.pulsebrowser.app"
+     if CONFIG["MOZ_APPUPDATE_HOST"]:
+         appini_defines["MOZ_APPUPDATE_HOST"] = CONFIG["MOZ_APPUPDATE_HOST"]
+ 

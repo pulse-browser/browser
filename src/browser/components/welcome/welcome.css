@@ -67,3 +67,20 @@ p {
   height: 82px;
   width: 82px;
 }
+
+.asset {
+  width: 500px;
+  padding-bottom: 32px;
+}
+
+@media (prefers-color-scheme: light) {
+  .dark-only {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .light-only {
+    display: none;
+  }
+}

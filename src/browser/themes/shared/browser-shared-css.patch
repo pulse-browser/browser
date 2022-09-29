@@ -1,0 +1,13 @@
+diff --git a/browser/themes/shared/browser-shared.css b/browser/themes/shared/browser-shared.css
+index ea4e59523027b51ecea12a45dc3844f17136c918..b542ece71a64cfe8747f494e67362f188b618321 100644
+--- a/browser/themes/shared/browser-shared.css
++++ b/browser/themes/shared/browser-shared.css
+@@ -23,6 +23,8 @@
+ @import url("chrome://browser/skin/customizableui/customizeMode.css");
+ @import url("chrome://browser/skin/UITour.css");
+ 
++@import url("chrome://browser/skin/sidebar_tabs.css");
++
+ @namespace html url("http://www.w3.org/1999/xhtml");
+ 
+ :root {

@@ -12,6 +12,7 @@ on:
 jobs:
   stable:
     runs-on: ubuntu-latest
+    if: always()
     
     env:
       # replace "github_username" with your GitHub username
@@ -43,6 +44,7 @@ jobs:
   beta:
     runs-on: ubuntu-latest
     needs: [stable]
+    if: always()
     
     env:
       # replace "github_username" with your GitHub username

@@ -1,5 +1,5 @@
 diff --git a/browser/themes/addons/jar.mn b/browser/themes/addons/jar.mn
-index 824c3289b83a1c880d55fb99b7be5c941e8981a9..ab7cf11c6ced9ca8dad15587f8439544a56efb09 100644
+index 69bb3000d6d2d249d1d77262dc2a0057d0318308..68fc1df73672c271990b6d2eca489093569ec0fb 100644
 --- a/browser/themes/addons/jar.mn
 +++ b/browser/themes/addons/jar.mn
 @@ -16,6 +16,14 @@ browser.jar:
@@ -7,13 +7,13 @@ index 824c3289b83a1c880d55fb99b7be5c941e8981a9..ab7cf11c6ced9ca8dad15587f8439544
    content/builtin-themes/light/manifest.json       (light/manifest.json)
  
 +  content/builtin-themes/pulse/dark                      (pulse/dark/*.svg)
-+* content/builtin-themes/pulse/dark/experiment.css       (pulse/dark/experiment.css)
++  content/builtin-themes/pulse/dark/experiment.css       (pulse/dark/experiment.css)
 +  content/builtin-themes/pulse/dark/manifest.json        (pulse/dark/manifest.json)
 +
 +  content/builtin-themes/pulse/light                     (pulse/light/*.svg)
-+* content/builtin-themes/pulse/light/experiment.css      (pulse/light/experiment.css)
++  content/builtin-themes/pulse/light/experiment.css      (pulse/light/experiment.css)
 +  content/builtin-themes/pulse/light/manifest.json       (pulse/light/manifest.json)
 +
-   content/builtin-themes/monochromatic/lush/soft                          (monochromatic/lush/soft/*.svg)
-   content/builtin-themes/monochromatic/lush/soft/manifest.json            (monochromatic/lush/soft/manifest.json)
-   content/builtin-themes/monochromatic/lush/balanced                      (monochromatic/lush/balanced/*.svg)
+   content/builtin-themes/colorways/2021lush/soft                          (colorways/2021-life-in-color/lush/soft/*.svg)
+   content/builtin-themes/colorways/2021lush/soft/manifest.json            (colorways/2021-life-in-color/lush/soft/manifest.json)
+   content/builtin-themes/colorways/2021lush/balanced                      (colorways/2021-life-in-color/lush/balanced/*.svg)

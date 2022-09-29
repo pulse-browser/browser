@@ -1,0 +1,15 @@
+diff --git a/browser/themes/osx/browser.css b/browser/themes/osx/browser.css
+index e39e14ca04edb171c1da6b7545c51accbd53535c..68d8e2ea0ae440eb1c00c6a0a1894450085ecc8a 100644
+--- a/browser/themes/osx/browser.css
++++ b/browser/themes/osx/browser.css
+@@ -2,6 +2,10 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
++
++/* Pulse vibrancy themes */
++@import url("chrome://browser/skin/vibrancy.css");
++
+ @import url("chrome://browser/skin/browser-shared.css");
+ @import url("chrome://browser/skin/browser-custom-colors.css");
+ 

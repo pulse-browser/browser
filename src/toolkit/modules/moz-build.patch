@@ -1,0 +1,12 @@
+diff --git a/toolkit/modules/moz.build b/toolkit/modules/moz.build
+index 26acb92b37b7c0989a117a082de1861710ca65d7..ff7101147f0e14ec32ec2bd0d4afff535cd14a9a 100644
+--- a/toolkit/modules/moz.build
++++ b/toolkit/modules/moz.build
+@@ -163,6 +163,7 @@ EXTRA_JS_MODULES += [
+     "Color.jsm",
+     "Console.jsm",
+     "ContentDOMReference.jsm",
++    "ContextMenu.jsm",
+     "CreditCard.jsm",
+     "DateTimePickerPanel.jsm",
+     "DeferredTask.jsm",

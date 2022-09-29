@@ -104,6 +104,7 @@ dist
 .tern-port
 
 .dotbuild/
+.gluon/
 engine/
 firefox-*/
 node_modules/

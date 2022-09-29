@@ -1,5 +1,5 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 99aa63874bc6f1821baae6788fbba18f6861f9c6..a315d56e988f7143f0fc3be5f93c86effd876be9 100644
+index 99aa63874bc6f1821baae6788fbba18f6861f9c6..baa85eae1b458a3187838336eada4b4a32504cd5 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
 @@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
@@ -10,16 +10,25 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..a315d56e988f7143f0fc3be5f93c86ef
  // WeakMap[Extension -> SidebarAction]
  let sidebarActionMap = new WeakMap();
  
-@@ -158,10 +159,17 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -95,6 +96,9 @@ this.sidebarAction = class extends ExtensionAPI {
+ 
+     this.tabContext.shutdown();
+ 
++    // Delete sidebar item
++    SidebarUI.deleteSidebarItem(this.id);
++
+     // Don't remove everything on app shutdown so session restore can handle
+     // restoring open sidebars.
+     if (isAppShutdown) {
+@@ -157,21 +161,30 @@ this.sidebarAction = class extends ExtensionAPI {
+     }
      let { document, SidebarUI } = window;
      let keyId = `ext-key-id-${this.id}`;
- 
 +    let getIcon = size =>
 +      IconDetails.escapeUrl(
 +        IconDetails.getPreferredIcon(details.icon, this.extension, size).icon
 +      );
-+
-+
+ 
      SidebarUI.sidebars.set(this.id, {
        title: details.title,
        url: sidebarURL,
@@ -28,3 +37,17 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..a315d56e988f7143f0fc3be5f93c86ef
        buttonId: this.buttonId,
        // The following properties are specific to extensions
        extensionId: this.extension.id,
+       panel: details.panel,
+       browserStyle: this.browserStyle,
+     });
++    
++    SidebarUI.createSidebarItem(this.id, SidebarUI.sidebars.get(this.id));
+ 
+     let header = document.getElementById("sidebar-switcher-target");
+     header.addEventListener("SidebarShown", this.updateHeader);
+ 
++
++
+     // Insert a menuitem for View->Show Sidebars.
+     let menuitem = document.createXULElement("menuitem");
+     menuitem.setAttribute("id", this.menuId);

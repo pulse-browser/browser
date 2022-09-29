@@ -1,0 +1,102 @@
+{
+  "name": "Pulse",
+  "vendor": "Fushra",
+  "appId": "com.fushra.browser.desktop",
+  "binaryName": "pulse-browser",
+  "version": {
+    "product": "firefox",
+    "version": "105.0.1"
+  },
+  "buildOptions": {
+    "generateBranding": true
+  },
+  "addons": {
+    "ublock": {
+      "platform": "github",
+      "id": "uBlock0@raymondhill.net",
+      "repo": "gorhill/uBlock",
+      "version": "1.44.4",
+      "fileGlob": "uBlock0_*.firefox.xpi"
+    },
+    "tabliss": {
+      "platform": "amo",
+      "id": "extension@tabliss.io",
+      "amoId": "850407",
+      "version": "2.6.0"
+    },
+    "firepicker": {
+      "id": "fire-picker@browser.fushra.com",
+      "platform": "github",
+      "repo": "pulse-browser/fire-picker",
+      "version": "v1.1.2",
+      "fileGlob": "release.zip"
+    },
+    "sidebar-tabs": {
+      "id": "sidebartabs@browser.fushra.com",
+      "platform": "github",
+      "repo": "pulse-browser/sidebar-tabs",
+      "version": "v0.3.1",
+      "fileGlob": "release.zip"
+    }
+  },
+  "brands": {
+    "stable": {
+      "backgroundColor": "#2B2A33",
+      "brandShorterName": "Pulse",
+      "brandShortName": "Pulse Browser",
+      "brandFullName": "Pulse Browser",
+      "release": {
+        "displayVersion": "1.0.0",
+        "github": {
+          "repo": "pulse-browser/browser"
+        },
+        "x86": {
+          "windowsMar": "windows.mar",
+          "macosMar": "macosIntel.mar",
+          "linuxMar": "linux.mar"
+        }
+      }
+    },
+    "beta": {
+      "backgroundColor": "#2B2A33",
+      "brandShorterName": "Pulse",
+      "brandShortName": "Pulse Browser",
+      "brandFullName": "Pulse Browser Beta",
+      "release": {
+        "displayVersion": "1.0.0-b.0",
+        "github": {
+          "repo": "pulse-browser/browser"
+        },
+        "x86": {
+          "windowsMar": "windows.mar",
+          "macosMar": "macosIntel.mar",
+          "linuxMar": "linux.mar"
+        }
+      }
+    },
+    "alpha": {
+      "backgroundColor": "#2B2A33",
+      "brandShorterName": "Pulse",
+      "brandShortName": "Pulse Browser",
+      "brandFullName": "Pulse Browser Alpha",
+      "release": {
+        "displayVersion": "1.0.0-a.25",
+        "github": {
+          "repo": "pulse-browser/browser"
+        },
+        "x86": {
+          "windowsMar": "windows.mar",
+          "macosMar": "macosIntel.mar",
+          "linuxMar": "linux.mar"
+        }
+      }
+    }
+  },
+  "license": {
+    "ignoredFiles": [
+      ".*\\.json"
+    ],
+    "licenseType": "MPL-2.0"
+  },
+  "updateHostname": "updates.pulsebrowser.app"
+}

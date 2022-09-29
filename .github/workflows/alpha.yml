@@ -8,24 +8,45 @@ jobs:
     name: Generate build data
     runs-on: ubuntu-latest
     outputs:
-      sha: ${{ steps.data.outputs.shortsha }}
       build_date: ${{ steps.data.outputs.builddate }}
-      upstream: ${{ steps.data.outputs.upstream }}
+      version: ${{ steps.data.outputs.version }}
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+          token: ${{ secrets.ROBOT_TOKEN }}
 
-      - name: Setup melon
-        run: yarn && yarn setupLink
+      - name: Setup gluon
+        run: |
+          yarn
+          yarn setupLink
 
-      - name: Export release data
+          cd gluon 
+          npm i -g . --force
+          cd ..
+
+      - name: Bump version
+        run: |
+          gluon ci --brand alpha --bump prerelease
+
+      - name: Debug
+        run: |
+          gluon get version
+          gluon get version | xargs
+          echo "$(gluon get version | xargs)"
+
+      - name: Export release date
         id: data
         shell: bash
         run: |
-          echo "::set-output name=shortsha::$(git rev-parse --short HEAD)"
           echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
-          echo "::set-output name=upstream::$(yarn melon ff-version)"
+          echo "::set-output name=version::$(gluon get version | xargs)"
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🔖 Update version to ${{ steps.data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
 
   linux:
     runs-on: ubuntu-latest
@@ -35,6 +56,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+
+        # Give the runner some swap space in an attempt to stop gkrust from crashing the build
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@v1.0
+        with:
+          swap-size-gb: 6
 
       - name: Setup git
         run: |
@@ -64,14 +91,6 @@ jobs:
         run: |
           echo "ac_add_options --without-wasm-sandboxed-libraries" >> mozconfig
 
-      - name: Use 2 threads to reduce memory usage
-        run: |
-          echo "mk_add_options MOZ_MAKE_FLAGS=\"-j2\"" >> mozconfig
-
-      - name: Use alpha branding
-        run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
-
       - name: Free up space
         run: |
           sudo rm -rf /usr/share/dotnet
@@ -95,7 +114,7 @@ jobs:
         continue-on-error: false
         with:
           path: /home/runner/.cache/sccache
-          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+          key: ${{ runner.os }}-sccache
 
       - name: Get System Info
         run: |
@@ -105,10 +124,14 @@ jobs:
           cargo --version
           ls /opt/wasi-sdk/share/wasi-sysroot
 
-      - name: Setup melon
-        run: yarn && yarn setupLink
+      - name: Setup gluon
+        run: |
+          yarn && yarn setupLink
 
-      - name: Download firefox source and dependancies
+      - name: Load gluon CI setup
+        run: yarn gluon ci --brand alpha --display-version ${{ needs.build-data.outputs.version }}
+
+      - name: Download firefox source and dependencies
         run: yarn download
 
       - name: Import
@@ -124,91 +147,30 @@ jobs:
         run: yarn build
 
       - name: Package
-        run: yarn melon package
+        run: yarn package
 
       - name: Rename artifacts
         run: |
-          cp ./engine/obj-*/dist/pulse-browser-*.tar.bz2 .
-          mv pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
+          mv dist/pulse-browser-*.tar.bz2 "pulse-browser.linux.tar.bz2"
+          mv dist/output.mar linux.mar
 
-      - name: Upload artifact
+      - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
           name: pulse-browser.linux.tar.bz2
           path: ./pulse-browser.linux.tar.bz2
 
-  flatpak:
-    name: 📦 Flatpak
-    needs: [build-data, linux]
-    runs-on: ubuntu-latest
-    container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-3.38
-      options: --privileged
-
-    steps:
-      - name: Clone packaging scripts
-        run: git clone --recurse-submodules https://github.com/pulse-browser/packages.git
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - uses: actions/download-artifact@v2
-        with:
-          name: pulse-browser.linux.tar.bz2
-
-      - name: Setup git
-        run: |
-          git config --global user.email "trickypr@users.noreply.github.com"
-          git config --global user.name "TrickyPR"
-
-      - name: Display structure of downloaded files
-        run: ls -R
-
-      - name: Save flatpak cache
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: ./packages/flatpak/.flatpak-builder/cache
-          key: ${{ runner.os }}-flatpak-${{ needs.build-data.outputs.shortsha }}
-          restore-keys: |
-            ${{ runner.os }}-flatpak-
-
-      - name: Download binaries
-        run: |
-          cd packages/flatpak
-          cp ../../pulse-browser.linux.tar.bz2 ./pulse-browser.tar.bz2
-          tar -xvf pulse-browser.tar.bz2
-      - uses: bilelmoussaoui/flatpak-github-actions@v2
-        with:
-          bundle: pulse-browser.linux.flatpak
-          manifest-path: './packages/flatpak/com.fushra.browser.desktop.yml'
-
-      - name: Upload artifact
+      - name: Upload mar
         uses: actions/upload-artifact@v2
         with:
-          name: pulse-browser.linux.flatpak
-          path: ./pulse-browser.linux.flatpak
+          name: linux.mar
+          path: ./linux.mar
 
-      - name: Import GPG key
-        run: |
-          echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import
-        env:
-          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
-
-      - name: Build for Alpha repo
-        run: |
-          export deploy_acc_key=$TRICKYPR_TOKEN
-          cd packages/flatpak
-          chmod +x ./build.sh
-          ./build.sh
-
-      - name: Push to flatpak repo
-        uses: ad-m/github-push-action@master
+      - name: Upload update manifests
+        uses: actions/upload-artifact@v2
         with:
-          github_token: ${{ secrets.TRICKYPR_TOKEN }}
-          directory: './packages/flatpak/repo/'
-          repository: 'pulse-browser/repo'
+          name: linux_update_manifest
+          path: ./dist/update
 
   mac:
     runs-on: macos-latest
@@ -234,24 +196,27 @@ jobs:
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.bash_profile
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
           source ~/.bash_profile
+      
+      # There are bugs in python 3.10 which prevent firefox from building correctly. This should
+      # fix it for the moment until mozilla or Python fix it
+      - name: Hotfix for bug 1766497 & 1786419
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' 
+
 
       - name: Save sccache
         uses: actions/cache@v2
         continue-on-error: false
         with:
           path: ~/Library/Caches/Mozilla.sccache
-          key: ${{ runner.os }}-sccache-${{ needs.build-data.outputs.upstream }}
+          key: ${{ runner.os }}-sccache
 
-      - name: Use alpha branding
-        run: |
-          echo "ac_add_options --with-branding=browser/branding/alpha" >> mozconfig
-
-      - name: Get System Info
-        run: |
-          cargo --version
-
-      - name: Setup melon
+      - name: Setup gluon
         run: yarn && yarn setupLink
+
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
 
       - name: Download firefox source and dependancies
         run: yarn download
@@ -259,29 +224,34 @@ jobs:
       - name: Import
         run: yarn imp
 
-      - name: Bootstrap
-        run: |
-          cd engine
-          ./mach --no-interactive bootstrap --application-choice browser
-          cd ..
-
-      - name: Build
-        run: yarn build
+      - name: Gluon build
+        run: yarn build --verbose
 
       - name: Package
-        run: yarn melon package
+        run: gluon package
 
       - name: Rename artifacts
         run: |
-          find ./engine/obj-*/dist/
-          cp ./engine/obj-*/dist/*.dmg .
-          mv *.dmg "pulse-browser.macos.dmg"
+          mv ./dist/*.dmg "pulse-browser.macos.dmg"
+          mv ./dist/output.mar macos.mar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: pulse-browser.macos.dmg
           path: ./pulse-browser.macos.dmg
+
+      - name: Upload mar
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos.mar
+          path: ./macos.mar
+
+      - name: Upload update manifests
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos_update_manifest
+          path: ./dist/update
 
   source:
     runs-on: ubuntu-latest
@@ -297,19 +267,23 @@ jobs:
           git config --global user.email "trickypr@users.noreply.github.com"
           git config --global user.name "TrickyPR"
 
-      - name: Setup melon
+      - name: Setup gluon
         run: yarn && yarn setupLink
 
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
+
       - name: Download firefox source and dependancies
-        run: yarn download
+        run: yarn download --verbose
 
       - name: Import
-        run: yarn imp
+        run: yarn imp --verbose
 
       - name: Compress
         run: |
           cd engine
-          tar -czvf ../pulse-browser.source.tar.gz *
+          # -h is used to dereference symlinks
+          tar --use-compress-program=zstd -hcf ../pulse-browser.source.tar.gz *
           cd ..
 
       - name: Upload artifact
@@ -318,9 +292,62 @@ jobs:
           name: pulse-browser.source.tar.gz
           path: ./pulse-browser.source.tar.gz
 
+  windows:
+    runs-on: tricky-win
+    needs: [build-data]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          yarn
+
+      - name: Build gluon
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          yarn setupLink:win
+
+      - name: Load gluon CI setup
+        run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
+
+      - name: Download
+        run: yarn download
+
+      - name: Import
+        run: yarn imp
+
+      - name: Build
+        run: yarn build -- --skip-patch-check
+
+      - name: Package
+        run: |
+          yarn package
+          mv ./dist/output.mar windows.mar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: pulse-browser.installer.exe
+          path: ./dist/pulse-browser.installer.exe
+
+      - name: Upload mar
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows.mar
+          path: ./windows.mar
+
+      - name: Upload update manifests
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows_update_manifest
+          path: ./dist/update
+
   release:
     name: Release
-    needs: [build-data, linux, flatpak, source, mac]
+    needs: [build-data, linux, source, mac, windows]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -329,11 +356,38 @@ jobs:
         uses: 'marvinpinto/action-automatic-releases@latest'
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: 'alpha-${{ needs.build-data.outputs.build_date }}'
+          automatic_release_tag: ${{ needs.build-data.outputs.version }}
           prerelease: true
           title: 'Alpha build'
           files: |
-            pulse-browser.linux.flatpak 
             pulse-browser.linux.tar.bz2
             pulse-browser.source.tar.gz
-            pulse-browser.macos.dmg 
+            pulse-browser.macos.dmg
+            pulse-browser.installer.exe
+            windows.mar
+            macos.mar
+            linux.mar
+
+      - name: List
+        run: find .
+
+      - name: Checkout tools repo
+        uses: actions/checkout@v3
+        with:
+          repository: pulse-browser/updates
+          path: updates
+          token: ${{ secrets.ROBOT_TOKEN }}
+
+      - name: Copy update manifests
+        run: |
+          mkdir -p updates/browser
+          cp -a macos_update_manifest/. updates/browser/
+          cp -a linux_update_manifest/. updates/browser/
+          cp -a windows_update_manifest/. updates/browser/
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 🔖 Upload update manifests ${{ needs.build-data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+          repository: ./updates
