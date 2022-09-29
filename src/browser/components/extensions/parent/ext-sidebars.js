@@ -246,14 +246,7 @@ class ConfigAPI extends ExtensionAPI {
         },
 
         get: async (/** @type {any} */ id) => {
-          //not cloneable so we need to return a new object
-          return {
-            title: this.sidebars.get(id).title,
-            iconUrl: this.sidebars.get(id).iconUrl,
-            webviewUrl: this.sidebars.get(id).webviewUrl,
-            isBottom: this.sidebars.get(id).isBottom,
-            browserStyle: this.sidebars.get(id).browserStyle,
-          };
+          return this.sidebars.get(id);
         },
 
         list: async () => {
