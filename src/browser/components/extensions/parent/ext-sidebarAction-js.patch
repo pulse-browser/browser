@@ -1,5 +1,5 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 99aa63874bc6f1821baae6788fbba18f6861f9c6..baa85eae1b458a3187838336eada4b4a32504cd5 100644
+index 99aa63874bc6f1821baae6788fbba18f6861f9c6..160d7edd07f9e515e472e606cf9885ae46c13682 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
 @@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
@@ -20,7 +20,16 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..baa85eae1b458a3187838336eada4b4a
      // Don't remove everything on app shutdown so session restore can handle
      // restoring open sidebars.
      if (isAppShutdown) {
-@@ -157,21 +161,30 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -129,6 +133,8 @@ this.sidebarAction = class extends ExtensionAPI {
+       if (SidebarUI.lastOpenedId === sidebarId) {
+         SidebarUI.lastOpenedId = null;
+       }
++      // Remove the sidebar item from the sidebar menu.
++    SidebarUI.deleteSidebarItem(sidebarId);
+     }
+   }
+ 
+@@ -157,21 +163,30 @@ this.sidebarAction = class extends ExtensionAPI {
      }
      let { document, SidebarUI } = window;
      let keyId = `ext-key-id-${this.id}`;
