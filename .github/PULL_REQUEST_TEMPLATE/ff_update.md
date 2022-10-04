@@ -9,7 +9,13 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
   - [ ] The sidebar exists
   - [ ] The settings and addons button are visible down the bottom
   - [ ] The bookmarks, history and synced tabs icons are in the sidebar
+  - [ ] The sidebar can be resized properly
   - [ ] An [installed extension](https://addons.mozilla.org/en-US/firefox/addon/sidebar-note/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search) will appear in the sidebar
+  - [ ] Sidebar-Tabs is Loaded and has a button visible down the bottom
+  - [ ] Sidebar-Tabs can add a sidebar item to the sidebar
+  - [ ] Sidebar-Tabs can remove a sidebar item to the sidebar
+
+
 
 - [ ] Extensions
 
