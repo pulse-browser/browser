@@ -188,7 +188,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          brew install cairo sccache gnu-tar
+          brew install cairo sccache gnu-tar mercurial
           pip3 install pycairo testresources
 
       - name: Force usage fo gnu-tar
