@@ -188,7 +188,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          brew install cairo sccache gnu-tar
+          brew install cairo sccache gnu-tar mercurial
           pip3 install pycairo testresources
 
       - name: Force usage fo gnu-tar
@@ -196,14 +196,13 @@ jobs:
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.bash_profile
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
           source ~/.bash_profile
-      
+
       # There are bugs in python 3.10 which prevent firefox from building correctly. This should
       # fix it for the moment until mozilla or Python fix it
       - name: Hotfix for bug 1766497 & 1786419
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' 
-
+          python-version: '3.9'
 
       - name: Save sccache
         uses: actions/cache@v2
@@ -223,6 +222,12 @@ jobs:
 
       - name: Import
         run: yarn imp
+
+      - name: Bootstrap
+        run: |
+          cd engine
+          ./mach --no-interactive bootstrap --application-choice browser
+          cd ..
 
       - name: Gluon build
         run: yarn build --verbose
@@ -380,10 +385,10 @@ jobs:
 
       - name: Copy update manifests
         run: |
-          mkdir -p updates/browser
-          cp -a macos_update_manifest/. updates/browser/
-          cp -a linux_update_manifest/. updates/browser/
-          cp -a windows_update_manifest/. updates/browser/
+          mkdir -p updates/updates
+          cp -a macos_update_manifest/. updates/updates/
+          cp -a linux_update_manifest/. updates/updates/
+          cp -a windows_update_manifest/. updates/updates/
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -391,3 +396,34 @@ jobs:
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: ./updates
+
+  distro-flatpak:
+    name: Build flatpak repos
+    needs: [build-data, release]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: pulse-browser/packages
+          token: ${{ secrets.ROBOT_TOKEN }}
+          submodules: recursive
+
+      - name: Import GPG keys
+        run: |
+          echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import --homedir ~/.gpg
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+
+      - name: Build flatpak
+        run: |
+          cd flatpak
+          ./build.sh alpha
+
+      - name: Upload flatpak repo
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 📦 Upload flatpak for ${{ needs.build-data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+          repository: ./repo
