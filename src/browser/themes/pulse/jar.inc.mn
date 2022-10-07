@@ -8,5 +8,4 @@
 # to the location of the actual manifest.
 
 * skin/classic/browser/sidebar_tabs.css                                (../pulse/sidebar_tabs.css)
-  
-  skin/classic/browser/addons/shared.css                                (../pulse/addons/shared.css)
+  skin/classic/browser/addons/shared.css                               (../pulse/addons/shared.css)

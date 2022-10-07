@@ -1,8 +1,12 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 /* ========================================================================== */
 /* SIDE BAR STYLES */
 
 :root {
-  --sidebar-inside-padding: 8px; 
+  --sidebar-inside-padding: 8px;
   --sidebar-tab-hover-color: color-mix(in srgb, currentColor 11%, transparent);
 }
 
@@ -21,6 +25,11 @@
 }
 
 .sidebar-container:-moz-lwtheme {
+  background-image: var(--lwt-additional-images);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center;
+  background-size: cover;
+
   background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
@@ -65,7 +74,7 @@
   background-repeat: repeat-x, repeat-x, no-repeat;
   background-size: auto 100%, auto 100%, auto auto;
 
-  box-shadow: 0 0 4px rgba(0,0,0,.4);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
 #sidebar-icon-paint,
@@ -106,15 +115,12 @@
 }
 
 /* Make it feel native on macos */
-%ifdef XP_MACOSX
-#sidebar-container:not([lwt-sidebar]) {
+%ifdef XP_MACOSX #sidebar-container:not([lwt-sidebar]) {
   appearance: auto;
   -moz-default-appearance: -moz-mac-source-list;
   -moz-font-smoothing-background-color: -moz-mac-source-list;
 }
-%endif
-
-.sidebar-divider{
+%endif .sidebar-divider {
   margin: 6px;
   /* border-top: 1px solid var(--toolbarbutton-icon-fill); */
 }
