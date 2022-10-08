@@ -411,6 +411,7 @@ jobs:
 
       - name: Import GPG keys
         run: |
+          mkdir ~/.gpg
           echo -n "$GPG_SIGNING_KEY" | base64 --decode | gpg --import --homedir ~/.gpg
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
