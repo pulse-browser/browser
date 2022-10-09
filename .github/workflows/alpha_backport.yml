@@ -38,6 +38,7 @@ jobs:
           git config user.email "fushra-bot@users.noreply.github.com"
           git config pull.rebase true
           git pull ${{env.MASTER_REPO}} ${{env.MASTER_BRANCH}}
+          git pull ${{env.MASTER_REPO}} ${{env.MY_BRANCH}}
           git commit --amend -m "🔀 Backport changes from ${{env.MASTER_BRANCH}} to ${{env.MY_BRANCH}}"
           git push
 
@@ -70,5 +71,6 @@ jobs:
           git config user.email "fushra-bot@users.noreply.github.com"
           git config pull.rebase true
           git pull ${{env.MASTER_REPO}} ${{env.MASTER_BRANCH}}
+          git pull ${{env.MASTER_REPO}} ${{env.MY_BRANCH}}
           git commit --amend -m "🔀 Backport changes from ${{env.MASTER_BRANCH}} to ${{env.MY_BRANCH}}"
           git push
