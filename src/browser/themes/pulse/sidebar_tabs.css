@@ -115,12 +115,15 @@
 }
 
 /* Make it feel native on macos */
-%ifdef XP_MACOSX #sidebar-container:not([lwt-sidebar]) {
+%ifdef XP_MACOSX
+#sidebar-container:not([lwt-sidebar]) {
   appearance: auto;
   -moz-default-appearance: -moz-mac-source-list;
   -moz-font-smoothing-background-color: -moz-mac-source-list;
 }
-%endif .sidebar-divider {
+%endif
+
+.sidebar-divider {
   margin: 6px;
   /* border-top: 1px solid var(--toolbarbutton-icon-fill); */
 }
