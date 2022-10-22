@@ -19,4 +19,4 @@ jobs:
         run: yarn
 
       - name: Check license
-        run: yarn licenseCheck --no-fix
+        run: yarn licenseCheck
