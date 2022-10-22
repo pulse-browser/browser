@@ -111,6 +111,7 @@
 
 #sidebar-icons {
   overflow: scroll;
+  scrollbar-width: none;
   max-height: 820px;
 }
 
