@@ -7,11 +7,9 @@
   "license": "MPL-2.0",
   "private": true,
   "dependencies": {
-    "melon-build": "^1.0.0-a.10"
+    "gluon-build": "^1.0.0-rc.1"
   },
   "scripts": {
-    "setupLink": "cd gluon && yarn && yarn build && yarn link && cd .. && yarn link gluon-build",
-    "setupLink:win": "cd gluon && yarn && yarn build:win && yarn link && cd .. && yarn link gluon-build",
     "build": "gluon build",
     "build:ui": "gluon build --ui",
     "bs": "yarn build && yarn start",
@@ -21,8 +19,6 @@
     "imp": "gluon import",
     "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default",
     "download": "gluon download",
-    "rebuild": "cd gluon && yarn build && cd ..",
-    "rebuild:win": "cd gluon && yarn build:win && cd ..",
     "package": "gluon package",
     "ff-version": "gluon ff-version",
     "licenseCheck": "gluon license-check",

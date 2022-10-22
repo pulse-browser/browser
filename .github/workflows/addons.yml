@@ -16,7 +16,7 @@ jobs:
           submodules: recursive
 
       - name: Setup Gluon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Load config
         run: yarn gluon ci --brand ${GITHUB_REF##*/}

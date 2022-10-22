@@ -17,7 +17,7 @@ jobs:
           submodules: recursive
 
       - name: Setup melon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Export release data
         id: data
@@ -115,7 +115,7 @@ jobs:
           ls /opt/wasi-sdk/share/wasi-sysroot
 
       - name: Setup melon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Download firefox source and dependancies
         run: yarn download
@@ -273,7 +273,7 @@ jobs:
           cargo --version
 
       - name: Setup melon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Download firefox source and dependancies
         run: yarn download
@@ -320,7 +320,7 @@ jobs:
           git config --global user.name "TrickyPR"
 
       - name: Setup melon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Download firefox source and dependancies
         run: yarn download
