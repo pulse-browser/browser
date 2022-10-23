@@ -19,14 +19,11 @@ jobs:
       - name: Setup gluon
         run: |
           yarn
-
-          cd gluon
-          npm i -g . --force
-          cd ..
+          npm i -g gluon-build@next
 
       - name: Bump version
         run: |
-          gluon ci --brand alpha --bump prerelease
+          yarn gluon ci --brand alpha --bump prerelease
 
       - name: Debug
         run: |
@@ -232,7 +229,7 @@ jobs:
         run: yarn build --verbose
 
       - name: Package
-        run: gluon package
+        run: yarn gluon package
 
       - name: Rename artifacts
         run: |
