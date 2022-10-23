@@ -1,3 +1,8 @@
+<!--
+   - This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   -->
 <svg width="806" height="196" viewBox="0 0 806 196" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="348" height="196" rx="8" fill="#BFBCC2" />
     <rect x="458" width="348" height="196" rx="8" fill="#C18CF2" />
