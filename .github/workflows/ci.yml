@@ -16,7 +16,7 @@ jobs:
           submodules: recursive
 
       - name: Setup Melon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Check license
-        run: yarn licenseCheck --no-fix
+        run: yarn licenseCheck

@@ -19,9 +19,8 @@ jobs:
       - name: Setup gluon
         run: |
           yarn
-          yarn setupLink
 
-          cd gluon 
+          cd gluon
           npm i -g . --force
           cd ..
 
@@ -126,7 +125,7 @@ jobs:
 
       - name: Setup gluon
         run: |
-          yarn && yarn setupLink
+          yarn
 
       - name: Load gluon CI setup
         run: yarn gluon ci --brand alpha --display-version ${{ needs.build-data.outputs.version }}
@@ -212,7 +211,7 @@ jobs:
           key: ${{ runner.os }}-sccache
 
       - name: Setup gluon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Load gluon CI setup
         run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
@@ -273,7 +272,7 @@ jobs:
           git config --global user.name "TrickyPR"
 
       - name: Setup gluon
-        run: yarn && yarn setupLink
+        run: yarn
 
       - name: Load gluon CI setup
         run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
@@ -309,11 +308,6 @@ jobs:
       - name: Install dependencies
         run: |
           yarn
-
-      - name: Build gluon
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          yarn setupLink:win
 
       - name: Load gluon CI setup
         run: yarn gluon ci -- --brand alpha --display-version ${{ needs.build-data.outputs.version }}
