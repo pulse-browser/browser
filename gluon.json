@@ -28,7 +28,7 @@
       "id": "qr-generator@browser.fushra.com",
       "platform": "github",
       "repo": "pulse-browser/firefox-qr-generator",
-      "version": "v0.0.0",
+      "version": "v0.1.0",
       "fileGlob": "release.zip"
     },
     "sidebar-tabs": {
