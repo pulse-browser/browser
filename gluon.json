@@ -24,11 +24,11 @@
       "amoId": "850407",
       "version": "2.6.0"
     },
-    "firepicker": {
-      "id": "fire-picker@browser.fushra.com",
+    "firefox-qr-generator": {
+      "id": "qr-generator@browser.fushra.com",
       "platform": "github",
-      "repo": "pulse-browser/fire-picker",
-      "version": "v1.1.2",
+      "repo": "pulse-browser/firefox-qr-generator",
+      "version": "v0.1.0",
       "fileGlob": "release.zip"
     },
     "sidebar-tabs": {
