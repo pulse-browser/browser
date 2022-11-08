@@ -1,8 +1,8 @@
 diff --git a/browser/components/moz.build b/browser/components/moz.build
-index 38f6b2c0ca72f55985a27256a028ba5d552c03ec..4bdc2faebce245267fac031a6fa93f0ad198b50a 100644
+index 3b2126e66efa27d4b941ceb93b46a04aa3cdef30..bbc1b8b248f32bf17764813402abf224b4bc38c1 100644
 --- a/browser/components/moz.build
 +++ b/browser/components/moz.build
-@@ -60,6 +60,9 @@ DIRS += [
+@@ -63,6 +63,9 @@ DIRS += [
      "urlbar",
  ]
  
@@ -11,4 +11,4 @@ index 38f6b2c0ca72f55985a27256a028ba5d552c03ec..4bdc2faebce245267fac031a6fa93f0a
 +
  DIRS += ["build"]
  
- if CONFIG["NIGHTLY_BUILD"]:
+ 
