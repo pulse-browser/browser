@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index e91b0d5b4198b7e3967b6d144ae195da954f3ef3..ff38f32739948842a74499aa56f7487e3351ec7c 100644
+index aac068a8177abe5031152e7b567b45fd2b5ef4a2..b0ed4a98f8d832b924b6b1a93eda75d746984613 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -19,6 +19,15 @@ index e91b0d5b4198b7e3967b6d144ae195da954f3ef3..ff38f32739948842a74499aa56f7487e
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
+@@ -773,7 +774,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
+ pref("browser.tabs.tooltipsShowPidAndActiveness", false);
+ #endif
+ 
+-pref("browser.tabs.firefox-view", true);
++pref("browser.tabs.firefox-view", false);
+ pref("browser.tabs.firefox-view.logLevel", "Warn");
+ 
+ // allow_eval_* is enabled on Firefox Desktop only at this
 @@ -1937,7 +1938,6 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
  pref("browser.vpn_promo.disallowed_regions", "ae,by,cn,cu,iq,ir,kp,om,ru,sd,sy,tm,tr,ua");
  
@@ -49,7 +58,7 @@ index e91b0d5b4198b7e3967b6d144ae195da954f3ef3..ff38f32739948842a74499aa56f7487e
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
  
-@@ -2246,9 +2238,6 @@ pref("toolkit.coverage.enabled", false);
+@@ -2243,9 +2235,6 @@ pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
  // Discovery prefs
