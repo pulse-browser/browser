@@ -1,5 +1,5 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index cee46e6341f98441df743f4f5abccc380a67f74b..728e4e6d4b708d75a266181052e4af54c17b6180 100644
+index cee46e6341f98441df743f4f5abccc380a67f74b..1102e374a8a93f2ae6142ff0bffaea71fdceb59c 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
 @@ -4343,6 +4343,24 @@ BrowserGlue.prototype = {
@@ -32,7 +32,7 @@ index cee46e6341f98441df743f4f5abccc380a67f74b..728e4e6d4b708d75a266181052e4af54
      "nsISupportsWeakReference",
    ]),
 +  /**
-+  * Displays the welcome dialog. Trigured `_maybeShowDefaultBrowserPrompt`.
++  * Displays the welcome dialog. Triggered `_maybeShowDefaultBrowserPrompt`.
 +  *
 +  * @todo Add gluon docs for how to show custom popups on startup
 +  * @patch Pulse Browser
