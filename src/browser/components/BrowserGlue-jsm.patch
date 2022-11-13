@@ -1,20 +1,20 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 64ac529d54270758b6dfa7a0a04b604b89a92402..e4b7844fd1df5c3ff09432c6d1664f72dba02320 100644
+index cee46e6341f98441df743f4f5abccc380a67f74b..1102e374a8a93f2ae6142ff0bffaea71fdceb59c 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
-@@ -4321,6 +4321,23 @@ BrowserGlue.prototype = {
+@@ -4343,6 +4343,24 @@ BrowserGlue.prototype = {
    },
  
    async _maybeShowDefaultBrowserPrompt() {
 +    // =========================================================================
 +    // Pulse browser welcome
-+
++    
 +    const welcomeEnabledPref = 'pulse.welcome.enabled'
 +    const welcomeSeenPref = 'pulse.welcome.seen'
-+
++    
 +    // NOTE: Get bool prefs takes in two options, the pref string and a default
 +    // value if it is not defined
-+
++    
 +    const welcomeEnabled = Services.prefs.getBoolPref(welcomeEnabledPref, true)
 +    const welcomeSeen = Services.prefs.getBoolPref(welcomeSeenPref, false)
 +
@@ -23,23 +23,23 @@ index 64ac529d54270758b6dfa7a0a04b604b89a92402..e4b7844fd1df5c3ff09432c6d1664f72
 +
 +    // =========================================================================
 +
++
      // Highest priority is the upgrade dialog, which can include a "primary
      // browser" request and is limited in various ways, e.g., major upgrades.
-     const dialogVersion = 100;
-@@ -4780,6 +4797,18 @@ BrowserGlue.prototype = {
+     const dialogVersion = 106;
+@@ -4809,6 +4827,17 @@ BrowserGlue.prototype = {
      "nsIObserver",
      "nsISupportsWeakReference",
    ]),
-+
 +  /**
-+   * Displays the welcome dialog. Trigured `_maybeShowDefaultBrowserPrompt`.
-+   *
-+   * @todo Add gluon docs for how to show custom popups on startup
-+   * @patch Pulse Browser
-+   */
++  * Displays the welcome dialog. Triggered `_maybeShowDefaultBrowserPrompt`.
++  *
++  * @todo Add gluon docs for how to show custom popups on startup
++  * @patch Pulse Browser
++  */
 +  _showWelcomeDialog() {
 +    lazy.BrowserWindowTracker.getTopWindow().gDialogBox.open(
-+      "chrome://browser/content/welcome/welcome.html"
++    "chrome://browser/content/welcome/welcome.html"
 +    );
 +  },
  };
