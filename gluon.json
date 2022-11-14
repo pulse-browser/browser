@@ -16,7 +16,7 @@
       "id": "uBlock0@raymondhill.net",
       "repo": "gorhill/uBlock",
       "version": "1.44.4",
-      "fileGlob": "uBlock0_*.firefox.xpi"
+      "fileGlob": "uBlock0_*.firefox(.signed)?.xpi"
     },
     "tabliss": {
       "platform": "amo",
