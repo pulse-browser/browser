@@ -15,7 +15,8 @@
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
   "files.exclude": {
-    "**/node_modules": true
+    "**/node_modules": true,
+    "**/.gluon": true
   },
   "[html]": {
     "editor.formatOnSave": false
