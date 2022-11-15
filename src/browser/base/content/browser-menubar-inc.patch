@@ -1,0 +1,14 @@
+diff --git a/browser/base/content/browser-menubar.inc b/browser/base/content/browser-menubar.inc
+index f3134d5a9a01b7965eede5695def5afef4a66d6b..626fba18a7e9341731f6b71a98197695d63d7c6c 100644
+--- a/browser/base/content/browser-menubar.inc
++++ b/browser/base/content/browser-menubar.inc
+@@ -153,6 +153,9 @@
+                               type="checkbox"
+                               class="sync-ui-item"
+                               oncommand="SidebarUI.toggle('viewTabsSidebar');" data-l10n-id="menu-view-synced-tabs-sidebar"/>
++                    <menuitem id="menu_downloadsSidebar"
++                              type="checkbox"
++                              oncommand="SidebarUI.toggle('viewDownloadsSidebar');" data-l10n-id="navbar-downloads"/>
+                   </menupopup>
+                 </menu>
+                 <menuseparator/>

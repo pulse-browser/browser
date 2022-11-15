@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafcf1d66f5a 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..e1833bbfd8a8ed7da767349f886d554f3dd795f3 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -37,11 +37,21 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
          }),
        ],
        [
-@@ -47,8 +54,27 @@ var SidebarUI = {
+@@ -47,8 +54,37 @@ var SidebarUI = {
            elementId: "sidebar-switcher-tabs",
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
 +          iconurl: "chrome://browser/skin/tab.svg",
++        }),
++      ],
++      [
++        "viewDownloadsSidebar",
++        makeSidebar({
++          elementId: "sidebar-switcher-downloads",
++          title: "Downloads",
++          url: "about:downloads",
++          menuId: "menu_downloadsSidebar",
++          iconurl: "chrome://browser/skin/downloads/downloads.svg"
          }),
        ],
 +      [
@@ -65,7 +75,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
      ]));
    },
  
-@@ -61,6 +87,8 @@ var SidebarUI = {
+@@ -61,6 +97,8 @@ var SidebarUI = {
      return (this._browser = document.getElementById("sidebar"));
    },
    POSITION_START_PREF: "sidebar.position_start",
@@ -74,7 +84,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -78,6 +106,8 @@ var SidebarUI = {
+@@ -78,6 +116,8 @@ var SidebarUI = {
    },
    _splitter: null,
    _icon: null,
@@ -83,7 +93,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,10 +140,40 @@ var SidebarUI = {
+@@ -110,10 +150,40 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
@@ -124,7 +134,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
      this._inited = true;
  
      Services.obs.addObserver(this, "intl:app-locales-changed");
-@@ -159,17 +219,26 @@ var SidebarUI = {
+@@ -159,17 +229,26 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -155,7 +165,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
        }
      }
    },
-@@ -573,6 +642,10 @@ var SidebarUI = {
+@@ -573,6 +652,10 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -166,7 +176,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
        let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
        this.title = title;
        // Keep the title element in sync with any l10n changes.
-@@ -618,6 +691,26 @@ var SidebarUI = {
+@@ -618,6 +701,26 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -193,7 +203,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..3148bad1c6c65207064bd650eef9bafc
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,25 +734,112 @@ var SidebarUI = {
+@@ -641,25 +744,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
