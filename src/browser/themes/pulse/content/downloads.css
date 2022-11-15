@@ -1,0 +1,33 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* ========================================================================== */
+/* about:downloads */
+
+#contentAreaDownloadsView {
+  background: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+}
+
+#downloadsListBox {
+  border: none;
+  border-radius: 0;
+  background: none;
+}
+
+#downloadsListBox > richlistitem {
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+
+  margin-bottom: 8px;
+}
+
+#downloadsListBox > richlistitem:not([selected]):hover {
+  background-color: var(--in-content-box-background);
+}
+
+@media (prefers-reduced-motion) {
+  #downloadsListBox > richlistitem {
+    transition: none;
+  }
+}
