@@ -316,9 +316,11 @@ jobs:
         run: yarn imp
 
       - name: Build
+        shell: powershell.exe C:\mozilla-build\start-shell.bat "{0}"
         run: yarn build -- --skip-patch-check
 
       - name: Package
+        shell: powershell.exe C:\mozilla-build\start-shell.bat "{0}"
         run: |
           yarn package
           mv ./dist/output.mar windows.mar
