@@ -5,7 +5,7 @@
   "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
-    "version": "106.0.5"
+    "version": "107.0"
   },
   "buildOptions": {
     "generateBranding": true
@@ -15,7 +15,7 @@
       "platform": "github",
       "id": "uBlock0@raymondhill.net",
       "repo": "gorhill/uBlock",
-      "version": "1.44.4",
+      "version": "1.45.2",
       "fileGlob": "uBlock0_*.firefox(.signed)?.xpi"
     },
     "tabliss": {
