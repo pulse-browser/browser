@@ -22,7 +22,7 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
   - [ ] Tabliss is loading correctly
   - [ ] Tabliss does not have the webextention symbol in the title bar
   - [ ] uBlock origin is loading correctly
-  - [ ] FirePicker is loading correctly
+  - [ ] QR Code Generator is loading correctly
 
 - [ ] About dialog
 
