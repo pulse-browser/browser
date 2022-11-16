@@ -1,5 +1,5 @@
 diff --git a/browser/themes/shared/jar.inc.mn b/browser/themes/shared/jar.inc.mn
-index 26f209ad704739db88ead4ccfc7075d23b4b666d..31a1e45a8f7729f50b95fb4ea68962faaee02446 100644
+index 14ef7ff731145a42b28cbb9afe192bf56f756ed5..25d12586b7e8ce29d694dd6c0028ad176da96b1d 100644
 --- a/browser/themes/shared/jar.inc.mn
 +++ b/browser/themes/shared/jar.inc.mn
 @@ -7,6 +7,8 @@
@@ -9,5 +9,5 @@ index 26f209ad704739db88ead4ccfc7075d23b4b666d..31a1e45a8f7729f50b95fb4ea68962fa
 +#include ../pulse/jar.inc.mn
 +
    skin/classic/browser/aboutFrameCrashed.css                   (../shared/aboutFrameCrashed.css)
-   skin/classic/browser/aboutNetError.css                       (../shared/aboutNetError.css)
    skin/classic/browser/aboutRestartRequired.css                (../shared/aboutRestartRequired.css)
+   skin/classic/browser/aboutSessionRestore.css                 (../shared/aboutSessionRestore.css)
