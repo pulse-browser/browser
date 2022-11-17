@@ -407,8 +407,12 @@ jobs:
 
       - name: Install flatpak builder
         run: | 
-           sudo apt-get install -y flatpak-builder 
-
+           sudo apt-get install -y flatpak-builder
+     
+      - name: Install build dependancies
+        run: |
+          flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08 --assumeyes
+  
       - name: Import GPG keys
         run: |
           mkdir ~/.gpg
