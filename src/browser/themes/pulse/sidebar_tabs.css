@@ -3,7 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* ========================================================================== */
-/* SIDE BAR STYLES */
+/* SIDEBAR TABS STYLES */
 
 :root {
   --sidebar-inside-padding: 8px;
@@ -18,7 +18,7 @@
   background-color: -moz-Dialog;
   overflow: hidden;
 
-  max-width: var(--tab-min-height);
+  max-width: calc(var(--tab-min-height) + var(--tab-block-margin) * 2);
 
   /* Makes the sidebar slide out from below */
   position: relative;

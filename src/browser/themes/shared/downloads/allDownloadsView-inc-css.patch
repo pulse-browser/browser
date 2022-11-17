@@ -1,0 +1,12 @@
+diff --git a/browser/themes/shared/downloads/allDownloadsView.inc.css b/browser/themes/shared/downloads/allDownloadsView.inc.css
+index 204e6a95a17a58789c5992983196542104f6cf84..43f7cae36b9b60d27d2442efe3f48f7cbea8bcaa 100644
+--- a/browser/themes/shared/downloads/allDownloadsView.inc.css
++++ b/browser/themes/shared/downloads/allDownloadsView.inc.css
+@@ -4,6 +4,7 @@
+ 
+ @import "chrome://browser/skin/downloads/progressmeter.css";
+ @import "chrome://browser/skin/downloads/download-blockedStates.css";
++@import "chrome://browser/skin/pulse/downloads.css";
+ 
+ /*** View and outer controls ***/
+ 
