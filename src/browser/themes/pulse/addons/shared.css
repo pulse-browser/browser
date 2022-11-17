@@ -6,34 +6,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 /* Pulse specific variables */
 :root {
-  --tab-rounding-size: 8px;
-  --tab-rounding-size-neg: -8px;
-
-  /* Colors */
   --gradient-orientation: 90deg;
-  --gradient: linear-gradient(
-    var(--gradient-orientation),
-    hsla(212, 97%, 54%, 1) 0%,
-    hsla(295, 70%, 58%, 1) 100%
-  );
-
-  /* Tabs */
-  --tab-block-margin: 0 !important; /* The padding around each tab. In proton, this is what makes them float */
-  --tab-border-radius: 0 !important; /* The border radius of the tab */
-  --tab-padding-inline: 0 !important; /* Padding to the left and right of the tab. **Focus Browser custom** */
-
-  --toolbarbutton-border-radius: 4px;
-
-  /* Toolbar area */
-  --toolbar-field-border-color: transparent !important; /* The border color of the search input */
-
-  /* App Menu styling */
-  --panel-separator-zap-gradient: var(
-    --gradient
-  ) !important; /* The gradient used for the app menu separator */
-
-  /* Panel variables */
-  --panel-footer-item-border-radius: 8px; /* The border radius of the panel footer items */
 
   /* Bookmark panel */
   --bookmark-panel-image-border-radius: 8px; /* The border radius of the bookmark panel image */
@@ -50,7 +23,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
   --menulist-border-radius: 8px; /* The border radius of the menulist */
 
   /* Dialog variables */
-  --dialog-border-radius: 8px; /* The border radius of the dialog */
+  --dialog-border-radius: 16px; /* The border radius of the dialog */
 
   /* Make the tabs a touch wider */
   --tab-min-height: 38px;
@@ -87,13 +60,8 @@ tab.tabbrowser-tab:nth-child(1) {
 
   /* Expand the overflow margin to contain the tab curves
     https://searchfox.org/mozilla-central/diff/b269ed31009c9a01be532c9afc0a836e0ad86ed6/browser/themes/shared/tabs.css#103 */
-  overflow-clip-margin: 8px !important;
+  overflow-clip-margin: var(--tab-rounding-size) !important;
 }
-
-/* #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
-  -moz-context-properties: fill;
-  fill: var(--lwt-selected-tab-background-color);
-} */
 
 .tab-background[selected='true']::before,
 .tab-background[selected='true']::after {
@@ -172,12 +140,6 @@ tab.tabbrowser-tab:nth-child(1) {
   border-style: none;
 }
 
-/* Panel footer styles */
-.panel-footer > button {
-  /* The border radius of the panel footer items */
-  border-radius: var(--panel-footer-item-border-radius);
-}
-
 /* ========================================================================== */
 /* Bookmark styles */
 
@@ -216,7 +178,11 @@ menulist:host(:not([native])) {
 }
 
 .dialogBox {
-  border-radius: var(--dialog-border-radius);
+  border-radius: var(--dialog-border-radius) !important;
+}
+
+.panel-footer > button {
+  border-radius: var(--arrowpanel-menuitem-border-radius);
 }
 
 /**
@@ -231,7 +197,6 @@ menulist:host(:not([native])) {
  *
  *     If you have any issues with this style, please open a ticket at https://github.com/NiklasGollenstede/unload-tabs
  */
-
 tab[pending],
 #alltabs-popup menuitem[pending] {
   opacity: 0.6 !important;

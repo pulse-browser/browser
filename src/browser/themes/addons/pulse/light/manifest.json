@@ -8,7 +8,7 @@
   },
 
   "name": "Pulse Light",
-  "description": "A clean, minimalist, light theme",
+  "description": "Pulse's light theme",
   "author": "Fushra",
   "version": "1.2",
 
@@ -59,12 +59,25 @@
       "sidebar_border": "transparent"
     },
     "properties": {
+      "arrowpanel_border_radius": "16px",
+      "arrowpanel_menuitem_border_radius": "8px",
+
       "panel_hover": "color-mix(in srgb, currentColor 12%, transparent)",
       "panel_active": "color-mix(in srgb, currentColor 20%, transparent)",
       "panel_active_darker": "color-mix(in srgb, currentColor 27%, transparent)",
       "toolbar_field_icon_opacity": "0.72",
       "input_border_color": "color-mix(in srgb, currentColor 41%, transparent)",
-      "zap_gradient": "linear-gradient(90deg, #9059FF 0%, #FF4AA2 52.08%, #FFBD4F 100%)"
+
+      "tab_rounding_size": "16px",
+      "tab_rounding_size_neg": "-16px",
+      "tab_block_margin": "0",
+      "tab_border_radius": "0",
+      "tab_padding_inline": "0",
+
+      "gradient": "linear-gradient(var(--gradient-orientation), hsla(212, 97%, 54%, 1) 0%, hsla(295, 70%, 58%, 1) 100%)",
+      "zap_gradient": "var(--gradient)",
+
+      "toolbar_button_border_radius": "8px"
     }
   },
 
@@ -92,12 +105,27 @@
       "tab_icon_overlay_fill": "--tab-icon-overlay-fill"
     },
     "properties": {
+      "arrowpanel_border_radius": "--arrowpanel-border-radius",
+      "arrowpanel_menuitem_border_radius": "--arrowpanel-menuitem-border-radius",
+
       "panel_hover": "--panel-item-hover-bgcolor",
       "panel_active": "--arrowpanel-dimmed-further",
       "panel_active_darker": "--panel-item-active-bgcolor",
       "toolbar_field_icon_opacity": "--urlbar-icon-fill-opacity",
-      "input_border_color": "--input-border-color",
-      "zap_gradient": "--panel-separator-zap-gradient"
+
+      "tab_rounding_size": "--tab-rounding-size",
+      "tab_rounding_size_neg": "--tab-rounding-size-neg",
+      // The padding around each tab. In proton, this is what makes them float
+      "tab_block_margin": "--tab-block-margin",
+      // The border radius of the tab
+      "tab_border_radius": "--tab-border-radius",
+      // Padding to the left and right of the tab. **Pulse Browser custom**
+      "tab_padding_inline": "--tab-padding-inline",
+
+      "gradient": "--gradient",
+      "zap_gradient": "--panel-separator-zap-gradient",
+
+      "toolbar_button_border_radius": "--toolbarbutton-border-radius"
     }
   }
 }
