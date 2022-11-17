@@ -350,6 +350,8 @@ jobs:
     name: Release
     needs: [build-data, linux, source, mac, windows]
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/alpha' }}
+
     steps:
       - uses: actions/download-artifact@v2
 
@@ -397,6 +399,7 @@ jobs:
     name: Build flatpak repos
     needs: [build-data, release]
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/alpha' }}
     
     steps:
       - uses: actions/checkout@v3
