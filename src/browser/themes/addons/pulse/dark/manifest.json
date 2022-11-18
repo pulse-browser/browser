@@ -16,47 +16,85 @@
 
   "theme": {
     "colors": {
-      "tab_background_text": "#fbfbfe",
-      "tab_selected": "rgb(43,42,51)",
-      "tab_text": "rgb(251,251,254)",
-      "icons": "rgb(251,251,254)",
-      "frame": "#1c1b22",
-      "popup": "rgb(66,65,77)",
-      "popup_text": "rgb(251,251,254)",
-      "popup_border": "rgb(82,82,94)",
+      "tab_background_text": "#BFBCC2", // Grey 300
+      "tab_selected": "#1A171C", // Grey 900
+      "tab_text": "#F2F1F4", // Grey 100
+
+      "icons": "#F2F1F4", // Grey 100
+      "frame": "#26222A", // Grey 850
+      "popup": "#26222A", // Grey 850
+      "popup_text": "#F2F1F4", // Grey 100
+      "popup_border": "transparent",
       "popup_highlight": "rgb(43,42,51)",
       "tab_line": "transparent",
-      "toolbar": "rgb(43,42,51)",
+
+      "toolbar": "#1A171C", // Grey 900
       "toolbar_top_separator": "transparent",
-      "toolbar_bottom_separator": "hsl(240, 5%, 5%)",
-      "toolbar_field": "rgb(28,27,34)",
+      "toolbar_bottom_separator": "#1A171C", // Grey 900
+      "toolbar_field": "#26222A", // Grey 850
       "toolbar_field_border": "transparent",
-      "toolbar_field_text": "rgb(251,251,254)",
-      "toolbar_field_focus": "rgb(66,65,77)",
-      "toolbar_text": "rgb(251, 251, 254)",
-      "ntp_background": "rgb(43, 42, 51)",
-      "ntp_card_background": "rgb(66,65,77)",
-      "ntp_text": "rgb(251, 251, 254)",
-      "sidebar_text": "rgb(249, 249, 250)",
+      "toolbar_field_text": "#F2F1F4", // Grey 100
+      "toolbar_field_focus": "#332F37", // Grey 800
+      "toolbar_text": "#BFBCC2", // Grey 300
+
+      "ntp_background": "#26222A", // Grey 850
+      "ntp_card_background": "#332F37", // Grey 800
+      "ntp_text": "#F2F1F4", // Grey 100
+
+      "sidebar_text": "#F2F1F4", // Grey 100
       "sidebar_border": "transparent",
-      "button": "rgb(43,42,51)",
-      "button_hover": "rgb(82,82,94)",
-      "button_active": "rgb(91,91,102)",
-      "button_primary": "rgb(0, 221, 255)",
-      "button_primary_hover": "rgb(128, 235, 255)",
-      "button_primary_active": "rgb(170, 242, 255)",
-      "button_primary_color": "rgb(43, 42, 51)",
-      "error_text_color": "rgb(255, 154, 162)",
-      "input_background": "#42414D",
-      "input_color": "rgb(251,251,254)",
-      "input_border": "#8f8f9d",
-      "input_border_error": "rgb(255, 132, 138)",
-      "zoom_controls": "rgb(74,74,85)",
-      "autocomplete_popup_separator": "rgb(82,82,94)",
-      "appmenu_update_icon_color": "#54FFBD",
-      "appmenu_info_icon_color": "#80EBFF",
-      "tab_icon_overlay_stroke": "rgb(66,65,77)",
-      "tab_icon_overlay_fill": "rgb(251,251,254)"
+
+      "button": "#332F37", // Grey 800
+      "button_hover": "#4D4950", // Grey 700
+      "button_active": "#656369", // Grey 600
+      "button_primary": "#8240BF33", // Primary 500, 20%
+      "button_primary_hover": "#8240BF4D", // Primary 500, 30%
+      "button_primary_active": "#8240BF65", // Primary 500, 40%
+      "button_primary_color": "#DAB6FB", // Primary 200
+
+      "error_text_color": "rgb(255, 154, 162)", // TODO: We need red / error colors
+
+      "input_background": "#332F37", // Grey 800
+      "input_color": "#F2F1F4", // Grey 100
+      "input_border": "transparent",
+      "input_border_error": "rgb(255, 132, 138)", // TODO: We need red / error colors
+
+      "autocomplete_popup_separator": "#4D4950", // Grey 700
+      "appmenu_update_icon_color": "#54FFBD", // TODO
+      "appmenu_info_icon_color": "#80EBFF", // TODO
+      "tab_icon_overlay_stroke": "rgb(66,65,77)", // TODO: What even are these?
+      "tab_icon_overlay_fill": "rgb(251,251,254)", // TODO: What even are these?
+
+      "pulse_grey_900": "#1A171C",
+      "pulse_grey_850": "#26222A",
+      "pulse_grey_800": "#332F37",
+      "pulse_grey_700": "#4D4950",
+      "pulse_grey_600": "#656369",
+      "pulse_grey_500": "#807D82",
+      "pulse_grey_400": "#A19EA3",
+      "pulse_grey_300": "#BFBCC2",
+      "pulse_grey_200": "#D9D6DC",
+      "pulse_grey_100": "#F2F1F4",
+
+      "pulse_primary_900": "#1B0033",
+      "pulse_primary_800": "#34085E",
+      "pulse_primary_700": "#4E1386",
+      "pulse_primary_600": "#6829A3",
+      "pulse_primary_500": "#8240BF",
+      "pulse_primary_400": "#A363DE",
+      "pulse_primary_300": "#A363DE",
+      "pulse_primary_200": "#DAB6FB",
+      "pulse_primary_100": "#F3E6FF",
+
+      "pulse_secondary_900": "#350439",
+      "pulse_secondary_800": "#500B56",
+      "pulse_secondary_700": "#791282",
+      "pulse_secondary_600": "#A429AE",
+      "pulse_secondary_500": "#C732D3",
+      "pulse_secondary_400": "#E54AE8",
+      "pulse_secondary_300": "#FC79FF",
+      "pulse_secondary_200": "#FD9EFF",
+      "pulse_secondary_100": "#F9D8FC"
     },
     "properties": {
       "arrowpanel_border_radius": "16px",
@@ -73,7 +111,7 @@
       "tab_border_radius": "0",
       "tab_padding_inline": "0",
 
-      "gradient": "linear-gradient(var(--gradient-orientation), hsla(212, 97%, 54%, 1) 0%, hsla(295, 70%, 58%, 1) 100%)",
+      "gradient": "linear-gradient(var(--gradient-orientation), var(--pulse-primary-500) 0%, var(--pulse-secondary-500) 100%)",
       "zap_gradient": "var(--gradient)",
 
       "toolbar_button_border_radius": "8px"
@@ -96,11 +134,41 @@
       "input_border": "--input-border-color",
       "input_border_error": "--input-error-border-color",
       "autocomplete_popup_separator": "--autocomplete-popup-separator-color",
-      "zoom_controls": "--zoom-controls-bgcolor",
       "appmenu_update_icon_color": "--panel-banner-item-update-supported-bgcolor",
       "appmenu_info_icon_color": "--panel-banner-item-info-icon-bgcolor",
       "tab_icon_overlay_stroke": "--tab-icon-overlay-stroke",
-      "tab_icon_overlay_fill": "--tab-icon-overlay-fill"
+      "tab_icon_overlay_fill": "--tab-icon-overlay-fill",
+
+      "pulse_grey_900": "--pulse-grey-900",
+      "pulse_grey_850": "--pulse-grey-850",
+      "pulse_grey_800": "--pulse-grey-800",
+      "pulse_grey_700": "--pulse-grey-700",
+      "pulse_grey_600": "--pulse-grey-600",
+      "pulse_grey_500": "--pulse-grey-500",
+      "pulse_grey_400": "--pulse-grey-400",
+      "pulse_grey_300": "--pulse-grey-300",
+      "pulse_grey_200": "--pulse-grey-200",
+      "pulse_grey_100": "--pulse-grey-100",
+
+      "pulse_primary_900": "--pulse-primary-900",
+      "pulse_primary_800": "--pulse-primary-800",
+      "pulse_primary_700": "--pulse-primary-700",
+      "pulse_primary_600": "--pulse-primary-600",
+      "pulse_primary_500": "--pulse-primary-500",
+      "pulse_primary_400": "--pulse-primary-400",
+      "pulse_primary_300": "--pulse-primary-300",
+      "pulse_primary_200": "--pulse-primary-200",
+      "pulse_primary_100": "--pulse-primary-100",
+
+      "pulse_secondary_900": "--pulse-secondary-900",
+      "pulse_secondary_800": "--pulse-secondary-800",
+      "pulse_secondary_700": "--pulse-secondary-700",
+      "pulse_secondary_600": "--pulse-secondary-600",
+      "pulse_secondary_500": "--pulse-secondary-500",
+      "pulse_secondary_400": "--pulse-secondary-400",
+      "pulse_secondary_300": "--pulse-secondary-300",
+      "pulse_secondary_200": "--pulse-secondary-200",
+      "pulse_secondary_100": "--pulse-secondary-100"
     },
     "properties": {
       "arrowpanel_border_radius": "--arrowpanel-border-radius",
