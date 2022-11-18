@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96fd83d16f9 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..9ddb76aecd1d74ddee7910913d28d0006e6d66a3 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -194,28 +194,11 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96f
        }
      }
    },
-@@ -510,6 +611,7 @@ var SidebarUI = {
-    * @return {Promise<boolean>}
-    */
-   async show(commandID, triggerNode) {
-+    console.log("Trying to open sidebar");
-     let panelType = commandID.substring(4, commandID.length - 7);
-     Services.telemetry.keyedScalarAdd("sidebar.opened", panelType, 1);
- 
-@@ -539,6 +641,7 @@ var SidebarUI = {
-    * @return {Promise<boolean>}
-    */
-   async showInitially(commandID) {
-+    console.log("Show initially?");
-     let panelType = commandID.substring(4, commandID.length - 7);
-     Services.telemetry.keyedScalarAdd("sidebar.opened", panelType, 1);
- 
-@@ -562,6 +665,47 @@ var SidebarUI = {
+@@ -562,6 +663,45 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
-+      console.log("Opening sidebar " + commandID);
-+      if (this._keepTabsActive){
++      if (this.keepTabsActivePref){
 +        //try and find browser with id sidebar-browser-<commandid>
 +        if (!document.getElementById("sidebar-browser-" + commandID)){
 +          //create a new browser for the sidebar with id "sidebar-browser-<commandID>"
@@ -230,7 +213,6 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96f
 +
 +          //temp here
 +          browser.setAttribute("style", "min-width: 14em; width: 18em; max-width: 36em; -moz-box-flex: 1;");
-+
 +          //append into _box
 +          this._box.appendChild(browser);
 +          this._browser = browser;
@@ -258,7 +240,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96f
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -573,10 +717,15 @@ var SidebarUI = {
+@@ -573,6 +713,10 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -269,12 +251,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96f
        let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
        this.title = title;
        // Keep the title element in sync with any l10n changes.
-       this.observeTitleChanges(sourceL10nEl);
-+      console.log("Setting SRC to " + url + " for " + this.browser.id);
-       this.browser.setAttribute("src", url); // kick off async load
- 
-       if (this.browser.contentDocument.location.href != url) {
-@@ -618,6 +767,26 @@ var SidebarUI = {
+@@ -618,22 +762,45 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -301,7 +278,33 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96f
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,25 +810,112 @@ var SidebarUI = {
+     // until about:blank has loaded (which does not happen as long as the
+     // element is hidden).
+-    this.browser.setAttribute("src", "about:blank");
+-    this.browser.docShell.createAboutBlankContentViewer(null, null);
++
++    if (!this.keepTabsActivePref){
++      this.browser.setAttribute("src", "about:blank");
++      this.browser.docShell.createAboutBlankContentViewer(null, null);
++    }
+ 
+     this._box.removeAttribute("checked");
+     this._box.hidden = this._splitter.hidden = true;
+ 
+-    let selBrowser = gBrowser.selectedBrowser;
+-    selBrowser.focus();
+-    if (triggerNode) {
+-      updateToggleControlLabel(triggerNode);
+-    }
++    // let selBrowser = gBrowser.selectedBrowser;
++    // selBrowser.focus();
++    // if (triggerNode) {
++    //   updateToggleControlLabel(triggerNode);
++    // }
+   },
+ 
+   /**
+@@ -641,25 +808,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
