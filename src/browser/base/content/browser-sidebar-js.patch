@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0c5340d31 100644
+index f09e37fc42f7754f7f3687884ead25124c1b2076..35f403b1cfc17b27e06b16957d2ed96fd83d16f9 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -84,8 +84,23 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -78,6 +116,8 @@ var SidebarUI = {
+@@ -76,8 +114,23 @@ var SidebarUI = {
+     }
+     return (this.__title = document.getElementById("sidebar-title"));
    },
++
++  get keepTabsActivePref() {
++    if (this._keepTabsActive) {
++      return this._keepTabsActive;
++    }
++    return (async () => {
++      try {
++        return await (this.keepTabsActivePref = Services.prefs.getBoolPref("pulse.sidebar.keeptabsactive.enabled"));
++      } catch(e) {
++        return 1;
++      }
++   })();
++  },
    _splitter: null,
    _icon: null,
 +  _sidebarIcons: null,
@@ -93,7 +108,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,10 +150,40 @@ var SidebarUI = {
+@@ -110,15 +163,54 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
@@ -134,7 +149,21 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
      this._inited = true;
  
      Services.obs.addObserver(this, "intl:app-locales-changed");
-@@ -159,17 +229,26 @@ var SidebarUI = {
+ 
+     this._initDeferred.resolve();
++
++    if (this.keepTabsActivePref){
++      //if element by id sidebar exists destroy it
++      if (document.getElementById("sidebar")){
++        document.getElementById("sidebar").remove();
++      }
++    }
++    
++
+   },
+ 
+   uninit() {
+@@ -159,17 +251,26 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -165,7 +194,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
        }
      }
    },
-@@ -510,6 +589,7 @@ var SidebarUI = {
+@@ -510,6 +611,7 @@ var SidebarUI = {
     * @return {Promise<boolean>}
     */
    async show(commandID, triggerNode) {
@@ -173,7 +202,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
      let panelType = commandID.substring(4, commandID.length - 7);
      Services.telemetry.keyedScalarAdd("sidebar.opened", panelType, 1);
  
-@@ -539,6 +619,7 @@ var SidebarUI = {
+@@ -539,6 +641,7 @@ var SidebarUI = {
     * @return {Promise<boolean>}
     */
    async showInitially(commandID) {
@@ -181,54 +210,55 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
      let panelType = commandID.substring(4, commandID.length - 7);
      Services.telemetry.keyedScalarAdd("sidebar.opened", panelType, 1);
  
-@@ -562,6 +643,46 @@ var SidebarUI = {
+@@ -562,6 +665,47 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
-+
 +      console.log("Opening sidebar " + commandID);
++      if (this._keepTabsActive){
++        //try and find browser with id sidebar-browser-<commandid>
++        if (!document.getElementById("sidebar-browser-" + commandID)){
++          //create a new browser for the sidebar with id "sidebar-browser-<commandID>"
++          let browser = document.createXULElement("browser");
++          browser.setAttribute("id", "sidebar-browser-" + commandID);
++          browser.setAttribute("autoscroll", "false");
++          browser.setAttribute("disablehistory", "true");
++          browser.setAttribute("disablefullscreen", "true");
++          browser.setAttribute("tooltip", "aHTMLTooltip");
++          browser.setAttribute("class", "sidebar-tab");
++          browser.setAttribute("sidebarcommand", commandID);
 +
-+      //try and find browser with id sidebar-browser-<commandid>
-+      if (!document.getElementById("sidebar-browser-" + commandID)){
-+        //create a new browser for the sidebar with id "sidebar-browser-<commandID>"
-+        let browser = document.createXULElement("browser");
-+        browser.setAttribute("id", "sidebar-browser-" + commandID);
-+        browser.setAttribute("autoscroll", "false");
-+        browser.setAttribute("disablehistory", "true");
-+        browser.setAttribute("disablefullscreen", "true");
-+        browser.setAttribute("tooltip", "aHTMLTooltip");
-+        browser.setAttribute("class", "sidebar-tab");
-+        browser.setAttribute("sidebarcommand", commandID);
++          //temp here
++          browser.setAttribute("style", "min-width: 14em; width: 18em; max-width: 36em; -moz-box-flex: 1;");
 +
-+        //temp here
-+        browser.setAttribute("style", "min-width: 14em; width: 18em; max-width: 36em; -moz-box-flex: 1;");
-+
-+        //append into _box
-+        this._box.appendChild(browser);
-+        this._browser = browser;
-+      }
-+      else {
-+        //browser already exists, get it
-+        let browser = document.getElementById("sidebar-browser-" + commandID);
-+        this._browser = browser;
-+      }
-+
-+      let browsers = document.querySelectorAll("[id^='sidebar-browser-']");
-+      //hide all of them except the one we want to show
-+      for (let i = 0; i < browsers.length; i++) {
-+        if (browsers[i].id != "sidebar-browser-" + commandID) {
-+          browsers[i].setAttribute("hidden", "true");
++          //append into _box
++          this._box.appendChild(browser);
++          this._browser = browser;
 +        }
-+        else
-+        {
-+          browsers[i].removeAttribute("hidden");
++        else {
++          //browser already exists, get it
++          let browser = document.getElementById("sidebar-browser-" + commandID);
++          this._browser = browser;
++        }
++
++        let browsers = document.querySelectorAll("[id^='sidebar-browser-']");
++        //hide all of them except the one we want to show
++        for (let i = 0; i < browsers.length; i++) {
++          if (browsers[i].id != "sidebar-browser-" + commandID) {
++            browsers[i].setAttribute("hidden", "true");
++          }
++          else
++          {
++            browsers[i].removeAttribute("hidden");
++          }
 +        }
 +      }
++      
 +
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -573,10 +694,15 @@ var SidebarUI = {
+@@ -573,10 +717,15 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -244,7 +274,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
        this.browser.setAttribute("src", url); // kick off async load
  
        if (this.browser.contentDocument.location.href != url) {
-@@ -618,6 +744,26 @@ var SidebarUI = {
+@@ -618,6 +767,26 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -271,7 +301,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..f94a47f909b9dd17b6673387f44a01d0
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,25 +787,112 @@ var SidebarUI = {
+@@ -641,25 +810,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
