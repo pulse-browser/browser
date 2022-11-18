@@ -1,0 +1,56 @@
+diff --git a/browser/base/content/contentTheme.js b/browser/base/content/contentTheme.js
+index d634a17c2633dc2ead40082c71622fe1b7a491a2..2d122f05cc5ce74e43d73a218ad5636deabc7296 100644
+--- a/browser/base/content/contentTheme.js
++++ b/browser/base/content/contentTheme.js
+@@ -135,6 +135,51 @@
+         lwtProperty: "sidebar_highlight_text",
+       },
+     ],
++
++    // Pulse: Force content styles to use the current css theme!
++    // Remember to add your keys to browser/themes/ThemeVariableMap.sys.mjs
++    [
++      "--in-content-primary-button-background",
++      {
++        lwtProperty: "button_primary",
++      }
++    ],
++    [
++      "--in-content-primary-button-background-hover",
++      {
++        lwtProperty: "button_primary_hover",
++      }
++    ],
++    [
++      "--in-content-primary-button-background-active",
++      {
++        lwtProperty: "button_primary_active",
++      }
++    ],
++    [
++      "--in-content-primary-button-text-color",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ],
++    [
++      "--in-content-primary-button-text-color-hover",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ],
++    [
++      "--newtab-primary-action-background",
++      {
++        lwtProperty: "button_primary",
++      }
++    ],
++    [
++      "--newtab-primary-element-text-color",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ]
+   ];
+ 
+   /**
