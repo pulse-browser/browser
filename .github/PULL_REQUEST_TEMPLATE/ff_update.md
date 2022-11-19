@@ -39,7 +39,6 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
   - [ ] All tabs in preferences open
   - [ ] The "More from {Vendor}" option is not present
   - [ ] The sidebar preferences are present and work as expected
-  - [ ] The sidebar keep tabs active preference is present and works as expected
 
 - [ ] Welcome experience
 
