@@ -1,0 +1,12 @@
+diff --git a/browser/components/preferences/preferences.xhtml b/browser/components/preferences/preferences.xhtml
+index 9921e0307b4af54bbb6fa4d85e1a5d1d0fbf07a7..2c5db086f1320d2e334ed2c1988f515dc5cace3c 100644
+--- a/browser/components/preferences/preferences.xhtml
++++ b/browser/components/preferences/preferences.xhtml
+@@ -63,6 +63,7 @@
+   <script src="chrome://browser/content/preferences/preferences.js"/>
+   <script src="chrome://browser/content/preferences/extensionControlled.js"/>
+   <script src="chrome://browser/content/preferences/findInPage.js"/>
++  <script src="chrome://browser/content/contentTheme.js"></script>
+ </head>
+ 
+ <html:body xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

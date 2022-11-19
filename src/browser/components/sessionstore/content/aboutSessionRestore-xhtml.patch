@@ -1,0 +1,12 @@
+diff --git a/browser/components/sessionstore/content/aboutSessionRestore.xhtml b/browser/components/sessionstore/content/aboutSessionRestore.xhtml
+index bb0aff1b9e25cce2c8f9c95d73c5be4f63bbe46f..f8d68e0cbe198ca9010884c2e9add5a640e3013b 100644
+--- a/browser/components/sessionstore/content/aboutSessionRestore.xhtml
++++ b/browser/components/sessionstore/content/aboutSessionRestore.xhtml
+@@ -20,6 +20,7 @@
+     <link rel="localization" href="browser/aboutSessionRestore.ftl"/>
+     <link rel="localization" href="branding/brand.ftl"/>
+     <script src="chrome://browser/content/aboutSessionRestore.js"/>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+ 
+   <body class="illustrated">

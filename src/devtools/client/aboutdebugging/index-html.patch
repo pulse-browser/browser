@@ -1,0 +1,12 @@
+diff --git a/devtools/client/aboutdebugging/index.html b/devtools/client/aboutdebugging/index.html
+index 1f65aeec4a786f6a67713a26f4cd39ae62cbf77a..d7fc0f4a76dd00bd26811fa1bec76767da26fc45 100644
+--- a/devtools/client/aboutdebugging/index.html
++++ b/devtools/client/aboutdebugging/index.html
+@@ -14,6 +14,7 @@
+     <link rel="icon" type="image/png" href="chrome://global/skin/icons/developer.svg">
+     <link rel="stylesheet" href="chrome://devtools/content/aboutdebugging/aboutdebugging.css"/>
+     <script src="resource://devtools/client/aboutdebugging/initializer.js"></script>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+   <body>
+     <div id="mount"></div>
