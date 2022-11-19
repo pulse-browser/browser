@@ -1,8 +1,8 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index 3d4035690d38f4d851cc86749ebeec7b7ca9aaf2..e9136a52427d7f3ada87803373f16c20a25b066a 100644
+index 4cdcece2776506eb772a5463e245218837abc5e0..9b517ea6a3fc2ff43c7c412b90f241e75a65bdae 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
-@@ -125,6 +125,15 @@
+@@ -125,6 +125,22 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  
@@ -13,6 +13,13 @@ index 3d4035690d38f4d851cc86749ebeec7b7ca9aaf2..e9136a52427d7f3ada87803373f16c20
 +  <checkbox id="sidebarVisible"
 +    preference="pulse.sidebar.enabled"
 +    data-l10n-id="preferences-sidebar-visible"/>
++  <checkbox id="sidebarKeepTabsActive"
++    preference="pulse.sidebar.keeptabsactive.enabled"
++    data-l10n-id="preferences-sidebar-active-tabs"/>
++  <description id="sidebarKeepTabsActiveTooltip"
++    data-l10n-id="preferences-sidebar-active-tabs-tooltip">
++    <html:a id="restart-browser-button" class="text-link" data-l10n-name="restart-browser" href="about:restartrequired"/>
++  </description>
 +</groupbox>
 +
  <!-- Website appearance -->

@@ -1,8 +1,8 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index e51ab66d5bdbda020e11f715080e2d716b6385ef..5530d7b452c72900a093b02133714daf413c30b4 100644
+index e51ab66d5bdbda020e11f715080e2d716b6385ef..3c6be2ce7a787de0344f0bfe2b756d2d48396f27 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
-@@ -1424,3 +1424,15 @@ httpsonly-radio-disabled =
+@@ -1424,3 +1424,13 @@ httpsonly-radio-disabled =
  desktop-folder-name = Desktop
  downloads-folder-name = Downloads
  choose-download-folder-title = Choose Download Folder:
@@ -11,10 +11,8 @@ index e51ab66d5bdbda020e11f715080e2d716b6385ef..5530d7b452c72900a093b02133714daf
 +preferences-sidebar-header = Sidebar
 +preferences-sidebar-visible =
 +    .label = Show sidebar tabs 
-+
 +preferences-sidebar-extensions-visible =
 +    .label = Show available extensions on the sidebar
-+
-+preferences-sidebar-active-tabs = Keep sidebar tabs active even when closed
-+preferences-sidebar-active-tabs-tooltip = When enabled, sidebar tabs will remain active even when closed. When disabled, sidebar tabs will be closed when you click on another tab.
-+
++preferences-sidebar-active-tabs = 
++    .label = Keep sidebar tabs active even when closed
++preferences-sidebar-active-tabs-tooltip = When enabled, sidebar tabs will remain active even when closed. When disabled, sidebar tabs will be closed when you click on another tab. <a data-l10n-name="restart-browser">Restart { -brand-short-name }</a>
