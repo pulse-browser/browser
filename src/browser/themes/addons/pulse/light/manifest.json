@@ -41,13 +41,13 @@
       "ntp_background": "rgb(217, 214, 220)", // Grey 200
       "ntp_text": "rgb(26, 23, 28)", // Grey 900
 
-      "button": "rgb(217, 214, 220, .33)", // Grey 200, 33% opacity
-      "button_hover": "rgba(217, 214, 220, .66)", // Grey 200, 66% opacity
-      "button_active": "rgb(217, 214, 220)", // Grey 200
+      "button": "rgba(191, 188, 194, .33)", // Grey 300, 33% opacity
+      "button_hover": "rgba(191, 188, 194, .66)", // Grey 300, 66% opacity
+      "button_active": "rgba(191, 188, 194)", // Grey 300
       "button_primary": "rgba(130, 64, 181, 0.20)", // Primary 500, 20%
-      "button_primary_hover": "rgb(130, 64, 191, 0.30)", // Primary 500, 30%
-      "button_primary_active": "rgb(130, 64, 191, 0.40)", // Primary 500, 40%
-      "button_primary_color": "rgb(52, 8, 94)", // Primary 800
+      "button_primary_hover": "rgba(130, 64, 191, 0.30)", // Primary 500, 30%
+      "button_primary_active": "rgba(130, 64, 191, 0.40)", // Primary 500, 40%
+      "button_primary_color": "rgba(52, 8, 94)", // Primary 800
 
       "error_text_color": "rgb(197,0,66)", // TODO: Error buttons
 
