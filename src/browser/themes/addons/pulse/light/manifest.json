@@ -99,11 +99,10 @@
       "arrowpanel_border_radius": "16px",
       "arrowpanel_menuitem_border_radius": "8px",
 
-      "panel_hover": "color-mix(in srgb, currentColor 12%, transparent)",
-      "panel_active": "color-mix(in srgb, currentColor 20%, transparent)",
-      "panel_active_darker": "color-mix(in srgb, currentColor 27%, transparent)",
-      "toolbar_field_icon_opacity": "0.72",
-      "input_border_color": "color-mix(in srgb, currentColor 41%, transparent)",
+      "panel_hover": "color-mix(in srgb, currentColor 9%, transparent)",
+      "panel_active": "color-mix(in srgb, currentColor 14%, transparent)",
+      "panel_active_darker": "color-mix(in srgb, currentColor 25%, transparent)",
+      "toolbar_field_icon_opacity": "1",
 
       "tab_rounding_size": "16px",
       "tab_rounding_size_neg": "-16px",
@@ -111,7 +110,7 @@
       "tab_border_radius": "0",
       "tab_padding_inline": "0",
 
-      "gradient": "linear-gradient(var(--gradient-orientation), hsla(212, 97%, 54%, 1) 0%, hsla(295, 70%, 58%, 1) 100%)",
+      "gradient": "linear-gradient(var(--gradient-orientation), var(--pulse-primary-500) 0%, var(--pulse-secondary-500) 100%)",
       "zap_gradient": "var(--gradient)",
 
       "toolbar_button_border_radius": "8px"
