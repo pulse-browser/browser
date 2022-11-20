@@ -134,6 +134,29 @@ tab.tabbrowser-tab:nth-child(1) {
   transform: rotate(180deg);
 }
 
+/* Show the curve next to the sidebar panel */
+#sidebar-box[checked] ~ #appcontent::before {
+  content: '';
+
+  background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
+  background-size: cover;
+  color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(180deg);
+}
+
+#appcontent {
+  position: relative;
+}
+
 /* =========================================================================- */
 /* General sidebar stuff */
 .sidebar-splitter {
