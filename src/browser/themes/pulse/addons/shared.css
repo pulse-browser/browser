@@ -157,6 +157,23 @@ tab.tabbrowser-tab:nth-child(1) {
   position: relative;
 }
 
+/* Curve up at the top of the tabs */
+#sidebar-icons[checked]::before {
+  content: '';
+  background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
+  background-size: cover;
+  color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  width: var(--tab-rounding-size);
+  height: var(--tab-rounding-size);
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotate(-90deg);
+}
+
 /* =========================================================================- */
 /* General sidebar stuff */
 .sidebar-splitter {
