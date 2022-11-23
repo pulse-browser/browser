@@ -18,7 +18,7 @@ welcome-dialog-theme-action = Continue
 welcome-dialog-search = Chose a search engine
 welcome-dialog-search-action = Next
 
-welcome-dialog-sidebar = Choose your Sidebar Settigns
+welcome-dialog-sidebar = Choose your Sidebar Settings
 welcome-dialog-sidebar-subtext = Some users like to have a sidebar, others don't. It's all up to you.
 welcome-dialog-sidebar-checkbox = Enable Sidebar
 welcome-dialog-sidebar-keeptabsenabled-checkbox = Keep sidebar tabs active even when closed
