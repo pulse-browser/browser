@@ -151,32 +151,6 @@ class Themes extends Page {
   }
 }
 
-class Sidebar extends Page {
-  constructor(id) {
-    super(id)
-
-    this.loadSidebar()
-  }
-
-  async loadSidebar() {
-    this.enabled = document.getElementById('sidebarEnabled')
-    this.keepTabsActive = document.getElementById('sidebarKeepTabsActive')
-
-    this.enabled.addEventListener('change', () => {
-      //change browser preference pulse.sidebar.enabled
-      Services.prefs.setBoolPref('pulse.sidebar.enabled', this.enabled.checked)
-    })
-
-    this.keepTabsActive.addEventListener('change', () => {
-      //change browser preference pulse.sidebar.keeptabsactive.enabled
-      Services.prefs.setBoolPref(
-        'pulse.sidebar.keeptabsactive.enabled',
-        this.keepTabsActive.checked
-      )
-    })
-  }
-}
-
 class Search extends Page {
   constructor(id) {
     super(id)
@@ -292,5 +266,4 @@ const pages = new Pages([
   new Import('import'),
   new Themes('theme'),
   new Search('search'),
-  new Sidebar('sidebar'),
 ])
