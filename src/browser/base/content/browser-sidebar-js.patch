@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f1662c3a7 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af0247ed4c2d4 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -205,18 +205,19 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f
        }
      }
    },
-@@ -485,6 +588,10 @@ var SidebarUI = {
+@@ -485,6 +588,11 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
 +    if (this.keepTabsActivePref && this.loadedSidebars.includes(commandID)) {
++      console.log("returned");
 +      return;
 +    }
-+    
++    console.log("it went on");
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +630,7 @@ var SidebarUI = {
+@@ -523,6 +631,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -224,7 +225,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f
        return true;
      });
    },
-@@ -546,10 +654,29 @@ var SidebarUI = {
+@@ -546,10 +655,29 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -254,7 +255,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +686,31 @@ var SidebarUI = {
+@@ -559,6 +687,31 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -286,7 +287,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +722,16 @@ var SidebarUI = {
+@@ -570,13 +723,16 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -301,11 +302,11 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f
        this.browser.setAttribute("src", url); // kick off async load
 -
 -      if (this.browser.contentDocument.location.href != url) {
-+      if (!this.loadedSidebars.includes(commandID)) {
++      if (!this.loadedSidebars.includes(commandID) && this.keepTabsActivePref || this.browser.contentDocument.location.href != url && !this.keepTabsActivePref) {
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +770,45 @@ var SidebarUI = {
+@@ -615,22 +771,45 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -358,7 +359,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4f77ac45a4f7e551c527457551dade0f
    },
  
    /**
-@@ -638,25 +816,112 @@ var SidebarUI = {
+@@ -638,25 +817,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
