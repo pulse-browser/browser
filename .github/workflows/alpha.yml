@@ -316,10 +316,15 @@ jobs:
         run: yarn imp
 
       - name: Build
-        run: yarn build -- --skip-patch-check
+        shell: powershell.exe C:\mozilla-build\start-shell.bat "{0}"
+        run: |
+          cd /c/actions-runner/_work/browser/browser # mozillabuild defaults to ~
+          yarn build --skip-patch-check
 
       - name: Package
+        shell: powershell.exe C:\mozilla-build\start-shell.bat "{0}"
         run: |
+          cd /c/actions-runner/_work/browser/browser # mozillabuild defaults to ~
           yarn package
           mv ./dist/output.mar windows.mar
 
@@ -402,8 +407,13 @@ jobs:
 
       - name: Install flatpak builder
         run: | 
-           sudo apt-get install -y flatpak-builder 
-
+           sudo apt-get install -y flatpak-builder
+     
+      - name: Install build dependancies
+        run: |
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08 --assumeyes
+  
       - name: Import GPG keys
         run: |
           mkdir ~/.gpg

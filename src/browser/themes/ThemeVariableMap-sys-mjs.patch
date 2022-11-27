@@ -1,0 +1,15 @@
+diff --git a/browser/themes/ThemeVariableMap.sys.mjs b/browser/themes/ThemeVariableMap.sys.mjs
+index f2fd99193ddd0c24b7ad3ec953216973b162aaed..2d07c599152d8b0329f84a6cb626a1a40fdd241d 100644
+--- a/browser/themes/ThemeVariableMap.sys.mjs
++++ b/browser/themes/ThemeVariableMap.sys.mjs
+@@ -126,7 +126,9 @@ export const ThemeVariableMap = [
+     "--sidebar-background-color",
+     {
+       lwtProperty: "sidebar",
+-      optionalElementID: "sidebar-box",
++      // Pulse: we want to use the sidebar color in the sidebar tabs, which are
++      // under the `browser` parent rather than the `sidebar-box` parent
++      optionalElementID: "browser",
+       processColor(rgbaChannels, element) {
+         if (!rgbaChannels) {
+           element.removeAttribute("lwt-sidebar");

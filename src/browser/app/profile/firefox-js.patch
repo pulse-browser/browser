@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index aac068a8177abe5031152e7b567b45fd2b5ef4a2..b0ed4a98f8d832b924b6b1a93eda75d746984613 100644
+index 14ecab77149f5645e24c8bffff57c223f64730bb..09bf8bebc166fb1e316e2c0c425f8117468281fc 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -19,32 +19,36 @@ index aac068a8177abe5031152e7b567b45fd2b5ef4a2..b0ed4a98f8d832b924b6b1a93eda75d7
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
-@@ -773,7 +774,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
+@@ -774,7 +775,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
  pref("browser.tabs.tooltipsShowPidAndActiveness", false);
  #endif
  
 -pref("browser.tabs.firefox-view", true);
 +pref("browser.tabs.firefox-view", false);
  pref("browser.tabs.firefox-view.logLevel", "Warn");
+ pref("browser.tabs.firefox-view.notify-for-tabs", false);
  
- // allow_eval_* is enabled on Firefox Desktop only at this
-@@ -1937,7 +1938,6 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
+@@ -1945,7 +1946,7 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
  pref("browser.vpn_promo.disallowed_regions", "ae,by,cn,cu,iq,ir,kp,om,ru,sd,sy,tm,tr,ua");
  
  // Default to enabling VPN promo messages to be shown when specified and allowed
 -pref("browser.vpn_promo.enabled", true);
++pref("browser.vpn_promo.enabled", false);
  // Only show vpn card to certain regions. Comma separated string of two letter ISO 3166-1 country codes.
  // The most recent list of supported countries can be found at https://support.mozilla.org/en-US/kb/mozilla-vpn-countries-available-subscribe
  // The full list of supported country codes can also be found at https://github.com/mozilla/bedrock/search?q=VPN_COUNTRY_CODES
-@@ -2060,7 +2060,6 @@ pref("browser.tabs.crashReporting.includeURL", false);
+@@ -2066,10 +2067,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
+ pref("browser.tabs.crashReporting.sendReport", true);
+ pref("browser.tabs.crashReporting.includeURL", false);
  
- // If true, unprivileged extensions may use experimental APIs on
- // nightly and developer edition.
+-// If true, unprivileged extensions may use experimental APIs on
+-// nightly and developer edition.
 -pref("extensions.experiments.enabled", false);
- 
+-
  #if defined(XP_LINUX) || defined(XP_WIN)
    // Allows us to adjust the priority of child processes at the OS level
-@@ -2108,13 +2107,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
+   pref("dom.ipc.processPriorityManager.enabled", true);
+@@ -2116,13 +2113,6 @@ pref("browser.migrate.chrome.history.limit", 2000);
  pref("browser.migrate.chrome.history.maxAgeInDays", 180);
  pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
  
@@ -58,13 +62,17 @@ index aac068a8177abe5031152e7b567b45fd2b5ef4a2..b0ed4a98f8d832b924b6b1a93eda75d7
  // Enable Pocket button home panel for non link pages.
  pref("extensions.pocket.showHome", true);
  
-@@ -2243,9 +2235,6 @@ pref("toolkit.coverage.enabled", false);
+@@ -2251,9 +2241,10 @@ pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
  // Discovery prefs
 -pref("browser.discovery.enabled", true);
 -pref("browser.discovery.containers.enabled", true);
 -pref("browser.discovery.sites", "addons.mozilla.org");
++//
++// From memory, these connect to Google Analytics, so they are a no go
++pref("browser.discovery.enabled", false);
++pref("browser.discovery.containers.enabled", false);
  
  pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
  pref("browser.engagement.downloads-button.has-used", false);

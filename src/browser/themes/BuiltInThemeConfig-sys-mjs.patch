@@ -1,8 +1,8 @@
-diff --git a/browser/themes/BuiltInThemeConfig.jsm b/browser/themes/BuiltInThemeConfig.jsm
-index 05bc07ac54fa43dd6bcce1f4ab619bc054cb8084..8ace74cac976889ca0e92910388fb5128436d013 100644
---- a/browser/themes/BuiltInThemeConfig.jsm
-+++ b/browser/themes/BuiltInThemeConfig.jsm
-@@ -32,6 +32,20 @@ const BuiltInThemeConfig = new Map([
+diff --git a/browser/themes/BuiltInThemeConfig.sys.mjs b/browser/themes/BuiltInThemeConfig.sys.mjs
+index 9c93c0d39ad11d95ecb4ad119d3c21da2528af23..e00efac497130363a41c0ecdbe07df761076b368 100644
+--- a/browser/themes/BuiltInThemeConfig.sys.mjs
++++ b/browser/themes/BuiltInThemeConfig.sys.mjs
+@@ -32,6 +32,20 @@ export const BuiltInThemeConfig = new Map([
        path: "resource://builtin-themes/dark/",
      },
    ],

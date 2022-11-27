@@ -51,6 +51,7 @@ For bug reports, support, and just having a friendly chat with the team, feel fr
 ## 🏗️ Credits
 
 - Dot HQ's [melon build tool](https://github.com/dothq/melon), which was extracted from Dot Browser. They have been driving development of firefox forks and have made incredible progress. - [MPL-2.0 License](https://github.com/dothq/melon/blob/main/LICENSE)
+  - We maintain our own fork, [Gluon](https://github.com/pulse-browser/gluon) which is used by this project
 - The [BetterFox](https://github.com/yokoffing/Better-Fox) user.js tweaks, which are used throughout the browser. - [MIT License](https://github.com/yokoffing/Better-Fox/blob/master/LICENSE) 
 - [uBlock](https://github.com/gorhill/uBlock) extension from GitHub for blocking ads. - [GNU General Public License v3.0](https://github.com/gorhill/uBlock/blob/master/LICENSE.txt)
 - [Firefox-QR-Code-Generator](https://github.com/pulse-browser/firefox-qr-generator) extension from GitHub for a QR Code generator. - [MPL-2.0 License](https://github.com/pulse-browser/firefox-qr-generator/blob/main/LICENSE)
