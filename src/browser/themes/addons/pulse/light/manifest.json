@@ -32,7 +32,7 @@
       "toolbar": "rgb(242, 241, 244)", // Grey 100
       "toolbar_top_separator": "transparent",
       "toolbar_bottom_separator": "rgb(242, 241, 244)", // Grey 100
-      "toolbar_field": "rgb(217, 214, 220)" , // Grey 200
+      "toolbar_field": "rgb(217, 214, 220)", // Grey 200
       "toolbar_field_text": "rgb(26, 23, 28)", // Grey 900
       "toolbar_field_border": "transparent",
       "toolbar_field_focus": "rgb(217, 214, 220)", // Grey 200
@@ -96,16 +96,16 @@
       "pulse_secondary_100": "rgb(249, 216, 252)"
     },
     "properties": {
-      "arrowpanel_border_radius": "16px",
-      "arrowpanel_menuitem_border_radius": "8px",
+      "arrowpanel_border_radius": "4px",
+      "arrowpanel_menuitem_border_radius": "4px",
 
       "panel_hover": "color-mix(in srgb, currentColor 9%, transparent)",
       "panel_active": "color-mix(in srgb, currentColor 14%, transparent)",
       "panel_active_darker": "color-mix(in srgb, currentColor 25%, transparent)",
       "toolbar_field_icon_opacity": "1",
 
-      "tab_rounding_size": "16px",
-      "tab_rounding_size_neg": "-16px",
+      "tab_rounding_size": "8px",
+      "tab_rounding_size_neg": "-8px",
       "tab_block_margin": "0",
       "tab_border_radius": "0",
       "tab_padding_inline": "0",
@@ -113,7 +113,7 @@
       "gradient": "linear-gradient(var(--gradient-orientation), var(--pulse-primary-500) 0%, var(--pulse-secondary-500) 100%)",
       "zap_gradient": "var(--gradient)",
 
-      "toolbar_button_border_radius": "8px"
+      "toolbar_button_border_radius": "4px"
     }
   },
 
