@@ -1,8 +1,8 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index 3d4035690d38f4d851cc86749ebeec7b7ca9aaf2..e9136a52427d7f3ada87803373f16c20a25b066a 100644
+index fdf515554d67c5082b0d9c73b72533e06a085030..8ebf00f65ab6d662110a0ce211f05958364cedcb 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
-@@ -125,6 +125,15 @@
+@@ -122,6 +122,24 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  
@@ -13,6 +13,15 @@ index 3d4035690d38f4d851cc86749ebeec7b7ca9aaf2..e9136a52427d7f3ada87803373f16c20
 +  <checkbox id="sidebarVisible"
 +    preference="pulse.sidebar.enabled"
 +    data-l10n-id="preferences-sidebar-visible"/>
++</groupbox>
++
++<!-- Vertical tabs -->
++<groupbox id="verticalTabsGroup" data-category="paneGeneral" hidden="true">
++  <label><html:h2 data-l10n-id="preferences-vertical-tabs-header"/></label>
++
++  <checkbox id="verticalTabsGroup"
++    preference="pulse.tabs.vertical"
++    data-l10n-id="preferences-vertical-tabs-enabled"/>
 +</groupbox>
 +
  <!-- Website appearance -->

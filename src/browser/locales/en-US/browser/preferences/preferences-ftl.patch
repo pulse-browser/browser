@@ -1,8 +1,8 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index b10403800c7aafe97471474f6bddb6098ce21a82..b39593816149a71a1e6b40626e304e367359fd02 100644
+index d7b87eacb425cb277e226261c7d994e084100a5d..7b8b924fa5a3456bc1c36b8f6fe1e9f378630782 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
-@@ -1413,3 +1413,11 @@ httpsonly-radio-disabled =
+@@ -1424,3 +1424,12 @@ httpsonly-radio-disabled =
  desktop-folder-name = Desktop
  downloads-folder-name = Downloads
  choose-download-folder-title = Choose Download Folder:
@@ -10,7 +10,8 @@ index b10403800c7aafe97471474f6bddb6098ce21a82..b39593816149a71a1e6b40626e304e36
 +## Pulse browser: Settings entries localization
 +preferences-sidebar-header = Sidebar
 +preferences-sidebar-visible =
-+    .label = Show sidebar tabs 
++    .label = Show sidebar tabs
 +
-+preferences-sidebar-extensions-visible =
-+    .label = Show available extensions on the sidebar
++preferences-vertical-tabs-header = Vertical Tabs
++preferences-vertical-tabs-enabled =
++    .label = Use vertical tabs
