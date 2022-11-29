@@ -10,6 +10,11 @@
 }
 
 #browser #TabsToolbar:-moz-lwtheme {
+  background-image: var(--lwt-additional-images);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center;
+  background-size: cover;
+
   background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
