@@ -1,5 +1,5 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index d7b87eacb425cb277e226261c7d994e084100a5d..7b8b924fa5a3456bc1c36b8f6fe1e9f378630782 100644
+index d7b87eacb425cb277e226261c7d994e084100a5d..fb2a3d6f1c1c37673f7e58a785e96e8c9b246c14 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
 @@ -1424,3 +1424,12 @@ httpsonly-radio-disabled =
@@ -14,4 +14,4 @@ index d7b87eacb425cb277e226261c7d994e084100a5d..7b8b924fa5a3456bc1c36b8f6fe1e9f3
 +
 +preferences-vertical-tabs-header = Vertical Tabs
 +preferences-vertical-tabs-enabled =
-+    .label = Use vertical tabs
++    .label = Use vertical tabs (Early Access)
