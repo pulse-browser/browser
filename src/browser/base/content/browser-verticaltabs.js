@@ -51,8 +51,6 @@ var VerticalTabs = {
   },
 
   enableVerticalTabs() {
-    console.log('enableVerticalTabs')
-
     this.browserContainer?.prepend(this.tabsToolbar || '')
 
     this.arrowScrollbox?.setAttribute('orient', 'vertical')
@@ -67,8 +65,6 @@ var VerticalTabs = {
   },
 
   disableVerticalTabs() {
-    console.log('disableVerticalTabs')
-
     this.titlebarContainer?.prepend(this.tabsToolbar || '')
 
     this.arrowScrollbox?.setAttribute('orient', 'horizontal')
