@@ -13,6 +13,15 @@
   width: 100%;
 }
 
+/* Put the new tab button on the bottom */
+#browser #TabsToolbar #TabsToolbar-customization-target {
+  -moz-box-orient: vertical;
+}
+
+#browser #TabsToolbar #new-tab-button {
+  margin: 8px;
+}
+
 /* Work around for tab closing animation whilst in vertical tabs. Without this
     the clean up code (created by 608589) will not work correctly */
 /* TODO: This means the old tabs stick around for 3 seconds rather than
