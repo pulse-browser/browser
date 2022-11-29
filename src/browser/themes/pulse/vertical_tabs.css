@@ -1,0 +1,26 @@
+#browser #TabsToolbar .titlebar-spacer,
+#browser #TabsToolbar .titlebar-buttonbox-container,
+#browser #TabsToolbar #alltabs-button {
+  display: none;
+}
+
+#browser #TabsToolbar {
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+#browser #TabsToolbar .tabbrowser-tab {
+  max-width: initial;
+  width: 100%;
+}
+
+/* Work around for tab closing animation whilst in vertical tabs. Without this
+    the clean up code (created by 608589) will not work correctly */
+/* TODO: This means the old tabs stick around for 3 seconds rather than
+    disappearing instantly. Need to find the root cause of this */
+#browser #TabsToolbar .tabbrowser-tab:not([pinned], [fadein]) {
+  max-width: 0.1px;
+}
+
+#browser #TabsToolbar tab.tabbrowser-tab:nth-child(1) {
+  margin-left: 0;
+}
