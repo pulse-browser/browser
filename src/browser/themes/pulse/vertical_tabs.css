@@ -6,6 +6,7 @@
 
 #browser #TabsToolbar {
   background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+  max-width: 350px;
 }
 
 #browser #TabsToolbar .tabbrowser-tab {
@@ -32,4 +33,20 @@
 
 #browser #TabsToolbar tab.tabbrowser-tab:nth-child(1) {
   margin-left: 0;
+}
+
+/* Border radius up at the top left of the browser when vertical tabs are enabled */
+@media (-moz-gtk-csd-available) {
+  :root[tabsintitlebar][sizemode='normal']:not([gtktiledwindow='true'])
+    #navigator-toolbox-background[verticaltabs='true']:-moz-lwtheme
+    #nav-bar {
+    border-top-left-radius: env(-moz-gtk-csd-titlebar-radius);
+    border-top-right-radius: env(-moz-gtk-csd-titlebar-radius);
+  }
+}
+
+#navigator-toolbox-background:not([verticaltabs='true'])
+  #nav-bar
+  .titlebar-buttonbox-container {
+  display: none;
 }
