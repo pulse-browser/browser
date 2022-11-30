@@ -26,11 +26,16 @@
 #browser #TabsToolbar .tabbrowser-tab {
   max-width: initial;
   width: 100%;
+
+  /* Stops the tabs from getting squished */
+  min-height: unset;
 }
 
 /* Put the new tab button on the bottom */
 #browser #TabsToolbar #TabsToolbar-customization-target {
   -moz-box-orient: vertical;
+  /* Not sure why, but this forces the scroll box to scroll */
+  max-height: 100%;
 }
 
 /* Work around for tab closing animation whilst in vertical tabs. Without this
