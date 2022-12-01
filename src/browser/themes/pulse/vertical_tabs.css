@@ -24,11 +24,14 @@
 }
 
 #browser #TabsToolbar .tabbrowser-tab {
-  max-width: initial;
+  max-width: unset;
   width: 100%;
 
   /* Stops the tabs from getting squished */
   min-height: unset;
+
+  /* Animate tabs out vertically */
+  transition: min-height 100ms ease-out, max-height 100ms ease-out;
 }
 
 /* Put the new tab button on the bottom */
@@ -40,10 +43,12 @@
 
 /* Work around for tab closing animation whilst in vertical tabs. Without this
     the clean up code (created by 608589) will not work correctly */
-/* TODO: This means the old tabs stick around for 3 seconds rather than
-    disappearing instantly. Need to find the root cause of this */
+/* TODO: This causes tabs to stick around for longer and trigger a clean up
+    function. This isn't that performant, so we should look into fixing it in
+    the future */
 #browser #TabsToolbar .tabbrowser-tab:not([pinned], [fadein]) {
   max-width: 0.1px;
+  max-height: 0.1px;
 }
 
 #browser #TabsToolbar tab.tabbrowser-tab:nth-child(1) {
