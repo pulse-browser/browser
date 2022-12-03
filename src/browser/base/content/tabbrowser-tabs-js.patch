@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/tabbrowser-tabs.js b/browser/base/content/tabbrowser-tabs.js
-index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..19d01a0904d372c5dc2471a874f9577ac79f0b26 100644
+index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..dfd4c47e9747736f352f4f49ae2c35a66f3f8e14 100644
 --- a/browser/base/content/tabbrowser-tabs.js
 +++ b/browser/base/content/tabbrowser-tabs.js
 @@ -517,19 +517,40 @@
@@ -127,24 +127,15 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..19d01a0904d372c5dc2471a874f9577a
        var dt = event.dataTransfer;
        var dropEffect = dt.dropEffect;
        var draggedTab;
-@@ -717,7 +753,7 @@
-         if (oldTranslateX && oldTranslateX != newTranslateX && !gReduceMotion) {
+@@ -714,7 +750,7 @@
+           incrementDropIndex = false;
+         }
+ 
+-        if (oldTranslateX && oldTranslateX != newTranslateX && !gReduceMotion) {
++        if (oldTranslateX && oldTranslateX != newTranslateX && !(gReduceMotion || verticalTabs)) {
            for (let tab of movingTabs) {
              tab.setAttribute("tabdrop-samewindow", "true");
--            tab.style.transform = "translateX(" + newTranslateX + "px)";
-+            tab.style.transform = (verticalTabs ? "translateY" : "translateX") + "(" + newTranslateX + "px)";
-             let postTransitionCleanup = () => {
-               tab.removeAttribute("tabdrop-samewindow");
- 
-@@ -731,7 +767,7 @@
- 
-               gBrowser.syncThrobberAnimations(tab);
-             };
--            if (gReduceMotion) {
-+            if (gReduceMotion || verticalTabs) {
-               postTransitionCleanup();
-             } else {
-               let onTransitionEnd = transitionendEvent => {
+             tab.style.transform = "translateX(" + newTranslateX + "px)";
 @@ -1519,6 +1555,11 @@
      }
  
