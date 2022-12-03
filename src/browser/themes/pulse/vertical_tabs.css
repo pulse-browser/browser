@@ -27,8 +27,9 @@
   max-width: unset;
   width: 100%;
 
-  /* Stops the tabs from getting squished */
+  /* Stops the tabs from getting squished or stretched */
   min-height: unset;
+  max-height: var(--tab-min-height);
 
   /* Animate tabs out vertically */
   transition: min-height 100ms ease-out, max-height 100ms ease-out;
@@ -37,6 +38,7 @@
 /* Put the new tab button on the bottom */
 #browser #TabsToolbar #TabsToolbar-customization-target {
   -moz-box-orient: vertical;
+  height: 100%;
   /* Not sure why, but this forces the scroll box to scroll */
   max-height: 100%;
 }
