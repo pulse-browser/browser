@@ -1,8 +1,19 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index fdf515554d67c5082b0d9c73b72533e06a085030..8ebf00f65ab6d662110a0ce211f05958364cedcb 100644
+index fdf515554d67c5082b0d9c73b72533e06a085030..fffba209eb127bd0052bcb0864cc001f1f3c5c75 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
-@@ -122,6 +122,24 @@
+@@ -61,6 +61,10 @@
+           hidden="true">
+     <label><html:h2 data-l10n-id="tabs-group-header"/></label>
+ 
++    <checkbox id="verticalTabsGroup"
++              preference="pulse.tabs.vertical"
++              data-l10n-id="preferences-vertical-tabs-enabled"/>
++
+     <checkbox id="ctrlTabRecentlyUsedOrder" data-l10n-id="ctrl-tab-recently-used-order"
+               preference="browser.ctrlTab.sortByRecentlyUsed"/>
+ 
+@@ -122,6 +126,15 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  
@@ -13,15 +24,6 @@ index fdf515554d67c5082b0d9c73b72533e06a085030..8ebf00f65ab6d662110a0ce211f05958
 +  <checkbox id="sidebarVisible"
 +    preference="pulse.sidebar.enabled"
 +    data-l10n-id="preferences-sidebar-visible"/>
-+</groupbox>
-+
-+<!-- Vertical tabs -->
-+<groupbox id="verticalTabsGroup" data-category="paneGeneral" hidden="true">
-+  <label><html:h2 data-l10n-id="preferences-vertical-tabs-header"/></label>
-+
-+  <checkbox id="verticalTabsGroup"
-+    preference="pulse.tabs.vertical"
-+    data-l10n-id="preferences-vertical-tabs-enabled"/>
 +</groupbox>
 +
  <!-- Website appearance -->
