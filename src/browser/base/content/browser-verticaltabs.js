@@ -39,7 +39,13 @@ var VerticalTabs = {
   /** @type {HTMLElement?} */
   tabBrowserTabs: null,
 
+  _initialized: false,
+
   init() {
+    if (this._initialized) {
+      return
+    }
+
     this.arrowScrollbox = document.getElementById('tabbrowser-arrowscrollbox')
     this.tabBrowserTabs = document.getElementById('tabbrowser-tabs')
 
@@ -48,6 +54,8 @@ var VerticalTabs = {
     if (this.verticalTabsEnabled) {
       this.enableVerticalTabs()
     }
+
+    this._initialized = true
   },
 
   enableVerticalTabs() {
