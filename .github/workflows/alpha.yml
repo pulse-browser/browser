@@ -412,7 +412,7 @@ jobs:
       - name: Install build dependancies
         run: |
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08
+          sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08 -y
   
       - name: Import GPG keys
         run: |
