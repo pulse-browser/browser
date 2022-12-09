@@ -11,7 +11,7 @@ jobs:
       build_date: ${{ steps.data.outputs.builddate }}
       version: ${{ steps.data.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
           token: ${{ secrets.ROBOT_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -94,7 +94,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Save sccache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         continue-on-error: false
         with:
           path: /home/runner/.cache/sccache
@@ -161,7 +161,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -189,7 +189,7 @@ jobs:
           python-version: '3.9'
 
       - name: Save sccache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         continue-on-error: false
         with:
           path: ~/Library/Caches/Mozilla.sccache
@@ -247,7 +247,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -286,7 +286,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
