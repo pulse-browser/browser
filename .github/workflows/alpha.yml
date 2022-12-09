@@ -35,8 +35,8 @@ jobs:
         id: data
         shell: bash
         run: |
-          echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
-          echo "::set-output name=version::$(gluon get version | xargs)"
+          echo "builddate=$(date +"%Y-%m-%d")" >> $GITHUB_STATE
+          echo "version=$(gluon get version | xargs)" >> $GITHUB_STATE
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
