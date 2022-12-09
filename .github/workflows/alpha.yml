@@ -100,14 +100,6 @@ jobs:
           path: /home/runner/.cache/sccache
           key: ${{ runner.os }}-sccache
 
-      - name: Get System Info
-        run: |
-          llc --version
-          ls /usr/lib/llvm-10/bin
-          wasm-ld --version
-          cargo --version
-          ls /opt/wasi-sdk/share/wasi-sysroot
-
       - name: Setup gluon
         run: |
           yarn
