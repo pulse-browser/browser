@@ -90,11 +90,6 @@ tab.tabbrowser-tab:nth-child(1) {
   overflow-clip-margin: 8px !important;
 }
 
-/* #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[multiselected="true"]:-moz-lwtheme, #tabbrowser-tabs:not([movingtab]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab > .tab-stack > .tab-background[selected="true"]:-moz-lwtheme {
-  -moz-context-properties: fill;
-  fill: var(--lwt-selected-tab-background-color);
-} */
-
 .tab-background[selected='true']::before,
 .tab-background[selected='true']::after {
   content: '';
@@ -133,6 +128,11 @@ tab.tabbrowser-tab:nth-child(1) {
   width: auto !important;
   height: auto !important;
   border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+/* Vertical tab new button stuff */
+#browser #TabsToolbar #new-tab-button {
+  margin: 8px;
 }
 
 /* ========================================================================== */

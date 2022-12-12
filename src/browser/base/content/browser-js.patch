@@ -1,0 +1,12 @@
+diff --git a/browser/base/content/browser.js b/browser/base/content/browser.js
+index a9d4fc4abe1d3b5d5213d3afd90fd0128ee0d032..f2eb4888521deefa7da2b7666ec6012af2a27a4e 100644
+--- a/browser/base/content/browser.js
++++ b/browser/base/content/browser.js
+@@ -1841,6 +1841,7 @@ var gBrowserInit = {
+     gPrivateBrowsingUI.init();
+     BrowserSearch.init();
+     BrowserPageActions.init();
++    VerticalTabs.init();
+     if (gToolbarKeyNavEnabled) {
+       ToolbarKeyboardNavigator.init();
+     }
