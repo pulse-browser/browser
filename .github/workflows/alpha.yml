@@ -385,6 +385,12 @@ jobs:
           token: ${{ secrets.ROBOT_TOKEN }}
           submodules: recursive
 
+      - name: Ensure repo is on main branch
+        run: |
+          cd repo
+          git checkout main
+          git pull
+
       - name: Install flatpak builder
         run: | 
            sudo apt-get update
@@ -414,3 +420,11 @@ jobs:
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: ./repo
+          
+      - name: Update repo version in package
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 📦 Upload flatpak for ${{ needs.build-data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+          repository: .
