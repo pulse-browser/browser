@@ -1,0 +1,12 @@
+diff --git a/toolkit/content/aboutTelemetry.xhtml b/toolkit/content/aboutTelemetry.xhtml
+index 8cddb4661741bc57cebb1506150ba3172d08259e..2b9422812892c3659f3263b2586f495c6f7df2d5 100644
+--- a/toolkit/content/aboutTelemetry.xhtml
++++ b/toolkit/content/aboutTelemetry.xhtml
+@@ -17,6 +17,7 @@
+     <script src="chrome://global/content/aboutTelemetry.js"/>
+     <link rel="localization" href="branding/brand.ftl"/>
+     <link rel="localization" href="toolkit/about/aboutTelemetry.ftl"/>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+ 
+   <body id="body">

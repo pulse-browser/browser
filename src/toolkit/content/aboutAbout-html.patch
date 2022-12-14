@@ -1,0 +1,13 @@
+diff --git a/toolkit/content/aboutAbout.html b/toolkit/content/aboutAbout.html
+index cb38ea566330765ec0fc18c5006b748c758d5177..20fb0d3a85eb4c5b9e5d2f94f229c09bd2740bcf 100644
+--- a/toolkit/content/aboutAbout.html
++++ b/toolkit/content/aboutAbout.html
+@@ -15,7 +15,7 @@
+   <link rel="localization" href="toolkit/about/aboutAbout.ftl">
+   <link rel="icon" type="image/png" href="chrome://branding/content/icon32.png">
+   <script src="chrome://global/content/aboutAbout.js"></script>
+-
++  <script src="chrome://browser/content/contentTheme.js"></script>
+ </head>
+ 
+ <body>

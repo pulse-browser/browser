@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f09e37fc42f7754f7f3687884ead25124c1b2076..e1833bbfd8a8ed7da767349f886d554f3dd795f3 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..ef82cb7bf931d7601c2116ee0d1828d6aa593cae 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -165,7 +165,7 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..e1833bbfd8a8ed7da767349f886d554f
        }
      }
    },
-@@ -573,6 +652,10 @@ var SidebarUI = {
+@@ -570,6 +649,13 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -173,10 +173,13 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..e1833bbfd8a8ed7da767349f886d554f
 +      // take place (adapted from dot browser, se below)
 +      this._box.style.marginLeft = "0px";
 +
++      // Pulse: Add checked to the sidebar-icons class to enable more css latter
++      this._sidebarIcons.setAttribute("checked", "true");
++
        let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
        this.title = title;
        // Keep the title element in sync with any l10n changes.
-@@ -618,6 +701,26 @@ var SidebarUI = {
+@@ -615,6 +701,27 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -198,12 +201,21 @@ index f09e37fc42f7754f7f3687884ead25124c1b2076..e1833bbfd8a8ed7da767349f886d554f
 +      this._splitter.hidden = true;
 +
 +      this._box.removeAttribute("checked");
++      this._sidebarIcons.removeAttribute("checked");
 +    }, 170);
 +
      // Replace the document currently displayed in the sidebar with about:blank
      // so that we can free memory by unloading the page. We need to explicitly
      // create a new content viewer because the old one doesn't get destroyed
-@@ -641,25 +744,112 @@ var SidebarUI = {
+@@ -625,6 +732,7 @@ var SidebarUI = {
+ 
+     this._box.removeAttribute("checked");
+     this._box.hidden = this._splitter.hidden = true;
++    this._sidebarIcons.removeAttribute("checked");
+ 
+     let selBrowser = gBrowser.selectedBrowser;
+     selBrowser.focus();
+@@ -638,25 +746,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {

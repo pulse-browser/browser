@@ -1,0 +1,12 @@
+diff --git a/toolkit/components/aboutmemory/content/aboutMemory.xhtml b/toolkit/components/aboutmemory/content/aboutMemory.xhtml
+index 99955b445a5da8febe5adcdf004f687b507711af..6065110ee6ad079c368135b2d1944920f99cadca 100644
+--- a/toolkit/components/aboutmemory/content/aboutMemory.xhtml
++++ b/toolkit/components/aboutmemory/content/aboutMemory.xhtml
+@@ -22,6 +22,7 @@
+     <title>Memory Analyzer</title>
+     <link rel="stylesheet" href="chrome://global/skin/aboutMemory.css" type="text/css"/>
+     <script src="chrome://global/content/aboutMemory.js"/>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+ 
+   <body></body>

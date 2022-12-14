@@ -1,0 +1,110 @@
+diff --git a/browser/base/content/contentTheme.js b/browser/base/content/contentTheme.js
+index d634a17c2633dc2ead40082c71622fe1b7a491a2..042c8120729f6c35ad0b49b91443a88ec6ed4fe8 100644
+--- a/browser/base/content/contentTheme.js
++++ b/browser/base/content/contentTheme.js
+@@ -135,6 +135,105 @@
+         lwtProperty: "sidebar_highlight_text",
+       },
+     ],
++
++    // Pulse: Force content styles to use the current css theme!
++    // Remember to add your keys to browser/themes/ThemeVariableMap.sys.mjs
++    [
++      "--in-content-primary-button-background",
++      {
++        lwtProperty: "button_primary",
++      }
++    ],
++    [
++      "--primary-button-background-color",
++      {
++        lwtProperty: "button_primary",
++      }
++    ],
++
++    [
++      "--in-content-primary-button-background-hover",
++      {
++        lwtProperty: "button_primary_hover",
++      }
++    ],
++    [
++      "--primary-button-hover-background-color",
++      {
++        lwtProperty: "button_primary_hover",
++      }
++    ],
++
++    [
++      "--in-content-primary-button-background-active",
++      {
++        lwtProperty: "button_primary_active",
++      }
++    ],
++    [
++      "--primary-button-active-background-color",
++      {
++        lwtProperty: "button_primary_active",
++      }
++    ],
++
++    [
++      "--in-content-primary-button-text-color",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ],
++    [
++      "--primary-button-color",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ],
++
++    [
++      "--in-content-primary-button-text-color-hover",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ],
++    [
++      "--newtab-primary-action-background",
++      {
++        lwtProperty: "button_primary",
++      }
++    ],
++    [
++      "--newtab-primary-element-text-color",
++      {
++        lwtProperty: "button_primary_color",
++      }
++    ],
++
++    [
++      "--in-content-page-background",
++      {
++        lwtProperty: "ntp_background",
++      }
++    ],
++    [
++      "--bg-color",
++      {
++        lwtProperty: "ntp_background",
++      }
++    ],
++
++    [
++      "--card-background-color",
++      {
++        lwtProperty: "ntp_card_background",
++      }
++    ],
++    [
++      "--in-content-box-background",
++      {
++        lwtProperty: "ntp_card_background",
++      }
++    ],
+   ];
+ 
+   /**

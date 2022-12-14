@@ -8,7 +8,7 @@
   },
 
   "name": "Pulse Dark",
-  "description": "A clean, minimalist, dark theme",
+  "description": "Pulse's dark theme",
   "author": "Fushra",
   "version": "1.2",
 
@@ -16,54 +16,105 @@
 
   "theme": {
     "colors": {
-      "tab_background_text": "#fbfbfe",
-      "tab_selected": "rgb(43,42,51)",
-      "tab_text": "rgb(251,251,254)",
-      "icons": "rgb(251,251,254)",
-      "frame": "#1c1b22",
-      "popup": "rgb(66,65,77)",
-      "popup_text": "rgb(251,251,254)",
-      "popup_border": "rgb(82,82,94)",
-      "popup_highlight": "rgb(43,42,51)",
+      "tab_background_text": "rgb(191, 188, 194)", // Grey 300
+      "tab_selected": "rgb(26, 23, 28)", // Grey 900
+      "tab_text": "rgb(242, 241, 244)", // Grey 100
+
+      "icons": "rgb(242, 241, 244)", // Grey 100
+      "frame": "rgb(38, 34, 42)", // Grey 850
+      "popup": "rgb(38, 34, 42)", // Grey 850
+      "popup_text": "rgb(242, 241, 244)", // Grey 100
+      "popup_border": "transparent",
+      "popup_highlight": "rgb(43,42,51)", // TODO: what
       "tab_line": "transparent",
-      "toolbar": "rgb(43,42,51)",
+
+      "toolbar": "rgb(26, 23, 28)", // Grey 900
       "toolbar_top_separator": "transparent",
-      "toolbar_bottom_separator": "hsl(240, 5%, 5%)",
-      "toolbar_field": "rgb(28,27,34)",
+      "toolbar_bottom_separator": "rgb(26, 23, 28)", // Grey 900
+      "toolbar_field": "rgb(38, 34, 42)", // Grey 850
       "toolbar_field_border": "transparent",
-      "toolbar_field_text": "rgb(251,251,254)",
-      "toolbar_field_focus": "rgb(66,65,77)",
-      "toolbar_text": "rgb(251, 251, 254)",
-      "ntp_background": "rgb(43, 42, 51)",
-      "ntp_card_background": "rgb(66,65,77)",
-      "ntp_text": "rgb(251, 251, 254)",
-      "sidebar_text": "rgb(249, 249, 250)",
+      "toolbar_field_text": "rgb(242, 241, 244)", // Grey 100
+      "toolbar_field_focus": "rgb(51, 47, 55)", // Grey 800
+      "toolbar_text": "rgb(191, 188, 194)", // Grey 300
+
+      "ntp_background": "rgb(38, 34, 42)", // Grey 850
+      "ntp_card_background": "rgb(51, 47, 55)", // Grey 800
+      "ntp_text": "rgb(242, 241, 244)", // Grey 100
+
+      "sidebar_text": "rgb(242, 241, 244)", // Grey 100
       "sidebar_border": "transparent",
-      "button": "rgb(43,42,51)",
-      "button_hover": "rgb(82,82,94)",
-      "button_active": "rgb(91,91,102)",
-      "button_primary": "rgb(0, 221, 255)",
-      "button_primary_hover": "rgb(128, 235, 255)",
-      "button_primary_active": "rgb(170, 242, 255)",
-      "button_primary_color": "rgb(43, 42, 51)",
-      "error_text_color": "rgb(255, 154, 162)",
-      "input_background": "#42414D",
-      "input_color": "rgb(251,251,254)",
-      "input_border": "#8f8f9d",
-      "input_border_error": "rgb(255, 132, 138)",
-      "zoom_controls": "rgb(74,74,85)",
-      "autocomplete_popup_separator": "rgb(82,82,94)",
-      "appmenu_update_icon_color": "#54FFBD",
-      "appmenu_info_icon_color": "#80EBFF",
-      "tab_icon_overlay_stroke": "rgb(66,65,77)",
-      "tab_icon_overlay_fill": "rgb(251,251,254)"
+
+      "button": "rgb(51, 47, 55)", // Grey 800
+      "button_hover": "rgb(77, 73, 80)", // Grey 700
+      "button_active": "rgb(101, 99, 105)", // Grey 600
+      "button_primary": "rgba(130, 64, 181, 0.20)", // Primary 500, 20%
+      "button_primary_hover": "rgb(130, 64, 191, 0.30)", // Primary 500, 30%
+      "button_primary_active": "rgb(130, 64, 191, 0.40)", // Primary 500, 40%
+      "button_primary_color": "rgb(218, 182, 251)", // Primary 200
+
+      "error_text_color": "rgb(255, 154, 162)", // TODO: We need red / error colors
+
+      "input_background": "rgb(51, 47, 55)", // Grey 800
+      "input_color": "rgb(242, 241, 244)", // Grey 100
+      "input_border": "transparent",
+      "input_border_error": "rgb(255, 132, 138)", // TODO: We need red / error colors
+
+      "autocomplete_popup_separator": "rgb(77, 73, 80)", // Grey 700
+      "appmenu_update_icon_color": "#54FFBD", // TODO
+      "appmenu_info_icon_color": "#80EBFF", // TODO
+      "tab_icon_overlay_stroke": "rgb(66,65,77)", // TODO: What even are these?
+      "tab_icon_overlay_fill": "rgb(251,251,254)", // TODO: What even are these?
+
+      "pulse_grey_900": "rgb(26, 23, 28)",
+      "pulse_grey_850": "rgb(38, 34, 42)",
+      "pulse_grey_800": "rgb(51, 47, 55)",
+      "pulse_grey_700": "rgb(77, 73, 80)",
+      "pulse_grey_600": "rgb(101, 99, 105)",
+      "pulse_grey_500": "rgb(128, 125, 130)",
+      "pulse_grey_400": "rgb(161, 158, 163)",
+      "pulse_grey_300": "rgb(191, 188, 194)",
+      "pulse_grey_200": "rgb(217, 214, 220)",
+      "pulse_grey_100": "rgb(242, 241, 244)",
+
+      "pulse_primary_900": "rgb(27, 0, 51)",
+      "pulse_primary_800": "rgb(52, 8, 94)",
+      "pulse_primary_700": "rgb(78, 19, 134)",
+      "pulse_primary_600": "rgb(104, 41, 163)",
+      "pulse_primary_500": "rgb(130, 64, 191)",
+      "pulse_primary_400": "rgb(163, 99, 222)",
+      "pulse_primary_300": "rgb(163, 99, 222)",
+      "pulse_primary_200": "rgb(218, 182, 251)",
+      "pulse_primary_100": "rgb(243, 230, 255)",
+
+      "pulse_secondary_900": "rgb(53, 4, 57)",
+      "pulse_secondary_800": "rgb(80, 11, 86)",
+      "pulse_secondary_700": "rgb(121, 18, 130)",
+      "pulse_secondary_600": "rgb(164, 41, 174)",
+      "pulse_secondary_500": "rgb(199, 50, 211)",
+      "pulse_secondary_400": "rgb(229, 74, 232)",
+      "pulse_secondary_300": "rgb(252, 121, 255)",
+      "pulse_secondary_200": "rgb(253, 158, 255)",
+      "pulse_secondary_100": "rgb(249, 216, 252)"
     },
     "properties": {
+      "arrowpanel_border_radius": "4px",
+      "arrowpanel_menuitem_border_radius": "4px",
+
       "panel_hover": "color-mix(in srgb, currentColor 9%, transparent)",
       "panel_active": "color-mix(in srgb, currentColor 14%, transparent)",
       "panel_active_darker": "color-mix(in srgb, currentColor 25%, transparent)",
       "toolbar_field_icon_opacity": "1",
-      "zap_gradient": "linear-gradient(90deg, #9059FF 0%, #FF4AA2 52.08%, #FFBD4F 100%)"
+
+      "tab_rounding_size": "8px",
+      "tab_rounding_size_neg": "-8px",
+      "tab_block_margin": "0",
+      "tab_border_radius": "0",
+      "tab_padding_inline": "0",
+
+      "gradient": "linear-gradient(var(--gradient-orientation), var(--pulse-primary-500) 0%, var(--pulse-secondary-500) 100%)",
+      "zap_gradient": "var(--gradient)",
+
+      "toolbar_button_border_radius": "4px"
     }
   },
 
@@ -83,18 +134,64 @@
       "input_border": "--input-border-color",
       "input_border_error": "--input-error-border-color",
       "autocomplete_popup_separator": "--autocomplete-popup-separator-color",
-      "zoom_controls": "--zoom-controls-bgcolor",
       "appmenu_update_icon_color": "--panel-banner-item-update-supported-bgcolor",
       "appmenu_info_icon_color": "--panel-banner-item-info-icon-bgcolor",
       "tab_icon_overlay_stroke": "--tab-icon-overlay-stroke",
-      "tab_icon_overlay_fill": "--tab-icon-overlay-fill"
+      "tab_icon_overlay_fill": "--tab-icon-overlay-fill",
+
+      "pulse_grey_900": "--pulse-grey-900",
+      "pulse_grey_850": "--pulse-grey-850",
+      "pulse_grey_800": "--pulse-grey-800",
+      "pulse_grey_700": "--pulse-grey-700",
+      "pulse_grey_600": "--pulse-grey-600",
+      "pulse_grey_500": "--pulse-grey-500",
+      "pulse_grey_400": "--pulse-grey-400",
+      "pulse_grey_300": "--pulse-grey-300",
+      "pulse_grey_200": "--pulse-grey-200",
+      "pulse_grey_100": "--pulse-grey-100",
+
+      "pulse_primary_900": "--pulse-primary-900",
+      "pulse_primary_800": "--pulse-primary-800",
+      "pulse_primary_700": "--pulse-primary-700",
+      "pulse_primary_600": "--pulse-primary-600",
+      "pulse_primary_500": "--pulse-primary-500",
+      "pulse_primary_400": "--pulse-primary-400",
+      "pulse_primary_300": "--pulse-primary-300",
+      "pulse_primary_200": "--pulse-primary-200",
+      "pulse_primary_100": "--pulse-primary-100",
+
+      "pulse_secondary_900": "--pulse-secondary-900",
+      "pulse_secondary_800": "--pulse-secondary-800",
+      "pulse_secondary_700": "--pulse-secondary-700",
+      "pulse_secondary_600": "--pulse-secondary-600",
+      "pulse_secondary_500": "--pulse-secondary-500",
+      "pulse_secondary_400": "--pulse-secondary-400",
+      "pulse_secondary_300": "--pulse-secondary-300",
+      "pulse_secondary_200": "--pulse-secondary-200",
+      "pulse_secondary_100": "--pulse-secondary-100"
     },
     "properties": {
+      "arrowpanel_border_radius": "--arrowpanel-border-radius",
+      "arrowpanel_menuitem_border_radius": "--arrowpanel-menuitem-border-radius",
+
       "panel_hover": "--panel-item-hover-bgcolor",
       "panel_active": "--arrowpanel-dimmed-further",
       "panel_active_darker": "--panel-item-active-bgcolor",
       "toolbar_field_icon_opacity": "--urlbar-icon-fill-opacity",
-      "zap_gradient": "--panel-separator-zap-gradient"
+
+      "tab_rounding_size": "--tab-rounding-size",
+      "tab_rounding_size_neg": "--tab-rounding-size-neg",
+      // The padding around each tab. In proton, this is what makes them float
+      "tab_block_margin": "--tab-block-margin",
+      // The border radius of the tab
+      "tab_border_radius": "--tab-border-radius",
+      // Padding to the left and right of the tab. **Pulse Browser custom**
+      "tab_padding_inline": "--tab-padding-inline",
+
+      "gradient": "--gradient",
+      "zap_gradient": "--panel-separator-zap-gradient",
+
+      "toolbar_button_border_radius": "--toolbarbutton-border-radius"
     }
   }
 }
