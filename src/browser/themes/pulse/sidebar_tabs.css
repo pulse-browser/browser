@@ -18,7 +18,7 @@
   background-color: -moz-Dialog;
   overflow: hidden;
 
-  max-width: calc(var(--tab-min-height) + var(--tab-block-margin) * 2);
+  max-width: calc(var(--tab-min-height) + 2px + var(--tab-block-margin) * 2);
 
   /* Makes the sidebar slide out from below */
   position: relative;
@@ -53,8 +53,8 @@
   border-radius: var(--tab-border-radius);
   margin: var(--tab-block-margin);
 
-  width: var(--tab-min-height);
-  height: var(--tab-min-height);
+  width: calc(var(--tab-min-height) + 2px);
+  height: calc(var(--tab-min-height) + 2px);
   display: flex;
   justify-content: center;
   align-items: center;

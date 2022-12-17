@@ -1,0 +1,12 @@
+diff --git a/browser/components/aboutlogins/content/aboutLogins.html b/browser/components/aboutlogins/content/aboutLogins.html
+index d53bc804177d414928dae9a2cb8e42a0a0dae9ac..b5190e9d556ab8b40840214fac15eed17a5fae25 100644
+--- a/browser/components/aboutlogins/content/aboutLogins.html
++++ b/browser/components/aboutlogins/content/aboutLogins.html
+@@ -31,6 +31,7 @@
+     <link rel="stylesheet" href="chrome://browser/content/aboutlogins/aboutLogins.css">
+     <link rel="stylesheet" href="chrome://browser/content/aboutlogins/common.css">
+     <link rel="icon" href="chrome://branding/content/icon32.png">
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+   <body>
+     <header>

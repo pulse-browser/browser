@@ -1,0 +1,12 @@
+diff --git a/toolkit/content/plugins.html b/toolkit/content/plugins.html
+index 84855798c78cbd5b4c039f179b672ec425c03347..9b0528ff8e63c0a575fbcb99165691750f4a9578 100644
+--- a/toolkit/content/plugins.html
++++ b/toolkit/content/plugins.html
+@@ -12,6 +12,7 @@
+ <title data-l10n-id="title-label"></title>
+ <link rel="stylesheet" href="chrome://global/content/plugins.css">
+ <link rel="localization" href="toolkit/about/aboutPlugins.ftl"/>
++<script src="chrome://browser/content/contentTheme.js"></script>
+ </head>
+ <body>
+ <div id="outside">

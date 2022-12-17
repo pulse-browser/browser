@@ -8,7 +8,7 @@
 # Pulse Browser
 An experimental Firefox fork that enhances focus and increases work productivity due to its Hyper minimalistic UI and built-in tools.
 
-[![Discord](https://img.shields.io/discord/835714549545828352?style=flat-square)](https://discord.gg/xNkretH7sD)  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pulse-browser/browser/Alpha%20builds?style=flat-square) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/pulse-browser/browser?style=flat-square) ![GitHub Repo stars](https://img.shields.io/github/stars/pulse-browser/browser?style=flat-square)
+[![Discord](https://img.shields.io/discord/835714549545828352?style=flat-square)](https://discord.gg/xNkretH7sD)  ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/pulse-browser/browser/alpha.yml?branch=alpha&style=flat-square) ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/pulse-browser/browser?style=flat-square) ![GitHub Repo stars](https://img.shields.io/github/stars/pulse-browser/browser?style=flat-square)
 
 
 </div>

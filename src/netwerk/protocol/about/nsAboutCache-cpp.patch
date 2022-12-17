@@ -1,0 +1,12 @@
+diff --git a/netwerk/protocol/about/nsAboutCache.cpp b/netwerk/protocol/about/nsAboutCache.cpp
+index d49b2a5a542d3b33e62a07f2b59bd6e2020ed000..b651d2f38cc3e9dce1be8c12d7e008b6159fb23a 100644
+--- a/netwerk/protocol/about/nsAboutCache.cpp
++++ b/netwerk/protocol/about/nsAboutCache.cpp
+@@ -91,6 +91,7 @@ nsresult nsAboutCache::Channel::Init(nsIURI* aURI, nsILoadInfo* aLoadInfo) {
+       "href=\"chrome://global/skin/in-content/info-pages.css\"/>\n"
+       "  <link rel=\"stylesheet\" "
+       "href=\"chrome://global/skin/aboutCache.css\"/>\n"
++      "   <script src=\"chrome://browser/content/contentTheme.js\"></script>\n"
+       "</head>\n"
+       "<body class=\"aboutPageWideContainer\">\n"
+       "<h1>Information about the Network Cache Storage Service</h1>\n");

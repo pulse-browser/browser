@@ -1,0 +1,19 @@
+diff --git a/toolkit/content/license.html b/toolkit/content/license.html
+index d56233243c7e24185a68b48fbd3ab3d69aaa153a..fdebfe2f254c1c2d10a198e1c1f42bebcfb2df4e 100644
+--- a/toolkit/content/license.html
++++ b/toolkit/content/license.html
+@@ -5,12 +5,13 @@
+ 
+ <html lang="en">
+   <head>
+-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src chrome:; img-src chrome:; object-src 'none'">
++    <meta http-equiv="Content-Security-Policy" content="default-src chrome:; style-src chrome:; img-src chrome:; object-src 'none'">
+     <meta charset="utf-8">
+     <meta name="color-scheme" content="light dark">
+     <title>Licenses</title>
+     <link rel="stylesheet" href="chrome://global/skin/in-content/info-pages.css">
+     <link rel="stylesheet" href="chrome://global/skin/aboutLicense.css">
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+ 
+   <body id="lic-info">
