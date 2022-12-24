@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a3672b5b513b53f423b6bd3532e1347f6659a0cf 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c7ee3d8822946d78054bc99ca0392e7f7445f87f 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -148,9 +148,9 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a3672b5b513b53f423b6bd3532e1347f
      Services.obs.addObserver(this, "intl:app-locales-changed");
  
      this._initDeferred.resolve();
-+    
-+    //check if element by id sidebar exists to bool var
 +
++
++    //Check the pre-existance of sidebar and if it is not there, create it
 +    var sidebar = this.browser;
 +    let sidebarExists = sidebar ? true : false;
 +    if (this._keepTabsActivePref && sidebarExists) {
