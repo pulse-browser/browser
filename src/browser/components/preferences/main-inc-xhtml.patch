@@ -1,8 +1,8 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index 4cdcece2776506eb772a5463e245218837abc5e0..9b517ea6a3fc2ff43c7c412b90f241e75a65bdae 100644
+index fdf515554d67c5082b0d9c73b72533e06a085030..2d8130d90a6ff43af287debca7c44cc13d4da3f6 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
-@@ -125,6 +125,22 @@
+@@ -122,6 +122,22 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  
@@ -16,8 +16,8 @@ index 4cdcece2776506eb772a5463e245218837abc5e0..9b517ea6a3fc2ff43c7c412b90f241e7
 +  <checkbox id="sidebarKeepTabsActive"
 +    preference="pulse.sidebar.keeptabsactive.enabled"
 +    data-l10n-id="preferences-sidebar-active-tabs"/>
-+  <description id="sidebarKeepTabsActiveTooltip"
-+    data-l10n-id="preferences-sidebar-active-tabs-tooltip">
++  <description id="sidebarKeepTabsActiveDescription"
++    data-l10n-id="preferences-sidebar-active-tabs-description">
 +    <html:a id="restart-browser-button" class="text-link" data-l10n-name="restart-browser" href="about:restartrequired"/>
 +  </description>
 +</groupbox>
