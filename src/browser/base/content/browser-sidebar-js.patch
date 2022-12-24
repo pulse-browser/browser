@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4b02c90e0 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a3672b5b513b53f423b6bd3532e1347f6659a0cf 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -151,7 +151,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
 +    
 +    //check if element by id sidebar exists to bool var
 +
-+    var sidebar = document.getElementById("sidebar");
++    var sidebar = this.browser;
 +    let sidebarExists = sidebar ? true : false;
 +    if (this._keepTabsActivePref && sidebarExists) {
 +      sidebar.remove();
@@ -211,19 +211,17 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
        }
      }
    },
-@@ -485,6 +593,11 @@ var SidebarUI = {
+@@ -485,6 +593,9 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
 +    if (this._keepTabsActivePref && this.loadedSidebars.includes(commandID)) {
-+      console.log("returned");
 +      return;
 +    }
-+    console.log("it went on");
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +636,7 @@ var SidebarUI = {
+@@ -523,6 +634,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -231,7 +229,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
        return true;
      });
    },
-@@ -546,10 +660,29 @@ var SidebarUI = {
+@@ -546,10 +658,29 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -261,7 +259,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +692,31 @@ var SidebarUI = {
+@@ -559,6 +690,31 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -293,7 +291,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +728,16 @@ var SidebarUI = {
+@@ -570,13 +726,16 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -312,7 +310,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +776,45 @@ var SidebarUI = {
+@@ -615,22 +774,45 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -365,7 +363,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4
    },
  
    /**
-@@ -638,25 +822,112 @@ var SidebarUI = {
+@@ -638,25 +820,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
