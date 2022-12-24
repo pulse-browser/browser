@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af0247ed4c2d4 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..c837599d8d336b0a0e11780721acefe4b02c90e0 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -75,26 +75,21 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
      ]));
    },
  
-@@ -61,6 +97,8 @@ var SidebarUI = {
+@@ -61,7 +97,10 @@ var SidebarUI = {
      return (this._browser = document.getElementById("sidebar"));
    },
    POSITION_START_PREF: "sidebar.position_start",
 +  SIDEBAR_TABS_PREF: "pulse.sidebar.enabled",
 +  SIDEBAR_EXTENSIONS_PREF: "pulse.sidebar.extensions.enabled",
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
++  SIDEBAR_KEEP_TABS_ACTIVE_PREF: "pulse.sidebar.keeptabsactive.enabled",
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-@@ -76,8 +114,18 @@ var SidebarUI = {
+   // and isn't persisted across windows
+@@ -76,8 +115,11 @@ var SidebarUI = {
      }
      return (this.__title = document.getElementById("sidebar-title"));
    },
-+
-+  get keepTabsActivePref() {
-+    if (this._keepTabsActive != null) {
-+      return this._keepTabsActive;
-+    }
-+    return this._keepTabsActive = Services.prefs.getBoolPref("pulse.sidebar.keeptabsactive.enabled", true);
-+  },
 +
    _splitter: null,
    _icon: null,
@@ -103,7 +98,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,15 +158,58 @@ var SidebarUI = {
+@@ -110,15 +152,65 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
@@ -117,6 +112,11 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
 +    const sidebaritems = this.sidebars.keys();
 +    const sidebarExtensionVis = Services.prefs.getBoolPref(
 +      this.SIDEBAR_EXTENSIONS_PREF,
++      false
++    );
++
++    this._keepTabsActivePref = Services.prefs.getBoolPref(
++      this.SIDEBAR_KEEP_TABS_ACTIVE_PREF,
 +      false
 +    );
 +
@@ -141,6 +141,8 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
 +    // Keep track on the changes of the sidebar visibility
 +    Services.prefs.addObserver(this.SIDEBAR_TABS_PREF, this);
 +
++    Services.prefs.addObserver(this.SIDEBAR_KEEP_TABS_ACTIVE_PREF, this);
++
      this._inited = true;
  
      Services.obs.addObserver(this, "intl:app-locales-changed");
@@ -151,10 +153,10 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
 +
 +    var sidebar = document.getElementById("sidebar");
 +    let sidebarExists = sidebar ? true : false;
-+    if (this.keepTabsActivePref && sidebarExists) {
++    if (this._keepTabsActivePref && sidebarExists) {
 +      sidebar.remove();
 +    }
-+    else if (this.keepTabsActivePref && !sidebarExists) {
++    else if (this._keepTabsActivePref && !sidebarExists) {
 +      this.createBrowser("sidebar");
 +    }
 +    
@@ -162,19 +164,19 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
    },
  
    uninit() {
-@@ -127,7 +218,10 @@ var SidebarUI = {
+@@ -127,7 +219,10 @@ var SidebarUI = {
      let enumerator = Services.wm.getEnumerator("navigator:browser");
      if (!enumerator.hasMoreElements()) {
        let xulStore = Services.xulStore;
 -      xulStore.persist(this._box, "sidebarcommand");
 +
-+      if(!this.keepTabsActivePref){
++      if(!this._keepTabsActivePref){
 +        xulStore.persist(this._box, "sidebarcommand");
 +      }
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -159,17 +253,26 @@ var SidebarUI = {
+@@ -159,17 +254,30 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -200,16 +202,20 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
 +              Services.prefs.getBoolPref(this.SIDEBAR_TABS_PREF, true)
 +            );
 +            break;
++
++          case this.SIDEBAR_KEEP_TABS_ACTIVE_PREF:
++            this.init();
++            break;
 +        }
 +        break;
        }
      }
    },
-@@ -485,6 +588,11 @@ var SidebarUI = {
+@@ -485,6 +593,11 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
-+    if (this.keepTabsActivePref && this.loadedSidebars.includes(commandID)) {
++    if (this._keepTabsActivePref && this.loadedSidebars.includes(commandID)) {
 +      console.log("returned");
 +      return;
 +    }
@@ -217,7 +223,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +631,7 @@ var SidebarUI = {
+@@ -523,6 +636,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -225,7 +231,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
        return true;
      });
    },
-@@ -546,10 +655,29 @@ var SidebarUI = {
+@@ -546,10 +660,29 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -255,11 +261,11 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +687,31 @@ var SidebarUI = {
+@@ -559,6 +692,31 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
-+      if (this.keepTabsActivePref){
++      if (this._keepTabsActivePref){
 +        //try and find browser with id sidebar-browser-<commandid>
 +        if (!document.getElementById("sidebar-browser-" + commandID)){
 +          this.createBrowser(("sidebar-browser-"+commandID),commandID);
@@ -287,7 +293,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +723,16 @@ var SidebarUI = {
+@@ -570,13 +728,16 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -302,11 +308,11 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
        this.browser.setAttribute("src", url); // kick off async load
 -
 -      if (this.browser.contentDocument.location.href != url) {
-+      if (!this.loadedSidebars.includes(commandID) && this.keepTabsActivePref || this.browser.contentDocument.location.href != url && !this.keepTabsActivePref) {
++      if (!this.loadedSidebars.includes(commandID) && this._keepTabsActivePref || this.browser.contentDocument.location.href != url && !this._keepTabsActivePref) {
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +771,45 @@ var SidebarUI = {
+@@ -615,22 +776,45 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -338,7 +344,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
 -    this.browser.setAttribute("src", "about:blank");
 -    this.browser.docShell.createAboutBlankContentViewer(null, null);
 +
-+    if (!this.keepTabsActivePref){
++    if (!this._keepTabsActivePref){
 +      this.browser.setAttribute("src", "about:blank");
 +      this.browser.docShell.createAboutBlankContentViewer(null, null);
 +    }
@@ -359,7 +365,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a9e0a4a559452a195b55a1c9576af024
    },
  
    /**
-@@ -638,25 +817,112 @@ var SidebarUI = {
+@@ -638,25 +822,112 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
