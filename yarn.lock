@@ -110,9 +110,9 @@
     "@resvg/resvg-js-win32-x64-msvc" "1.4.0"
 
 "@types/node@*":
-  version "18.11.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.3.tgz#78a6d7ec962b596fc2d2ec102c4dd3ef073fea6a"
-  integrity sha512-fNjDQzzOsZeKZu5NATgXUPsaFaTxeRgFXoosrHivTl8RGeV733OLawXsGfEk9a8/tySyZUyiZ6E8LcjPFZ2y1A==
+  version "18.11.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.17.tgz#5c009e1d9c38f4a2a9d45c0b0c493fe6cdb4bcb5"
+  integrity sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==
 
 "@types/node@^17.0.36":
   version "17.0.45"
@@ -339,10 +339,10 @@ globrex@^0.1.2:
   resolved "https://registry.yarnpkg.com/globrex/-/globrex-0.1.2.tgz#dd5d9ec826232730cd6793a5e33a9302985e6098"
   integrity sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==
 
-gluon-build@^1.0.0-rc.4:
-  version "1.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/gluon-build/-/gluon-build-1.0.0-rc.4.tgz#4f8f5372029932f70a26b4b06110215126f65489"
-  integrity sha512-vcpbfouLHYqDRC0yyil2baOhSAxYB/XhMXq0FZH7QD6dAoKBj8wVP2Moc3WDyvneED4HxgXoiupGxtbNFdUTog==
+gluon-build@^1.0.0-rc.5:
+  version "1.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/gluon-build/-/gluon-build-1.0.0-rc.5.tgz#eb12f04082597a3c48a8d3cc42caff65bed9e6b7"
+  integrity sha512-TJMv24pMQPo3eXQLacJ9xS1qcwPt/WERw9xTQImbnXWCe9dn6d0nAD9FamVZXZvNU7jzPcObjoPXytwTP1yCWw==
   dependencies:
     "@resvg/resvg-js" "^1.4.0"
     async-icns "^1.0.2"
