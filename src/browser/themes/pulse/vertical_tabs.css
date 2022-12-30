@@ -81,3 +81,8 @@
 #browser #new-tab-button {
   display: inherit !important;
 }
+
+#browser #tabbrowser-tabs {
+  border-inline-start: none;
+  margin-inline-start: none;
+}
