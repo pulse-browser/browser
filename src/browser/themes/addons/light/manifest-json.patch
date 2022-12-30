@@ -11,3 +11,6 @@ index b8eb9649a8a5292f83c34aa1d3cc867fbf456798..e8c6756f2858783cce86f94793b14071
    "description": "A theme with a light color scheme.",
    "author": "Mozilla",
    "version": "1.2",
+"rgb(21,20,26)",
+       "icons": "rgb(91,91,102)",
+       "frame": "#f0f0f4",

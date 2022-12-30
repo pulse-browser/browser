@@ -4,6 +4,7 @@
 // @ts-check
 
 const VERTICAL_TABS_POSITION = 'pulse.tabs.vertical'
+const VERTICAL_TABS_COLLAPSE = 'pulse.tabs.vertical.collapse'
 
 var VerticalTabs = {
   /**
@@ -32,6 +33,13 @@ var VerticalTabs = {
    */
   get browserContainer() {
     return document.getElementById('browser')
+  },
+
+  /**
+   * @return {Boolean}
+   */
+  get browserCollapseTabs() {
+    return Services.prefs.getBoolPref(VERTICAL_TABS_COLLAPSE, false)
   },
 
   /** @type {HTMLElement?} */
@@ -70,6 +78,10 @@ var VerticalTabs = {
     document
       .querySelector('#TabsToolbar .toolbar-items')
       ?.setAttribute('align', 'start')
+
+    document
+      .getElementById('TabsToolbar')
+      ?.setAttribute('collapse', this.browserCollapseTabs ? 'true' : 'false')
   },
 
   disableVerticalTabs() {
@@ -99,6 +111,15 @@ var VerticalTabs = {
             this.disableVerticalTabs()
           }
         }
+        if (data === VERTICAL_TABS_COLLAPSE) {
+          document
+            .getElementById('TabsToolbar')
+            ?.setAttribute(
+              'collapse',
+              this.browserCollapseTabs ? 'true' : 'false'
+            )
+        }
+
         break
     }
   },

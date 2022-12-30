@@ -11,3 +11,6 @@ index 3ab1378a042996445ec77c8cad46b0fc44604d70..24cb568177ad3b68ad31785595073287
    "description": "A theme with a dark color scheme.",
    "author": "Mozilla",
    "version": "1.2",
+"tab_text": "rgb(251,251,254)",
+       "icons": "rgb(251,251,254)",
+       "frame": "#1c1b22",
