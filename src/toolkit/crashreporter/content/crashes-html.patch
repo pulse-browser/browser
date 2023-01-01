@@ -1,0 +1,12 @@
+diff --git a/toolkit/crashreporter/content/crashes.html b/toolkit/crashreporter/content/crashes.html
+index 5a11b8c05bbafd47ba40f5adc44aefb11ee1df81..9559bf9db0a1e1c20a460c48e8bdd100d9d3b8f1 100644
+--- a/toolkit/crashreporter/content/crashes.html
++++ b/toolkit/crashreporter/content/crashes.html
+@@ -13,6 +13,7 @@
+     <link rel="stylesheet" media="screen, projection" href="chrome://global/skin/in-content/common.css">
+     <script src="chrome://global/content/crashes.js"></script>
+     <title data-l10n-id="crash-reports-title"></title>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+ 
+   <body>

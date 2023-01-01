@@ -5,7 +5,8 @@
     "moz.configure": "python",
     "app.mozbuild": "python",
     "Makefile.in": "makefile",
-    "mozconfig": "shellscript"
+    "mozconfig": "shellscript",
+    "src/browser/themes/**.json": "jsonc"
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,

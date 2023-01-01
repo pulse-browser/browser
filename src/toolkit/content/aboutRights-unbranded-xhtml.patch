@@ -1,0 +1,12 @@
+diff --git a/toolkit/content/aboutRights-unbranded.xhtml b/toolkit/content/aboutRights-unbranded.xhtml
+index 6fce98054a0802d6fc0be797676fa3c18f0e23d2..26e322695a2bb9309e11b4986f27f214f6e57ace 100644
+--- a/toolkit/content/aboutRights-unbranded.xhtml
++++ b/toolkit/content/aboutRights-unbranded.xhtml
+@@ -17,6 +17,7 @@
+   <link rel="stylesheet" href="chrome://global/skin/in-content/info-pages.css" type="text/css"/>
+   <link rel="localization" href="branding/brand.ftl"/>
+   <link rel="localization" href="toolkit/about/aboutRights.ftl"/>
++  <script src="chrome://browser/content/contentTheme.js"></script>
+ </head>
+ 
+ <body id="your-rights" class="aboutPageWideContainer">

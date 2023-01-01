@@ -1,0 +1,12 @@
+diff --git a/browser/components/aboutlogins/content/aboutLoginsImportReport.html b/browser/components/aboutlogins/content/aboutLoginsImportReport.html
+index c8a768c7d867464771b2a37e3fb7361e17370a59..2d770c8ad36febd9fc02dadca4ba88caa31c77db 100644
+--- a/browser/components/aboutlogins/content/aboutLoginsImportReport.html
++++ b/browser/components/aboutlogins/content/aboutLoginsImportReport.html
+@@ -19,6 +19,7 @@
+     <link rel="stylesheet" href="chrome://browser/content/aboutlogins/aboutLoginsImportReport.css">
+     <link rel="stylesheet" href="chrome://browser/content/aboutlogins/common.css">
+     <link rel="icon" href="chrome://branding/content/icon32.png">
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+   <body class="importreport">
+     <section id="report-body">

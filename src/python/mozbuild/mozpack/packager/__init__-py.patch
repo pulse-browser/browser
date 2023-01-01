@@ -1,0 +1,21 @@
+diff --git a/python/mozbuild/mozpack/packager/__init__.py b/python/mozbuild/mozpack/packager/__init__.py
+index 6873758eeecbc7e5564a7c882e70894c2b92f9f2..79d66339f47e3dd26b731ea218c6fb402c1745d2 100644
+--- a/python/mozbuild/mozpack/packager/__init__.py
++++ b/python/mozbuild/mozpack/packager/__init__.py
+@@ -285,6 +285,16 @@ class SimplePackager(object):
+                 self._add_addon(mozpath.dirname(path), addon)
+             elif mozpath.basename(path) == "manifest.json":
+                 manifest = six.ensure_text(file.open().read())
++
++                # Strip comments from theme addons provided by Pulse
++                # Browser but do not do that for all the other addons
++                # (because it breaks some of them)
++                #
++                # This does not apply to extensions inlueded by gluon
++                # in /browser/extensions
++                if "pulse" in path:
++                    manifest = re.sub('//.*?\n', '\n', manifest)
++
+                 try:
+                     parsed = json.loads(manifest)
+                 except ValueError:

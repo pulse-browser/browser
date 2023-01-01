@@ -1,0 +1,15 @@
+diff --git a/browser/base/content/navigator-toolbox.inc.xhtml b/browser/base/content/navigator-toolbox.inc.xhtml
+index 8071a5fa5e1f3ba3dfd0345fa1e3284082eb2e39..c6d6d3b08f033ff207daa44074f8422e51b52640 100644
+--- a/browser/base/content/navigator-toolbox.inc.xhtml
++++ b/browser/base/content/navigator-toolbox.inc.xhtml
+@@ -475,6 +475,10 @@
+                      consumeanchor="PanelUI-button"
+                      data-l10n-id="appmenu-menu-button-closed2"/>
+     </toolbaritem>
++
++# Intended for the vertical tabs view, should be hidden by default
++#include titlebar-items.inc.xhtml
++
+   </toolbar>
+ 
+   <toolbar id="PersonalToolbar"

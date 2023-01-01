@@ -1,0 +1,12 @@
+diff --git a/toolkit/content/aboutGlean.html b/toolkit/content/aboutGlean.html
+index 86e09467306610179c3a9aeccdfda25e9ec8b670..5f9f264d1bdfe9beaacb256b71d544687868a85a 100644
+--- a/toolkit/content/aboutGlean.html
++++ b/toolkit/content/aboutGlean.html
+@@ -15,6 +15,7 @@
+     <script src="chrome://global/content/aboutGlean.js"></script>
+     <link rel="localization" href="branding/brand.ftl"/>
+     <link rel="localization" href="toolkit/about/aboutGlean.ftl"/>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+ 
+   <body>

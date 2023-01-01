@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..93e3e974d40e32ed27e237a02c0bc643b201f43f 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31372a789e 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -325,7 +325,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..93e3e974d40e32ed27e237a02c0bc643
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +782,45 @@ var SidebarUI = {
+@@ -615,22 +782,46 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -364,6 +364,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..93e3e974d40e32ed27e237a02c0bc643
  
      this._box.removeAttribute("checked");
      this._box.hidden = this._splitter.hidden = true;
++    this._sidebarIcons.removeAttribute("checked");
  
 -    let selBrowser = gBrowser.selectedBrowser;
 -    selBrowser.focus();
@@ -378,7 +379,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..93e3e974d40e32ed27e237a02c0bc643
    },
  
    /**
-@@ -638,25 +828,121 @@ var SidebarUI = {
+@@ -638,25 +829,121 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {

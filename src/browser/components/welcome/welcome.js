@@ -65,7 +65,7 @@ class EngineStore {
   }
 
   async setDefaultEngine(engine) {
-    await Services.search.setDefault(engine, Ci.nsISearchService.CHANGE_REASON_USER)
+    await Services.search.setDefault(engine.originalEngine, Ci.nsISearchService.CHANGE_REASON_USER)
   }
 }
 

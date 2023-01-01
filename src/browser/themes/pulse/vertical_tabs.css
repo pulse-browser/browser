@@ -1,0 +1,83 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+#browser #TabsToolbar .titlebar-spacer,
+#browser #TabsToolbar .titlebar-buttonbox-container,
+#browser #TabsToolbar #alltabs-button {
+  display: none;
+}
+
+#browser #TabsToolbar {
+  background-color: -moz-Dialog;
+  max-width: 350px;
+}
+
+#browser #TabsToolbar:-moz-lwtheme {
+  background-image: var(--lwt-additional-images);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+#browser #TabsToolbar .tabbrowser-tab {
+  max-width: unset;
+  width: 100%;
+
+  /* Stops the tabs from getting squished or stretched */
+  min-height: unset;
+  max-height: var(--tab-min-height);
+
+  /* Animate tabs out vertically */
+  transition: min-height 100ms ease-out, max-height 100ms ease-out;
+}
+
+/* Put the new tab button on the bottom */
+#browser #TabsToolbar #TabsToolbar-customization-target {
+  -moz-box-orient: vertical;
+  height: 100%;
+  /* Not sure why, but this forces the scroll box to scroll */
+  max-height: 100%;
+}
+
+/* Work around for tab closing animation whilst in vertical tabs. Without this
+    the clean up code (created by 608589) will not work correctly */
+/* TODO: This causes tabs to stick around for longer and trigger a clean up
+    function. This isn't that performant, so we should look into fixing it in
+    the future */
+#browser #TabsToolbar .tabbrowser-tab:not([pinned], [fadein]) {
+  max-width: 0.1px;
+  max-height: 0.1px;
+}
+
+#browser #TabsToolbar tab.tabbrowser-tab:nth-child(1) {
+  margin-left: 0;
+}
+
+/* Border radius up at the top left of the browser when vertical tabs are enabled */
+@media (-moz-gtk-csd-available) {
+  :root[tabsintitlebar][sizemode='normal']:not([gtktiledwindow='true'])
+    #navigator-toolbox-background[verticaltabs='true']
+    #nav-bar {
+    border-top-left-radius: env(-moz-gtk-csd-titlebar-radius);
+    border-top-right-radius: env(-moz-gtk-csd-titlebar-radius);
+  }
+}
+
+#navigator-toolbox-background:not([verticaltabs='true'])
+  #nav-bar
+  .titlebar-buttonbox-container {
+  display: none;
+}
+
+/* This fixes some consistencies with which buttons should be visible */
+#browser #tabbrowser-arrowscrollbox-periphery {
+  display: none;
+}
+
+#browser #new-tab-button {
+  display: inherit !important;
+}
