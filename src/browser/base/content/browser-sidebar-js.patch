@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31372a789e 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..513dcacbe33770cfafb57bdcadfd64b6fb999eef 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -42,8 +42,8 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
 +          iconurl: "chrome://browser/skin/tab.svg",
-         }),
-       ],
++        }),
++      ],
 +      [
 +        "viewDownloadsSidebar",
 +        makeSidebar({
@@ -51,9 +51,9 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
 +          title: "Downloads",
 +          url: "about:downloads",
 +          menuId: "menu_downloadsSidebar",
-+          iconurl: "chrome://browser/skin/downloads/downloads.svg"
-+        }),
-+      ],
++          iconurl: "chrome://browser/skin/downloads/downloads.svg",
+         }),
+       ],
 +      [
 +        "sidebar-view-addons",
 +        {
@@ -86,7 +86,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
    // and isn't persisted across windows
-@@ -76,8 +115,11 @@ var SidebarUI = {
+@@ -76,8 +115,13 @@ var SidebarUI = {
      }
      return (this.__title = document.getElementById("sidebar-title"));
    },
@@ -95,10 +95,12 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
    _icon: null,
 +  _sidebarIcons: null,
 +  _sidebarIconsBottom: null,
++  /** @type {string[]} */
++  loadedSidebars: null,
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,15 +152,60 @@ var SidebarUI = {
+@@ -110,15 +154,58 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
@@ -144,17 +146,15 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
  
      this._initDeferred.resolve();
 +
-+
 +    //Check the pre-existance of sidebar and if it is not there, create it
 +    var sidebar = this.browser;
-+    let sidebarExists = sidebar ? true : false;
++    let sidebarExists = !!sidebar;
 +    if (this._keepTabsActivePref && sidebarExists) {
 +      sidebar.remove();
-+    }
-+    else if (this._keepTabsActivePref && !sidebarExists) {
++    } else if (this._keepTabsActivePref && !sidebarExists) {
 +      this.createBrowser("sidebar");
 +    }
-+    
++
 +    this.loadedSidebars = [];
    },
  
@@ -165,7 +165,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
        let xulStore = Services.xulStore;
 -      xulStore.persist(this._box, "sidebarcommand");
 +
-+      if(!this._keepTabsActivePref){
++      if (!this._keepTabsActivePref) {
 +        xulStore.persist(this._box, "sidebarcommand");
 +      }
  
@@ -184,7 +184,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
      Services.obs.removeObserver(this, "intl:app-locales-changed");
  
      if (this._observer) {
-@@ -159,17 +255,37 @@ var SidebarUI = {
+@@ -159,17 +255,47 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -212,13 +212,23 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
 +            break;
 +
 +          case this.SIDEBAR_KEEP_TABS_ACTIVE_PREF:
-+
 +            //Hide the sidebar if it is open
 +            if (this.isOpen) {
 +              this.hide();
 +            }
-+            
++
 +            this.uninit();
++
++            // We need to clean up all existing sidebar frames to prevent a memory leak.
++            for (const loadedSidebar of this.loadedSidebars) {
++              const elementId = `sidebar-browser-${loadedSidebar}`;
++              const element = document.getElementById(elementId);
++
++              if (element) {
++                element.remove();
++              }
++            }
++
 +            this.init();
 +            break;
 +        }
@@ -226,7 +236,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
        }
      }
    },
-@@ -485,6 +601,9 @@ var SidebarUI = {
+@@ -485,6 +611,9 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -236,7 +246,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +642,7 @@ var SidebarUI = {
+@@ -523,6 +652,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -244,7 +254,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
        return true;
      });
    },
-@@ -546,10 +666,29 @@ var SidebarUI = {
+@@ -546,10 +676,28 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -253,7 +263,6 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
      });
    },
  
-+
 +  //Create sidebar browser between active and inactive for persistence reasons
 +  createBrowser(id, commandID) {
 +    let browser = document.createXULElement("browser");
@@ -274,18 +283,19 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +698,31 @@ var SidebarUI = {
+@@ -559,6 +707,29 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
-+      if (this._keepTabsActivePref){
++      if (this._keepTabsActivePref) {
++        const elementId = `sidebar-browser-${commandID}`;
++
 +        //try and find browser with id sidebar-browser-<commandid>
-+        if (!document.getElementById("sidebar-browser-" + commandID)){
-+          this.createBrowser(("sidebar-browser-"+commandID),commandID);
-+        }
-+        else {
++        if (!document.getElementById(elementId)) {
++          this.createBrowser(elementId, commandID);
++        } else {
 +          //browser already exists, get it
-+          let browser = document.getElementById("sidebar-browser-" + commandID);
++          let browser = document.getElementById(elementId);
 +          this._browser = browser;
 +        }
 +
@@ -294,19 +304,16 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
 +        for (let i = 0; i < browsers.length; i++) {
 +          if (browsers[i].id != "sidebar-browser-" + commandID) {
 +            browsers[i].setAttribute("hidden", "true");
-+          }
-+          else
-+          {
++          } else {
 +            browsers[i].removeAttribute("hidden");
 +          }
 +        }
 +      }
-+      
 +
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +734,16 @@ var SidebarUI = {
+@@ -570,13 +741,21 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -321,11 +328,16 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
        this.browser.setAttribute("src", url); // kick off async load
 -
 -      if (this.browser.contentDocument.location.href != url) {
-+      if (!this.loadedSidebars.includes(commandID) && this._keepTabsActivePref || (this.browser.contentDocument.location.href != url || null) && !this._keepTabsActivePref) {
++      if (
++        (!this.loadedSidebars.includes(commandID) &&
++          this._keepTabsActivePref) ||
++        ((this.browser.contentDocument.location.href != url || null) &&
++          !this._keepTabsActivePref)
++      ) {
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +782,46 @@ var SidebarUI = {
+@@ -615,22 +794,46 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -357,7 +369,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
 -    this.browser.setAttribute("src", "about:blank");
 -    this.browser.docShell.createAboutBlankContentViewer(null, null);
 +
-+    if (!this._keepTabsActivePref){
++    if (!this._keepTabsActivePref) {
 +      this.browser.setAttribute("src", "about:blank");
 +      this.browser.docShell.createAboutBlankContentViewer(null, null);
 +    }
@@ -379,7 +391,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
    },
  
    /**
-@@ -638,25 +829,121 @@ var SidebarUI = {
+@@ -638,25 +841,121 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -453,9 +465,9 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..7c1cb6f131eeaeeb677c2d14275cec31
 +      document.getElementById(`sidebar-background-${id}`).remove();
 +    }
 +
-+    //if id contains ext 
++    //if id contains ext
 +    if (id.includes("ext")) {
-+      if (document.getElementsByClassName("sidebar-divider").length == 0) {
++      if (!document.getElementsByClassName("sidebar-divider").length) {
 +        const divider = document.createElement("hr");
 +        divider.classList.add("sidebar-divider");
 +        this._sidebarIcons.appendChild(divider);
