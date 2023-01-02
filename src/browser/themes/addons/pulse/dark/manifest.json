@@ -107,9 +107,9 @@
 
       "tab_rounding_size": "8px",
       "tab_rounding_size_neg": "-8px",
-      "tab_block_margin": "0",
-      "tab_border_radius": "0",
-      "tab_padding_inline": "0",
+      "tab_block_margin": "0px",
+      "tab_border_radius": "0px",
+      "tab_padding_inline": "0px",
 
       "gradient": "linear-gradient(var(--gradient-orientation), var(--pulse-primary-500) 0%, var(--pulse-secondary-500) 100%)",
       "zap_gradient": "var(--gradient)",

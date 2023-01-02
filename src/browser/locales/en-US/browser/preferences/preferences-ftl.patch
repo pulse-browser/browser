@@ -1,8 +1,8 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index d7b87eacb425cb277e226261c7d994e084100a5d..277547d122293ade9a6dd9c41640f62a1adc1e16 100644
+index f24485700321defc69cd57099ede164701b9b3ec..515f7ca0e448c37554e7dbdf3b000765de8be766 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
-@@ -1424,3 +1424,11 @@ httpsonly-radio-disabled =
+@@ -1432,3 +1432,13 @@ httpsonly-radio-disabled =
  desktop-folder-name = Desktop
  downloads-folder-name = Downloads
  choose-download-folder-title = Choose Download Folder:
@@ -14,4 +14,5 @@ index d7b87eacb425cb277e226261c7d994e084100a5d..277547d122293ade9a6dd9c41640f62a
 +
 +preferences-vertical-tabs-enabled =
 +    .label = Use vertical tabs (Early Access)
-n the sidebar
++preferences-vertical-tabs-collapse =
++		.label = Collapse tabs
