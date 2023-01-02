@@ -1,8 +1,8 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index d7b87eacb425cb277e226261c7d994e084100a5d..277547d122293ade9a6dd9c41640f62a1adc1e16 100644
+index d7b87eacb425cb277e226261c7d994e084100a5d..92db46705e11eeb3aa77d1e9d901ebf01b799e91 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
-@@ -1424,3 +1424,11 @@ httpsonly-radio-disabled =
+@@ -1424,3 +1424,15 @@ httpsonly-radio-disabled =
  desktop-folder-name = Desktop
  downloads-folder-name = Downloads
  choose-download-folder-title = Choose Download Folder:
@@ -10,7 +10,11 @@ index d7b87eacb425cb277e226261c7d994e084100a5d..277547d122293ade9a6dd9c41640f62a
 +## Pulse browser: Settings entries localization
 +preferences-sidebar-header = Sidebar
 +preferences-sidebar-visible =
-+    .label = Show sidebar tabs
-+
++    .label = Show sidebar tabs 
 +preferences-vertical-tabs-enabled =
 +    .label = Use vertical tabs (Early Access)
++preferences-sidebar-extensions-visible =
++    .label = Show available extensions on the sidebar
++preferences-sidebar-active-tabs = 
++    .label = Keep sidebar tabs active even when closed
++preferences-sidebar-active-tabs-description = When enabled, sidebar tabs will remain active even when closed. When disabled, sidebar tabs will be closed when you click on another tab.

@@ -14,7 +14,8 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
   - [ ] Sidebar-Tabs is Loaded and has a button visible down the bottom
   - [ ] Sidebar-Tabs can add a sidebar item to the sidebar
   - [ ] Sidebar-Tabs can remove a sidebar item to the sidebar
-
+  - [ ] The sidebar keeps tabs active while closed when keep sidebar tabs active is set to true
+  - [ ] The sidebar overwrites tabs when keep sidebar tabs active is set to false
 
 
 - [ ] Extensions

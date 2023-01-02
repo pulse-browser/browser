@@ -1,5 +1,5 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index fdf515554d67c5082b0d9c73b72533e06a085030..fffba209eb127bd0052bcb0864cc001f1f3c5c75 100644
+index fdf515554d67c5082b0d9c73b72533e06a085030..ed381af1294c5ce0bcc1d87be32e931e904821dc 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
 @@ -61,6 +61,10 @@
@@ -13,7 +13,7 @@ index fdf515554d67c5082b0d9c73b72533e06a085030..fffba209eb127bd0052bcb0864cc001f
      <checkbox id="ctrlTabRecentlyUsedOrder" data-l10n-id="ctrl-tab-recently-used-order"
                preference="browser.ctrlTab.sortByRecentlyUsed"/>
  
-@@ -122,6 +126,15 @@
+@@ -122,6 +126,22 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  
@@ -24,6 +24,13 @@ index fdf515554d67c5082b0d9c73b72533e06a085030..fffba209eb127bd0052bcb0864cc001f
 +  <checkbox id="sidebarVisible"
 +    preference="pulse.sidebar.enabled"
 +    data-l10n-id="preferences-sidebar-visible"/>
++  <checkbox id="sidebarKeepTabsActive"
++    preference="pulse.sidebar.keeptabsactive.enabled"
++    data-l10n-id="preferences-sidebar-active-tabs"/>
++  <description id="sidebarKeepTabsActiveDescription"
++    data-l10n-id="preferences-sidebar-active-tabs-description">
++    <html:a id="restart-browser-button" class="text-link" data-l10n-name="restart-browser" href="about:restartrequired"/>
++  </description>
 +</groupbox>
 +
  <!-- Website appearance -->
