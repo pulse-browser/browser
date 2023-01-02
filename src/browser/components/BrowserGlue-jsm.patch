@@ -1,8 +1,24 @@
 diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index cee46e6341f98441df743f4f5abccc380a67f74b..1102e374a8a93f2ae6142ff0bffaea71fdceb59c 100644
+index 43fbae6024d491379965937246c4900179d924eb..cbf5c219feeab92a3ecfcc991c605394ef29b8de 100644
 --- a/browser/components/BrowserGlue.jsm
 +++ b/browser/components/BrowserGlue.jsm
-@@ -4343,6 +4343,24 @@ BrowserGlue.prototype = {
+@@ -562,13 +562,8 @@ let JSWINDOWACTORS = {
+     includeChrome: true,
+     allFrames: true,
+     matches: [
+-      "about:home",
+-      "about:newtab",
+-      "about:welcome",
+-      "chrome://browser/content/syncedtabs/sidebar.xhtml",
+-      "chrome://browser/content/places/historySidebar.xhtml",
+-      "chrome://browser/content/places/bookmarksSidebar.xhtml",
+-      "about:firefoxview",
++      "about:*",
++      "chrome://*"
+     ],
+   },
+ 
+@@ -4361,6 +4356,24 @@ BrowserGlue.prototype = {
    },
  
    async _maybeShowDefaultBrowserPrompt() {
@@ -27,7 +43,7 @@ index cee46e6341f98441df743f4f5abccc380a67f74b..1102e374a8a93f2ae6142ff0bffaea71
      // Highest priority is the upgrade dialog, which can include a "primary
      // browser" request and is limited in various ways, e.g., major upgrades.
      const dialogVersion = 106;
-@@ -4809,6 +4827,17 @@ BrowserGlue.prototype = {
+@@ -4827,6 +4840,17 @@ BrowserGlue.prototype = {
      "nsIObserver",
      "nsISupportsWeakReference",
    ]),

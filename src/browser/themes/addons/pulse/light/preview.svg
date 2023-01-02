@@ -2,35 +2,20 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <svg width="680" height="92" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="680" height="92" fill="#F0F0F4" />
-  <g filter="url(#filter0_dd)">
-    <rect x="28" y="5" width="166" height="34" rx="4" fill="white" />
-  </g>
-  <rect x="51" y="20" width="121" height="4" rx="2" fill="#15141A" />
-  <rect x="221" y="20" width="121" height="4" rx="2" fill="#15141A" />
-  <rect y="44" width="680" height="48" fill="#F9F9FB" />
-  <circle cx="24" cy="68" r="6.25" stroke="#5B5B66" stroke-width="1.5" />
-  <circle cx="60" cy="68" r="6.25" stroke="#5B5B66" stroke-width="1.5" />
-  <line x1="663" y1="73.75" x2="649" y2="73.75" stroke="#5B5B66" stroke-width="1.5" />
-  <line x1="663" y1="67.75" x2="649" y2="67.75" stroke="#5B5B66" stroke-width="1.5" />
-  <line x1="663" y1="61.75" x2="649" y2="61.75" stroke="#5B5B66" stroke-width="1.5" />
-  <rect x="114" y="52" width="488" height="32" rx="4" fill="#F0F0F4" />
-  <circle cx="130" cy="68" r="6.25" stroke="#5B5B66" stroke-width="1.5" />
-  <rect x="146" y="66" width="308" height="4" rx="2" fill="#5B5B66" />
-  <defs>
-    <filter id="filter0_dd" x="24" y="1" width="174" height="42" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-      <feOffset />
-      <feGaussianBlur stdDeviation="2" />
-      <feColorMatrix type="matrix" values="0 0 0 0 0.501961 0 0 0 0 0.501961 0 0 0 0 0.556863 0 0 0 0.5 0" />
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-      <feOffset />
-      <feGaussianBlur stdDeviation="0.5" />
-      <feColorMatrix type="matrix" values="0 0 0 0 0.501961 0 0 0 0 0.501961 0 0 0 0 0.556863 0 0 0 0.9 0" />
-      <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow" />
-      <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape" />
-    </filter>
-  </defs>
+    <rect width="680" height="92" fill="#F2F1F4" />
+    <path d="M679 0H0V92H679V0Z" fill="#D9D6DC" />
+    <rect x="21" width="174" height="44" fill="#F2F1F4" />
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M5 44C13.8366 44 21 36.8366 21 28V44H5Z" fill="#F2F1F4" />
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M211 44C202.163 44 195 36.8366 195 28V44H211Z" fill="#F2F1F4" />
+    <rect x="114" y="52" width="487" height="32" rx="8" fill="#D9D6DC" />
+    <path d="M162.825 20H45.9971C44.8941 20 44 20.8954 44 22C44 23.1046 44.8941 24 45.9971 24H162.825C163.928 24 164.822 23.1046 164.822 22C164.822 20.8954 163.928 20 162.825 20Z" fill="#1A171C" />
+    <path d="M332.575 20H215.747C214.644 20 213.75 20.8954 213.75 22C213.75 23.1046 214.644 24 215.747 24H332.575C333.678 24 334.572 23.1046 334.572 22C334.572 20.8954 333.678 20 332.575 20Z" fill="#1A171C" />
+    <path d="M679 44H0V92H679V44Z" fill="#F2F1F4" />
+    <path d="M23.9647 74.25C27.4114 74.25 30.2055 71.4518 30.2055 68C30.2055 64.5482 27.4114 61.75 23.9647 61.75C20.518 61.75 17.7239 64.5482 17.7239 68C17.7239 71.4518 20.518 74.25 23.9647 74.25Z" stroke="#332F37" stroke-width="1.5" />
+    <path d="M59.9117 74.25C63.3584 74.25 66.1525 71.4518 66.1525 68C66.1525 64.5482 63.3584 61.75 59.9117 61.75C56.465 61.75 53.6709 64.5482 53.6709 68C53.6709 71.4518 56.465 74.25 59.9117 74.25Z" stroke="#332F37" stroke-width="1.5" />
+    <path d="M662.025 73.75H648.046" stroke="#332F37" stroke-width="1.5" />
+    <path d="M662.025 67.75H648.046" stroke="#332F37" stroke-width="1.5" />
+    <path d="M597.12 52H117.826C115.621 52 113.832 53.7909 113.832 56V80C113.832 82.2091 115.621 84 117.826 84H597.12C599.326 84 601.115 82.2091 601.115 80V56C601.115 53.7909 599.326 52 597.12 52Z" fill="#F2F1F4" />
+    <path d="M129.809 74.25C133.256 74.25 136.05 71.4518 136.05 68C136.05 64.5482 133.256 61.75 129.809 61.75C126.362 61.75 123.568 64.5482 123.568 68C123.568 71.4518 126.362 74.25 129.809 74.25Z" stroke="#332F37" stroke-width="1.5" />
+    <path d="M451.335 66H147.782C146.68 66 145.785 66.8954 145.785 68C145.785 69.1046 146.68 70 147.782 70H451.335C452.438 70 453.332 69.1046 453.332 68C453.332 66.8954 452.438 66 451.335 66Z" fill="#332F37" />
 </svg>

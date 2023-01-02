@@ -1,0 +1,12 @@
+diff --git a/toolkit/content/aboutNetworking.html b/toolkit/content/aboutNetworking.html
+index 908002988c6bbff652a0a1a14833d13976841920..42897f8f4e00168d9f65248f3964056775569ce9 100644
+--- a/toolkit/content/aboutNetworking.html
++++ b/toolkit/content/aboutNetworking.html
+@@ -14,6 +14,7 @@
+         <link rel="stylesheet" href="chrome://global/skin/aboutNetworking.css">
+         <script src="chrome://global/content/aboutNetworking.js"></script>
+         <link rel="localization"  href="toolkit/about/aboutNetworking.ftl">
++        <script src="chrome://browser/content/contentTheme.js"></script>
+     </head>
+     <body id="body">
+         <div id="categories">

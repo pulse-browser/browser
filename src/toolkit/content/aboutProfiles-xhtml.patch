@@ -1,0 +1,12 @@
+diff --git a/toolkit/content/aboutProfiles.xhtml b/toolkit/content/aboutProfiles.xhtml
+index 85e2cff36776d82e66dd8b9f9c31f3af88cf8532..9019beb54690bb9562bd0c17c982c31b425e6a32 100644
+--- a/toolkit/content/aboutProfiles.xhtml
++++ b/toolkit/content/aboutProfiles.xhtml
+@@ -16,6 +16,7 @@
+     <script src="chrome://global/content/aboutProfiles.js" />
+     <link rel="localization" href="branding/brand.ftl" />
+     <link rel="localization" href="toolkit/about/aboutProfiles.ftl" />
++    <script src="chrome://browser/content/contentTheme.js"></script>
+ </head>
+   <body id="body" class="wide-container">
+     <div class="action-box">

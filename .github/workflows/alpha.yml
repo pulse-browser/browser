@@ -11,7 +11,7 @@ jobs:
       build_date: ${{ steps.data.outputs.builddate }}
       version: ${{ steps.data.outputs.version }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
           token: ${{ secrets.ROBOT_TOKEN }}
@@ -35,8 +35,8 @@ jobs:
         id: data
         shell: bash
         run: |
-          echo "::set-output name=builddate::$(date +"%Y-%m-%d")"
-          echo "::set-output name=version::$(gluon get version | xargs)"
+          echo "builddate=$(date +"%Y-%m-%d")" >> $GITHUB_OUTPUT
+          echo "version=$(gluon get version | xargs)" >> $GITHUB_OUTPUT
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -49,7 +49,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -68,20 +68,8 @@ jobs:
         run: |
           sudo apt-get update --fix-missing
           sudo apt-get update
-          sudo apt-get install dos2unix yasm nasm build-essential libgtk2.0-dev libpython3-dev m4 uuid libasound2-dev libcurl4-openssl-dev libdbus-1-dev libdrm-dev libdbus-glib-1-dev libdbus-glib-1-dev libgtk-3-dev libpulse-dev libx11-xcb-dev libxt-dev xvfb lld-10 llvm
+          sudo apt-get install dos2unix yasm nasm build-essential libgtk2.0-dev libpython3-dev m4 uuid libasound2-dev libcurl4-openssl-dev libdbus-1-dev libdrm-dev libdbus-glib-1-dev libdbus-glib-1-dev libgtk-3-dev libpulse-dev libx11-xcb-dev libxt-dev xvfb lld llvm
           pip install pycairo testresources
-
-          echo "/usr/lib/llvm-10/bin" >> $GITHUB_PATH
-
-      - name: Install WASI SDK
-        run: |
-          wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-14/wasi-sdk_14.0_amd64.deb
-          sudo apt install ./wasi-sdk_14.0_amd64.deb
-
-      - name: Install libclang builtins
-        run: |
-          wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-14/libclang_rt.builtins-wasm32-wasi-14.0.tar.gz
-          sudo tar -xf libclang_rt.builtins-wasm32-wasi-14.0.tar.gz --strip-components=1 -C /usr/lib/llvm-10/lib/clang/10.0.0/lib/
 
       - name: Disable wasm sandboxing for the sake of my sanity
         run: |
@@ -106,19 +94,11 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Save sccache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         continue-on-error: false
         with:
           path: /home/runner/.cache/sccache
           key: ${{ runner.os }}-sccache
-
-      - name: Get System Info
-        run: |
-          llc --version
-          ls /usr/lib/llvm-10/bin
-          wasm-ld --version
-          cargo --version
-          ls /opt/wasi-sdk/share/wasi-sysroot
 
       - name: Setup gluon
         run: |
@@ -173,7 +153,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -201,7 +181,7 @@ jobs:
           python-version: '3.9'
 
       - name: Save sccache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         continue-on-error: false
         with:
           path: ~/Library/Caches/Mozilla.sccache
@@ -259,7 +239,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -350,6 +330,8 @@ jobs:
     name: Release
     needs: [build-data, linux, source, mac, windows]
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/alpha' }}
+
     steps:
       - uses: actions/download-artifact@v2
 
@@ -397,6 +379,7 @@ jobs:
     name: Build flatpak repos
     needs: [build-data, release]
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/alpha' }}
     
     steps:
       - uses: actions/checkout@v3
@@ -405,14 +388,21 @@ jobs:
           token: ${{ secrets.ROBOT_TOKEN }}
           submodules: recursive
 
+      - name: Ensure repo is on main branch
+        run: |
+          cd repo
+          git checkout main
+          git pull
+
       - name: Install flatpak builder
         run: | 
+           sudo apt-get update
            sudo apt-get install -y flatpak-builder
      
       - name: Install build dependancies
         run: |
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08 --assumeyes
+          sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08 -y
   
       - name: Import GPG keys
         run: |
@@ -433,3 +423,11 @@ jobs:
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: ./repo
+          
+      - name: Update repo version in package
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 📦 Upload flatpak for ${{ needs.build-data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+          repository: .

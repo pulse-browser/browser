@@ -1,5 +1,5 @@
 diff --git a/browser/components/preferences/main.js b/browser/components/preferences/main.js
-index 0dc01225f51934fd86653748c1182960b5ba4e70..3f24c789c550021cd9be90691aac167686f550da 100644
+index 1ce4ba85a0df22b4176443c9003669577b6a230c..a582693e2b7e6fd1e150d25f51c9f578065ce14c 100644
 --- a/browser/components/preferences/main.js
 +++ b/browser/components/preferences/main.js
 @@ -161,6 +161,12 @@ Preferences.addAll([
@@ -10,8 +10,8 @@ index 0dc01225f51934fd86653748c1182960b5ba4e70..3f24c789c550021cd9be90691aac1676
 +
 +  // Pulse browser: custom settings
 +  { id: 'pulse.sidebar.enabled', type: 'bool' },
-+  { id: 'pulse.sidebar.extensions.enabled', type: 'bool' },
-+  { id: 'pulse.sidebar.keeptabsactive.enabled', type: 'bool' }
++  { id: 'pulse.sidebar.keeptabsactive.enabled', type: 'bool' },
++  { id: 'pulse.tabs.vertical', type: 'bool' }
  ]);
  
  if (AppConstants.HAVE_SHELL_SERVICE) {
