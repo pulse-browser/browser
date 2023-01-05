@@ -31,6 +31,13 @@ index a9a1511a8da36140be93264effe683e5d5007f11..1dbcad427fc40cd30a31e9bae9684977
 +  <checkbox id="sidebarVisible"
 +    preference="pulse.sidebar.enabled"
 +    data-l10n-id="preferences-sidebar-visible"/>
++  <checkbox id="sidebarKeepTabsActive"
++    preference="pulse.sidebar.keeptabsactive.enabled"
++    data-l10n-id="preferences-sidebar-active-tabs"/>
++  <description id="sidebarKeepTabsActiveDescription"
++    data-l10n-id="preferences-sidebar-active-tabs-description">
++    <html:a id="restart-browser-button" class="text-link" data-l10n-name="restart-browser" href="about:restartrequired"/>
++  </description>
 +</groupbox>
 +
  <!-- Website appearance -->

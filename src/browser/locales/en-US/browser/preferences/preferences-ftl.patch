@@ -10,8 +10,7 @@ index f24485700321defc69cd57099ede164701b9b3ec..515f7ca0e448c37554e7dbdf3b000765
 +## Pulse browser: Settings entries localization
 +preferences-sidebar-header = Sidebar
 +preferences-sidebar-visible =
-+    .label = Show sidebar tabs
-+
++    .label = Show sidebar tabs 
 +preferences-vertical-tabs-enabled =
 +    .label = Use vertical tabs (Early Access)
 +preferences-vertical-tabs-collapse =
