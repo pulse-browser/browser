@@ -15,7 +15,7 @@ welcome-dialog-import-action = Import
 welcome-dialog-theme = Choose a theme
 welcome-dialog-theme-action = Continue
 
-welcome-dialog-search = Chose a search engine
+welcome-dialog-search = Choose a search engine
 welcome-dialog-search-action = Next
 
 welcome-dialog-sidebar = Choose your Sidebar Settings
