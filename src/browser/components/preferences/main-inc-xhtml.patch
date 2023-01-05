@@ -1,5 +1,5 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index a9a1511a8da36140be93264effe683e5d5007f11..b869fcd6e39ebb350a3ce9f3eb58d2ab4e743ff6 100644
+index a9a1511a8da36140be93264effe683e5d5007f11..839ba020d4b2b4e5672f357377840bb2dd9362e9 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
 @@ -61,6 +61,14 @@
@@ -11,7 +11,7 @@ index a9a1511a8da36140be93264effe683e5d5007f11..b869fcd6e39ebb350a3ce9f3eb58d2ab
 +
 +    <vbox class="indent">
 +      <checkbox id="verticalTabsCollapse" preference="pulse.tabs.vertical.collapse"
-+                preference="preferences-vertical-tabs-collapse" />
++                data-l10n-id="preferences-vertical-tabs-collapse" />
 +    </vbox>
 +
      <checkbox id="ctrlTabRecentlyUsedOrder" data-l10n-id="ctrl-tab-recently-used-order"
