@@ -57,3 +57,10 @@ pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
 pref("extensions.pocket.enabled", false);
 
 #include better-fox.js
+RL", "https://discord.gg/Y3khyEtAgS");
+pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
+
+// This pref needs to be here to not break context menus (GH#169)
+pref("extensions.pocket.enabled", false);
+
+#include better-fox.js

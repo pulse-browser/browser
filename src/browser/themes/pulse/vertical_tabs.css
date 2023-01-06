@@ -12,6 +12,8 @@
 #browser #TabsToolbar {
   background-color: -moz-Dialog;
   max-width: 350px;
+
+  transition: all 200ms ease-in-out;
 }
 
 #browser #TabsToolbar:-moz-lwtheme {
@@ -80,4 +82,15 @@
 
 #browser #new-tab-button {
   display: inherit !important;
+}
+
+#browser #tabbrowser-tabs {
+  border-inline-start: none;
+  margin-inline-start: none;
+}
+
+#browser #TabsToolbar[collapse='true']:not(:hover) {
+  max-width: calc(
+    16px + 2 * var(--inline-tab-padding) + 2 * var(--tab-block-margin)
+  );
 }

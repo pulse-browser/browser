@@ -75,3 +75,16 @@ index 14ecab77149f5645e24c8bffff57c223f64730bb..875b78dbd027dc18debf10281733cd8c
  
  pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
  pref("browser.engagement.downloads-button.has-used", false);
+.mozilla.org");
+ 
+ // Discovery prefs
+-pref("browser.discovery.enabled", true);
+-pref("browser.discovery.containers.enabled", true);
+-pref("browser.discovery.sites", "addons.mozilla.org");
++//
++// From memory, these connect to Google Analytics, so they are a no go
++pref("browser.discovery.enabled", false);
++pref("browser.discovery.containers.enabled", false);
+ 
+ pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
+ pref("browser.engagement.downloads-button.has-used", false);

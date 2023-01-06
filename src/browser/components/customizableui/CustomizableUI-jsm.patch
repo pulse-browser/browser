@@ -40,3 +40,5 @@ index e97c979363775d2de999e65e7e41c02a736f57ac..501f1235ac9ba571be66b533772cc259
        "downloads-button",
        AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
        "fxa-toolbar-menu-button",
+V_EDITION ? "developer-button" : null,
+       "fxa-toolbar-menu-button",

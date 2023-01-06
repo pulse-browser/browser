@@ -431,3 +431,7 @@ jobs:
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: .
+         commit_message: 📦 Upload flatpak for ${{ needs.build-data.outputs.version }}
+          commit_user_name: Fushra Robot
+          commit_user_email: trickypr@gmail.com
+          repository: ./repo
