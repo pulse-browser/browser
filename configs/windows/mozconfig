@@ -3,11 +3,6 @@
 # ac_add_options --enable-rust-simd
 # ac_add_options --enable-crashreporter
 
-# Enable these to enable mozilla telemetry and tracking
-# mk_add_options MOZ_TELEMETRY_REPORTING=
-# mk_add_options MOZ_DATA_REPORTING=
-
-# Provide the mozilla stub installer. This is basicly an IE8 window that
 # installs pulse in the background
 # TODO: rebrand this to look more like pulse
 export MOZ_STUB_INSTALLER=1
