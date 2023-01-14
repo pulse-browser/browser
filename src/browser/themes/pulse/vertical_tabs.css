@@ -94,3 +94,7 @@
     16px + 2 * var(--inline-tab-padding) + 2 * var(--tab-block-margin)
   );
 }
+
+:root[sizemode='fullscreen'] #browser #TabsToolbar {
+    display: none;
+}
