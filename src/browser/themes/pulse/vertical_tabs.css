@@ -9,6 +9,10 @@
   display: none;
 }
 
+#navigator-toolbox-background[verticaltabs='true'] #titlebar {
+    display: none;
+}
+
 #browser #TabsToolbar {
   background-color: -moz-Dialog;
   max-width: 350px;
