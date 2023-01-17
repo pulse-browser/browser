@@ -65,7 +65,10 @@ class EngineStore {
   }
 
   async setDefaultEngine(engine) {
-    await Services.search.setDefault(engine.originalEngine, Ci.nsISearchService.CHANGE_REASON_USER)
+    await Services.search.setDefault(
+      engine.originalEngine,
+      Ci.nsISearchService.CHANGE_REASON_USER
+    )
   }
 }
 
@@ -151,29 +154,52 @@ class Themes extends Page {
   }
 }
 
-class Sidebar extends Page {
+class Features extends Page {
   constructor(id) {
     super(id)
 
-    this.loadSidebar()
-  }
+    /** @type {HTMLDivElement} */
+    this.enableFeatures = document.getElementById('enableFeatures')
 
-  async loadSidebar() {
-    this.enabled = document.getElementById('sidebarEnabled')
-    this.keepTabsActive = document.getElementById('sidebarKeepTabsActive')
+    /** @type {{ l10nId: string; image: string; pref: string; }[]} */
+    this.features = [
+      {
+        l10nId: 'welcome-dialog-feature-vertical-tabs',
+        image: 'vertical.vis.svg',
+        pref: 'pulse.tabs.vertical',
+      },
+      {
+        l10nId: 'welcome-dialog-feature-sidebar-tabs',
+        image: 'sidebar.vis.svg',
+        pref: 'pulse.sidebar.enabled',
+      },
+    ]
 
-    this.enabled.addEventListener('change', () => {
-      //change browser preference pulse.sidebar.enabled
-      Services.prefs.setBoolPref('pulse.sidebar.enabled', this.enabled.checked)
-    })
+    for (const feature of this.features) {
+      const container = document.createElement('div')
+      container.classList.add('card')
+      if (Services.prefs.getBoolPref(feature.pref))
+        container.classList.add('selected')
 
-    this.keepTabsActive.addEventListener('change', () => {
-      //change browser preference pulse.sidebar.keeptabsactive.enabled
-      Services.prefs.setBoolPref(
-        'pulse.sidebar.keeptabsactive.enabled',
-        this.keepTabsActive.checked
-      )
-    })
+      container.addEventListener('click', () => {
+        const newValue = !Services.prefs.getBoolPref(feature.pref)
+        Services.prefs.setBoolPref(feature.pref, newValue)
+
+        if (newValue) container.classList.add('selected')
+        else container.classList.remove('selected')
+      })
+
+      const img = document.createElement('img')
+      img.src = feature.image
+
+      const name = document.createElement('h3')
+      name.setAttribute('data-l10n-id', feature.l10nId)
+
+      container.appendChild(img)
+      container.appendChild(name)
+
+      this.enableFeatures.appendChild(container)
+    }
   }
 }
 
@@ -292,5 +318,5 @@ const pages = new Pages([
   new Import('import'),
   new Themes('theme'),
   new Search('search'),
-  new Sidebar('sidebar'),
+  new Features('features'),
 ])
