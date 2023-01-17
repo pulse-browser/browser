@@ -5,6 +5,47 @@
 
 const VERTICAL_TABS_POSITION = 'pulse.tabs.vertical'
 const VERTICAL_TABS_COLLAPSE = 'pulse.tabs.vertical.collapse'
+const VERTICAL_TABS_WIDTH = 'pulse.tabs.vertical.width'
+
+/**
+ * @param {HTMLElement} toInsertAfter This is the element that I want to insert content after
+ * @param {HTMLElement} toInsert The element to insert
+ *
+ * @throws {Error} If the element you want me to base insertions on has no parent
+ */
+function insertAfter(toInsertAfter, toInsert) {
+  const parent = toInsertAfter.parentNode
+
+  if (!parent) {
+    throw new Error(
+      'The element you want me to base insertions on has no parent'
+    )
+  }
+
+  if (toInsertAfter.nextSibling) {
+    parent.insertBefore(toInsert, toInsertAfter.nextSibling)
+  } else {
+    parent.appendChild(toInsert)
+  }
+}
+
+/**
+ * Replace a tag with another tag with a different name
+ * @param {string} tagName The new tag name
+ * @param {HTMLElement?} initialTag The tag to be changed
+ */
+function changeXULTagName(tagName, initialTag) {
+  if (!initialTag) return
+  if (initialTag.tagName == tagName) return
+
+  const newParent = document.createXULElement(tagName)
+
+  for (const attr of initialTag.attributes)
+    newParent.setAttribute(attr.name, attr.value)
+  while (initialTag.firstChild) newParent.appendChild(initialTag.firstChild)
+
+  initialTag.replaceWith(newParent)
+}
 
 var VerticalTabs = {
   /**
@@ -36,6 +77,13 @@ var VerticalTabs = {
   },
 
   /**
+   * @return {HTMLElement?}
+   */
+  get splitter() {
+    return document.getElementById('verticaltabs-splitter')
+  },
+
+  /**
    * @return {Boolean}
    */
   get browserCollapseTabs() {
@@ -48,6 +96,8 @@ var VerticalTabs = {
   tabBrowserTabs: null,
 
   _initialized: false,
+  /** @type {MutationObserver?} */
+  _widthObserver: null,
 
   init() {
     if (this._initialized) {
@@ -79,9 +129,40 @@ var VerticalTabs = {
       .querySelector('#TabsToolbar .toolbar-items')
       ?.setAttribute('align', 'start')
 
-    document
-      .getElementById('TabsToolbar')
-      ?.setAttribute('collapse', this.browserCollapseTabs ? 'true' : 'false')
+    this.tabsToolbar?.setAttribute(
+      'collapse',
+      this.browserCollapseTabs ? 'true' : 'false'
+    )
+    this.tabsToolbar?.removeAttribute('flex')
+    changeXULTagName('vbox', this.tabsToolbar)
+
+    this._widthObserver = new MutationObserver(this._mutationObserverCallback)
+    if (this.tabsToolbar)
+      this._widthObserver.observe(this.tabsToolbar, { attributes: true })
+
+    this.tabsToolbar?.setAttribute(
+      'width',
+      Services.prefs.getIntPref(VERTICAL_TABS_WIDTH, 200)
+    )
+    if (this.tabsToolbar)
+      this.tabsToolbar.style.width = `${Services.prefs.getIntPref(
+        VERTICAL_TABS_WIDTH,
+        200
+      )}px`
+
+    if (!this.splitter) {
+      const separator = document.createXULElement('splitter')
+      separator.setAttribute('id', 'verticaltabs-splitter')
+      separator.setAttribute(
+        'class',
+        'chromeclass-extrachrome verticaltabs-splitter'
+      )
+      separator.setAttribute('resizebefore', 'sibling')
+      separator.setAttribute('resizeafter', 'none')
+
+      const tabs = this.tabsToolbar
+      if (tabs) insertAfter(tabs, separator)
+    }
   },
 
   disableVerticalTabs() {
@@ -96,6 +177,35 @@ var VerticalTabs = {
     document
       .querySelector('#TabsToolbar .toolbar-items')
       ?.setAttribute('align', 'end')
+
+    changeXULTagName('toolbar', this.tabsToolbar)
+    this.tabsToolbar?.setAttribute('flex', '1')
+
+    if (this.splitter) {
+      this.splitter.remove()
+    }
+
+    if (this._widthObserver) {
+      this._widthObserver.disconnect()
+      this._widthObserver = null
+    }
+  },
+
+  /**
+   * @param {MutationRecord[]} mutationsList
+   * @param {MutationObserver} _observer
+   */
+  _mutationObserverCallback(mutationsList, _observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName == 'width') {
+        const tabsToolbar = document.getElementById('TabsToolbar')
+
+        Services.prefs.setIntPref(
+          VERTICAL_TABS_WIDTH,
+          parseInt(tabsToolbar?.getAttribute('width') || '100')
+        )
+      }
+    }
   },
 
   /**
