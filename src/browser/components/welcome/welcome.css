@@ -29,14 +29,14 @@ body {
 }
 
 .card h3 {
-  font-size: 0.75rem;
   /* margin: 0; */
+  text-align: center;
 }
 
 .cardGroup {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 8px;
   margin-bottom: 8px;
 }
@@ -46,6 +46,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: space-between;
   border: 2px solid transparent;
   transition: all 250ms ease-in-out;
   margin: 0;
@@ -85,7 +86,7 @@ p {
   }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   display: inline-block;
   vertical-align: middle;
 }
