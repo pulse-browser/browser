@@ -29,8 +29,12 @@ body {
   margin: 32px;
 }
 
+#enableFeatures .card {
+  width: auto;
+}
+
 .card h3 {
-  /* margin: 0; */
+  margin: auto;
   text-align: center;
 }
 
@@ -40,6 +44,7 @@ body {
   align-items: stretch;
   gap: 8px;
   margin-bottom: 8px;
+  justify-content: center;
 }
 
 .cardGroup .card {
