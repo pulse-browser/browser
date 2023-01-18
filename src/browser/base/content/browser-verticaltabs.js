@@ -178,8 +178,12 @@ var VerticalTabs = {
       .querySelector('#TabsToolbar .toolbar-items')
       ?.setAttribute('align', 'end')
 
-    changeXULTagName('toolbar', this.tabsToolbar)
-    this.tabsToolbar?.setAttribute('flex', '1')
+    if (this.tabsToolbar) {
+      changeXULTagName('toolbar', this.tabsToolbar)
+      this.tabsToolbar.setAttribute('flex', '1')
+      // Reset the resize value, or else the tabs will end up squished
+      this.tabsToolbar.style.width = ''
+    }
 
     if (this.splitter) {
       this.splitter.remove()
