@@ -117,9 +117,11 @@ tab.tabbrowser-tab:nth-child(1) {
 }
 
 /* ========================================================================== */
-/* Sidebar tabs */
+/* Sidebar tabs & vertical tabs */
 .sidebar-item-background[checked='true']::before,
-.sidebar-item-background[checked='true']::after {
+.sidebar-item-background[checked='true']::after,
+#browser .tab-background[selected='true']::before,
+#browser .tab-background[selected='true']::after {
   content: '';
   position: absolute;
   right: 0;
@@ -136,19 +138,23 @@ tab.tabbrowser-tab:nth-child(1) {
   z-index: 10;
 }
 
-.sidebar-item-background[checked='true']::before {
+.sidebar-item-background[checked='true']::before,
+#browser .tab-background[selected='true']::before {
   background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
   top: var(--tab-rounding-size-neg);
+  left: unset; /* This is for vertical tabs */
 }
 
-.sidebar-item-background[checked='true']::after {
+.sidebar-item-background[checked='true']::after,
+#browser .tab-background[selected='true']::after {
   background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
   bottom: var(--tab-rounding-size-neg);
   transform: rotate(180deg);
 }
 
 /* Show the curve next to the sidebar panel */
-#sidebar-box[checked] ~ #appcontent::before {
+#sidebar-box[checked] ~ #appcontent::before,
+#browser #TabsToolbar ~ #appcontent::before {
   content: '';
 
   background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
@@ -166,12 +172,14 @@ tab.tabbrowser-tab:nth-child(1) {
   transform: rotate(180deg);
 }
 
-#appcontent {
+#appcontent,
+#browser #TabsToolbar {
   position: relative;
 }
 
 /* Curve up at the top of the tabs */
-#sidebar-icons[checked]::before {
+#sidebar-icons[checked]::before,
+#browser #TabsToolbar::before {
   content: '';
   background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
   background-size: cover;
