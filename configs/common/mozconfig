@@ -18,3 +18,8 @@ export MOZ_INCLUDE_SOURCE_INFO=1
 export MOZ_REQUIRE_SIGNING=
 export MOZ_SOURCE_REPO=https://github.com/pulse-browser/browser
 export MOZ_SOURCE_CHANGESET=${changeset}
+
+# Enable these to enable mozilla telemetry and tracking. By default, mozilla will not build telemetry code.
+# MOZ_TELEMETRY_REPORTING=1
+# MOZ_DATA_REPORTING=1
+
