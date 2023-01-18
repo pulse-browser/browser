@@ -16,6 +16,7 @@
 #browser #TabsToolbar {
   background-color: -moz-Dialog;
   max-width: 350px;
+  min-width: 76px;
 }
 
 #browser #TabsToolbar:-moz-lwtheme {
