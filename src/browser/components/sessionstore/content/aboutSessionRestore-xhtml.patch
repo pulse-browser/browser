@@ -1,5 +1,5 @@
 diff --git a/browser/components/sessionstore/content/aboutSessionRestore.xhtml b/browser/components/sessionstore/content/aboutSessionRestore.xhtml
-index bb0aff1b9e25cce2c8f9c95d73c5be4f63bbe46f..f8d68e0cbe198ca9010884c2e9add5a640e3013b 100644
+index 05538be5d95492903e44076dc43e195cbc76c10d..44819694a95e5064078e48a704fa53d46b134c50 100644
 --- a/browser/components/sessionstore/content/aboutSessionRestore.xhtml
 +++ b/browser/components/sessionstore/content/aboutSessionRestore.xhtml
 @@ -20,6 +20,7 @@
@@ -9,4 +9,4 @@ index bb0aff1b9e25cce2c8f9c95d73c5be4f63bbe46f..f8d68e0cbe198ca9010884c2e9add5a6
 +    <script src="chrome://browser/content/contentTheme.js"></script>
    </head>
  
-   <body class="illustrated">
+   <body>

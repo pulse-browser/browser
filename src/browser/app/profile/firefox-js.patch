@@ -1,5 +1,5 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 14ecab77149f5645e24c8bffff57c223f64730bb..875b78dbd027dc18debf10281733cd8c37b23031 100644
+index 9b56ba74cff12f029b6d8910ff487a216a15194f..ff91ce488ddd65c148633eb3e8e65044da47bf37 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
 @@ -19,6 +19,8 @@
@@ -19,7 +19,7 @@ index 14ecab77149f5645e24c8bffff57c223f64730bb..875b78dbd027dc18debf10281733cd8c
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
-@@ -774,7 +775,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
+@@ -802,7 +803,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
  pref("browser.tabs.tooltipsShowPidAndActiveness", false);
  #endif
  
@@ -28,16 +28,7 @@ index 14ecab77149f5645e24c8bffff57c223f64730bb..875b78dbd027dc18debf10281733cd8c
  pref("browser.tabs.firefox-view.logLevel", "Warn");
  pref("browser.tabs.firefox-view.notify-for-tabs", false);
  
-@@ -1945,7 +1946,7 @@ pref("browser.send_to_device_locales", "de,en-GB,en-US,es-AR,es-CL,es-ES,es-MX,f
- pref("browser.vpn_promo.disallowed_regions", "ae,by,cn,cu,iq,ir,kp,om,ru,sd,sy,tm,tr,ua");
- 
- // Default to enabling VPN promo messages to be shown when specified and allowed
--pref("browser.vpn_promo.enabled", true);
-+pref("browser.vpn_promo.enabled", false);
- // Only show vpn card to certain regions. Comma separated string of two letter ISO 3166-1 country codes.
- // The most recent list of supported countries can be found at https://support.mozilla.org/en-US/kb/mozilla-vpn-countries-available-subscribe
- // The full list of supported country codes can also be found at https://github.com/mozilla/bedrock/search?q=VPN_COUNTRY_CODES
-@@ -2066,10 +2067,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
+@@ -2082,10 +2083,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
  pref("browser.tabs.crashReporting.sendReport", true);
  pref("browser.tabs.crashReporting.includeURL", false);
  
@@ -48,8 +39,8 @@ index 14ecab77149f5645e24c8bffff57c223f64730bb..875b78dbd027dc18debf10281733cd8c
  #if defined(XP_LINUX) || defined(XP_WIN)
    // Allows us to adjust the priority of child processes at the OS level
    pref("dom.ipc.processPriorityManager.enabled", true);
-@@ -2117,10 +2114,10 @@ pref("browser.migrate.chrome.history.maxAgeInDays", 180);
- pref("browser.migrate.showBookmarksToolbarAfterMigration", true);
+@@ -2156,10 +2153,10 @@ pref("browser.migrate.opera-gx.enabled", false);
+ pref("browser.migrate.content-modal.enabled", false);
  
  pref("extensions.pocket.api", "api.getpocket.com");
 -pref("extensions.pocket.enabled", true);
@@ -61,30 +52,15 @@ index 14ecab77149f5645e24c8bffff57c223f64730bb..875b78dbd027dc18debf10281733cd8c
  pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
  
  // Enable Pocket button home panel for non link pages.
-@@ -2251,9 +2248,10 @@ pref("toolkit.coverage.enabled", false);
+@@ -2290,8 +2287,9 @@ pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
  // Discovery prefs
 -pref("browser.discovery.enabled", true);
 -pref("browser.discovery.containers.enabled", true);
--pref("browser.discovery.sites", "addons.mozilla.org");
-+//
-+// From memory, these connect to Google Analytics, so they are a no go
++// From memory, this uses google analytics
 +pref("browser.discovery.enabled", false);
 +pref("browser.discovery.containers.enabled", false);
+ pref("browser.discovery.sites", "addons.mozilla.org");
  
  pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
- pref("browser.engagement.downloads-button.has-used", false);
-.mozilla.org");
- 
- // Discovery prefs
--pref("browser.discovery.enabled", true);
--pref("browser.discovery.containers.enabled", true);
--pref("browser.discovery.sites", "addons.mozilla.org");
-+//
-+// From memory, these connect to Google Analytics, so they are a no go
-+pref("browser.discovery.enabled", false);
-+pref("browser.discovery.containers.enabled", false);
- 
- pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
- pref("browser.engagement.downloads-button.has-used", false);
