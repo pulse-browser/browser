@@ -108,6 +108,14 @@ tab.tabbrowser-tab:nth-child(1) {
   margin: 8px;
 }
 
+#verticaltabs-splitter {
+  background-color: var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
+  background-image: var(--tab-selected-bgimage, var(--toolbar-bgimage));
+  -moz-default-appearance: auto !important;
+  -moz-font-smoothing-background-color: auto !important;
+  width: 4px;
+}
+
 /* ========================================================================== */
 /* Sidebar tabs */
 .sidebar-item-background[checked='true']::before,
@@ -255,7 +263,14 @@ tab[pending],
 }
 
 /* Hide the firefox view button */
-:root:not([privatebrowsingmode="temporary"]) :is(toolbarbutton, toolbarpaletteitem) + #tabbrowser-tabs, :root[privatebrowsingmode="temporary"] :is(toolbarbutton:not(#firefox-view-button), toolbarpaletteitem:not(#wrapper-firefox-view-button)) + #tabbrowser-tabs {
-	border-inline-start: none;
+:root:not([privatebrowsingmode='temporary'])
+  :is(toolbarbutton, toolbarpaletteitem)
+  + #tabbrowser-tabs,
+:root[privatebrowsingmode='temporary']
+  :is(
+    toolbarbutton:not(#firefox-view-button),
+    toolbarpaletteitem:not(#wrapper-firefox-view-button)
+  )
+  + #tabbrowser-tabs {
+  border-inline-start: none;
 }
-
