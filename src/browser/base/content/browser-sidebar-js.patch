@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f587815197 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645afde674dd8 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -75,7 +75,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
      ]));
    },
  
-@@ -61,7 +97,10 @@ var SidebarUI = {
+@@ -61,12 +97,16 @@ var SidebarUI = {
      return (this._browser = document.getElementById("sidebar"));
    },
    POSITION_START_PREF: "sidebar.position_start",
@@ -86,7 +86,13 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
  
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
    // and isn't persisted across windows
-@@ -76,8 +115,13 @@ var SidebarUI = {
+   lastOpenedId: null,
+ 
++  /** @type {HTMLElement?} */
+   _box: null,
+   // The constructor of this label accesses the browser element due to the
+   // control="sidebar" attribute, so avoid getting this label during startup.
+@@ -76,8 +116,13 @@ var SidebarUI = {
      }
      return (this.__title = document.getElementById("sidebar-title"));
    },
@@ -100,7 +106,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,15 +154,59 @@ var SidebarUI = {
+@@ -110,15 +155,59 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
@@ -160,7 +166,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
    },
  
    uninit() {
-@@ -127,7 +215,10 @@ var SidebarUI = {
+@@ -127,7 +216,10 @@ var SidebarUI = {
      let enumerator = Services.wm.getEnumerator("navigator:browser");
      if (!enumerator.hasMoreElements()) {
        let xulStore = Services.xulStore;
@@ -172,7 +178,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -148,6 +239,12 @@ var SidebarUI = {
+@@ -148,6 +240,12 @@ var SidebarUI = {
        xulStore.persist(this._title, "value");
      }
  
@@ -185,7 +191,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
      Services.obs.removeObserver(this, "intl:app-locales-changed");
  
      if (this._observer) {
-@@ -159,17 +256,47 @@ var SidebarUI = {
+@@ -159,17 +257,62 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -230,6 +236,21 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
 +              }
 +            }
 +
++            // The sidebar depends on a browse existing. If this has been 
++            // destroyed, we need to re-init it. Although, first we need to 
++            // remove any possible cached value
++            this._browser = null
++            if (!this.browser) {
++              /** @type {HTMLElement} */
++              const browser = document.createXULElement('browser')
++              browser.setAttribute('id', 'sidebar')
++              browser.setAttribute('autoscroll', 'false')
++              browser.setAttribute('disablehistory', 'true')
++              browser.setAttribute('disablefullscreen', 'true')
++              browser.setAttribute('tooltip', 'aHTMLTooltip')
++              this._box.appendChild(browser)
++            } 
++
 +            this.init();
 +            break;
 +        }
@@ -237,7 +258,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
        }
      }
    },
-@@ -485,6 +612,9 @@ var SidebarUI = {
+@@ -485,6 +628,9 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -247,7 +268,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +653,7 @@ var SidebarUI = {
+@@ -523,6 +669,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -255,7 +276,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
        return true;
      });
    },
-@@ -546,10 +677,28 @@ var SidebarUI = {
+@@ -546,10 +693,28 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -284,7 +305,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +708,29 @@ var SidebarUI = {
+@@ -559,6 +724,29 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -314,7 +335,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +742,21 @@ var SidebarUI = {
+@@ -570,13 +758,21 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -338,7 +359,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +795,46 @@ var SidebarUI = {
+@@ -615,22 +811,46 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -392,7 +413,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..4d824259fd611e5531e35bb3d3da85f5
    },
  
    /**
-@@ -638,25 +842,121 @@ var SidebarUI = {
+@@ -638,25 +858,121 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
