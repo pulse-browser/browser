@@ -178,11 +178,11 @@ class Features extends Page {
     for (const feature of this.features) {
       const container = document.createElement('div')
       container.classList.add('card')
-      if (Services.prefs.getBoolPref(feature.pref))
+      if (Services.prefs.getBoolPref(feature.pref, false))
         container.classList.add('selected')
 
       container.addEventListener('click', () => {
-        const newValue = !Services.prefs.getBoolPref(feature.pref)
+        const newValue = !Services.prefs.getBoolPref(feature.pref, false)
         Services.prefs.setBoolPref(feature.pref, newValue)
 
         if (newValue) container.classList.add('selected')
