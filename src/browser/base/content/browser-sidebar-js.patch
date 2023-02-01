@@ -258,7 +258,17 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        }
      }
    },
-@@ -485,6 +628,9 @@ var SidebarUI = {
+@@ -286,6 +413,9 @@ var SidebarUI = {
+     // First reset all ordinals to match DOM ordering.
+     let browser = document.getElementById("browser");
+     [...browser.children].forEach((node, i) => {
++      // Do not change ordinal on vertical tabs
++      if (node.id == 'TabsToolbar' || node.id == 'verticaltabs-splitter') return
++
+       node.style.MozBoxOrdinalGroup = i + 1;
+     });
+ 
+@@ -485,6 +615,9 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -268,7 +278,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +669,7 @@ var SidebarUI = {
+@@ -523,6 +656,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -276,7 +286,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        return true;
      });
    },
-@@ -546,10 +693,28 @@ var SidebarUI = {
+@@ -546,10 +680,28 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -305,7 +315,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +724,29 @@ var SidebarUI = {
+@@ -559,6 +711,29 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -335,7 +345,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +758,21 @@ var SidebarUI = {
+@@ -570,13 +745,21 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -359,7 +369,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +811,46 @@ var SidebarUI = {
+@@ -615,22 +798,46 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -413,7 +423,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    },
  
    /**
-@@ -638,25 +858,121 @@ var SidebarUI = {
+@@ -638,25 +845,121 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {

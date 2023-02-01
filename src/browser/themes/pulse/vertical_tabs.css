@@ -5,6 +5,9 @@
  */
 :root {
   --vertical-tabs-max-width: 350px;
+  --vertical-tabs-collapse-width: calc(
+    16px + 2 * var(--inline-tab-padding) + 2 * var(--tab-block-margin)
+  );
 }
 
 #browser #TabsToolbar .titlebar-spacer,
@@ -20,7 +23,11 @@
 #browser #TabsToolbar {
   background-color: -moz-Dialog;
   max-width: var(--vertical-tabs-max-width);
+  min-width: var(--vertical-tabs-collapse-width);
   -moz-box-ordinal-group: 0;
+  overflow-x: hidden;
+
+  transition: min-width 150ms ease-in-out, max-width 150ms ease-in-out;
 }
 
 #browser #TabsToolbar:not([collapse='true']) {
@@ -28,9 +35,7 @@
 }
 
 #browser #TabsToolbar[collapse='true'] {
-  max-width: calc(
-    16px + 2 * var(--inline-tab-padding) + 2 * var(--tab-block-margin)
-  );
+  max-width: var(--vertical-tabs-collapse-width);
 }
 
 /** On collapse hover of tabs or splitter, the max width should increase again */
@@ -106,7 +111,8 @@
 
 #browser #tabbrowser-tabs {
   border-inline-start: none;
-  margin-inline-start: none;
+  margin-inline-start: 0;
+  padding-inline-start: 0;
 }
 
 #browser #TabsToolbar[collapse='true'] .tabbrowser-tab {
