@@ -3,6 +3,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
+:root {
+  --vertical-tabs-max-width: 350px;
+}
+
 #browser #TabsToolbar .titlebar-spacer,
 #browser #TabsToolbar .titlebar-buttonbox-container,
 #browser #TabsToolbar #alltabs-button {
@@ -10,14 +14,29 @@
 }
 
 #navigator-toolbox-background[verticaltabs='true'] #titlebar {
-    display: none;
+  display: none;
 }
 
 #browser #TabsToolbar {
   background-color: -moz-Dialog;
-  max-width: 350px;
+  max-width: var(--vertical-tabs-max-width);
+  -moz-box-ordinal-group: 0;
+}
 
-  transition: all 200ms ease-in-out;
+#browser #TabsToolbar:not([collapse='true']) {
+  min-width: 76px;
+}
+
+#browser #TabsToolbar[collapse='true'] {
+  max-width: calc(
+    16px + 2 * var(--inline-tab-padding) + 2 * var(--tab-block-margin)
+  );
+}
+
+/** On collapse hover of tabs or splitter, the max width should increase again */
+#browser #TabsToolbar[collapse='true']:hover,
+#verticaltabs-splitter:hover ~ #TabsToolbar[collapse='true'] {
+  max-width: var(--vertical-tabs-max-width);
 }
 
 #browser #TabsToolbar:-moz-lwtheme {
@@ -36,9 +55,6 @@
   /* Stops the tabs from getting squished or stretched */
   min-height: unset;
   max-height: var(--tab-min-height);
-
-  /* Animate tabs out vertically */
-  transition: min-height 100ms ease-out, max-height 100ms ease-out;
 }
 
 /* Put the new tab button on the bottom */
@@ -93,12 +109,15 @@
   margin-inline-start: none;
 }
 
-#browser #TabsToolbar[collapse='true']:not(:hover) {
-  max-width: calc(
-    16px + 2 * var(--inline-tab-padding) + 2 * var(--tab-block-margin)
-  );
+#browser #TabsToolbar[collapse='true'] .tabbrowser-tab {
+  /* Animate tabs out vertically */
+  transition: min-height 100ms ease-out, max-height 100ms ease-out;
+}
+
+#verticaltabs-splitter {
+  -moz-box-ordinal-group: 1;
 }
 
 :root[sizemode='fullscreen'] #browser #TabsToolbar {
-    display: none;
+  display: none;
 }
