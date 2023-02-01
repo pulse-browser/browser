@@ -88,20 +88,19 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
       ></button>
     </div>
 
-    <div class="page" id="sidebar">
-      <h2 data-l10n-id="welcome-dialog-sidebar"></h2>
-      <p data-l10n-id="welcome-dialog-sidebar-subtext"></p>
-      <hbox>
-        <input type="checkbox" id="sidebarEnabled" checked><label data-l10n-id="welcome-dialog-sidebar-checkbox"></label></input><br>
-        <input type="checkbox" id="sidebarKeepTabsActive" checked><label data-l10n-id="welcome-dialog-sidebar-keeptabsenabled-checkbox"></label></input>
-      </hbox>
+    <div class="page" id="features">
+      <h2 data-l10n-id="welcome-dialog-features"></h2>
+
+      <div class="cardGroup" id="enableFeatures"></div>
+
       <button
-        id="sidebarNext"
+        id="featuresNext"
         class="primary"
-        data-l10n-id="welcome-dialog-sidebar-action"
+        data-l10n-id="welcome-dialog-features-action"
       ></button>
     </div>
 
     <script src="./welcome.js"></script>
+    <script src="chrome://browser/content/contentTheme.js"></script>
   </body>
 </html>

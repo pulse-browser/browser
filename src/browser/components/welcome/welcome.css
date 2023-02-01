@@ -3,6 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
+
 body {
   width: 670px;
   height: 504px;
@@ -25,20 +26,25 @@ body {
   align-content: center;
   width: 100%;
 
-  margin: 64px;
+  margin: 32px;
+}
+
+#enableFeatures .card {
+  width: auto;
 }
 
 .card h3 {
-  font-size: 0.75rem;
-  /* margin: 0; */
+  margin: auto;
+  text-align: center;
 }
 
 .cardGroup {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 8px;
   margin-bottom: 8px;
+  justify-content: center;
 }
 
 .cardGroup .card {
@@ -46,13 +52,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: space-between;
   border: 2px solid transparent;
   transition: all 250ms ease-in-out;
   margin: 0;
+  border-radius: 16px;
 }
 
 .cardGroup .card.selected {
-  border: 2px solid var(--in-content-item-selected);
+  border: 2px solid var(--in-content-primary-button-background-hover);
 }
 
 h2,
@@ -85,7 +93,7 @@ p {
   }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   display: inline-block;
   vertical-align: middle;
 }

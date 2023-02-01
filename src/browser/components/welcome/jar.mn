@@ -9,3 +9,5 @@ browser.jar:
   content/browser/welcome/welcome.js          (welcome.js)
   content/browser/welcome/migrate.light.svg   (migrate.light.svg)
   content/browser/welcome/migrate.dark.svg    (migrate.dark.svg)
+  content/browser/welcome/sidebar.vis.svg     (sidebar.vis.svg)
+  content/browser/welcome/vertical.vis.svg    (vertical.vis.svg)
