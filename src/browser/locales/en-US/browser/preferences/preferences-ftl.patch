@@ -1,5 +1,5 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index f24485700321defc69cd57099ede164701b9b3ec..c62c09a76a96a8fd443537146edf4461839135f4 100644
+index f24485700321defc69cd57099ede164701b9b3ec..8061f090bf6d2fb29c4824d5d1a812688abfafb4 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
 @@ -1432,3 +1432,18 @@ httpsonly-radio-disabled =
@@ -16,7 +16,7 @@ index f24485700321defc69cd57099ede164701b9b3ec..c62c09a76a96a8fd443537146edf4461
 +preferences-sidebar-active-tabs-description = When enabled, sidebar tabs will remain active even when closed. When disabled, sidebar tabs will be closed when you click on another tab.
 +
 +preferences-vertical-tabs-enabled =
-+    .label = Use vertical tabs (Early Access)
++    .label = Use vertical tabs (In dev)
 +preferences-vertical-tabs-collapse =
 +    .label = Collapse tabs
 +
