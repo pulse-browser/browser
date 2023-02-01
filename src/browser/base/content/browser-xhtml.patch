@@ -1,20 +1,12 @@
 diff --git a/browser/base/content/browser.xhtml b/browser/base/content/browser.xhtml
-index 8dfb7b3c787661b5541d77c0eddf408ee90c513f..2a8c13598f5d047bb2fbcbae0b1ee6032a50e9da 100644
+index a775f71d5ca17dfbba4e84ea602c17ee669ab7e4..36f2d1fab395a7a2f3e299b39dfc15187aa9f28a 100644
 --- a/browser/base/content/browser.xhtml
 +++ b/browser/base/content/browser.xhtml
-@@ -105,6 +105,7 @@
-   Services.scriptloader.loadSubScript("chrome://browser/content/browser-pageActions.js", this);
+@@ -110,6 +110,7 @@
    Services.scriptloader.loadSubScript("chrome://browser/content/browser-sidebar.js", this);
    Services.scriptloader.loadSubScript("chrome://browser/content/browser-tabsintitlebar.js", this);
+   Services.scriptloader.loadSubScript("chrome://browser/content/browser-unified-extensions.js", this);
 +  Services.scriptloader.loadSubScript("chrome://browser/content/browser-verticaltabs.js", this);
    Services.scriptloader.loadSubScript("chrome://browser/content/tabbrowser.js", this);
    Services.scriptloader.loadSubScript("chrome://browser/content/tabbrowser-tab.js", this);
    Services.scriptloader.loadSubScript("chrome://browser/content/tabbrowser-tabs.js", this);
-@@ -112,6 +113,7 @@
-   Services.scriptloader.loadSubScript("chrome://browser/content/search/autocomplete-popup.js", this);
-   Services.scriptloader.loadSubScript("chrome://browser/content/search/searchbar.js", this);
- 
-+
-   window.onload = gBrowserInit.onLoad.bind(gBrowserInit);
-   window.onunload = gBrowserInit.onUnload.bind(gBrowserInit);
-   window.onclose = WindowIsClosing;

@@ -1,10 +1,10 @@
 diff --git a/browser/base/jar.mn b/browser/base/jar.mn
-index 4239a2af4952c0c7ceafaae1d614925a960402bc..f53ab91867941b7282d71b4687ae8af7df47e621 100644
+index a0e9585076a16f46f0b100f3fdd71896b75d165b..9c8a3abcdb97a968e00c9727c82e2644f9aaf921 100644
 --- a/browser/base/jar.mn
 +++ b/browser/base/jar.mn
-@@ -58,6 +58,7 @@ browser.jar:
-         content/browser/browser-toolbarKeyNav.js            (content/browser-toolbarKeyNav.js)
+@@ -60,6 +60,7 @@ browser.jar:
          content/browser/browser-thumbnails.js               (content/browser-thumbnails.js)
+         content/browser/browser-unified-extensions.js       (content/browser-unified-extensions.js)
          content/browser/browser-graphics-utils.js           (content/browser-graphics-utils.js)
 +        content/browser/browser-verticaltabs.js             (content/browser-verticaltabs.js)
          content/browser/browser-webrtc.js                   (content/browser-webrtc.js)

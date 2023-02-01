@@ -1,0 +1,19 @@
+diff --git a/browser/components/migration/ChromeMigrationUtils.sys.mjs b/browser/components/migration/ChromeMigrationUtils.sys.mjs
+--- a/browser/components/migration/ChromeMigrationUtils.sys.mjs
++++ b/browser/components/migration/ChromeMigrationUtils.sys.mjs
+@@ -297,12 +297,12 @@
+         "Chrome Dev": ["google-chrome-unstable"],
+         Chromium: ["chromium"],
+         "Opera GX": ["Opera-GX"],
+         // Canary is not available on Linux.
+         // Edge is not available on Linux.
+-        Opera: ["Opera"],
+-        Vivaldi: ["Vivaldi"],
++        Opera: ["opera"],
++        Vivaldi: ["vivaldi"],
+       },
+     };
+     let subfolders = SUB_DIRECTORIES[AppConstants.platform][chromeProjectName];
+     if (!subfolders) {
+       return null;
+

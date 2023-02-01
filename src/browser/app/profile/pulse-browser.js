@@ -4,6 +4,11 @@
 //
 // Note: You must have semicolons at the end of each line in user setting files
 
+// Enable importers for other browsers
+pref('browser.migrate.vivaldi.enabled', true);
+pref('browser.migrate.opera-gx.enabled', true);
+pref('browser.migrate.opera.enabled', true);
+
 // Enable downloading DRM.
 pref('media.eme.enabled', true);
 
@@ -51,13 +56,6 @@ pref("extensions.systemAddon.update.enabled", true);
 pref("app.update.url.manual", "https://pulsebrowser.app/download");
 pref("app.update.url.details", "hhttps://pulsebrowser.app/download");
 pref("app.releaseNotesURL", "https://discord.gg/Y3khyEtAgS");
-pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
-
-// This pref needs to be here to not break context menus (GH#169)
-pref("extensions.pocket.enabled", false);
-
-#include better-fox.js
-RL", "https://discord.gg/Y3khyEtAgS");
 pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
 
 // This pref needs to be here to not break context menus (GH#169)
