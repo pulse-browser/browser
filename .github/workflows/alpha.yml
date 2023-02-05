@@ -131,19 +131,19 @@ jobs:
           mv dist/output.mar linux.mar
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pulse-browser.linux.tar.bz2
           path: ./pulse-browser.linux.tar.bz2
 
       - name: Upload mar
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: linux.mar
           path: ./linux.mar
 
       - name: Upload update manifests
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: linux_update_manifest
           path: ./dist/update
@@ -217,19 +217,19 @@ jobs:
           mv ./dist/output.mar macos.mar
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pulse-browser.macos.dmg
           path: ./pulse-browser.macos.dmg
 
       - name: Upload mar
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: macos.mar
           path: ./macos.mar
 
       - name: Upload update manifests
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: macos_update_manifest
           path: ./dist/update
@@ -309,19 +309,19 @@ jobs:
           mv ./dist/output.mar windows.mar
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pulse-browser.installer.exe
           path: ./dist/pulse-browser.installer.exe
 
       - name: Upload mar
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: windows.mar
           path: ./windows.mar
 
       - name: Upload update manifests
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: windows_update_manifest
           path: ./dist/update
@@ -333,7 +333,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/alpha' }}
 
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
 
       - name: release-github
         uses: 'marvinpinto/action-automatic-releases@latest'
