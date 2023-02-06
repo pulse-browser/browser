@@ -1,17 +1,8 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 9b56ba74cff12f029b6d8910ff487a216a15194f..603a2b90f800b8f702ab2c1c61ce922c11459ce6 100644
+index 9b56ba74cff12f029b6d8910ff487a216a15194f..790cefdf29f62acea33fb483fdefdf4ac0638f95 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -19,6 +19,8 @@
-   #endif
- #endif
- 
-+#include pulse-browser.js
-+
- pref("browser.hiddenWindowChromeURL", "chrome://browser/content/hiddenWindowMac.xhtml");
- 
- // Enables some extra Extension System Logging (can reduce performance)
-@@ -67,7 +69,6 @@ pref("extensions.webextensions.remote", true);
+@@ -67,7 +67,6 @@ pref("extensions.webextensions.remote", true);
  
  // Require signed add-ons by default
  pref("extensions.langpacks.signatures.required", true);
@@ -19,7 +10,7 @@ index 9b56ba74cff12f029b6d8910ff487a216a15194f..603a2b90f800b8f702ab2c1c61ce922c
  pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
  
  // Enable extensionStorage storage actor by default
-@@ -802,7 +803,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
+@@ -802,7 +801,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
  pref("browser.tabs.tooltipsShowPidAndActiveness", false);
  #endif
  
@@ -28,7 +19,7 @@ index 9b56ba74cff12f029b6d8910ff487a216a15194f..603a2b90f800b8f702ab2c1c61ce922c
  pref("browser.tabs.firefox-view.logLevel", "Warn");
  pref("browser.tabs.firefox-view.notify-for-tabs", false);
  
-@@ -2082,10 +2083,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
+@@ -2082,10 +2081,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
  pref("browser.tabs.crashReporting.sendReport", true);
  pref("browser.tabs.crashReporting.includeURL", false);
  
@@ -39,7 +30,7 @@ index 9b56ba74cff12f029b6d8910ff487a216a15194f..603a2b90f800b8f702ab2c1c61ce922c
  #if defined(XP_LINUX) || defined(XP_WIN)
    // Allows us to adjust the priority of child processes at the OS level
    pref("dom.ipc.processPriorityManager.enabled", true);
-@@ -2149,17 +2146,15 @@ pref("browser.migrate.edge.enabled", true);
+@@ -2149,17 +2144,15 @@ pref("browser.migrate.edge.enabled", true);
  pref("browser.migrate.firefox.enabled", true);
  pref("browser.migrate.ie.enabled", true);
  pref("browser.migrate.safari.enabled", true);
@@ -60,7 +51,7 @@ index 9b56ba74cff12f029b6d8910ff487a216a15194f..603a2b90f800b8f702ab2c1c61ce922c
  pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
  
  // Enable Pocket button home panel for non link pages.
-@@ -2290,8 +2285,9 @@ pref("toolkit.coverage.enabled", false);
+@@ -2290,8 +2283,9 @@ pref("toolkit.coverage.enabled", false);
  pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
  
  // Discovery prefs
@@ -72,3 +63,9 @@ index 9b56ba74cff12f029b6d8910ff487a216a15194f..603a2b90f800b8f702ab2c1c61ce922c
  pref("browser.discovery.sites", "addons.mozilla.org");
  
  pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
+@@ -2781,3 +2775,5 @@ pref("browser.pdfjs.feature-tour", "{\"screen\":\"\",\"complete\":false}");
+ 
+ // Enables the cookie banner desktop UI.
+ pref("cookiebanners.ui.desktop.enabled", false);
++
++#include pulse-browser.js
