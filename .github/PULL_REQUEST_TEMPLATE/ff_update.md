@@ -56,3 +56,7 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
 
 - [ ] Useragent
   - [ ] The user agent is reporting as Mozilla Firefox
+
+- [ ] Are all extensions up to date?
+- [ ] Has `better-fox.js` been updated to the relevent version?
+  - [ ] Have `user_pref`s been changed to `pref`?
