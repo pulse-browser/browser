@@ -10,6 +10,10 @@
   );
 }
 
+#browser #TabsToolbar .toolbar-items {
+  height: 100%;
+}
+
 #browser #TabsToolbar .titlebar-spacer,
 #browser #TabsToolbar .titlebar-buttonbox-container,
 #browser #TabsToolbar #alltabs-button {
