@@ -1,69 +1,8 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 9b56ba74cff12f029b6d8910ff487a216a15194f..790cefdf29f62acea33fb483fdefdf4ac0638f95 100644
+index 9b56ba74cff12f029b6d8910ff487a216a15194f..ec90cd53380cd948d4aaee457c257fdeea7023ea 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -67,7 +67,6 @@ pref("extensions.webextensions.remote", true);
- 
- // Require signed add-ons by default
- pref("extensions.langpacks.signatures.required", true);
--pref("xpinstall.signatures.required", true);
- pref("xpinstall.signatures.devInfoURL", "https://wiki.mozilla.org/Addons/Extension_Signing");
- 
- // Enable extensionStorage storage actor by default
-@@ -802,7 +801,7 @@ pref("browser.tabs.tooltipsShowPidAndActiveness", true);
- pref("browser.tabs.tooltipsShowPidAndActiveness", false);
- #endif
- 
--pref("browser.tabs.firefox-view", true);
-+pref("browser.tabs.firefox-view", false);
- pref("browser.tabs.firefox-view.logLevel", "Warn");
- pref("browser.tabs.firefox-view.notify-for-tabs", false);
- 
-@@ -2082,10 +2081,6 @@ pref("browser.tabs.remote.warmup.unloadDelayMs", 2000);
- pref("browser.tabs.crashReporting.sendReport", true);
- pref("browser.tabs.crashReporting.includeURL", false);
- 
--// If true, unprivileged extensions may use experimental APIs on
--// nightly and developer edition.
--pref("extensions.experiments.enabled", false);
--
- #if defined(XP_LINUX) || defined(XP_WIN)
-   // Allows us to adjust the priority of child processes at the OS level
-   pref("dom.ipc.processPriorityManager.enabled", true);
-@@ -2149,17 +2144,15 @@ pref("browser.migrate.edge.enabled", true);
- pref("browser.migrate.firefox.enabled", true);
- pref("browser.migrate.ie.enabled", true);
- pref("browser.migrate.safari.enabled", true);
--pref("browser.migrate.opera.enabled", false);
--pref("browser.migrate.vivaldi.enabled", false);
--pref("browser.migrate.opera-gx.enabled", false);
-+// Temporarily override browser.migrate for opera and vivaldi
- 
- pref("browser.migrate.content-modal.enabled", false);
- 
- pref("extensions.pocket.api", "api.getpocket.com");
--pref("extensions.pocket.enabled", true);
-+pref("extensions.pocket.enabled", false);
- pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
- pref("extensions.pocket.site", "getpocket.com");
--pref("extensions.pocket.onSaveRecs", true);
-+pref("extensions.pocket.onSaveRecs", false);
- pref("extensions.pocket.onSaveRecs.locales", "en-US,en-GB,en-CA");
- 
- // Enable Pocket button home panel for non link pages.
-@@ -2290,8 +2283,9 @@ pref("toolkit.coverage.enabled", false);
- pref("toolkit.coverage.endpoint.base", "https://coverage.mozilla.org");
- 
- // Discovery prefs
--pref("browser.discovery.enabled", true);
--pref("browser.discovery.containers.enabled", true);
-+// From memory, this uses google analytics
-+pref("browser.discovery.enabled", false);
-+pref("browser.discovery.containers.enabled", false);
- pref("browser.discovery.sites", "addons.mozilla.org");
- 
- pref("browser.engagement.recent_visited_origins.expiry", 86400); // 24 * 60 * 60 (24 hours in seconds)
-@@ -2781,3 +2775,5 @@ pref("browser.pdfjs.feature-tour", "{\"screen\":\"\",\"complete\":false}");
+@@ -2781,3 +2781,5 @@ pref("browser.pdfjs.feature-tour", "{\"screen\":\"\",\"complete\":false}");
  
  // Enables the cookie banner desktop UI.
  pref("cookiebanners.ui.desktop.enabled", false);
