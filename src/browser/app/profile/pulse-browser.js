@@ -7,6 +7,9 @@
 // Betterfox has a lower priority than the prefs included in this file
 #include better-fox.js
 
+// Betterfox overrides:
+pref('identity.fxaccounts.enabled', true); // Enable firefox sync
+
 // Enable importers for other browsers
 pref('browser.migrate.vivaldi.enabled', true);
 pref('browser.migrate.opera-gx.enabled', true);
@@ -63,4 +66,3 @@ pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
 
 // This pref needs to be here to not break context menus (GH#169)
 pref("extensions.pocket.enabled", false);
-
