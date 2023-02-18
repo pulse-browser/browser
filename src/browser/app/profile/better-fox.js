@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 109                                                             *
+ * version: 110                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -76,8 +76,6 @@ pref('browser.cache.memory.max_entry_size', 153600);
 /** NETWORK ***/
 pref('network.buffer.cache.size', 262144);
 pref('network.buffer.cache.count', 128);
-pref('network.dnsCacheExpiration', 3600);
-pref('network.dnsCacheExpirationGracePeriod', 240);
 pref('network.ssl_tokens_cache_capacity', 32768);
 
 /****************************************************************************
@@ -111,15 +109,10 @@ pref('security.ssl.treat_unsafe_negotiation_as_broken', true);
 pref('browser.xul.error_pages.expert_bad_cert', true);
 pref('security.tls.enable_0rtt_data', false);
 
-/** RFP ***/
-pref('browser.startup.blankWindow', false);
-pref('browser.display.use_system_colors', false);
-
 /** DISK AVOIDANCE ***/
 pref('browser.cache.disk.enable', false);
 pref('browser.privatebrowsing.forceMediaMemoryCache', true);
 pref('browser.sessionstore.privacy_level', 2);
-pref('browser.pagethumbnails.capturing_disabled', true);
 
 /** SHUTDOWN & SANITIZING ***/
 pref('privacy.history.custom', true);
@@ -127,7 +120,6 @@ pref('privacy.history.custom', true);
 /** SPECULATIVE CONNECTIONS ***/
 pref('network.http.speculative-parallel-limit', 0);
 pref('network.dns.disablePrefetch', true);
-pref('network.dns.disablePrefetchFromHTTPS', true);
 pref('browser.urlbar.speculativeConnect.enabled', false);
 pref('browser.places.speculativeConnect.enabled', false);
 pref('network.prefetch-next', false);
@@ -142,12 +134,8 @@ pref('browser.urlbar.suggest.quicksuggest.sponsored', false);
 pref('browser.urlbar.suggest.quicksuggest.nonsponsored', false);
 pref('network.IDN_show_punycode', true);
 
-/** HTTPS-ONLY MODE ***/
-pref('dom.security.https_only_mode', true);
-pref('dom.security.https_only_mode_error_page_user_suggestions', true);
-
-/** DNS-over-HTTPS (DOH) ***/
-pref('network.dns.skipTRR-when-parental-control-enabled', false);
+/** HTTPS-FIRST MODE ***/
+pref('dom.security.https_first', true);
 
 /** PROXY / SOCKS / IPv6 ***/
 pref('network.proxy.socks_remote_dns', true);
@@ -160,6 +148,7 @@ pref('signon.privateBrowsingCapture.enabled', false);
 pref('signon.autofillForms', false);
 pref('signon.rememberSignons', false);
 pref('editor.truncate_user_pastes', false);
+pref('layout.forms.reveal-password-context-menu.enabled', true);
 
 /** ADDRESS + CREDIT CARD MANAGER ***/
 pref('extensions.formautofill.addresses.enabled', false);
@@ -184,17 +173,12 @@ pref('media.peerconnection.ice.proxy_only_if_behind_proxy', true);
 pref('media.peerconnection.ice.default_address_only', true);
 
 /** SAFE BROWSING ***/
-pref('browser.safebrowsing.blockedURIs.enabled', true); // reset pref; remove in v.110
-pref('browser.safebrowsing.malware.enabled', true); // reset pref; remove in v.110
-pref('browser.safebrowsing.phishing.enabled', true); // reset pref; remove in v.110
-pref('browser.safebrowsing.downloads.enabled', true); // reset pref; remove in v.110
 pref('browser.safebrowsing.downloads.remote.enabled', false);
 
 /** MOZILLA ***/
 pref('accessibility.force_disabled', 1);
 pref('identity.fxaccounts.enabled', false);
 pref('browser.tabs.firefox-view', false);
-pref('dom.push.enabled', true); // reset pref; remove in v.110
 pref('permissions.default.desktop-notification', 2);
 pref('permissions.default.geo', 2);
 pref(
@@ -294,7 +278,6 @@ pref('browser.link.open_newwindow.restriction', 0);
 pref('dom.disable_window_move_resize', true);
 pref('browser.tabs.loadBookmarksInTabs', true);
 pref('browser.bookmarks.openInTabClosesMenu', false);
-pref('dom.popup_allowed_events', 'click dblclick');
 pref('layout.css.has-selector.enabled', true);
 
 /****************************************************************************
