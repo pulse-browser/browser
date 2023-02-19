@@ -1,8 +1,8 @@
-diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue.jsm
-index 43fbae6024d491379965937246c4900179d924eb..cbf5c219feeab92a3ecfcc991c605394ef29b8de 100644
---- a/browser/components/BrowserGlue.jsm
-+++ b/browser/components/BrowserGlue.jsm
-@@ -562,13 +562,8 @@ let JSWINDOWACTORS = {
+diff --git a/browser/components/BrowserGlue.sys.mjs b/browser/components/BrowserGlue.sys.mjs
+index fd088d0918705c25e541a568409478eaeabb69db..67cdb5ca87e1747223826b8addd847857e50babe 100644
+--- a/browser/components/BrowserGlue.sys.mjs
++++ b/browser/components/BrowserGlue.sys.mjs
+@@ -565,13 +565,8 @@ let JSWINDOWACTORS = {
      includeChrome: true,
      allFrames: true,
      matches: [
@@ -18,7 +18,7 @@ index 43fbae6024d491379965937246c4900179d924eb..cbf5c219feeab92a3ecfcc991c605394
      ],
    },
  
-@@ -4361,6 +4356,24 @@ BrowserGlue.prototype = {
+@@ -4392,6 +4387,24 @@ BrowserGlue.prototype = {
    },
  
    async _maybeShowDefaultBrowserPrompt() {
@@ -40,13 +40,14 @@ index 43fbae6024d491379965937246c4900179d924eb..cbf5c219feeab92a3ecfcc991c605394
 +    // =========================================================================
 +
 +
-     // Highest priority is the upgrade dialog, which can include a "primary
+     // Highest priority is about:welcome window modal experiment
+     // Second highest priority is the upgrade dialog, which can include a "primary
      // browser" request and is limited in various ways, e.g., major upgrades.
-     const dialogVersion = 106;
-@@ -4827,6 +4840,17 @@ BrowserGlue.prototype = {
+@@ -4866,6 +4879,18 @@ BrowserGlue.prototype = {
      "nsIObserver",
      "nsISupportsWeakReference",
    ]),
++
 +  /**
 +  * Displays the welcome dialog. Triggered `_maybeShowDefaultBrowserPrompt`.
 +  *

@@ -1,12 +1,11 @@
 diff --git a/browser/locales/en-US/browser/browser.ftl b/browser/locales/en-US/browser/browser.ftl
-index ca4bfcb81b852966a4486d8ec238345f18971f85..738fbe237412aacb4f24c84986c97bac0cf674b4 100644
+index e86de659cda8d8f8bbc4df8346f97697e75848f5..91262ca49165a753dfdd644fd6ef2fd278f7a2d2 100644
 --- a/browser/locales/en-US/browser/browser.ftl
 +++ b/browser/locales/en-US/browser/browser.ftl
-@@ -950,3 +950,8 @@ refresh-blocked-redirect-label = { -brand-short-name } prevented this page from
- refresh-blocked-allow =
-     .label = Allow
-     .accesskey = A
-+
+@@ -963,3 +963,7 @@ firefox-relay-offer-how-we-integrate = By continuing, you’ll be able to genera
+ #  $sitename (String): name of the site where user enters their Relay mask
+ #  $useremail (String): user email that will receive messages
+ firefox-relay-offer-what-relay-does = We’ll forward all emails from <strong>{ $sitename }</strong> to <strong>{ $useremail }</strong>.
 +
 +sidebar-context-delete = 
 +    .label = Delete
