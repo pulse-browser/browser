@@ -132,6 +132,8 @@ pref('browser.urlbar.update2.engineAliasRefresh', true);
 pref('browser.search.suggest.enabled', false);
 pref('browser.urlbar.suggest.quicksuggest.sponsored', false);
 pref('browser.urlbar.suggest.quicksuggest.nonsponsored', false);
+pref('security.insecure_connection_text.enabled', true);
+pref('security.insecure_connection_text.pbmode.enabled', true);
 pref('network.IDN_show_punycode', true);
 
 /** HTTPS-FIRST MODE ***/
@@ -278,6 +280,10 @@ pref('browser.link.open_newwindow.restriction', 0);
 pref('dom.disable_window_move_resize', true);
 pref('browser.tabs.loadBookmarksInTabs', true);
 pref('browser.bookmarks.openInTabClosesMenu', false);
+pref(
+  'dom.popup_allowed_events',
+  'change click dblclick auxclick mousedown mouseup pointerdown pointerup notificationclick reset submit touchend contextmenu'
+); // reset pref; remove in v.111
 pref('layout.css.has-selector.enabled', true);
 
 /****************************************************************************
