@@ -18,6 +18,12 @@ pref('browser.migrate.opera.enabled', true);
 // Enable downloading DRM.
 pref('media.eme.enabled', true);
 
+// Enable linux hardware video decoding. Note that this may cause a crash
+// on start for some linux setups, for example, those that do not have DMA-BUF
+// or VA-API. We should see if we can find a work around for those 
+// crashes when they come up
+pref('media.ffmpeg.vaapi.enabled', true);
+
 // Disable firefox's about:welcome page
 pref('browser.aboutwelcome.enabled', true);
 
