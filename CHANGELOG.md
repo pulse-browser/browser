@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0-a.60
+
+### Changed
+- Updated Better-Fox (#218)
+- Enable VA-API by default (#216)
+
 ## 1.0.0-a.58
 
 ### Changed
