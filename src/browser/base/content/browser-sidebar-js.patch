@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645afde674dd8 100644
+index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc6fdf86ad 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,10 @@ var SidebarUI = {
@@ -92,7 +92,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    _box: null,
    // The constructor of this label accesses the browser element due to the
    // control="sidebar" attribute, so avoid getting this label during startup.
-@@ -76,8 +116,13 @@ var SidebarUI = {
+@@ -76,8 +116,15 @@ var SidebarUI = {
      }
      return (this.__title = document.getElementById("sidebar-title"));
    },
@@ -101,17 +101,20 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    _icon: null,
 +  _sidebarIcons: null,
 +  _sidebarIconsBottom: null,
++  /** @type {HTMLDivElement?} */
++  _sidebarTabs: null,
 +  /** @type {string[]} */
 +  loadedSidebars: null,
    _reversePositionButton: null,
    _switcherPanel: null,
    _switcherTarget: null,
-@@ -110,15 +155,59 @@ var SidebarUI = {
+@@ -110,15 +157,60 @@ var SidebarUI = {
      this._switcherTarget = document.getElementById("sidebar-switcher-target");
      this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
  
 +    this._sidebarIcons = document.getElementById("sidebar-icons");
 +    this._sidebarIconsBottom = document.getElementById("sidebar-icons-bottom");
++    this._sidebarTabs = document.getElementById("sidebar-container")
 +
      this._switcherTarget.addEventListener("command", () => {
        this.toggleSwitcherPanel();
@@ -166,7 +169,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    },
  
    uninit() {
-@@ -127,7 +216,10 @@ var SidebarUI = {
+@@ -127,7 +219,10 @@ var SidebarUI = {
      let enumerator = Services.wm.getEnumerator("navigator:browser");
      if (!enumerator.hasMoreElements()) {
        let xulStore = Services.xulStore;
@@ -178,7 +181,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -148,6 +240,12 @@ var SidebarUI = {
+@@ -148,6 +243,12 @@ var SidebarUI = {
        xulStore.persist(this._title, "value");
      }
  
@@ -191,7 +194,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
      Services.obs.removeObserver(this, "intl:app-locales-changed");
  
      if (this._observer) {
-@@ -159,17 +257,62 @@ var SidebarUI = {
+@@ -159,17 +260,62 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -258,7 +261,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        }
      }
    },
-@@ -286,6 +413,9 @@ var SidebarUI = {
+@@ -286,17 +432,31 @@ var SidebarUI = {
      // First reset all ordinals to match DOM ordering.
      let browser = document.getElementById("browser");
      [...browser.children].forEach((node, i) => {
@@ -268,7 +271,34 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        node.style.MozBoxOrdinalGroup = i + 1;
      });
  
-@@ -485,6 +615,9 @@ var SidebarUI = {
+     if (!this._positionStart) {
+-      // DOM ordering is:     |  sidebar-box  | splitter |   appcontent  |
+-      // Want to display as:  |   appcontent  | splitter |  sidebar-box  |
+-      // So we just swap box and appcontent ordering
++      // DOM ordering is:     | sidebar-container |  sidebar-box  | splitter |   appcontent  |
++      // Want to display as:  |   appcontent  | splitter |  sidebar-box | sidebar-container |
++      // So we just swap
++      // - sidebar-container and appcontent
++      // - splitter and sidebar-box
++
++      // sidebar-container and appcontent
+       let appcontent = document.getElementById("appcontent");
+-      let boxOrdinal = this._box.style.MozBoxOrdinalGroup;
+-      this._box.style.MozBoxOrdinalGroup = appcontent.style.MozBoxOrdinalGroup;
++      let boxOrdinal = this._sidebarTabs.style.MozBoxOrdinalGroup;
++      this._sidebarTabs.style.MozBoxOrdinalGroup = appcontent.style.MozBoxOrdinalGroup;
+       appcontent.style.MozBoxOrdinalGroup = boxOrdinal;
++
++      // splitter and sidebar-box
++      const splitterBoxOrdinal = this._splitter.style.MozBoxOrdinalGroup;
++      this._splitter.style.MozBoxOrdinalGroup = this._box.style.MozBoxOrdinalGroup
++      this._box.style.MozBoxOrdinalGroup = splitterBoxOrdinal
++
++
+       // Indicate we've switched ordering to the box
+       this._box.setAttribute("positionend", true);
+     } else {
+@@ -485,6 +645,9 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -278,7 +308,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +656,7 @@ var SidebarUI = {
+@@ -523,6 +686,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -286,7 +316,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        return true;
      });
    },
-@@ -546,10 +680,28 @@ var SidebarUI = {
+@@ -546,10 +710,28 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -315,7 +345,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    /**
     * Implementation for show. Also used internally for sidebars that are shown
     * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +711,29 @@ var SidebarUI = {
+@@ -559,6 +741,29 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -345,7 +375,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +745,21 @@ var SidebarUI = {
+@@ -570,13 +775,21 @@ var SidebarUI = {
        this._box.setAttribute("sidebarcommand", commandID);
        this.lastOpenedId = commandID;
  
@@ -369,7 +399,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
          this.browser.addEventListener(
            "load",
            event => {
-@@ -615,22 +798,46 @@ var SidebarUI = {
+@@ -615,22 +828,46 @@ var SidebarUI = {
  
      this.selectMenuItem("");
  
@@ -423,7 +453,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
    },
  
    /**
-@@ -638,25 +845,121 @@ var SidebarUI = {
+@@ -638,25 +875,121 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -478,7 +508,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..fa3cd3184cce8759c834fa0fadc645af
 +   * @param {boolean} visible Sets the sidebar to be visible or not visible
 +   */
 +  setSidebarVisibility(visible) {
-+    const sidebarContainer = document.getElementById("sidebar-container");
++    const sidebarContainer = this._sidebarTabs
 +
 +    if (visible) {
 +      sidebarContainer.style.display = "flex";
