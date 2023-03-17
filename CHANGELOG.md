@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.0-a.60
 
+### Changed
+
+- Updated Firefox to `111.0` (#)
+- Updated uBlock to `1.47.4` (#)
+
+## 1.0.0-a.60
+
 ### Fixed
 
 - Forget functionality would forget all cookies (#215, [Bug 1816279](https://bugzilla.mozilla.org/show_bug.cgi?id=1816279))
