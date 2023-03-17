@@ -1,5 +1,5 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 99aa63874bc6f1821baae6788fbba18f6861f9c6..76354d828578fabd297c817e15b7492c167958b9 100644
+index 6adb116e4a3b7113f4b133a36bb575dfdcf2ca2e..d5d8956a4de92e28584941ea00be98ae0d020035 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
 @@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
@@ -10,17 +10,25 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..76354d828578fabd297c817e15b7492c
  // WeakMap[Extension -> SidebarAction]
  let sidebarActionMap = new WeakMap();
  
-@@ -95,6 +96,9 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -95,6 +96,7 @@ this.sidebarAction = class extends ExtensionAPI {
  
      this.tabContext.shutdown();
  
-+    // Delete sidebar item
-+    SidebarUI.deleteSidebarItem(this.id);
 +
      // Don't remove everything on app shutdown so session restore can handle
      // restoring open sidebars.
      if (isAppShutdown) {
-@@ -129,6 +133,8 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -116,6 +118,9 @@ this.sidebarAction = class extends ExtensionAPI {
+       }
+       let header = document.getElementById("sidebar-switcher-target");
+       header.removeEventListener("SidebarShown", this.updateHeader);
++
++      // Delete sidebar item
++      SidebarUI.deleteSidebarItem(this.id);
+       SidebarUI.sidebars.delete(this.id);
+     }
+     windowTracker.removeOpenListener(this.windowOpenListener);
+@@ -129,6 +134,8 @@ this.sidebarAction = class extends ExtensionAPI {
        if (SidebarUI.lastOpenedId === sidebarId) {
          SidebarUI.lastOpenedId = null;
        }
@@ -29,7 +37,7 @@ index 99aa63874bc6f1821baae6788fbba18f6861f9c6..76354d828578fabd297c817e15b7492c
      }
    }
  
-@@ -157,21 +163,30 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -157,21 +164,30 @@ this.sidebarAction = class extends ExtensionAPI {
      }
      let { document, SidebarUI } = window;
      let keyId = `ext-key-id-${this.id}`;
