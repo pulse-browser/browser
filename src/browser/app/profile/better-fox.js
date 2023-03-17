@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 110                                                             *
+ * version: 111                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -76,6 +76,8 @@ pref('browser.cache.memory.max_entry_size', 153600);
 /** NETWORK ***/
 pref('network.buffer.cache.size', 262144);
 pref('network.buffer.cache.count', 128);
+pref('network.http.max-connections', 1800);
+pref('network.http.max-persistent-connections-per-server', 10);
 pref('network.ssl_tokens_cache_capacity', 32768);
 
 /****************************************************************************
@@ -97,6 +99,8 @@ pref(
   '__hsfp __hssc __hstc __s _hsenc _openstat dclid fbclid gbraid gclid hsCtaTracking igshid mc_eid ml_subscriber ml_subscriber_hash msclkid oft_c oft_ck oft_d oft_id oft_ids oft_k oft_lk oft_sk oly_anon_id oly_enc_id rb_clickid s_cid twclid vero_conv vero_id wbraid wickedid yclid'
 );
 pref('browser.uitour.enabled', false);
+pref('privacy.globalprivacycontrol.enabled', true);
+pref('privacy.globalprivacycontrol.functionality.enabled', true);
 
 /** OCSP & CERTS / HPKP ***/
 pref('security.OCSP.enabled', 0);
@@ -280,10 +284,6 @@ pref('browser.link.open_newwindow.restriction', 0);
 pref('dom.disable_window_move_resize', true);
 pref('browser.tabs.loadBookmarksInTabs', true);
 pref('browser.bookmarks.openInTabClosesMenu', false);
-pref(
-  'dom.popup_allowed_events',
-  'change click dblclick auxclick mousedown mouseup pointerdown pointerup notificationclick reset submit touchend contextmenu'
-); // reset pref; remove in v.111
 pref('layout.css.has-selector.enabled', true);
 
 /****************************************************************************
