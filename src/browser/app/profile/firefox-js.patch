@@ -1,10 +1,10 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 9b56ba74cff12f029b6d8910ff487a216a15194f..ec90cd53380cd948d4aaee457c257fdeea7023ea 100644
+index 81f4d49068c285049d49db6c8fc5c0fbe042ff6b..39ef13fb66567c31ebf932d7a6f528fa1d635069 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -2781,3 +2781,5 @@ pref("browser.pdfjs.feature-tour", "{\"screen\":\"\",\"complete\":false}");
- 
- // Enables the cookie banner desktop UI.
- pref("cookiebanners.ui.desktop.enabled", false);
+@@ -2804,3 +2804,5 @@ pref("cookiebanners.ui.desktop.cfrVariant", 0);
+   pref("browser.swipe.navigation-icon-min-radius", 12);
+   pref("browser.swipe.navigation-icon-max-radius", 20);
+ #endif
 +
 +#include pulse-browser.js

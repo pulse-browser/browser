@@ -1,19 +1,18 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc6fdf86ad 100644
+index 22c886b09373a38a4fbceb6d279a58f276675d63..7b41613b2b5abe00e506a6b60e6bdf9a7670405e 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
-@@ -11,6 +11,10 @@ var SidebarUI = {
+@@ -11,6 +11,9 @@ var SidebarUI = {
        return this._sidebars;
      }
  
 +    /**
 +     * @returns {Map<string, { title: string, url?: string, onclick?: string, menuId?: string, triggerButtonId?: string, iconurl: string, isBottom: boolean }>}
 +     */
-+
      function makeSidebar({ elementId, ...rest }) {
        return {
          get sourceL10nEl() {
-@@ -19,6 +23,7 @@ var SidebarUI = {
+@@ -19,6 +22,7 @@ var SidebarUI = {
          get title() {
            return document.getElementById(elementId).getAttribute("label");
          },
@@ -21,7 +20,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
          ...rest,
        };
      }
-@@ -30,6 +35,7 @@ var SidebarUI = {
+@@ -30,6 +34,7 @@ var SidebarUI = {
            elementId: "sidebar-switcher-bookmarks",
            url: "chrome://browser/content/places/bookmarksSidebar.xhtml",
            menuId: "menu_bookmarksSidebar",
@@ -29,7 +28,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
          }),
        ],
        [
-@@ -39,6 +45,7 @@ var SidebarUI = {
+@@ -39,6 +44,7 @@ var SidebarUI = {
            url: "chrome://browser/content/places/historySidebar.xhtml",
            menuId: "menu_historySidebar",
            triggerButtonId: "appMenuViewHistorySidebar",
@@ -37,7 +36,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
          }),
        ],
        [
-@@ -47,8 +54,37 @@ var SidebarUI = {
+@@ -47,8 +53,37 @@ var SidebarUI = {
            elementId: "sidebar-switcher-tabs",
            url: "chrome://browser/content/syncedtabs/sidebar.xhtml",
            menuId: "menu_tabsSidebar",
@@ -75,51 +74,41 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
      ]));
    },
  
-@@ -61,12 +97,16 @@ var SidebarUI = {
-     return (this._browser = document.getElementById("sidebar"));
-   },
+@@ -63,6 +98,10 @@ var SidebarUI = {
    POSITION_START_PREF: "sidebar.position_start",
+   DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
+ 
++  SIDEBAR_KEEP_TABS_ACTIVE_PREF: "pulse.sidebar.keeptabsactive.enabled",
 +  SIDEBAR_TABS_PREF: "pulse.sidebar.enabled",
 +  SIDEBAR_EXTENSIONS_PREF: "pulse.sidebar.extensions.enabled",
-   DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
-+  SIDEBAR_KEEP_TABS_ACTIVE_PREF: "pulse.sidebar.keeptabsactive.enabled",
- 
++
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
    // and isn't persisted across windows
    lastOpenedId: null,
+@@ -83,6 +122,15 @@ var SidebarUI = {
+   _switcherArrow: null,
+   _inited: false,
  
-+  /** @type {HTMLElement?} */
-   _box: null,
-   // The constructor of this label accesses the browser element due to the
-   // control="sidebar" attribute, so avoid getting this label during startup.
-@@ -76,8 +116,15 @@ var SidebarUI = {
-     }
-     return (this.__title = document.getElementById("sidebar-title"));
-   },
-+
-   _splitter: null,
-   _icon: null,
 +  _sidebarIcons: null,
 +  _sidebarIconsBottom: null,
 +  /** @type {HTMLDivElement?} */
 +  _sidebarTabs: null,
 +  /** @type {string[]} */
 +  loadedSidebars: null,
-   _reversePositionButton: null,
-   _switcherPanel: null,
-   _switcherTarget: null,
-@@ -110,15 +157,60 @@ var SidebarUI = {
-     this._switcherTarget = document.getElementById("sidebar-switcher-target");
-     this._switcherArrow = document.getElementById("sidebar-switcher-arrow");
- 
-+    this._sidebarIcons = document.getElementById("sidebar-icons");
-+    this._sidebarIconsBottom = document.getElementById("sidebar-icons-bottom");
-+    this._sidebarTabs = document.getElementById("sidebar-container")
++  /** @type {boolean} */
++  _keepTabsActivePref: false,
 +
-     this._switcherTarget.addEventListener("command", () => {
+   /**
+    * @type {MutationObserver | null}
+    */
+@@ -112,6 +160,51 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
++    this._sidebarIcons = document.getElementById("sidebar-icons");
++    this._sidebarIconsBottom = document.getElementById("sidebar-icons-bottom");
++    this._sidebarTabs = document.getElementById("sidebar-container");
++
 +    const sidebaritems = this.sidebars.keys();
 +    const sidebarExtensionVis = Services.prefs.getBoolPref(
 +      this.SIDEBAR_EXTENSIONS_PREF,
@@ -150,12 +139,6 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
 +
 +    Services.prefs.addObserver(this.SIDEBAR_KEEP_TABS_ACTIVE_PREF, this);
 +
-     this._inited = true;
- 
-     Services.obs.addObserver(this, "intl:app-locales-changed");
- 
-     this._initDeferred.resolve();
-+
 +    //Check the pre-existance of sidebar and if it is not there, create it
 +    var sidebar = this.browser;
 +    let sidebarExists = !!sidebar;
@@ -166,10 +149,11 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
 +    }
 +
 +    this.loadedSidebars = [];
-   },
++
+     this._inited = true;
  
-   uninit() {
-@@ -127,7 +219,10 @@ var SidebarUI = {
+     Services.obs.addObserver(this, "intl:app-locales-changed");
+@@ -125,7 +218,16 @@ var SidebarUI = {
      let enumerator = Services.wm.getEnumerator("navigator:browser");
      if (!enumerator.hasMoreElements()) {
        let xulStore = Services.xulStore;
@@ -178,23 +162,16 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
 +      if (!this._keepTabsActivePref) {
 +        xulStore.persist(this._box, "sidebarcommand");
 +      }
++
++      // Remove the sidebar seperator with class sidebar-divider
++      const sidebarDivider = document.querySelector(".sidebar-divider");
++      if (sidebarDivider) {
++        sidebarDivider.remove();
++      }
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -148,6 +243,12 @@ var SidebarUI = {
-       xulStore.persist(this._title, "value");
-     }
- 
-+    // Remove the sidebar seperator with class sidebar-divider
-+    const sidebarDivider = document.querySelector(".sidebar-divider");
-+    if (sidebarDivider) {
-+      sidebarDivider.remove();
-+    }
-+
-     Services.obs.removeObserver(this, "intl:app-locales-changed");
- 
-     if (this._observer) {
-@@ -159,17 +260,62 @@ var SidebarUI = {
+@@ -157,7 +259,7 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -203,12 +180,9 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
      switch (topic) {
        case "intl:app-locales-changed": {
          if (this.isOpen) {
--          // The <tree> component used in history and bookmarks, but it does not
--          // support live switching the app locale. Reload the entire sidebar to
-           // invalidate any old text.
-           this.hide();
+@@ -168,6 +270,54 @@ var SidebarUI = {
            this.showInitially(this.lastOpenedId);
--          break;
+           break;
          }
 +        break;
 +      }
@@ -239,20 +213,20 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
 +              }
 +            }
 +
-+            // The sidebar depends on a browse existing. If this has been 
-+            // destroyed, we need to re-init it. Although, first we need to 
++            // The sidebar depends on a browse existing. If this has been
++            // destroyed, we need to re-init it. Although, first we need to
 +            // remove any possible cached value
-+            this._browser = null
++            this._browser = null;
 +            if (!this.browser) {
 +              /** @type {HTMLElement} */
-+              const browser = document.createXULElement('browser')
-+              browser.setAttribute('id', 'sidebar')
-+              browser.setAttribute('autoscroll', 'false')
-+              browser.setAttribute('disablehistory', 'true')
-+              browser.setAttribute('disablefullscreen', 'true')
-+              browser.setAttribute('tooltip', 'aHTMLTooltip')
-+              this._box.appendChild(browser)
-+            } 
++              const browser = document.createXULElement("browser");
++              browser.setAttribute("id", "sidebar");
++              browser.setAttribute("autoscroll", "false");
++              browser.setAttribute("disablehistory", "true");
++              browser.setAttribute("disablefullscreen", "true");
++              browser.setAttribute("tooltip", "aHTMLTooltip");
++              this._box.appendChild(browser);
++            }
 +
 +            this.init();
 +            break;
@@ -261,12 +235,14 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
        }
      }
    },
-@@ -286,17 +432,31 @@ var SidebarUI = {
+@@ -284,17 +434,32 @@ var SidebarUI = {
      // First reset all ordinals to match DOM ordering.
      let browser = document.getElementById("browser");
      [...browser.children].forEach((node, i) => {
 +      // Do not change ordinal on vertical tabs
-+      if (node.id == 'TabsToolbar' || node.id == 'verticaltabs-splitter') return
++      if (node.id == "TabsToolbar" || node.id == "verticaltabs-splitter") {
++        return;
++      }
 +
        node.style.MozBoxOrdinalGroup = i + 1;
      });
@@ -286,29 +262,29 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
 -      let boxOrdinal = this._box.style.MozBoxOrdinalGroup;
 -      this._box.style.MozBoxOrdinalGroup = appcontent.style.MozBoxOrdinalGroup;
 +      let boxOrdinal = this._sidebarTabs.style.MozBoxOrdinalGroup;
-+      this._sidebarTabs.style.MozBoxOrdinalGroup = appcontent.style.MozBoxOrdinalGroup;
++      this._sidebarTabs.style.MozBoxOrdinalGroup =
++        appcontent.style.MozBoxOrdinalGroup;
        appcontent.style.MozBoxOrdinalGroup = boxOrdinal;
 +
 +      // splitter and sidebar-box
 +      const splitterBoxOrdinal = this._splitter.style.MozBoxOrdinalGroup;
-+      this._splitter.style.MozBoxOrdinalGroup = this._box.style.MozBoxOrdinalGroup
-+      this._box.style.MozBoxOrdinalGroup = splitterBoxOrdinal
-+
-+
++      this._splitter.style.MozBoxOrdinalGroup = this._box.style.MozBoxOrdinalGroup;
++      this._box.style.MozBoxOrdinalGroup = splitterBoxOrdinal;
        // Indicate we've switched ordering to the box
        this._box.setAttribute("positionend", true);
      } else {
-@@ -485,6 +645,9 @@ var SidebarUI = {
+@@ -483,6 +648,10 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
 +    if (this._keepTabsActivePref && this.loadedSidebars.includes(commandID)) {
 +      return;
 +    }
++
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -523,6 +686,7 @@ var SidebarUI = {
+@@ -521,6 +690,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -316,7 +292,7 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
        return true;
      });
    },
-@@ -546,10 +710,28 @@ var SidebarUI = {
+@@ -544,6 +714,7 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -324,8 +300,124 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
        return true;
      });
    },
+@@ -557,6 +728,38 @@ var SidebarUI = {
+    */
+   _show(commandID) {
+     return new Promise(resolve => {
++      if (this._keepTabsActivePref) {
++        const browserID = `sidebar-browser-${commandID}`;
++
++        // Check if the browser element for this command has already been
++        // created.
++        if (!document.getElementById(browserID)) {
++          // If it doesn't exist, we should create it. Note that this
++          // function will set this._browser to be this new browser
++          this.createBrowser(browserID, commandID);
++        } else {
++          // We need to set the active browser to be the one that already exists
++          this._browser = document.getElementById(browserID);
++        }
++
++        // We must ensure ensure that all non-active browsers are hidden.
++        let sidebarBrowsers = document.querySelectorAll(
++          "[id^='sidebar-browser-']"
++        );
++
++        for (const browser of sidebarBrowsers) {
++          // If the browser matches the one we want to display, make sure it is
++          // not hidden
++          if (browser.id == browserID) {
++            browser.removeAttribute("hidden");
++            continue;
++          }
++
++          // Otherwise, hide all other browsers
++          browser.setAttribute("hidden", "true");
++        }
++      }
++
+       this.selectMenuItem(commandID);
  
-+  //Create sidebar browser between active and inactive for persistence reasons
+       this._box.hidden = this._splitter.hidden = false;
+@@ -574,7 +777,13 @@ var SidebarUI = {
+       this.observeTitleChanges(sourceL10nEl);
+       this.browser.setAttribute("src", url); // kick off async load
+ 
+-      if (this.browser.contentDocument.location.href != url) {
++      const activeSidebarUnloaded =
++        this._keepTabsActivePref && !this.loadedSidebars.includes(commandID);
++      const regularSidebarUnloaded =
++        !this._keepTabsActivePref &&
++        this.browser.contentDocument.location.href != url;
++
++      if (activeSidebarUnloaded || regularSidebarUnloaded) {
+         this.browser.addEventListener(
+           "load",
+           event => {
+@@ -618,12 +827,19 @@ var SidebarUI = {
+     // create a new content viewer because the old one doesn't get destroyed
+     // until about:blank has loaded (which does not happen as long as the
+     // element is hidden).
+-    this.browser.setAttribute("src", "about:blank");
+-    this.browser.docShell.createAboutBlankContentViewer(null, null);
++    if (!this._keepTabsActivePref) {
++      this.browser.setAttribute("src", "about:blank");
++      this.browser.docShell.createAboutBlankContentViewer(null, null);
++    }
+ 
+     this._box.removeAttribute("checked");
+     this._box.hidden = this._splitter.hidden = true;
++    this._sidebarIcons.removeAttribute("checked");
+ 
++    // Note: This was was commented out but had no description for its removed
++    // reason. I am bringing it back unless there is any other justification - tricky
++    //
++    // Removed in: :mute: Remove Test Logs
+     let selBrowser = gBrowser.selectedBrowser;
+     selBrowser.focus();
+     if (triggerNode) {
+@@ -636,10 +852,27 @@ var SidebarUI = {
+    * none if the argument is an empty string.
+    */
+   selectMenuItem(commandID) {
++    // Pulse modification: This needs to update both which sidebar item is
++    // checked and which dropdown item is checked. Hence, we are overriding this
++    // method.
++
+     for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
++      if (!menuId) {
++        continue;
++      }
++
+       let menu = document.getElementById(menuId);
+-      let triggerbutton =
++      let dropdownTriggerButton =
+         triggerButtonId && document.getElementById(triggerButtonId);
++      const sidebarTriggerButton = document.getElementById(
++        `sidebar-background-${id}`
++      );
++
++      setCheckedForItem(id, menu, dropdownTriggerButton);
++      setCheckedForItem(id, menu, sidebarTriggerButton);
++    }
++
++    function setCheckedForItem(id, menu, triggerbutton) {
+       if (id == commandID) {
+         menu.setAttribute("checked", "true");
+         if (triggerbutton) {
+@@ -655,6 +888,107 @@ var SidebarUI = {
+       }
+     }
+   },
++
++  // ===========================================================================
++  // Pulse methods
++
++  /**
++   * Create sidebar browser between active and inactive for persistence reasons
++   *
++   * @todo What the hell does this comment mean?
++   */
 +  createBrowser(id, commandID) {
 +    let browser = document.createXULElement("browser");
 +    browser.setAttribute("id", id);
@@ -342,173 +434,12 @@ index c5ac301416d2d820ba95e21c0ce1fe305e63b554..a38040e1cba3de0e383cda4b5147b3cc
 +    this._browser = browser;
 +  },
 +
-   /**
-    * Implementation for show. Also used internally for sidebars that are shown
-    * when a window is opened and we don't want to ping telemetry.
-@@ -559,6 +741,29 @@ var SidebarUI = {
-    */
-   _show(commandID) {
-     return new Promise(resolve => {
-+      if (this._keepTabsActivePref) {
-+        const elementId = `sidebar-browser-${commandID}`;
-+
-+        //try and find browser with id sidebar-browser-<commandid>
-+        if (!document.getElementById(elementId)) {
-+          this.createBrowser(elementId, commandID);
-+        } else {
-+          //browser already exists, get it
-+          let browser = document.getElementById(elementId);
-+          this._browser = browser;
-+        }
-+
-+        let browsers = document.querySelectorAll("[id^='sidebar-browser-']");
-+        //hide all of them except the one we want to show
-+        for (let i = 0; i < browsers.length; i++) {
-+          if (browsers[i].id != "sidebar-browser-" + commandID) {
-+            browsers[i].setAttribute("hidden", "true");
-+          } else {
-+            browsers[i].removeAttribute("hidden");
-+          }
-+        }
-+      }
-+
-       this.selectMenuItem(commandID);
- 
-       this._box.hidden = this._splitter.hidden = false;
-@@ -570,13 +775,21 @@ var SidebarUI = {
-       this._box.setAttribute("sidebarcommand", commandID);
-       this.lastOpenedId = commandID;
- 
-+      // Pulse: Reset sidebar margin to zero to allow for correct animations to
-+      // take place (adapted from dot browser, se below)
-+      this._box.style.marginLeft = "0px";
-+
-       let { url, title, sourceL10nEl } = this.sidebars.get(commandID);
-       this.title = title;
-       // Keep the title element in sync with any l10n changes.
-       this.observeTitleChanges(sourceL10nEl);
-       this.browser.setAttribute("src", url); // kick off async load
--
--      if (this.browser.contentDocument.location.href != url) {
-+      if (
-+        (!this.loadedSidebars.includes(commandID) &&
-+          this._keepTabsActivePref) ||
-+        ((this.browser.contentDocument.location.href != url || null) &&
-+          !this._keepTabsActivePref)
-+      ) {
-         this.browser.addEventListener(
-           "load",
-           event => {
-@@ -615,22 +828,46 @@ var SidebarUI = {
- 
-     this.selectMenuItem("");
- 
-+    // The below code was, in part, based on Dot Browser's source code
-+    // https://github.com/dothq/browser-desktop/blob/3c6b992af8946e1c30180cc824a78d4bb85ba868/patches/browser-base-content-browser-sidebar-js.patch#L183
-+
-+    // Pulse Browser: Helper stuff for sidebar animation. We can fake sliding in
-+    // and out by changing the left margin to be a negative value. Then, inside
-+    // of our css code, we can animate it to close.
-+    this._box.style.marginLeft = `${-Math.abs(
-+      this._box.getBoundingClientRect().width
-+    )}px`;
-+
-+    // We want to fully set it to hidden to slightly improve browser performance
-+    // when it is hidden. Note that this replaces some of Mozilla's code that
-+    // would generally be down below
-+    setTimeout(() => {
-+      this._box.hidden = true;
-+      this._splitter.hidden = true;
-+
-+      this._box.removeAttribute("checked");
-+    }, 170);
-+
-     // Replace the document currently displayed in the sidebar with about:blank
-     // so that we can free memory by unloading the page. We need to explicitly
-     // create a new content viewer because the old one doesn't get destroyed
-     // until about:blank has loaded (which does not happen as long as the
-     // element is hidden).
--    this.browser.setAttribute("src", "about:blank");
--    this.browser.docShell.createAboutBlankContentViewer(null, null);
-+
-+    if (!this._keepTabsActivePref) {
-+      this.browser.setAttribute("src", "about:blank");
-+      this.browser.docShell.createAboutBlankContentViewer(null, null);
-+    }
- 
-     this._box.removeAttribute("checked");
-     this._box.hidden = this._splitter.hidden = true;
-+    this._sidebarIcons.removeAttribute("checked");
- 
--    let selBrowser = gBrowser.selectedBrowser;
--    selBrowser.focus();
--    if (triggerNode) {
--      updateToggleControlLabel(triggerNode);
--    }
-+    // let selBrowser = gBrowser.selectedBrowser;
-+    // selBrowser.focus();
-+    // if (triggerNode) {
-+    //   updateToggleControlLabel(triggerNode);
-+    // }
-   },
- 
-   /**
-@@ -638,25 +875,121 @@ var SidebarUI = {
-    * none if the argument is an empty string.
-    */
-   selectMenuItem(commandID) {
-+    // Pulse modification: This needs to update both which sidebar item is
-+    // checked and which dropdown item is checked. Hence, we are overriding this
-+    // method.
-     for (let [id, { menuId, triggerButtonId }] of this.sidebars) {
-+      if (!menuId) {
-+        continue;
-+      }
-       let menu = document.getElementById(menuId);
--      let triggerbutton =
-+
-+      const dropdownTriggerButton =
-         triggerButtonId && document.getElementById(triggerButtonId);
-+      let sidebarTriggerButton = document.getElementById(
-+        "sidebar-background-" + id
-+      );
-+
-+      setCheckedForItem(id, menu, sidebarTriggerButton);
-+      setCheckedForItem(id, menu, dropdownTriggerButton);
-+    }
-+
-+    function setCheckedForItem(id, menu, sidebarTriggureButton) {
-       if (id == commandID) {
-         menu.setAttribute("checked", "true");
--        if (triggerbutton) {
--          triggerbutton.setAttribute("checked", "true");
--          updateToggleControlLabel(triggerbutton);
-+        if (sidebarTriggureButton) {
-+          sidebarTriggureButton.setAttribute("checked", "true");
-+          updateToggleControlLabel(sidebarTriggureButton);
-         }
-       } else {
-         menu.removeAttribute("checked");
--        if (triggerbutton) {
--          triggerbutton.removeAttribute("checked");
--          updateToggleControlLabel(triggerbutton);
-+        if (sidebarTriggureButton) {
-+          sidebarTriggureButton.removeAttribute("checked");
-+          updateToggleControlLabel(sidebarTriggureButton);
-         }
-       }
-     }
-   },
-+
-+  // ===========================================================================
-+  // Pulse sidebar
-+
 +  /**
 +   * Set the sidebar tabs to be visible or not visible
 +   * @param {boolean} visible Sets the sidebar to be visible or not visible
 +   */
 +  setSidebarVisibility(visible) {
-+    const sidebarContainer = this._sidebarTabs
++    const sidebarContainer = this._sidebarTabs;
 +
 +    if (visible) {
 +      sidebarContainer.style.display = "flex";

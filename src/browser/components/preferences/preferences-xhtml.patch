@@ -1,11 +1,11 @@
 diff --git a/browser/components/preferences/preferences.xhtml b/browser/components/preferences/preferences.xhtml
-index 9921e0307b4af54bbb6fa4d85e1a5d1d0fbf07a7..2c5db086f1320d2e334ed2c1988f515dc5cace3c 100644
+index 999241db4629794e200ec016b8d14694f7a5f4e3..6387589d6e2ba1a10d73ffef9dfdcc8ddee550c5 100644
 --- a/browser/components/preferences/preferences.xhtml
 +++ b/browser/components/preferences/preferences.xhtml
-@@ -63,6 +63,7 @@
-   <script src="chrome://browser/content/preferences/preferences.js"/>
-   <script src="chrome://browser/content/preferences/extensionControlled.js"/>
-   <script src="chrome://browser/content/preferences/findInPage.js"/>
+@@ -67,6 +67,7 @@
+   <script type="module" src="chrome://global/content/elements/moz-support-link.mjs"/>
+   <script src="chrome://browser/content/migration/migration-wizard.mjs" type="module"></script>
+   <script type="module" src="chrome://global/content/elements/moz-toggle.mjs"/>
 +  <script src="chrome://browser/content/contentTheme.js"></script>
  </head>
  
