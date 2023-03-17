@@ -9,8 +9,8 @@ export MOZ_APP_VENDOR="Pulse browser"
 export MOZ_APP_BASENAME=PulseBrowser
 export MOZ_APP_PROFILE=${binName}
 export MOZ_APP_DISPLAYNAME="Pulse browser"
-export MOZ_MACBUNDLE_ID=com.fushra.browser.desktop
-export MOZ_DISTRIBUTION_ID=com.fushra.browser.desktop
+export MOZ_MACBUNDLE_ID=com.fushra.browser.alpha
+export MOZ_DISTRIBUTION_ID=com.fushra.browser.alpha
 export MOZ_MACBUNDLE_NAME="Pulse browser.app"
 
 # Misc
