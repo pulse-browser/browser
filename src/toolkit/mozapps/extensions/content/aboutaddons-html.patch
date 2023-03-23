@@ -1,12 +1,11 @@
 diff --git a/toolkit/mozapps/extensions/content/aboutaddons.html b/toolkit/mozapps/extensions/content/aboutaddons.html
-index d346762cacbbfd66e8b544794050332b8eec9d53..472bdc0da7c9919635dbe0aa4d471230cb652c09 100644
+index df30d08f391d518a9c4cdbee8a5bff4d387df521..5a8a21a536d2edba898c544b5119201201a6235e 100644
 --- a/toolkit/mozapps/extensions/content/aboutaddons.html
 +++ b/toolkit/mozapps/extensions/content/aboutaddons.html
-@@ -31,6 +31,8 @@
-     <script defer src="chrome://mozapps/content/extensions/drag-drop-addon-installer.js"></script>
-     <script defer src="chrome://mozapps/content/extensions/view-controller.js"></script>
+@@ -32,6 +32,7 @@
      <script defer src="chrome://mozapps/content/extensions/aboutaddons.js"></script>
-+
+     <script type="module" src="chrome://global/content/elements/moz-toggle.mjs"></script>
+     <script type="module" src="chrome://global/content/elements/moz-support-link.mjs"></script>
 +    <script src="chrome://browser/content/contentTheme.js"></script>
    </head>
    <body>
