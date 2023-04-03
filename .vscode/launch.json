@@ -1,0 +1,16 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "gdb",
+      "request": "launch",
+      "name": "Launch Pulse (Linux)",
+      "target": "${workspaceFolder}/engine/obj-x86_64-pc-linux-gnu/dist/bin/pulse-browser",
+      "cwd": "${workspaceRoot}",
+      "valuesFormatting": "parseText"
+    }
+  ]
+}
