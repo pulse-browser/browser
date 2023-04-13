@@ -15,6 +15,7 @@
     "bs": "pnpm build && pnpm start",
     "bus": "pnpm build:ui && pnpm start",
     "start": "pnpm clearStartupCache && gluon run",
+    "start:win": "gluon run",
     "export": "gluon export-file",
     "imp": "gluon import",
     "clearProfile": "rm -rf engine/obj-x86_64-pc-linux-gnu/tmp/profile-default",

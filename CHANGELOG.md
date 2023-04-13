@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Migration for disabling sidebar animations (#234)
 - New tab button no longer follows OS style (#233, @surapunoyousei)
 - Download URL points to Pulse site (#235)
 
