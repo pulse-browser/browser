@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - New tab button no longer follows OS style (#233, @surapunoyousei)
+- Download URL points to Pulse site (#235)
 
 ## 1.0.0-a.61
 
