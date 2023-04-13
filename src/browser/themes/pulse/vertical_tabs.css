@@ -126,6 +126,7 @@
 
 #verticaltabs-splitter {
   -moz-box-ordinal-group: 1;
+  border: solid 1px var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
 }
 
 :root[sizemode='fullscreen'] #browser #TabsToolbar {

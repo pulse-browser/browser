@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa361530fad 100644
+index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e492783860a67c28 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,9 @@ var SidebarUI = {
@@ -101,7 +101,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
    /**
     * @type {MutationObserver | null}
     */
-@@ -112,20 +160,77 @@ var SidebarUI = {
+@@ -112,20 +160,80 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
@@ -140,6 +140,9 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
 +    } else if (this._keepTabsActivePref && !sidebarExists) {
 +      this.createBrowser("sidebar");
 +    }
++
++    // Temporary migration for 1.0.0-a.61
++    this._box.style.marginLeft = 'unset';
 +
 +    this.loadedSidebars = [];
 +
@@ -180,7 +183,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -157,7 +262,7 @@ var SidebarUI = {
+@@ -157,7 +265,7 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -189,7 +192,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
      switch (topic) {
        case "intl:app-locales-changed": {
          if (this.isOpen) {
-@@ -168,6 +273,54 @@ var SidebarUI = {
+@@ -168,6 +276,54 @@ var SidebarUI = {
            this.showInitially(this.lastOpenedId);
            break;
          }
@@ -244,7 +247,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
        }
      }
    },
-@@ -284,17 +437,32 @@ var SidebarUI = {
+@@ -284,17 +440,32 @@ var SidebarUI = {
      // First reset all ordinals to match DOM ordering.
      let browser = document.getElementById("browser");
      [...browser.children].forEach((node, i) => {
@@ -282,7 +285,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
        // Indicate we've switched ordering to the box
        this._box.setAttribute("positionend", true);
      } else {
-@@ -483,6 +651,10 @@ var SidebarUI = {
+@@ -483,6 +654,10 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -293,7 +296,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -521,6 +693,7 @@ var SidebarUI = {
+@@ -521,6 +696,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -301,7 +304,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
        return true;
      });
    },
-@@ -544,6 +717,7 @@ var SidebarUI = {
+@@ -544,6 +720,7 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -309,7 +312,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
        return true;
      });
    },
-@@ -557,6 +731,38 @@ var SidebarUI = {
+@@ -557,6 +734,38 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -348,7 +351,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -574,7 +780,13 @@ var SidebarUI = {
+@@ -574,7 +783,13 @@ var SidebarUI = {
        this.observeTitleChanges(sourceL10nEl);
        this.browser.setAttribute("src", url); // kick off async load
  
@@ -363,7 +366,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
          this.browser.addEventListener(
            "load",
            event => {
-@@ -618,12 +830,19 @@ var SidebarUI = {
+@@ -618,12 +833,19 @@ var SidebarUI = {
      // create a new content viewer because the old one doesn't get destroyed
      // until about:blank has loaded (which does not happen as long as the
      // element is hidden).
@@ -385,7 +388,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
      let selBrowser = gBrowser.selectedBrowser;
      selBrowser.focus();
      if (triggerNode) {
-@@ -636,10 +855,27 @@ var SidebarUI = {
+@@ -636,10 +858,27 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -414,7 +417,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..5f840372c8c9bf366e98ee3646965aa3
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -655,6 +891,107 @@ var SidebarUI = {
+@@ -655,6 +894,107 @@ var SidebarUI = {
        }
      }
    },
