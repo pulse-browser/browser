@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 111                                                             *
+ * version: 112                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -154,7 +154,6 @@ pref('signon.privateBrowsingCapture.enabled', false);
 pref('signon.autofillForms', false);
 pref('signon.rememberSignons', false);
 pref('editor.truncate_user_pastes', false);
-pref('layout.forms.reveal-password-context-menu.enabled', true);
 
 /** ADDRESS + CREDIT CARD MANAGER ***/
 pref('extensions.formautofill.addresses.enabled', false);
@@ -254,7 +253,7 @@ pref('browser.privatebrowsing.enable-new-indicator', false);
 /** FULLSCREEN ***/
 pref('full-screen-api.transition-duration.enter', '0 0');
 pref('full-screen-api.transition-duration.leave', '0 0');
-pref('full-screen-api.warning.delay', 0);
+pref('full-screen-api.warning.delay', -1);
 pref('full-screen-api.warning.timeout', 0);
 
 /** URL BAR ***/
