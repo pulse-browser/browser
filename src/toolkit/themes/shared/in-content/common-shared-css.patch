@@ -1,17 +1,17 @@
 diff --git a/toolkit/themes/shared/in-content/common-shared.css b/toolkit/themes/shared/in-content/common-shared.css
-index 35597e57e2af87d44b5b6f984c50705f70745d73..b2f69caa83256374e5a5d51e5b9203eb0193b1bc 100644
+index c88471068bca47b1bda1c307e1921f1936f24fb9..fdd2212d892047606b1b41c4e3dbadca5cc7169a 100644
 --- a/toolkit/themes/shared/in-content/common-shared.css
 +++ b/toolkit/themes/shared/in-content/common-shared.css
-@@ -261,8 +261,6 @@
+@@ -263,8 +263,6 @@
  :root {
    font: message-box;
    appearance: none;
 -  background-color: var(--in-content-page-background);
 -  color: var(--in-content-page-color);
-   -moz-box-layout: flex;
  }
  
-@@ -272,6 +270,8 @@
+ :root:not(.system-font-size) {
+@@ -273,6 +271,8 @@
  
  html|body {
    margin: 0;

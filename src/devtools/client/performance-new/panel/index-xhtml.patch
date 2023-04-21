@@ -1,7 +1,7 @@
-diff --git a/devtools/client/performance-new/index.xhtml b/devtools/client/performance-new/index.xhtml
-index e77548dcbd98a598822e080805d0e320310f3103..3011e0c0b84f9002b499f1ac2343c6c7bd34b372 100644
---- a/devtools/client/performance-new/index.xhtml
-+++ b/devtools/client/performance-new/index.xhtml
+diff --git a/devtools/client/performance-new/panel/index.xhtml b/devtools/client/performance-new/panel/index.xhtml
+index bdde2207d116069ca17dcb00ad7d1c6405b6fbe5..72dfd14eb2dd77e94bb596347e4275ee14f4a48b 100644
+--- a/devtools/client/performance-new/panel/index.xhtml
++++ b/devtools/client/performance-new/panel/index.xhtml
 @@ -13,6 +13,7 @@
    <head>
      <link rel="stylesheet" href="chrome://devtools/skin/widgets.css" type="text/css"/>
