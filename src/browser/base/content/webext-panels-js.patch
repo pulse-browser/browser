@@ -1,0 +1,13 @@
+diff --git a/browser/base/content/webext-panels.js b/browser/base/content/webext-panels.js
+index 22a5c0b4b6382fa5290391a14f7dd680a10a1ce1..fa8c68161914b230bf7ff3dbe7ab82e409630069 100644
+--- a/browser/base/content/webext-panels.js
++++ b/browser/base/content/webext-panels.js
+@@ -38,7 +38,7 @@ function getBrowser(panel) {
+   browser.setAttribute("type", "content");
+   browser.setAttribute("flex", "1");
+   browser.setAttribute("disableglobalhistory", "true");
+-  browser.setAttribute("messagemanagergroup", "webext-browsers");
++  browser.setAttribute("messagemanagergroup", !panel.uri.includes('http') ? "webext-browsers" : "browsers");
+   browser.setAttribute("webextension-view-type", panel.viewType);
+   browser.setAttribute("context", "contentAreaContextMenu");
+   browser.setAttribute("tooltip", "aHTMLTooltip");
