@@ -7,6 +7,26 @@
 // Betterfox has a lower priority than the prefs included in this file
 #include better-fox.js
 
+// Prefs from browser/branding/unofficial/prefs/firefox-branding.js:
+
+// The time interval between checks for a new version (in seconds)
+pref("app.update.interval", 86400); // 24 hours
+// Give the user x seconds to react before showing the big UI. default=24 hours
+pref("app.update.promptWaitTime", 86400);
+
+// The number of days a binary is permitted to be old
+// without checking for an update.  This assumes that
+// app.update.checkInstallTime is true.
+pref("app.update.checkInstallTime.days", 2);
+
+// Give the user x seconds to reboot before showing a badge on the hamburger
+// button. default=immediately
+pref("app.update.badgeWaitTime", 0);
+
+// Number of usages of the web console.
+// If this is less than 5, then pasting code into the web console is disabled
+pref("devtools.selfxss.count", 5);
+
 // Betterfox overrides:
 pref('identity.fxaccounts.enabled', true); // Enable firefox sync
 
