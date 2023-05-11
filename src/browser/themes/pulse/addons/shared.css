@@ -153,8 +153,8 @@ tab.tabbrowser-tab:nth-child(1) {
 }
 
 /* Show the curve next to the sidebar panel */
-#sidebar-box[checked] ~ #appcontent::before,
-#browser #TabsToolbar ~ #appcontent::before {
+#sidebar-box[checked] ~ #sidebar-container::before,
+#browser #TabsToolbar ~ #sidebar-container::before {
   content: '';
 
   background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
