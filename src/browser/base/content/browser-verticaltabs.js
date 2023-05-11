@@ -157,11 +157,11 @@ var VerticalTabs = {
         'class',
         'chromeclass-extrachrome verticaltabs-splitter'
       )
-      separator.setAttribute('resizebefore', 'none')
-      separator.setAttribute('resizeafter', 'sibling')
+      separator.setAttribute('resizebefore', 'sibling')
+      separator.setAttribute('resizeafter', 'none')
 
       const tabs = this.tabsToolbar
-      if (tabs) tabs.parentElement?.insertBefore(separator, tabs)
+      if (tabs) insertAfter(tabs, separator)
     }
   },
 
