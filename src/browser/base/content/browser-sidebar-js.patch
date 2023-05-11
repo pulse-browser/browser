@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc688cf9b14 100644
+index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..738502d7c0dd9336a48270249818861dcdff9c1a 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,9 @@ var SidebarUI = {
@@ -246,7 +246,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
        }
      }
    },
-@@ -284,17 +439,33 @@ var SidebarUI = {
+@@ -284,17 +439,32 @@ var SidebarUI = {
      // First reset all ordinals to match DOM ordering.
      let browser = document.getElementById("browser");
      [...browser.children].forEach((node, i) => {
@@ -272,20 +272,19 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
        let appcontent = document.getElementById("appcontent");
 -      let boxOrdinal = this._box.style.order;
 -      this._box.style.order = appcontent.style.order;
-+      let boxOrdinal = this._sidebarTabs.style.MozBoxOrdinalGroup;
-+      this._sidebarTabs.style.MozBoxOrdinalGroup =
-+        appcontent.style.MozBoxOrdinalGroup;
++      let boxOrdinal = this._sidebarTabs.style.order;
++      this._sidebarTabs.style.order = appcontent.style.order;
        appcontent.style.order = boxOrdinal;
 +
 +      // splitter and sidebar-box
-+      const splitterBoxOrdinal = this._splitter.style.MozBoxOrdinalGroup;
-+      this._splitter.style.MozBoxOrdinalGroup = this._box.style.MozBoxOrdinalGroup;
-+      this._box.style.MozBoxOrdinalGroup = splitterBoxOrdinal;
++      const splitterBoxOrdinal = this._splitter.style.order;
++      this._splitter.style.order = this._box.style.order;
++      this._box.style.order = splitterBoxOrdinal;
 + 
        // Indicate we've switched ordering to the box
        this._box.setAttribute("positionend", true);
      } else {
-@@ -483,6 +654,10 @@ var SidebarUI = {
+@@ -483,6 +653,10 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -296,7 +295,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -521,6 +696,7 @@ var SidebarUI = {
+@@ -521,6 +695,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -304,7 +303,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
        return true;
      });
    },
-@@ -544,6 +720,7 @@ var SidebarUI = {
+@@ -544,6 +719,7 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -312,7 +311,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
        return true;
      });
    },
-@@ -557,6 +734,38 @@ var SidebarUI = {
+@@ -557,6 +733,38 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -351,7 +350,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -574,7 +783,13 @@ var SidebarUI = {
+@@ -574,7 +782,13 @@ var SidebarUI = {
        this.observeTitleChanges(sourceL10nEl);
        this.browser.setAttribute("src", url); // kick off async load
  
@@ -366,7 +365,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
          this.browser.addEventListener(
            "load",
            event => {
-@@ -618,11 +833,14 @@ var SidebarUI = {
+@@ -618,11 +832,14 @@ var SidebarUI = {
      // create a new content viewer because the old one doesn't get destroyed
      // until about:blank has loaded (which does not happen as long as the
      // element is hidden).
@@ -384,7 +383,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
  
      let selBrowser = gBrowser.selectedBrowser;
      selBrowser.focus();
-@@ -636,10 +854,28 @@ var SidebarUI = {
+@@ -636,10 +853,28 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -414,7 +413,7 @@ index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..ba6785d74e6ca20aff569c3f18ff3bc6
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -655,6 +891,107 @@ var SidebarUI = {
+@@ -655,6 +890,107 @@ var SidebarUI = {
        }
      }
    },
