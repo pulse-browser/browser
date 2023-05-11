@@ -92,3 +92,10 @@ pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
 
 // This pref needs to be here to not break context menus (GH#169)
 pref("extensions.pocket.enabled", false);
+
+// Reenable accessability. Should have a low enough performance impact with the
+// changes in 113
+//  0: auto-detect
+//  1: force disable
+// -1: force enable
+pref('accessibility.force_disabled', 0);
