@@ -1,5 +1,5 @@
 diff --git a/browser/themes/ThemeVariableMap.sys.mjs b/browser/themes/ThemeVariableMap.sys.mjs
-index f2fd99193ddd0c24b7ad3ec953216973b162aaed..1810528d3b1d7b5cd2fb3f45548c8377a2f5f165 100644
+index f2fd99193ddd0c24b7ad3ec953216973b162aaed..6d03f796569080667910276c631fb6731547c9d7 100644
 --- a/browser/themes/ThemeVariableMap.sys.mjs
 +++ b/browser/themes/ThemeVariableMap.sys.mjs
 @@ -126,7 +126,9 @@ export const ThemeVariableMap = [
@@ -13,7 +13,26 @@ index f2fd99193ddd0c24b7ad3ec953216973b162aaed..1810528d3b1d7b5cd2fb3f45548c8377
        processColor(rgbaChannels, element) {
          if (!rgbaChannels) {
            element.removeAttribute("lwt-sidebar");
-@@ -187,4 +189,10 @@ export const ThemeContentPropertyList = [
+@@ -176,6 +178,18 @@ export const ThemeVariableMap = [
+       },
+     },
+   ],
++  [
++    "--in-content-link-color",
++    {
++      lwtProperty: "icon_color",
++    },
++  ],
++  [
++    "--in-content-link-color-hover",
++    {
++      lwtProperty: "icon_color",
++    },
++  ],
+ ];
+ 
+ export const ThemeContentPropertyList = [
+@@ -187,4 +201,10 @@ export const ThemeContentPropertyList = [
    "sidebar_highlight_text",
    "sidebar_text",
    "zap_gradient",

@@ -1,8 +1,8 @@
 diff --git a/browser/base/content/contentTheme.js b/browser/base/content/contentTheme.js
-index d634a17c2633dc2ead40082c71622fe1b7a491a2..73b2dedad1ccd3db43aca773f2e8bdcaa2737bda 100644
+index a2298986bae01a16c5306223a963119d37d2f8e4..64783d98f228c7ee373dfc1492d62ed84143b88a 100644
 --- a/browser/base/content/contentTheme.js
 +++ b/browser/base/content/contentTheme.js
-@@ -135,6 +135,119 @@
+@@ -135,6 +135,105 @@
          lwtProperty: "sidebar_highlight_text",
        },
      ],
@@ -60,13 +60,6 @@ index d634a17c2633dc2ead40082c71622fe1b7a491a2..73b2dedad1ccd3db43aca773f2e8bdca
 +        lwtProperty: "button_primary_color",
 +      }
 +    ],
-+    [
-+      "--in-content-link-color",
-+      {
-+        lwtProperty: "button_primary_color",
-+      }
-+    ],
-+ 
 +
 +    [
 +      "--in-content-primary-button-text-color-hover",
@@ -86,13 +79,6 @@ index d634a17c2633dc2ead40082c71622fe1b7a491a2..73b2dedad1ccd3db43aca773f2e8bdca
 +        lwtProperty: "button_primary_color",
 +      }
 +    ],
-+    [
-+      "--in-content-link-color-hover",
-+      {
-+        lwtProperty: "button_primary_color",
-+      }
-+    ],
-+ 
 +
 +    [
 +      "--in-content-page-background",
