@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e492783860a67c28 100644
+index d2b36db203f6572c39cc9a68cc71e4f7e2af0f07..738502d7c0dd9336a48270249818861dcdff9c1a 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,9 @@ var SidebarUI = {
@@ -74,17 +74,17 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
      ]));
    },
  
-@@ -63,6 +98,10 @@ var SidebarUI = {
+@@ -62,6 +97,10 @@ var SidebarUI = {
+   },
    POSITION_START_PREF: "sidebar.position_start",
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
- 
++  
 +  SIDEBAR_KEEP_TABS_ACTIVE_PREF: "pulse.sidebar.keeptabsactive.enabled",
 +  SIDEBAR_TABS_PREF: "pulse.sidebar.enabled",
 +  SIDEBAR_EXTENSIONS_PREF: "pulse.sidebar.extensions.enabled",
-+
+ 
    // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
    // and isn't persisted across windows
-   lastOpenedId: null,
 @@ -83,6 +122,15 @@ var SidebarUI = {
    _switcherArrow: null,
    _inited: false,
@@ -101,7 +101,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
    /**
     * @type {MutationObserver | null}
     */
-@@ -112,20 +160,80 @@ var SidebarUI = {
+@@ -112,20 +160,79 @@ var SidebarUI = {
        this.toggleSwitcherPanel();
      });
  
@@ -176,14 +176,13 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
      if (!enumerator.hasMoreElements()) {
        let xulStore = Services.xulStore;
 -      xulStore.persist(this._box, "sidebarcommand");
-+
 +      if (!this._keepTabsActivePref) {
 +        xulStore.persist(this._box, "sidebarcommand");
 +      }
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -157,7 +265,7 @@ var SidebarUI = {
+@@ -157,7 +264,7 @@ var SidebarUI = {
    /**
     * The handler for Services.obs.addObserver.
     **/
@@ -192,7 +191,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
      switch (topic) {
        case "intl:app-locales-changed": {
          if (this.isOpen) {
-@@ -168,6 +276,54 @@ var SidebarUI = {
+@@ -168,6 +275,54 @@ var SidebarUI = {
            this.showInitially(this.lastOpenedId);
            break;
          }
@@ -247,7 +246,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
        }
      }
    },
-@@ -284,17 +440,32 @@ var SidebarUI = {
+@@ -284,17 +439,32 @@ var SidebarUI = {
      // First reset all ordinals to match DOM ordering.
      let browser = document.getElementById("browser");
      [...browser.children].forEach((node, i) => {
@@ -255,8 +254,8 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
 +      if (node.id == "TabsToolbar" || node.id == "verticaltabs-splitter") {
 +        return;
 +      }
-+
-       node.style.MozBoxOrdinalGroup = i + 1;
++     
+       node.style.order = i + 1;
      });
  
      if (!this._positionStart) {
@@ -271,21 +270,21 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
 +
 +      // sidebar-container and appcontent
        let appcontent = document.getElementById("appcontent");
--      let boxOrdinal = this._box.style.MozBoxOrdinalGroup;
--      this._box.style.MozBoxOrdinalGroup = appcontent.style.MozBoxOrdinalGroup;
-+      let boxOrdinal = this._sidebarTabs.style.MozBoxOrdinalGroup;
-+      this._sidebarTabs.style.MozBoxOrdinalGroup =
-+        appcontent.style.MozBoxOrdinalGroup;
-       appcontent.style.MozBoxOrdinalGroup = boxOrdinal;
+-      let boxOrdinal = this._box.style.order;
+-      this._box.style.order = appcontent.style.order;
++      let boxOrdinal = this._sidebarTabs.style.order;
++      this._sidebarTabs.style.order = appcontent.style.order;
+       appcontent.style.order = boxOrdinal;
 +
 +      // splitter and sidebar-box
-+      const splitterBoxOrdinal = this._splitter.style.MozBoxOrdinalGroup;
-+      this._splitter.style.MozBoxOrdinalGroup = this._box.style.MozBoxOrdinalGroup;
-+      this._box.style.MozBoxOrdinalGroup = splitterBoxOrdinal;
++      const splitterBoxOrdinal = this._splitter.style.order;
++      this._splitter.style.order = this._box.style.order;
++      this._box.style.order = splitterBoxOrdinal;
++ 
        // Indicate we've switched ordering to the box
        this._box.setAttribute("positionend", true);
      } else {
-@@ -483,6 +654,10 @@ var SidebarUI = {
+@@ -483,6 +653,10 @@ var SidebarUI = {
    },
  
    _loadSidebarExtension(commandID) {
@@ -296,7 +295,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
      let sidebar = this.sidebars.get(commandID);
      let { extensionId } = sidebar;
      if (extensionId) {
-@@ -521,6 +696,7 @@ var SidebarUI = {
+@@ -521,6 +695,7 @@ var SidebarUI = {
        }
  
        this._fireFocusedEvent();
@@ -304,7 +303,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
        return true;
      });
    },
-@@ -544,6 +720,7 @@ var SidebarUI = {
+@@ -544,6 +719,7 @@ var SidebarUI = {
      }
      return this._show(commandID).then(() => {
        this._loadSidebarExtension(commandID);
@@ -312,7 +311,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
        return true;
      });
    },
-@@ -557,6 +734,38 @@ var SidebarUI = {
+@@ -557,6 +733,38 @@ var SidebarUI = {
     */
    _show(commandID) {
      return new Promise(resolve => {
@@ -347,11 +346,11 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
 +          browser.setAttribute("hidden", "true");
 +        }
 +      }
-+
++      
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
-@@ -574,7 +783,13 @@ var SidebarUI = {
+@@ -574,7 +782,13 @@ var SidebarUI = {
        this.observeTitleChanges(sourceL10nEl);
        this.browser.setAttribute("src", url); // kick off async load
  
@@ -366,29 +365,25 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
          this.browser.addEventListener(
            "load",
            event => {
-@@ -618,12 +833,19 @@ var SidebarUI = {
+@@ -618,11 +832,14 @@ var SidebarUI = {
      // create a new content viewer because the old one doesn't get destroyed
      // until about:blank has loaded (which does not happen as long as the
      // element is hidden).
 -    this.browser.setAttribute("src", "about:blank");
 -    this.browser.docShell.createAboutBlankContentViewer(null, null);
+-
 +    if (!this._keepTabsActivePref) {
 +      this.browser.setAttribute("src", "about:blank");
 +      this.browser.docShell.createAboutBlankContentViewer(null, null);
 +    }
- 
++    
      this._box.removeAttribute("checked");
      this._box.hidden = this._splitter.hidden = true;
 +    this._sidebarIcons.removeAttribute("checked");
  
-+    // Note: This was was commented out but had no description for its removed
-+    // reason. I am bringing it back unless there is any other justification - tricky
-+    //
-+    // Removed in: :mute: Remove Test Logs
      let selBrowser = gBrowser.selectedBrowser;
      selBrowser.focus();
-     if (triggerNode) {
-@@ -636,10 +858,27 @@ var SidebarUI = {
+@@ -636,10 +853,28 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -405,6 +400,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
 -      let triggerbutton =
 +      let dropdownTriggerButton =
          triggerButtonId && document.getElementById(triggerButtonId);
++
 +      const sidebarTriggerButton = document.getElementById(
 +        `sidebar-background-${id}`
 +      );
@@ -417,7 +413,7 @@ index 22c886b09373a38a4fbceb6d279a58f276675d63..ebc355c651fb48b9d6e7fc88e4927838
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -655,6 +894,107 @@ var SidebarUI = {
+@@ -655,6 +890,107 @@ var SidebarUI = {
        }
      }
    },

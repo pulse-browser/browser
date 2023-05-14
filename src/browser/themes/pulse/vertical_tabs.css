@@ -68,7 +68,7 @@
 
 /* Put the new tab button on the bottom */
 #browser #TabsToolbar #TabsToolbar-customization-target {
-  -moz-box-orient: vertical;
+  flex-direction: column;
   height: 100%;
   /* Not sure why, but this forces the scroll box to scroll */
   max-height: 100%;

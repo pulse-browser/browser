@@ -1,10 +1,10 @@
 diff --git a/toolkit/content/aboutwebrtc/aboutWebrtc.html b/toolkit/content/aboutwebrtc/aboutWebrtc.html
-index 14ffab8c5fc61dc51a32a981bdbc4b4d9b8cf301..1af13b9478941ea6ed0b34b92765bad223845a17 100644
+index 7396948d1e036489b0464da74d4066b1e3300656..deceb5177ecd30daabb4a4ec29f7e38c6707a5c2 100644
 --- a/toolkit/content/aboutwebrtc/aboutWebrtc.html
 +++ b/toolkit/content/aboutwebrtc/aboutWebrtc.html
-@@ -16,6 +16,7 @@
-   <script src="chrome://global/content/aboutwebrtc/aboutWebrtc.js"
-           defer="defer"></script>
+@@ -17,6 +17,7 @@
+           defer="defer"
+           type="module"></script>
    <link rel="localization" href="toolkit/about/aboutWebrtc.ftl"/>
 +  <script src="chrome://browser/content/contentTheme.js"></script>
  </head>

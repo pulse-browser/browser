@@ -1,10 +1,10 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 81f4d49068c285049d49db6c8fc5c0fbe042ff6b..39ef13fb66567c31ebf932d7a6f528fa1d635069 100644
+index 56c8022ec4bbeda70e09c3b8780afcbf21ba0579..4d637ea6263799f9574ac23f0c8900949540dfec 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -2804,3 +2804,5 @@ pref("cookiebanners.ui.desktop.cfrVariant", 0);
-   pref("browser.swipe.navigation-icon-min-radius", 12);
-   pref("browser.swipe.navigation-icon-max-radius", 20);
+@@ -2837,3 +2837,5 @@ pref("cookiebanners.ui.desktop.cfrVariant", 0);
+ #ifdef MOZ_ARTIFACT_BUILDS
+   pref("telemetry.fog.artifact_build", true);
  #endif
 +
 +#include pulse-browser.js

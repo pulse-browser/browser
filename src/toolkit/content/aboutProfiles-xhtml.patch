@@ -1,5 +1,5 @@
 diff --git a/toolkit/content/aboutProfiles.xhtml b/toolkit/content/aboutProfiles.xhtml
-index 85e2cff36776d82e66dd8b9f9c31f3af88cf8532..9019beb54690bb9562bd0c17c982c31b425e6a32 100644
+index d7079a022d0f5a8d44381580bd54cc2f99df53d2..1e9188a382b6676243c479fb2544fcea8387d800 100644
 --- a/toolkit/content/aboutProfiles.xhtml
 +++ b/toolkit/content/aboutProfiles.xhtml
 @@ -16,6 +16,7 @@
@@ -9,4 +9,4 @@ index 85e2cff36776d82e66dd8b9f9c31f3af88cf8532..9019beb54690bb9562bd0c17c982c31b
 +    <script src="chrome://browser/content/contentTheme.js"></script>
  </head>
    <body id="body" class="wide-container">
-     <div class="action-box">
+     <h1 data-l10n-id="profiles-title"></h1>

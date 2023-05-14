@@ -7,7 +7,7 @@
 # be specified once. As a result, the source file paths are relative
 # to the location of the actual manifest.
 
-* skin/classic/browser/pulse/sidebar_tabs.css                          (../pulse/sidebar_tabs.css)
+  skin/classic/browser/pulse/sidebar_tabs.css                          (../pulse/sidebar_tabs.css)
   skin/classic/browser/pulse/vertical_tabs.css                         (../pulse/vertical_tabs.css)
   skin/classic/browser/pulse/downloads.css                             (../pulse/content/downloads.css)
   skin/classic/browser/addons/shared.css                               (../pulse/addons/shared.css)
