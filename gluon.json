@@ -15,7 +15,7 @@
       "platform": "github",
       "id": "uBlock0@raymondhill.net",
       "repo": "gorhill/uBlock",
-      "version": "1.49.2",
+      "version": "1.50.0",
       "fileGlob": "uBlock0_*.firefox(.signed)?.xpi"
     },
     "tabliss": {
@@ -93,9 +93,7 @@
     }
   },
   "license": {
-    "ignoredFiles": [
-      ".*\\.json"
-    ],
+    "ignoredFiles": [".*\\.json"],
     "licenseType": "MPL-2.0"
   },
   "updateHostname": "updates.pulsebrowser.app"
