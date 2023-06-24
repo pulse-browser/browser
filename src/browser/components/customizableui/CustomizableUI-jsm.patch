@@ -1,11 +1,11 @@
 diff --git a/browser/components/customizableui/CustomizableUI.jsm b/browser/components/customizableui/CustomizableUI.jsm
-index e97c979363775d2de999e65e7e41c02a736f57ac..501f1235ac9ba571be66b533772cc259aceef48f 100644
+index 7dfad171476f20c6250866afc3b53c6979a58ce1..fb14cacccd08ccd0babdee9f581a443c0bd85872 100644
 --- a/browser/components/customizableui/CustomizableUI.jsm
 +++ b/browser/components/customizableui/CustomizableUI.jsm
-@@ -24,6 +24,7 @@ XPCOMUtils.defineLazyModuleGetters(lazy, {
+@@ -24,6 +24,7 @@ ChromeUtils.defineESModuleGetters(lazy, {
+ XPCOMUtils.defineLazyModuleGetters(lazy, {
+   AddonManager: "resource://gre/modules/AddonManager.jsm",
    AddonManagerPrivate: "resource://gre/modules/AddonManager.jsm",
-   SearchWidgetTracker: "resource:///modules/SearchWidgetTracker.jsm",
-   CustomizableWidgets: "resource:///modules/CustomizableWidgets.jsm",
 +  ExtensionCommon: "resource://gre/modules/ExtensionCommon.jsm",
    PanelMultiView: "resource:///modules/PanelMultiView.jsm",
    BrowserUsageTelemetry: "resource:///modules/BrowserUsageTelemetry.jsm",
@@ -18,12 +18,11 @@ index e97c979363775d2de999e65e7e41c02a736f57ac..501f1235ac9ba571be66b533772cc259
  
  const kSpecialWidgetPfx = "customizableui-special-";
  
-@@ -253,17 +255,19 @@ var CustomizableUIInternal = {
+@@ -245,17 +247,18 @@ var CustomizableUIInternal = {
        false
      );
  
 +    const { makeWidgetId } = lazy.ExtensionCommon;
-+
      let navbarPlacements = [
        "back-button",
 -      "forward-button",
@@ -39,6 +38,4 @@ index e97c979363775d2de999e65e7e41c02a736f57ac..501f1235ac9ba571be66b533772cc259
 -      "save-to-pocket-button",
        "downloads-button",
        AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
-       "fxa-toolbar-menu-button",
-V_EDITION ? "developer-button" : null,
        "fxa-toolbar-menu-button",
