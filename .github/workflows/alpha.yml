@@ -230,13 +230,6 @@ jobs:
           echo 'export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"' >> ~/.zsh
           source ~/.bash_profile
 
-      # There are bugs in python 3.10 which prevent firefox from building correctly. This should
-      # fix it for the moment until mozilla or Python fix it
-      - name: Hotfix for bug 1766497 & 1786419
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
       - name: Save sccache
         uses: actions/cache@v3
         continue-on-error: false
@@ -381,7 +374,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
 
