@@ -374,7 +374,7 @@ jobs:
     needs: [build-data]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: trickypr/checkout@main
         with:
           submodules: recursive
 
