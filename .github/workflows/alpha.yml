@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-     
+
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -81,7 +81,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-    
+
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -132,7 +132,7 @@ jobs:
         with:
           path: /home/runner/.cache/sccache
           key: ${{ runner.os }}-sccache
-          
+
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
@@ -202,7 +202,7 @@ jobs:
           path: ./dist/update
 
   mac:
-    runs-on: macos-latest
+    runs-on: macos-13
     needs: [build-data]
 
     steps:
@@ -210,7 +210,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-    
+
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -313,7 +313,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-    
+
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -476,7 +476,7 @@ jobs:
     needs: [build-data, release]
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/alpha' }}
-    
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -491,15 +491,15 @@ jobs:
           git pull
 
       - name: Install flatpak builder
-        run: | 
-           sudo apt-get update
-           sudo apt-get install -y flatpak-builder
-     
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak-builder
+
       - name: Install build dependancies
         run: |
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           sudo flatpak install flathub org.freedesktop.Platform//22.08 org.freedesktop.Sdk//22.08 org.mozilla.firefox.BaseApp//22.08 -y
-  
+
       - name: Import GPG keys
         run: |
           mkdir ~/.gpg
@@ -519,7 +519,7 @@ jobs:
           commit_user_name: Fushra Robot
           commit_user_email: trickypr@gmail.com
           repository: ./repo
-          
+
       - name: Update repo version in package
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
