@@ -5,14 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0-a.74
+
+### Changed
+
+- Update Firefox to `115.0.1`
+- Update Betterfox
+
+## 1.0.0-a.67 through 1.0.0-a.73
+
+Fight with CI.
+
+## 1.0.0-a.66
+
+### Changed
+
+- Update Firefox to `114.0.1`
+
+## 1.0.0-a.65
+
+### Changed
+
+- Update Firefox to `113.0.1`
+
 ## 1.0.0-a.64
 
 ### Fixed
+
 - Add branding prefs back (#242)
 
 ## 1.0.0-a.63
 
 ### Fixed
+
 - uBlock now works in sidebars (#238)
 
 ### Changed
