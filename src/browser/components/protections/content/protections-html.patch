@@ -1,10 +1,10 @@
 diff --git a/browser/components/protections/content/protections.html b/browser/components/protections/content/protections.html
-index fd6dfbade23b78282cdb81fb9c9d80b1fa250731..edb12e3472881c709ee71ed88e786495916e576b 100644
+index 1374c30fd7d13f7f3b609cedbf9ee553eee5d8e8..1d8082250689e0322c85c8e1b0605a49faaf0d7d 100644
 --- a/browser/components/protections/content/protections.html
 +++ b/browser/components/protections/content/protections.html
-@@ -19,6 +19,7 @@
-     <link rel="icon" href="chrome://browser/skin/controlcenter/dashboard.svg">
-     <script type="module" src="chrome://browser/content/protections.mjs"></script>
+@@ -25,6 +25,7 @@
+       src="chrome://browser/content/protections.mjs"
+     ></script>
      <title data-l10n-id="protection-report-webpage-title"></title>
 +    <script src="chrome://browser/content/contentTheme.js"></script>
    </head>

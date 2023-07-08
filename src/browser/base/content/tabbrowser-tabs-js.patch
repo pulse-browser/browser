@@ -1,8 +1,8 @@
 diff --git a/browser/base/content/tabbrowser-tabs.js b/browser/base/content/tabbrowser-tabs.js
-index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1fbed8041 100644
+index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..f73965ee9408b3f4c39646e6bda5b0c13f13628f 100644
 --- a/browser/base/content/tabbrowser-tabs.js
 +++ b/browser/base/content/tabbrowser-tabs.js
-@@ -517,19 +517,40 @@
+@@ -513,19 +513,40 @@
        }
        dt.setDragImage(toDrag, dragImageOffset, dragImageOffset);
  
@@ -17,14 +17,14 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
        // relative to the corner of the dragged tab.
        function clientX(ele) {
 +        if (verticalTabs) {
-+          return 0;
++          return 0
 +        }
 +
          return ele.getBoundingClientRect().left;
        }
 +      function clientY(ele) {
 +        if (!verticalTabs) {
-+          return 0;
++          return 0
 +        }
 +
 +        return ele.getBoundingClientRect().top;
@@ -44,7 +44,7 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
          movingTabs: (tab.multiselected ? gBrowser.selectedTabs : [tab]).filter(
            t => t.pinned == tab.pinned
          ),
-@@ -609,21 +630,31 @@
+@@ -612,21 +633,31 @@
          }
        }
  
@@ -72,8 +72,7 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
 +          minMargin + scrollRect[width],
 +          scrollRect[right]
          );
--        if (RTL_UI) {
-+        if (RTL_UI && !verticalTabs) {
+         if (RTL_UI) {
            [minMargin, maxMargin] = [
 -            this.clientWidth - maxMargin,
 -            this.clientWidth - minMargin,
@@ -82,10 +81,10 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
            ];
          }
          newMargin = pixelsToScroll > 0 ? maxMargin : minMargin;
-@@ -634,30 +665,38 @@
-           let tabRect = this._getVisibleTabs()
-             .at(-1)
-             .getBoundingClientRect();
+@@ -635,30 +666,40 @@
+         let children = this.allTabs;
+         if (newIndex == children.length) {
+           let tabRect = this._getVisibleTabs().at(-1).getBoundingClientRect();
 -          if (RTL_UI) {
 -            newMargin = rect.right - tabRect.left;
 +          if (RTL_UI && !verticalTabs) {
@@ -114,7 +113,8 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
 +      if (RTL_UI && !verticalTabs) {
          newMargin *= -1;
        }
--      ind.style.transform = "translate(" + Math.round(newMargin) + "px)";
+       ind.style.transform = "translate(" + Math.round(newMargin) + "px)";
++
 +      ind.style.transform =
 +        "translate(" + verticalTabs
 +          ? "0, "
@@ -130,32 +130,16 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
        var dt = event.dataTransfer;
        var dropEffect = dt.dropEffect;
        var draggedTab;
-@@ -714,7 +753,11 @@
+@@ -715,7 +756,7 @@
            incrementDropIndex = false;
          }
  
 -        if (oldTranslateX && oldTranslateX != newTranslateX && !gReduceMotion) {
-+        if (
-+          oldTranslateX &&
-+          oldTranslateX != newTranslateX &&
-+          !(gReduceMotion || verticalTabs)
-+        ) {
++        if (oldTranslateX && oldTranslateX != newTranslateX && !(gReduceMotion || verticalTabs)) {
            for (let tab of movingTabs) {
              tab.setAttribute("tabdrop-samewindow", "true");
              tab.style.transform = "translateX(" + newTranslateX + "px)";
-@@ -1519,6 +1562,11 @@
-     }
- 
-     _animateTabMove(event) {
-+      const verticalTabs = Services.prefs.getBoolPref(
-+        "pulse.tabs.vertical",
-+        false
-+      );
-+
-       let draggedTab = event.dataTransfer.mozGetDataAt(TAB_DROP_TYPE, 0);
-       let movingTabs = draggedTab._dragData.movingTabs;
- 
-@@ -1530,19 +1578,28 @@
+@@ -1485,19 +1526,28 @@
          }
        }
  
@@ -190,7 +174,7 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
  
        let pinned = draggedTab.pinned;
        let numPinned = gBrowser._numPinnedTabs;
-@@ -1551,36 +1608,40 @@
+@@ -1506,36 +1556,40 @@
          pinned ? numPinned : undefined
        );
  
@@ -204,8 +188,8 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
 +      let tabWidth = draggedTab.getBoundingClientRect()[dimensions];
        let shiftWidth = tabWidth * movingTabs.length;
 +
-+      // We want to store the output value as both the width and the height to
-+      // force compatibility with code elsewhere
++      // We want to store the output value as the width and the height to force
++      // compatibility with code elsewhere
        draggedTab._dragData.tabWidth = tabWidth;
 +      draggedTab._dragData.tabHeight = tabWidth;
  
@@ -242,7 +226,7 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
        }
  
        draggedTab._dragData.translateX = translateX;
-@@ -1613,11 +1674,11 @@
+@@ -1568,11 +1622,11 @@
          if (tabs[mid] == draggedTab && ++mid > high) {
            break;
          }
@@ -256,7 +240,7 @@ index 0aa7ae602ea1048a9b05d7614aacacdb736f3e28..2cb17dcfd88db3d0f242ce2051847ad1
            tabCenter
          ) {
            low = mid + 1;
-@@ -1640,16 +1701,16 @@
+@@ -1595,16 +1649,16 @@
        for (let tab of tabs) {
          if (tab != draggedTab) {
            let shift = getTabShift(tab, newIndex);

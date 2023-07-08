@@ -1,12 +1,12 @@
 diff --git a/browser/components/enterprisepolicies/content/aboutPolicies.html b/browser/components/enterprisepolicies/content/aboutPolicies.html
-index 41a9e6bdf632c278432f69a4778bcc8ef01e2d14..63b5819cd48884997651602c3b8930b11398f05c 100644
+index 624d4f24be98676554b855afcfa139a05800e063..de2f8859daf7bbb421a054cbb4328c2101040038 100644
 --- a/browser/components/enterprisepolicies/content/aboutPolicies.html
 +++ b/browser/components/enterprisepolicies/content/aboutPolicies.html
-@@ -18,6 +18,7 @@
-         <link rel="localization" href="toolkit/branding/accounts.ftl">
-         <link rel="localization" href="toolkit/branding/brandings.ftl">
-         <script src="chrome://browser/content/policies/aboutPolicies.js"></script>
-+        <script src="chrome://browser/content/contentTheme.js"></script>
-     </head>
-     <body id="body">
-         <div id="categories">
+@@ -27,6 +27,7 @@
+     <link rel="localization" href="toolkit/branding/accounts.ftl" />
+     <link rel="localization" href="toolkit/branding/brandings.ftl" />
+     <script src="chrome://browser/content/policies/aboutPolicies.js"></script>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+   <body id="body">
+     <div id="categories">

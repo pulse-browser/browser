@@ -1,0 +1,41 @@
+diff --git a/browser/components/customizableui/CustomizableUI.sys.mjs b/browser/components/customizableui/CustomizableUI.sys.mjs
+index ca629263080e3e2ba1d0ef2b15b11769fed433a8..ff5a28d40fdf2222ea7232c2a41182b4e305f92a 100644
+--- a/browser/components/customizableui/CustomizableUI.sys.mjs
++++ b/browser/components/customizableui/CustomizableUI.sys.mjs
+@@ -12,6 +12,7 @@ ChromeUtils.defineESModuleGetters(lazy, {
+   AddonManager: "resource://gre/modules/AddonManager.sys.mjs",
+   AddonManagerPrivate: "resource://gre/modules/AddonManager.sys.mjs",
+   CustomizableWidgets: "resource:///modules/CustomizableWidgets.sys.mjs",
++  ExtensionCommon: "resource://gre/modules/ExtensionCommon.sys.mjs",
+   PanelMultiView: "resource:///modules/PanelMultiView.sys.mjs",
+   PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
+   ShortcutUtils: "resource://gre/modules/ShortcutUtils.sys.mjs",
+@@ -29,6 +30,7 @@ XPCOMUtils.defineLazyGetter(lazy, "gWidgetsBundle", function () {
+ });
+ 
+ const kDefaultThemeID = "default-theme@mozilla.org";
++const kUBlockOriginID = "uBlock0@raymondhill.net";
+ 
+ const kSpecialWidgetPfx = "customizableui-special-";
+ 
+@@ -238,17 +240,18 @@ var CustomizableUIInternal = {
+       false
+     );
+ 
++    const { makeWidgetId } = lazy.ExtensionCommon;
+     let navbarPlacements = [
+       "back-button",
+-      "forward-button",
+       "stop-reload-button",
++      "forward-button",
+       Services.policies.isAllowed("removeHomeButtonByDefault")
+         ? null
+         : "home-button",
+       "spring",
++      `${makeWidgetId(kUBlockOriginID)}-browser-action`,
+       "urlbar-container",
+       "spring",
+-      "save-to-pocket-button",
+       "downloads-button",
+       AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
+       "fxa-toolbar-menu-button",

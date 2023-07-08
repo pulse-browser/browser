@@ -1,14 +1,14 @@
 diff --git a/browser/locales/en-US/browser/browser.ftl b/browser/locales/en-US/browser/browser.ftl
-index 710e5248557993012830e41d025b530c7bf33ade..8f58c6b9a2e6d726a30f49b40839b2c70e8d7195 100644
+index de82989814fa2c4c08e58230dbdfac4e3ed61801..64243a0212516e2fe2ecf29d363ac22a4e84bf7c 100644
 --- a/browser/locales/en-US/browser/browser.ftl
 +++ b/browser/locales/en-US/browser/browser.ftl
-@@ -982,6 +982,9 @@ firefox-relay-offer-how-we-integrate = By continuing, you’ll be able to genera
- #  $useremail (String): user email that will receive messages
- firefox-relay-offer-what-relay-does = We’ll forward all emails from <strong>{ $sitename }</strong> to <strong>{ $useremail }</strong>.
+@@ -981,6 +981,9 @@ firefox-relay-offer-what-relay-provides = All emails sent to your email masks wi
+ 
+ firefox-relay-offer-legal-notice = By clicking “Use email mask”, you agree to the <label data-l10n-name="tos-url">Terms of Service</label> and <label data-l10n-name="privacy-url">Privacy Notice</label>.
  
 +sidebar-context-delete = 
 +    .label = Delete
 +
- ## Popup Notification
+ ## Add-on Pop-up Notifications
  
- popup-notification-xpinstall-prompt-learn-more = Learn more about installing add-ons safely
+ popup-notification-addon-install-unsigned =
