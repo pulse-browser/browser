@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 112                                                             *
+ * version: 115                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -85,7 +85,6 @@ pref('network.ssl_tokens_cache_capacity', 32768);
  ****************************************************************************/
 /** TRACKING PROTECTION ***/
 pref('browser.contentblocking.category', 'strict');
-pref('privacy.trackingprotection.emailtracking.enabled', true);
 pref(
   'urlclassifier.trackingSkipURLs',
   '*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com'
@@ -279,11 +278,11 @@ pref('browser.download.always_ask_before_handling_new_types', true);
 pref('browser.download.open_pdf_attachments_inline', true);
 
 /** TAB BEHAVIOR ***/
-pref('browser.link.open_newwindow.restriction', 0);
-pref('dom.disable_window_move_resize', true);
 pref('browser.tabs.loadBookmarksInTabs', true);
 pref('browser.bookmarks.openInTabClosesMenu', false);
 pref('layout.css.has-selector.enabled', true);
+pref('cookiebanners.service.mode', 2);
+pref('cookiebanners.service.mode.privateBrowsing', 2);
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
