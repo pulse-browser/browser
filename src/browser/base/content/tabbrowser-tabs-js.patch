@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/tabbrowser-tabs.js b/browser/base/content/tabbrowser-tabs.js
-index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..f73965ee9408b3f4c39646e6bda5b0c13f13628f 100644
+index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..7169efb6fbf88071bfb45cacc138b5203c334738 100644
 --- a/browser/base/content/tabbrowser-tabs.js
 +++ b/browser/base/content/tabbrowser-tabs.js
 @@ -513,19 +513,40 @@
@@ -139,12 +139,17 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..f73965ee9408b3f4c39646e6bda5b0c1
            for (let tab of movingTabs) {
              tab.setAttribute("tabdrop-samewindow", "true");
              tab.style.transform = "translateX(" + newTranslateX + "px)";
-@@ -1485,19 +1526,28 @@
+@@ -1485,19 +1526,33 @@
          }
        }
  
 -      if (!("animLastScreenX" in draggedTab._dragData)) {
 -        draggedTab._dragData.animLastScreenX = draggedTab._dragData.screenX;
++      const verticalTabs = Services.prefs.getBoolPref(
++        "pulse.tabs.vertical",
++        false
++      );
++
 +      const animLastScreen = verticalTabs
 +        ? "animLastScreenY"
 +        : "animLastScreenX";
@@ -174,7 +179,7 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..f73965ee9408b3f4c39646e6bda5b0c1
  
        let pinned = draggedTab.pinned;
        let numPinned = gBrowser._numPinnedTabs;
-@@ -1506,36 +1556,40 @@
+@@ -1506,36 +1561,40 @@
          pinned ? numPinned : undefined
        );
  
@@ -226,7 +231,7 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..f73965ee9408b3f4c39646e6bda5b0c1
        }
  
        draggedTab._dragData.translateX = translateX;
-@@ -1568,11 +1622,11 @@
+@@ -1568,11 +1627,11 @@
          if (tabs[mid] == draggedTab && ++mid > high) {
            break;
          }
@@ -240,7 +245,7 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..f73965ee9408b3f4c39646e6bda5b0c1
            tabCenter
          ) {
            low = mid + 1;
-@@ -1595,16 +1649,16 @@
+@@ -1595,16 +1654,16 @@
        for (let tab of tabs) {
          if (tab != draggedTab) {
            let shift = getTabShift(tab, newIndex);

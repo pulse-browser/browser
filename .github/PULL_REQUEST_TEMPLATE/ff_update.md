@@ -17,7 +17,6 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
   - [ ] The sidebar keeps tabs active while closed when keep sidebar tabs active is set to true
   - [ ] The sidebar overwrites tabs when keep sidebar tabs active is set to false
 
-
 - [ ] Extensions
 
   - [ ] Tabliss is loading correctly
@@ -55,7 +54,13 @@ This bumps Firefox up to `{NEW_VERSION}` for security and performance reasons. R
   - [ ] The sidebar tabs are correct
 
 - [ ] Useragent
+
   - [ ] The user agent is reporting as Mozilla Firefox
+
+- [ ] Vertical tabs
+
+  - [ ] Vertical tabs can be enabled and disabled without a restart
+  - [ ] Tabs can be rearranged
 
 - [ ] Are all extensions up to date?
 - [ ] Has `better-fox.js` been updated to the relevent version?
