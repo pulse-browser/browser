@@ -57,15 +57,6 @@
   background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
-#browser #TabsToolbar .tabbrowser-tab {
-  max-width: unset;
-  width: 100%;
-
-  /* Stops the tabs from getting squished or stretched */
-  min-height: unset;
-  max-height: var(--tab-min-height);
-}
-
 /* Put the new tab button on the bottom */
 #browser #TabsToolbar #TabsToolbar-customization-target {
   flex-direction: column;
@@ -74,12 +65,25 @@
   max-height: 100%;
 }
 
+#browser #TabsToolbar .tabbrowser-tab {
+  max-width: unset;
+  width: 100%;
+
+  /* Stops the tabs from getting squished or stretched */
+  min-height: unset;
+  max-height: var(--tab-min-height);
+
+  transition: min-height 150ms ease-in-out, max-height 150ms ease-in-out;
+}
+
 /* Work around for tab closing animation whilst in vertical tabs. Without this
     the clean up code (created by 608589) will not work correctly */
 /* TODO: This causes tabs to stick around for longer and trigger a clean up
     function. This isn't that performant, so we should look into fixing it in
     the future */
 #browser #TabsToolbar .tabbrowser-tab:not([pinned], [fadein]) {
+  min-width: 0.1px;
+  max-width: 0.1px;
   max-width: 0.1px;
   max-height: 0.1px;
 }
