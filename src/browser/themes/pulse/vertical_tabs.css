@@ -71,9 +71,14 @@
 
   /* Stops the tabs from getting squished or stretched */
   min-height: unset;
+  height: var(--tab-min-height);
   max-height: var(--tab-min-height);
 
   transition: min-height 150ms ease-in-out, max-height 150ms ease-in-out;
+}
+
+#browser #TabsToolbar .tab-background {
+  height: calc(var(--tab-min-height) - 2px);
 }
 
 /* Work around for tab closing animation whilst in vertical tabs. Without this
@@ -115,6 +120,17 @@
 
 #browser #new-tab-button {
   display: inherit !important;
+  appearance: inherit !important;
+
+  border-radius: var(--tab-border-radius);
+  margin: 2px;
+  padding: var(--inline-tab-padding);
+
+  height: calc(var(--tab-min-height) - 2px);
+}
+
+#browser #new-tab-button:hover {
+  background: var(--toolbarbutton-hover-background);
 }
 
 #browser #tabbrowser-tabs {
@@ -135,15 +151,4 @@
 
 :root[sizemode='fullscreen'] #browser #TabsToolbar {
   display: none;
-}
-
-#new-tab-button {
-  appearance: inherit !important;
-  border-radius: 5px;
-  margin-left: 5px !important;
-  margin-right: 5px !important;
-}
-
-#new-tab-button:hover {
-  background: var(--toolbarbutton-hover-background);
 }

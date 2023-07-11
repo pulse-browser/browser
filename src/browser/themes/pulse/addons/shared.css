@@ -87,6 +87,11 @@ tab.tabbrowser-tab:nth-child(1) {
   right: var(--tab-rounding-size-neg);
 }
 
+/* This overrides our settings for the proton theme */
+#browser #TabsToolbar .tab-background {
+  height: var(--tab-min-height);
+}
+
 #tabbrowser-arrowscrollbox .tabbrowser-tab {
   /* Specifies the padding to the left and right of the tab */
   padding-inline: var(--tab-padding-inline) !important;
@@ -101,11 +106,6 @@ tab.tabbrowser-tab:nth-child(1) {
   width: auto !important;
   height: auto !important;
   border-radius: var(--toolbarbutton-border-radius) !important;
-}
-
-/* Vertical tab new button stuff */
-#browser #TabsToolbar #new-tab-button {
-  margin: 8px;
 }
 
 #verticaltabs-splitter {
