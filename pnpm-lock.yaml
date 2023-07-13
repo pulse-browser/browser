@@ -1,10 +1,14 @@
 lockfileVersion: 5.4
 
 specifiers:
+  gecko-types: github:quark-platform/gecko-types
   gluon-build: ^1.0.0-rc.5
 
 dependencies:
   gluon-build: 1.0.0-rc.5
+
+devDependencies:
+  gecko-types: github.com/quark-platform/gecko-types/5b753cc14696eb8aa23ab15bc68041a72f394f8f
 
 packages:
 
@@ -821,6 +825,12 @@ packages:
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: false
+
+  github.com/quark-platform/gecko-types/5b753cc14696eb8aa23ab15bc68041a72f394f8f:
+    resolution: {tarball: https://codeload.github.com/quark-platform/gecko-types/tar.gz/5b753cc14696eb8aa23ab15bc68041a72f394f8f}
+    name: gecko-types
+    version: 1.0.0
+    dev: true
 
   github.com/trickypr/is-apple-silicon/5f75501a1d7566ba9f94174b6825d7bd9d302b6a:
     resolution: {tarball: https://codeload.github.com/trickypr/is-apple-silicon/tar.gz/5f75501a1d7566ba9f94174b6825d7bd9d302b6a}

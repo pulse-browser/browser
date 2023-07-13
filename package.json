@@ -26,5 +26,8 @@
     "licenseCheck": "gluon license-check",
     "gluon": "gluon",
     "reset": "gluon reset"
+  },
+  "devDependencies": {
+    "gecko-types": "github:quark-platform/gecko-types"
   }
 }
