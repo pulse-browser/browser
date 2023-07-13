@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/tabbrowser-tabs.js b/browser/base/content/tabbrowser-tabs.js
-index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..6426d849d2afa12e123f8a1811aeb16515448158 100644
+index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..a5cbea88e9baa22c42c35c80a1f622db8bd52b43 100644
 --- a/browser/base/content/tabbrowser-tabs.js
 +++ b/browser/base/content/tabbrowser-tabs.js
 @@ -168,7 +168,14 @@
@@ -155,7 +155,21 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..6426d849d2afa12e123f8a1811aeb165
            for (let tab of movingTabs) {
              tab.setAttribute("tabdrop-samewindow", "true");
              tab.style.transform = "translateX(" + newTranslateX + "px)";
-@@ -1485,19 +1533,33 @@
+@@ -1414,7 +1462,13 @@
+     _positionPinnedTabs() {
+       let tabs = this._getVisibleTabs();
+       let numPinned = gBrowser._numPinnedTabs;
++      // Do not try and position vertical pinned tabs
++      const verticalTabs = Services.prefs.getBoolPref(
++        "pulse.tabs.vertical",
++        false
++      );
+       let doPosition =
++        !verticalTabs &&
+         this.getAttribute("overflow") == "true" &&
+         tabs.length > numPinned &&
+         numPinned > 0;
+@@ -1485,19 +1539,33 @@
          }
        }
  
@@ -195,7 +209,7 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..6426d849d2afa12e123f8a1811aeb165
  
        let pinned = draggedTab.pinned;
        let numPinned = gBrowser._numPinnedTabs;
-@@ -1506,36 +1568,40 @@
+@@ -1506,36 +1574,40 @@
          pinned ? numPinned : undefined
        );
  
@@ -247,7 +261,7 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..6426d849d2afa12e123f8a1811aeb165
        }
  
        draggedTab._dragData.translateX = translateX;
-@@ -1568,11 +1634,11 @@
+@@ -1568,11 +1640,11 @@
          if (tabs[mid] == draggedTab && ++mid > high) {
            break;
          }
@@ -261,7 +275,7 @@ index 06c2479886f0e3a7c5ba6d8d939a2c1f0f19442d..6426d849d2afa12e123f8a1811aeb165
            tabCenter
          ) {
            low = mid + 1;
-@@ -1595,16 +1661,16 @@
+@@ -1595,16 +1667,16 @@
        for (let tab of tabs) {
          if (tab != draggedTab) {
            let shift = getTabShift(tab, newIndex);

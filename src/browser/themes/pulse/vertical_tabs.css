@@ -139,9 +139,11 @@
   padding-inline-start: 0;
 }
 
-#browser #TabsToolbar[collapse='true'] .tabbrowser-tab {
-  /* Animate tabs out vertically */
-  transition: min-height 100ms ease-out, max-height 100ms ease-out;
+#browser
+  #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  > #tabbrowser-arrowscrollbox
+  > .tabbrowser-tab[first-visible-unpinned-tab] {
+  margin-inline-start: 0px !important;
 }
 
 #verticaltabs-splitter {
