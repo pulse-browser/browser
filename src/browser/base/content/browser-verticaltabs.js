@@ -8,6 +8,9 @@ const VERTICAL_TABS_POSITION = 'pulse.tabs.vertical'
 const VERTICAL_TABS_COLLAPSE = 'pulse.tabs.vertical.collapse'
 const VERTICAL_TABS_WIDTH = 'pulse.tabs.vertical.width'
 
+const SHOW_CLOSE_BUTTON = 'pulse.tabs.show.close'
+const SHOW_NEW_TAB = 'pulse.tabs.show.new'
+
 /**
  * @param {HTMLElement} toInsertAfter This is the element that I want to insert content after
  * @param {HTMLElement} toInsert The element to insert
@@ -54,6 +57,14 @@ var VerticalTabs = {
    */
   get verticalTabsEnabled() {
     return Services.prefs.getBoolPref(VERTICAL_TABS_POSITION, false)
+  },
+
+  get showCloseButton() {
+    return Services.prefs.getBoolPref(SHOW_CLOSE_BUTTON, true)
+  },
+
+  get showNewTab() {
+    return Services.prefs.getBoolPref(SHOW_NEW_TAB, true)
   },
 
   /**
@@ -109,6 +120,17 @@ var VerticalTabs = {
     this.tabBrowserTabs = document.getElementById('tabbrowser-tabs')
 
     Services.prefs.addObserver(VERTICAL_TABS_POSITION, this)
+    Services.prefs.addObserver(SHOW_CLOSE_BUTTON, this)
+    Services.prefs.addObserver(SHOW_NEW_TAB, this)
+
+    document.documentElement.setAttribute(
+      'show-tab-close',
+      this.showCloseButton ? 'true' : 'false'
+    )
+    document.documentElement.setAttribute(
+      'show-tab-new',
+      this.showNewTab ? 'true' : 'false'
+    )
 
     if (this.verticalTabsEnabled) {
       this.enableVerticalTabs()
@@ -239,6 +261,17 @@ var VerticalTabs = {
               'collapse',
               this.browserCollapseTabs ? 'true' : 'false'
             )
+        }
+
+        if (data === SHOW_CLOSE_BUTTON || data === SHOW_NEW_TAB) {
+          document.documentElement.setAttribute(
+            'show-tab-close',
+            this.showCloseButton ? 'true' : 'false'
+          )
+          document.documentElement.setAttribute(
+            'show-tab-new',
+            this.showNewTab ? 'true' : 'false'
+          )
         }
 
         break

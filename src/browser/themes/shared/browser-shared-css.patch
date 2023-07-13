@@ -1,12 +1,13 @@
 diff --git a/browser/themes/shared/browser-shared.css b/browser/themes/shared/browser-shared.css
-index b3f83092c310fe2378f79d5a07726ad8c215e2a3..d54dba549d4d3808671e03cc7747248186b1abdf 100644
+index 983aae77e5f4da3bbb37625ab597ad536d609ec0..9adbff1d6968012357a49b7edae69daf5738f3e4 100644
 --- a/browser/themes/shared/browser-shared.css
 +++ b/browser/themes/shared/browser-shared.css
-@@ -23,6 +23,9 @@
+@@ -23,6 +23,10 @@
  @import url("chrome://browser/skin/customizableui/customizeMode.css");
  @import url("chrome://browser/skin/UITour.css");
  
 +@import url("chrome://browser/skin/pulse/sidebar_tabs.css");
++@import url("chrome://browser/skin/pulse/tab_tweaks.css");
 +@import url("chrome://browser/skin/pulse/vertical_tabs.css");
 +
  @namespace html url("http://www.w3.org/1999/xhtml");

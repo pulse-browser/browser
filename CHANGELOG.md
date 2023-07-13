@@ -7,14 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.0-a.77
 
+### Added
+
+- Vertical tabs: Open new tab w/ clipboard contents on space middle click
+- The new tab & close tab buttons can now be hidden
+
 ### Changed
 
 - Vertical tabs: New tab button no longer has text
 - Partial `:has` support is enabled (this is intended for userchrome use only)
-
-### Feature
-
-- Vertical tabs: Open new tab w/ clipboard contents on space middle click
 
 ### Fixed
 

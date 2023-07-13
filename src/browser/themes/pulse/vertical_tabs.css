@@ -56,8 +56,8 @@
 }
 
 /** On collapse hover of tabs or splitter, the max width should increase again */
-#browser #TabsToolbar[collapse='true']:hover,
-#TabsToolbar[collapse='true']:has(+ #verticaltabs-splitter:hover) {
+#browser #TabsToolbar[collapse='true']:hover
+/* #TabsToolbar[collapse='true']:has(+ #verticaltabs-splitter:hover)  */ {
   max-width: var(--vertical-tabs-max-width);
 }
 

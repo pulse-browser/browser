@@ -1,8 +1,8 @@
 diff --git a/browser/components/preferences/main.js b/browser/components/preferences/main.js
-index 1ce4ba85a0df22b4176443c9003669577b6a230c..7447e19c3ddf2d40fe87ffcd945fdb5c00bd3e97 100644
+index 3f5db88709610537280ab4fae1d64364adf4d8bc..43cbc29e5b0d831a9a35a81ee5748098819fe97e 100644
 --- a/browser/components/preferences/main.js
 +++ b/browser/components/preferences/main.js
-@@ -161,6 +161,13 @@ Preferences.addAll([
+@@ -162,6 +162,15 @@ Preferences.addAll([
  
    // Media
    { id: "media.hardwaremediakeys.enabled", type: "bool" },
@@ -13,6 +13,8 @@ index 1ce4ba85a0df22b4176443c9003669577b6a230c..7447e19c3ddf2d40fe87ffcd945fdb5c
 +
 +  { id: "pulse.tabs.vertical", type: "bool" },
 +  { id: "pulse.tabs.vertical.collapse", type: "bool" },
++  { id: "pulse.tabs.show.new", type: "bool" },
++  { id: "pulse.tabs.show.close", type: "bool" },
  ]);
  
  if (AppConstants.HAVE_SHELL_SERVICE) {

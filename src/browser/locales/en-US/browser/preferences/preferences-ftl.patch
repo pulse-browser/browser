@@ -1,8 +1,8 @@
 diff --git a/browser/locales/en-US/browser/preferences/preferences.ftl b/browser/locales/en-US/browser/preferences/preferences.ftl
-index f24485700321defc69cd57099ede164701b9b3ec..8061f090bf6d2fb29c4824d5d1a812688abfafb4 100644
+index 829c18c5e16379fede509970fe056a52a16acf56..62c1716ff105c78ee1ec78dba3f7f2e8d4ae95f4 100644
 --- a/browser/locales/en-US/browser/preferences/preferences.ftl
 +++ b/browser/locales/en-US/browser/preferences/preferences.ftl
-@@ -1432,3 +1432,18 @@ httpsonly-radio-disabled =
+@@ -1551,3 +1551,21 @@ preferences-doh-manage-exceptions =
  desktop-folder-name = Desktop
  downloads-folder-name = Downloads
  choose-download-folder-title = Choose Download Folder:
@@ -20,4 +20,7 @@ index f24485700321defc69cd57099ede164701b9b3ec..8061f090bf6d2fb29c4824d5d1a81268
 +preferences-vertical-tabs-collapse =
 +    .label = Collapse tabs
 +
-+
++preferences-show-new-tab =
++    .label = Show the new tab button
++preferences-show-close-tab =
++    .label = Show the close tab button

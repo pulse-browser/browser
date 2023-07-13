@@ -1,8 +1,8 @@
 diff --git a/browser/components/preferences/main.inc.xhtml b/browser/components/preferences/main.inc.xhtml
-index a9a1511a8da36140be93264effe683e5d5007f11..839ba020d4b2b4e5672f357377840bb2dd9362e9 100644
+index 8f87b2f5d9b22d2607534d608749c3924199d3d0..2fb92229fafb937dec2dcdad1606b17390834ed7 100644
 --- a/browser/components/preferences/main.inc.xhtml
 +++ b/browser/components/preferences/main.inc.xhtml
-@@ -61,6 +61,14 @@
+@@ -72,6 +72,19 @@
            hidden="true">
      <label><html:h2 data-l10n-id="tabs-group-header"/></label>
  
@@ -14,10 +14,15 @@ index a9a1511a8da36140be93264effe683e5d5007f11..839ba020d4b2b4e5672f357377840bb2
 +                data-l10n-id="preferences-vertical-tabs-collapse" />
 +    </vbox>
 +
++    <checkbox id="showNewTab" preference="pulse.tabs.show.new"
++              data-l10n-id="preferences-show-new-tab" />
++    <checkbox id="showCloseTab" preference="pulse.tabs.show.close"
++              data-l10n-id="preferences-show-close-tab" />
++
      <checkbox id="ctrlTabRecentlyUsedOrder" data-l10n-id="ctrl-tab-recently-used-order"
                preference="browser.ctrlTab.sortByRecentlyUsed"/>
  
-@@ -122,6 +130,22 @@
+@@ -137,6 +150,22 @@
    <html:h1 data-l10n-id="language-and-appearance-header"/>
  </hbox>
  

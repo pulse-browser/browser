@@ -1,0 +1,8 @@
+html[show-tab-close='false'] .tab-close-button {
+  display: none !important;
+}
+
+html[show-tab-new='false'] #new-tab-button,
+html[show-tab-new='false'] #browser #new-tab-button {
+  display: none !important;
+}
