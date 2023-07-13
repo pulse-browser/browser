@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Pinned vertical tabs are no longer positioned. Sorta defeats their purpose, but it stops a semi-major bug
+- Sidebar sites now appear on new windows
 
 ## 1.0.0-a.75
 
