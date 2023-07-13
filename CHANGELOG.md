@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Vertical tabs: New tab button no longer has text
+- Partial `:has` support is enabled (this is intended for userchrome use only)
 
 ### Feature
 

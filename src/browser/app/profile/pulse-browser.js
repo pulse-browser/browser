@@ -99,3 +99,7 @@ pref("extensions.pocket.enabled", false);
 //  1: force disable
 // -1: force enable
 pref('accessibility.force_disabled', 0);
+
+// This feature isn't stable / performant, but I am going to enable it anyway
+// specifically to get vertical tab styling to work with minimal jank
+pref('layout.css.has-selector.enabled', true);

@@ -37,6 +37,16 @@
   transition: min-width 150ms ease-in-out, max-width 150ms ease-in-out;
 }
 
+#browser #TabsToolbar:-moz-lwtheme {
+  background-image: var(--lwt-additional-images);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+}
+
+/* Collapse styles */
 #browser #TabsToolbar:not([collapse='true']) {
   min-width: 76px;
 }
@@ -47,17 +57,8 @@
 
 /** On collapse hover of tabs or splitter, the max width should increase again */
 #browser #TabsToolbar[collapse='true']:hover,
-#verticaltabs-splitter:hover ~ #TabsToolbar[collapse='true'] {
+#TabsToolbar[collapse='true']:has(+ #verticaltabs-splitter:hover) {
   max-width: var(--vertical-tabs-max-width);
-}
-
-#browser #TabsToolbar:-moz-lwtheme {
-  background-image: var(--lwt-additional-images);
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-position: center;
-  background-size: cover;
-
-  background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
 /* ========================================================================== */
