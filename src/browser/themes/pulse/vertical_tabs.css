@@ -10,6 +10,9 @@
   );
 }
 
+/* ========================================================================== */
+/* Toolbar styles */
+
 #browser #TabsToolbar .toolbar-items {
   height: 100%;
 }
@@ -57,13 +60,8 @@
   background-color: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
 }
 
-/* Put the new tab button on the bottom */
-#browser #TabsToolbar #TabsToolbar-customization-target {
-  flex-direction: column;
-  height: 100%;
-  /* Not sure why, but this forces the scroll box to scroll */
-  max-height: 100%;
-}
+/* ========================================================================== */
+/* Tab styles */
 
 #browser #TabsToolbar .tabbrowser-tab {
   max-width: unset;
@@ -118,15 +116,35 @@
   display: none;
 }
 
+/* ========================================================================== */
+/* New tab icon styles */
+
+/* Put the new tab button on the bottom */
+#browser #TabsToolbar #TabsToolbar-customization-target {
+  flex-direction: column;
+  height: 100%;
+  /* Not sure why, but this forces the scroll box to scroll */
+  max-height: 100%;
+}
+
 #browser #new-tab-button {
   display: inherit !important;
   appearance: inherit !important;
 
   border-radius: var(--tab-border-radius);
   margin: 2px;
-  padding: var(--inline-tab-padding);
+  /* Note that we don't want left & right padding to ensure centering */
+  padding: var(--inline-tab-padding) 0;
 
   height: calc(var(--tab-min-height) - 2px);
+}
+
+/* Disable text & styling for new tab button */
+#browser #new-tab-button image {
+  margin-left: 0;
+}
+#browser #new-tab-button label {
+  display: none;
 }
 
 #browser #new-tab-button:hover {
