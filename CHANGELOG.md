@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.0-a.77
 
+### Feature
+
+- Vertical tabs: Open new tab w/ clipboard contents on space middle click
+
 ### Fixed
 
 - Pinned vertical tabs are no longer positioned. Sorta defeats their purpose, but it stops a semi-major bug

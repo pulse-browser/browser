@@ -114,6 +114,12 @@ var VerticalTabs = {
       this.enableVerticalTabs()
     }
 
+    // Cause middle click to open a new tab
+    this.arrowScrollbox?.addEventListener('click', (event) => {
+      if (event.button != 1 || event.target != this.arrowScrollbox) return
+      gBrowser.handleNewTabMiddleClick(this.arrowScrollbox, event)
+    })
+
     this._initialized = true
   },
 
