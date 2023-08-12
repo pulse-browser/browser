@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-box.inc.xhtml b/browser/base/content/browser-box.inc.xhtml
-index ae5b1979921a9390ee899d72b04bc4ff293b39d8..7a18f16b76a5a7fa9566e1f02fbae9d80e1212b5 100644
+index d445abe7e743b2ec5d46d42f8f149c000e3c7997..552bc997c4ca1955fdd09232a360d9f9e91ce682 100644
 --- a/browser/base/content/browser-box.inc.xhtml
 +++ b/browser/base/content/browser-box.inc.xhtml
 @@ -3,9 +3,13 @@
@@ -12,8 +12,8 @@ index ae5b1979921a9390ee899d72b04bc4ff293b39d8..7a18f16b76a5a7fa9566e1f02fbae9d8
 +  </div>
    <vbox id="sidebar-box" hidden="true" class="chromeclass-extrachrome">
      <box id="sidebar-header" align="center">
--      <toolbarbutton id="sidebar-switcher-target" class="tabbable">
-+      <toolbarbutton id="sidebar-switcher-target" flex="1" class="tabbable">
+-      <toolbarbutton id="sidebar-switcher-target" class="tabbable" aria-expanded="false">
++      <toolbarbutton id="sidebar-switcher-target" class="tabbable" aria-expanded="false" flex="1">
          <image id="sidebar-icon" consumeanchor="sidebar-switcher-target"/>
          <label id="sidebar-title" crop="end" control="sidebar"/>
          <image id="sidebar-switcher-arrow"/>

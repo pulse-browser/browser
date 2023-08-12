@@ -1,10 +1,10 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 56c8022ec4bbeda70e09c3b8780afcbf21ba0579..4d637ea6263799f9574ac23f0c8900949540dfec 100644
+index a7d255df89a42876d50f6e0648f7a397a9740141..d31c25f9d212efbb8a2107783206dd5c57eeb8cc 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -2837,3 +2837,5 @@ pref("cookiebanners.ui.desktop.cfrVariant", 0);
- #ifdef MOZ_ARTIFACT_BUILDS
-   pref("telemetry.fog.artifact_build", true);
+@@ -2836,3 +2836,5 @@ pref("cookiebanners.ui.desktop.cfrVariant", 0);
+ #ifdef NIGHTLY_BUILD
+   pref("dom.security.credentialmanagement.identity.enabled", true);
  #endif
 +
 +#include pulse-browser.js

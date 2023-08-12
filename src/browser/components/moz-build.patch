@@ -1,5 +1,5 @@
 diff --git a/browser/components/moz.build b/browser/components/moz.build
-index 3b2126e66efa27d4b941ceb93b46a04aa3cdef30..bbc1b8b248f32bf17764813402abf224b4bc38c1 100644
+index 94b328a9b049e0ae4cfafe2887c2b31d6d0dfefa..f60cab84bf16fdc3e6295ee0ad5e14a09b756355 100644
 --- a/browser/components/moz.build
 +++ b/browser/components/moz.build
 @@ -63,6 +63,9 @@ DIRS += [
@@ -11,4 +11,4 @@ index 3b2126e66efa27d4b941ceb93b46a04aa3cdef30..bbc1b8b248f32bf17764813402abf224
 +
  DIRS += ["build"]
  
- 
+ if CONFIG["NIGHTLY_BUILD"]:

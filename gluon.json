@@ -5,7 +5,7 @@
   "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
-    "version": "115.0.1"
+    "version": "116.0.2"
   },
   "buildOptions": {
     "generateBranding": true
@@ -15,7 +15,7 @@
       "platform": "github",
       "id": "uBlock0@raymondhill.net",
       "repo": "gorhill/uBlock",
-      "version": "1.50.0",
+      "version": "1.51.0",
       "fileGlob": "uBlock0_*.firefox(.signed)?.xpi"
     },
     "tabliss": {
@@ -93,9 +93,7 @@
     }
   },
   "license": {
-    "ignoredFiles": [
-      ".*\\.json"
-    ],
+    "ignoredFiles": [".*\\.json"],
     "licenseType": "MPL-2.0"
   },
   "updateHostname": "updates.pulsebrowser.app"

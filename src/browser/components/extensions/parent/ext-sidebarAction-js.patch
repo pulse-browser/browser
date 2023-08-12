@@ -1,34 +1,18 @@
 diff --git a/browser/components/extensions/parent/ext-sidebarAction.js b/browser/components/extensions/parent/ext-sidebarAction.js
-index 6adb116e4a3b7113f4b133a36bb575dfdcf2ca2e..d5d8956a4de92e28584941ea00be98ae0d020035 100644
+index a798801ebfaabaf96bf194fc2f2c6c31f852f149..9231c3b1cf92da5bc7feec1e73aa2b80c35c819e 100644
 --- a/browser/components/extensions/parent/ext-sidebarAction.js
 +++ b/browser/components/extensions/parent/ext-sidebarAction.js
-@@ -14,6 +14,7 @@ var { ExtensionError } = ExtensionUtils;
- 
- var { IconDetails } = ExtensionParent;
- 
-+
- // WeakMap[Extension -> SidebarAction]
- let sidebarActionMap = new WeakMap();
- 
-@@ -95,6 +96,7 @@ this.sidebarAction = class extends ExtensionAPI {
- 
-     this.tabContext.shutdown();
- 
-+
-     // Don't remove everything on app shutdown so session restore can handle
-     // restoring open sidebars.
-     if (isAppShutdown) {
-@@ -116,6 +118,9 @@ this.sidebarAction = class extends ExtensionAPI {
-       }
+@@ -109,7 +109,8 @@ this.sidebarAction = class extends ExtensionAPI {
+       document.getElementById(this.menuId)?.remove();
+       document.getElementById(this.switcherMenuId)?.remove();
        let header = document.getElementById("sidebar-switcher-target");
-       header.removeEventListener("SidebarShown", this.updateHeader);
-+
+-      header.removeEventListener("SidebarShown", this.updateHeader);
 +      // Delete sidebar item
-+      SidebarUI.deleteSidebarItem(this.id);
++      SidebarUI.deleteSidebarItem(this.id);  header.removeEventListener("SidebarShown", this.updateHeader);
        SidebarUI.sidebars.delete(this.id);
      }
      windowTracker.removeOpenListener(this.windowOpenListener);
-@@ -129,6 +134,8 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -123,6 +124,8 @@ this.sidebarAction = class extends ExtensionAPI {
        if (SidebarUI.lastOpenedId === sidebarId) {
          SidebarUI.lastOpenedId = null;
        }
@@ -37,7 +21,7 @@ index 6adb116e4a3b7113f4b133a36bb575dfdcf2ca2e..d5d8956a4de92e28584941ea00be98ae
      }
    }
  
-@@ -157,21 +164,30 @@ this.sidebarAction = class extends ExtensionAPI {
+@@ -151,11 +154,16 @@ this.sidebarAction = class extends ExtensionAPI {
      }
      let { document, SidebarUI } = window;
      let keyId = `ext-key-id-${this.id}`;
@@ -51,20 +35,15 @@ index 6adb116e4a3b7113f4b133a36bb575dfdcf2ca2e..d5d8956a4de92e28584941ea00be98ae
        url: sidebarURL,
        menuId: this.menuId,
 +      iconurl: getIcon(16),
-       buttonId: this.buttonId,
+       switcherMenuId: this.switcherMenuId,
        // The following properties are specific to extensions
        extensionId: this.extension.id,
-       panel: details.panel,
+@@ -163,6 +171,8 @@ this.sidebarAction = class extends ExtensionAPI {
        browserStyle: this.browserStyle,
      });
-+    
-+    SidebarUI.createSidebarItem(this.id, SidebarUI.sidebars.get(this.id));
  
++    SidebarUI.createSidebarItem(this.id, SidebarUI.sidebars.get(this.id));
++
      let header = document.getElementById("sidebar-switcher-target");
      header.addEventListener("SidebarShown", this.updateHeader);
  
-+
-+
-     // Insert a menuitem for View->Show Sidebars.
-     let menuitem = document.createXULElement("menuitem");
-     menuitem.setAttribute("id", this.menuId);
