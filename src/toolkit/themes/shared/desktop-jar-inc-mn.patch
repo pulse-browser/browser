@@ -1,12 +1,13 @@
 diff --git a/toolkit/themes/shared/desktop-jar.inc.mn b/toolkit/themes/shared/desktop-jar.inc.mn
-index 8658ca96084856eeeb58640de81d4e543f57c6d8..9977930b6ee0479796fd27fdec3ee12075bbc06a 100644
+index e695d2206a84d6ceb7d61ffa6adb1599872fba3f..45ea891e99bc692d73928e3f06b0ad0d5a0049d9 100644
 --- a/toolkit/themes/shared/desktop-jar.inc.mn
 +++ b/toolkit/themes/shared/desktop-jar.inc.mn
-@@ -131,4 +131,7 @@
+@@ -146,3 +146,7 @@
    skin/classic/global/reader/RM-Content-Width-Plus-44x16.svg           (../../shared/reader/RM-Content-Width-Plus-44x16.svg)
    skin/classic/global/reader/RM-Line-Height-Minus-38x14.svg            (../../shared/reader/RM-Line-Height-Minus-38x14.svg)
    skin/classic/global/reader/RM-Line-Height-Plus-38x24.svg             (../../shared/reader/RM-Line-Height-Plus-38x24.svg)
 +  skin/classic/global/icons/bookmark-outline.svg             (../../shared/icons/bookmark-outline.svg)
 +  skin/classic/global/icons/tab-rising-edge.svg             (../../shared/icons/tab-rising-edge.svg)
 +  skin/classic/global/icons/tab-falling-edge.svg             (../../shared/icons/tab-falling-edge.svg)  
- 
++ 
+\ No newline at end of file
