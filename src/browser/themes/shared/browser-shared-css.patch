@@ -1,5 +1,5 @@
 diff --git a/browser/themes/shared/browser-shared.css b/browser/themes/shared/browser-shared.css
-index 983aae77e5f4da3bbb37625ab597ad536d609ec0..9adbff1d6968012357a49b7edae69daf5738f3e4 100644
+index 7be173de584171d037339ad2d276b2ccb18d74db..9923e6a0bfb320d262a8a5450192151e72f1cd1f 100644
 --- a/browser/themes/shared/browser-shared.css
 +++ b/browser/themes/shared/browser-shared.css
 @@ -23,6 +23,10 @@
@@ -13,3 +13,14 @@ index 983aae77e5f4da3bbb37625ab597ad536d609ec0..9adbff1d6968012357a49b7edae69daf
  @namespace html url("http://www.w3.org/1999/xhtml");
  
  :root {
+@@ -234,7 +238,9 @@ toolbar[brighttext] :is(a, .text-link):-moz-lwtheme,
+ }
+ 
+ :root[BookmarksToolbarOverlapsBrowser] .newTabBrowserPanel,
+-:root[BookmarksToolbarOverlapsBrowser] #sidebar-box {
++:root[BookmarksToolbarOverlapsBrowser] #sidebar-box,
++:root[BookmarksToolbarOverlapsBrowser] #browser #TabsToolbar,
++:root[BookmarksToolbarOverlapsBrowser] #sidebar-container {
+   /* Make room for the bookmarks toolbar so that it won't visibly overlap the
+      new tab page and sidebar contents. We do not put this padding on #browser
+      as that would resize the content area for all tabs including background
