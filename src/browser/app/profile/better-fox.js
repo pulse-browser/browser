@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 116                                                             *
+ * version: 116.1                                                           *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -45,48 +45,51 @@
 pref('nglayout.initialpaint.delay', 0);
 pref('nglayout.initialpaint.delay_in_oopif', 0);
 pref('content.notify.interval', 100000);
-pref('browser.startup.preXulSkeletonUI', false);
+pref('browser.startup.preXulSkeletonUI', false); // WINDOWS
 
 /** EXPERIMENTAL ***/
 pref('layout.css.grid-template-masonry-value.enabled', true);
 pref('dom.enable_web_task_scheduling', true);
 pref('layout.css.has-selector.enabled', true);
-pref('layout.css.scroll-driven-animations.enabled', true);
 
 /** GFX ***/
-pref('gfx.webrender.all', true);
-pref('layers.gpu-process.enabled', true);
-//pref("gfx.canvas.accelerated", true); // enable if not using an integrated GPU on WINDOWS
-pref('gfx.canvas.accelerated.cache-items', 32768);
-pref('gfx.canvas.accelerated.cache-size', 4096);
-pref('gfx.content.skia-font-cache-size', 80);
+//pref("gfx.canvas.accelerated", true); // enable if using a dedicated GPU on WINDOWS
+pref('gfx.canvas.accelerated.cache-items', 4096);
+pref('gfx.canvas.accelerated.cache-size', 512);
+pref('gfx.content.skia-font-cache-size', 20);
 
 /** BROWSER CACHE ***/
 pref('browser.cache.disk.enable', false);
-pref('browser.cache.memory.capacity', 1048576);
-pref('browser.cache.memory.max_entry_size', 65536);
 
 /** MEDIA CACHE ***/
+pref('media.memory_cache_max_size', 65536);
 pref('media.cache_readahead_limit', 7200);
 pref('media.cache_resume_threshold', 3600);
-pref('media.memory_cache_max_size', 131072);
-pref('media.memory_caches_combined_limit_kb', 524288); // DEFAULT
 
-/** IMAGE CACHE  ***/
-pref('image.cache.size', 10485760);
-pref('image.mem.decode_bytes_at_a_time', 65536);
-pref('image.mem.shared.unmap.min_expiration_ms', 120000);
+/** IMAGE CACHE ***/
+pref('image.mem.decode_bytes_at_a_time', 32768);
 
 /** NETWORK ***/
 pref('network.buffer.cache.size', 262144);
 pref('network.buffer.cache.count', 128);
 pref('network.http.max-connections', 1800);
 pref('network.http.max-persistent-connections-per-server', 10);
-pref('network.http.pacing.requests.min-parallelism', 18);
+pref('network.http.max-urgent-start-excessive-connections-per-host', 5);
+pref('network.websocket.max-connections', 400);
+pref('network.http.pacing.requests.enabled', false);
 pref('network.dnsCacheEntries', 10000);
 pref('network.dnsCacheExpiration', 86400);
-pref('network.dnsCacheExpirationGracePeriod', 240);
-pref('network.ssl_tokens_cache_capacity', 32768);
+pref('network.dns.max_high_priority_threads', 8);
+pref('network.ssl_tokens_cache_capacity', 20480);
+
+/** SPECULATIVE CONNECTIONS ***/
+pref('network.http.speculative-parallel-limit', 0);
+pref('network.dns.disablePrefetch', true);
+pref('browser.urlbar.speculativeConnect.enabled', false);
+pref('browser.places.speculativeConnect.enabled', false);
+pref('network.prefetch-next', false);
+pref('network.predictor.enabled', false);
+pref('network.predictor.enable-prefetch', false);
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
@@ -100,10 +103,6 @@ pref(
 pref(
   'urlclassifier.features.socialtracking.skipURLs',
   '*.instagram.com, *.twitter.com, *.twimg.com'
-);
-pref(
-  'privacy.query_stripping.strip_list',
-  '__hsfp __hssc __hstc __s _hsenc _openstat dclid fbclid gbraid gclid hsCtaTracking igshid mc_eid ml_subscriber ml_subscriber_hash msclkid oft_c oft_ck oft_d oft_id oft_ids oft_k oft_lk oft_sk oly_anon_id oly_enc_id rb_clickid s_cid twclid vero_conv vero_id wbraid wickedid yclid'
 );
 pref('browser.uitour.enabled', false);
 pref('privacy.globalprivacycontrol.enabled', true);
@@ -123,19 +122,9 @@ pref('security.tls.enable_0rtt_data', false);
 /** DISK AVOIDANCE ***/
 pref('browser.privatebrowsing.forceMediaMemoryCache', true);
 pref('browser.sessionstore.interval', 60000);
-pref('browser.sessionstore.privacy_level', 2);
 
 /** SHUTDOWN & SANITIZING ***/
 pref('privacy.history.custom', true);
-
-/** SPECULATIVE CONNECTIONS ***/
-pref('network.http.speculative-parallel-limit', 0);
-pref('network.dns.disablePrefetch', true);
-pref('browser.urlbar.speculativeConnect.enabled', false);
-pref('browser.places.speculativeConnect.enabled', false);
-pref('network.prefetch-next', false);
-pref('network.predictor.enabled', false);
-pref('network.predictor.enable-prefetch', false);
 
 /** SEARCH / URL BAR ***/
 pref('browser.search.separatePrivateDefault.ui.enabled', true);
@@ -143,32 +132,25 @@ pref('browser.urlbar.update2.engineAliasRefresh', true);
 pref('browser.search.suggest.enabled', false);
 pref('browser.urlbar.suggest.quicksuggest.sponsored', false);
 pref('browser.urlbar.suggest.quicksuggest.nonsponsored', false);
+pref('browser.formfill.enable', false);
 pref('security.insecure_connection_text.enabled', true);
 pref('security.insecure_connection_text.pbmode.enabled', true);
 pref('network.IDN_show_punycode', true);
 
-/** HTTPS-FIRST MODE ***/
+/** HTTPS-FIRST POLICY ***/
 pref('dom.security.https_first', true);
 
-/** PROXY / SOCKS / IPv6 ***/
-pref('network.proxy.socks_remote_dns', true);
-pref('network.file.disable_unc_paths', true);
-pref('network.gio.supported-protocols', '');
-
 /** PASSWORDS AND AUTOFILL ***/
-pref('signon.formlessCapture.enabled', false);
-pref('signon.privateBrowsingCapture.enabled', false);
-pref('signon.autofillForms', false);
 pref('signon.rememberSignons', false);
 pref('editor.truncate_user_pastes', false);
 
 /** ADDRESS + CREDIT CARD MANAGER ***/
 pref('extensions.formautofill.addresses.enabled', false);
 pref('extensions.formautofill.creditCards.enabled', false);
-pref('browser.formfill.enable', false);
 
 /** MIXED CONTENT + CROSS-SITE ***/
 pref('network.auth.subresource-http-auth-allow', 1);
+pref('security.mixed_content.block_display_content', true);
 pref('pdfjs.enableScripting', false);
 pref('extensions.postDownloadThirdPartyPrompt', false);
 pref('permissions.delegation.enabled', false);
@@ -196,10 +178,6 @@ pref(
   'geo.provider.network.url',
   'https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%'
 );
-pref('geo.provider.ms-windows-location', false); // WINDOWS
-pref('geo.provider.use_corelocation', false); // MAC
-pref('geo.provider.use_gpsd', false); // LINUX
-pref('geo.provider.use_geoclue', false); // LINUX
 pref('permissions.manager.defaultsUrl', '');
 pref('webchannel.allowObject.urlWhitelist', '');
 
@@ -250,11 +228,15 @@ pref(
 );
 pref('browser.preferences.moreFromMozilla', false);
 pref('browser.tabs.tabmanager.enabled', false);
+pref('browser.aboutConfig.showWarning', false);
 pref('browser.aboutwelcome.enabled', false);
-pref('findbar.highlightAll', true);
-pref('middlemouse.contentLoadURL', false);
+pref('browser.display.focus_ring_on_anything', true);
+pref('browser.display.focus_ring_style', 0);
+pref('browser.display.focus_ring_width', 0);
 pref('browser.privateWindowSeparation.enabled', false); // WINDOWS
 pref('browser.privatebrowsing.enable-new-indicator', false);
+pref('cookiebanners.service.mode', 2);
+pref('cookiebanners.service.mode.privateBrowsing', 2);
 pref('browser.translations.enable', true);
 
 /** FULLSCREEN ***/
@@ -278,23 +260,24 @@ pref('extensions.pocket.enabled', false);
 
 /** DOWNLOADS ***/
 pref('browser.download.useDownloadDir', false);
+pref('browser.download.always_ask_before_handling_new_types', true);
 pref('browser.download.alwaysOpenPanel', false);
 pref('browser.download.manager.addToRecentDocs', false);
-pref('browser.download.always_ask_before_handling_new_types', true);
 
 /** PDF ***/
 pref('browser.download.open_pdf_attachments_inline', true);
+pref('pdfjs.sidebarViewOnLoad', 2);
 
 /** TAB BEHAVIOR ***/
 pref('browser.tabs.loadBookmarksInTabs', true);
 pref('browser.bookmarks.openInTabClosesMenu', false);
-pref('cookiebanners.service.mode', 2);
-pref('cookiebanners.service.mode.privateBrowsing', 2);
+pref('browser.menu.showViewImageInfo', true);
+pref('findbar.highlightAll', true);
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
  ****************************************************************************/
-// visit https://github.com/yokoffing/Betterfox/blob/master/Smoothfox.js
+// visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
 // Enter your scrolling prefs below this line:
 
 /****************************************************************************

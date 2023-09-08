@@ -6,6 +6,7 @@
 
 // Betterfox has a lower priority than the prefs included in this file
 #include better-fox.js
+#include smooth-fox.js
 
 // Prefs from browser/branding/unofficial/prefs/firefox-branding.js:
 
