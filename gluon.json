@@ -5,7 +5,7 @@
   "binaryName": "pulse-browser",
   "version": {
     "product": "firefox",
-    "version": "117.0"
+    "version": "117.0.1"
   },
   "buildOptions": {
     "generateBranding": true
