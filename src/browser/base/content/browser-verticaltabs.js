@@ -22,7 +22,7 @@ function insertAfter(toInsertAfter, toInsert) {
 
   if (!parent) {
     throw new Error(
-      'The element you want me to base insertions on has no parent'
+      'The element you want me to base insertions on has no parent',
     )
   }
 
@@ -111,6 +111,9 @@ var VerticalTabs = {
   /** @type {MutationObserver?} */
   _widthObserver: null,
 
+  /** @type {boolean} */
+  isFullScreen: false,
+
   init() {
     if (this._initialized) {
       return
@@ -125,11 +128,11 @@ var VerticalTabs = {
 
     document.documentElement.setAttribute(
       'show-tab-close',
-      this.showCloseButton ? 'true' : 'false'
+      this.showCloseButton ? 'true' : 'false',
     )
     document.documentElement.setAttribute(
       'show-tab-new',
-      this.showNewTab ? 'true' : 'false'
+      this.showNewTab ? 'true' : 'false',
     )
 
     if (this.verticalTabsEnabled) {
@@ -140,6 +143,19 @@ var VerticalTabs = {
     this.arrowScrollbox?.addEventListener('click', (event) => {
       if (event.button != 1 || event.target != this.arrowScrollbox) return
       gBrowser.handleNewTabMiddleClick(this.arrowScrollbox, event)
+    })
+
+    addEventListener('fullscreen', this, true)
+    window.addEventListener('mousemove', (e) => {
+      if (!window.fullScreen || !this.verticalTabsEnabled) return
+      const tabsToolbar = this.tabsToolbar
+      if (!tabsToolbar) return
+
+      const tabsWidth = tabsToolbar.clientWidth
+      // If not hovering over the expanded tabs, we should collpase them
+      if (e.clientX > tabsWidth) return this.fsMethods.collapse()
+      // If towards the edge of the screen, the tabs should be reexpanded
+      if (e.clientX == 0) return this.fsMethods.expand()
     })
 
     this._initialized = true
@@ -160,7 +176,7 @@ var VerticalTabs = {
 
     this.tabsToolbar?.setAttribute(
       'collapse',
-      this.browserCollapseTabs ? 'true' : 'false'
+      this.browserCollapseTabs ? 'true' : 'false',
     )
     this.tabsToolbar?.removeAttribute('flex')
     changeXULTagName('vbox', this.tabsToolbar)
@@ -171,12 +187,12 @@ var VerticalTabs = {
 
     this.tabsToolbar?.setAttribute(
       'width',
-      Services.prefs.getIntPref(VERTICAL_TABS_WIDTH, 200)
+      Services.prefs.getIntPref(VERTICAL_TABS_WIDTH, 200),
     )
     if (this.tabsToolbar)
       this.tabsToolbar.style.width = `${Services.prefs.getIntPref(
         VERTICAL_TABS_WIDTH,
-        200
+        200,
       )}px`
 
     if (!this.splitter) {
@@ -184,7 +200,7 @@ var VerticalTabs = {
       separator.setAttribute('id', 'verticaltabs-splitter')
       separator.setAttribute(
         'class',
-        'chromeclass-extrachrome verticaltabs-splitter'
+        'chromeclass-extrachrome verticaltabs-splitter',
       )
       separator.setAttribute('resizebefore', 'sibling')
       separator.setAttribute('resizeafter', 'none')
@@ -224,6 +240,43 @@ var VerticalTabs = {
     }
   },
 
+  handleEvent(event) {
+    switch (event.type) {
+      case 'fullscreen':
+        if (!window.fullScreen) this.fsMethods.collapse()
+        else this.fsMethods.expand()
+        break
+    }
+  },
+
+  fsMethods: {
+    isCollapsed: false,
+    get parent() {
+      return VerticalTabs
+    },
+
+    collapse() {
+      if (this.isCollapsed) return
+      this.isCollapsed = true
+
+      // Set the margin to hide the tabs of the side of the screen
+      if (!this.parent.tabsToolbar || !this.parent.splitter) return
+      this.parent.tabsToolbar.style.marginLeft =
+        -(
+          this.parent.tabsToolbar.clientWidth + this.parent.splitter.clientWidth
+        ) + 'px'
+    },
+
+    expand() {
+      if (!this.isCollapsed) return
+      this.isCollapsed = false
+
+      // Reset left margin
+      if (!this.parent.tabsToolbar) return
+      this.parent.tabsToolbar.style.marginLeft = ''
+    },
+  },
+
   /**
    * @param {MutationRecord[]} mutationsList
    * @param {MutationObserver} _observer
@@ -235,7 +288,7 @@ var VerticalTabs = {
 
         Services.prefs.setIntPref(
           VERTICAL_TABS_WIDTH,
-          parseInt(tabsToolbar?.getAttribute('width') || '100')
+          parseInt(tabsToolbar?.getAttribute('width') || '100'),
         )
       }
     }
@@ -259,18 +312,18 @@ var VerticalTabs = {
             .getElementById('TabsToolbar')
             ?.setAttribute(
               'collapse',
-              this.browserCollapseTabs ? 'true' : 'false'
+              this.browserCollapseTabs ? 'true' : 'false',
             )
         }
 
         if (data === SHOW_CLOSE_BUTTON || data === SHOW_NEW_TAB) {
           document.documentElement.setAttribute(
             'show-tab-close',
-            this.showCloseButton ? 'true' : 'false'
+            this.showCloseButton ? 'true' : 'false',
           )
           document.documentElement.setAttribute(
             'show-tab-new',
-            this.showNewTab ? 'true' : 'false'
+            this.showNewTab ? 'true' : 'false',
           )
         }
 

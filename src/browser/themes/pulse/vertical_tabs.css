@@ -34,7 +34,9 @@
   -moz-box-ordinal-group: 0;
   overflow-x: hidden;
 
-  transition: min-width 150ms ease-in-out, max-width 150ms ease-in-out;
+  transition:
+    min-width 150ms ease-in-out,
+    max-width 150ms ease-in-out;
 }
 
 #browser #TabsToolbar:-moz-lwtheme {
@@ -73,7 +75,9 @@
   height: var(--tab-min-height);
   max-height: var(--tab-min-height);
 
-  transition: min-height 150ms ease-in-out, max-height 150ms ease-in-out;
+  transition:
+    min-height 150ms ease-in-out,
+    max-height 150ms ease-in-out;
 }
 
 #browser #TabsToolbar .tab-background {
@@ -168,8 +172,4 @@
 #verticaltabs-splitter {
   -moz-box-ordinal-group: 1;
   border: solid 1px var(--tab-selected-bgcolor, var(--toolbar-bgcolor));
-}
-
-:root[sizemode='fullscreen'] #browser #TabsToolbar {
-  display: none;
 }

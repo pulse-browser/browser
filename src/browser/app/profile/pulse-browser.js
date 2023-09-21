@@ -109,3 +109,7 @@ pref('layout.css.has-selector.enabled', true);
 // digression
 pref('pulse.tabs.show.close', true);
 pref('pulse.tabs.show.new', true);
+
+// Disable bookmark toolbar by default
+pref('browser.toolbars.bookmarks.visibility', 'never');
+
