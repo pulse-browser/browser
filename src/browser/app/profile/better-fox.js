@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 116.1                                                           *
+ * version: 117                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -45,12 +45,12 @@
 pref('nglayout.initialpaint.delay', 0);
 pref('nglayout.initialpaint.delay_in_oopif', 0);
 pref('content.notify.interval', 100000);
-pref('browser.startup.preXulSkeletonUI', false); // WINDOWS
 
 /** EXPERIMENTAL ***/
 pref('layout.css.grid-template-masonry-value.enabled', true);
 pref('dom.enable_web_task_scheduling', true);
 pref('layout.css.has-selector.enabled', true);
+pref('dom.security.sanitizer.enabled', true);
 
 /** GFX ***/
 //pref("gfx.canvas.accelerated", true); // enable if using a dedicated GPU on WINDOWS
@@ -75,12 +75,11 @@ pref('network.buffer.cache.count', 128);
 pref('network.http.max-connections', 1800);
 pref('network.http.max-persistent-connections-per-server', 10);
 pref('network.http.max-urgent-start-excessive-connections-per-host', 5);
-pref('network.websocket.max-connections', 400);
 pref('network.http.pacing.requests.enabled', false);
-pref('network.dnsCacheEntries', 10000);
+pref('network.dnsCacheEntries', 1000);
 pref('network.dnsCacheExpiration', 86400);
 pref('network.dns.max_high_priority_threads', 8);
-pref('network.ssl_tokens_cache_capacity', 20480);
+pref('network.ssl_tokens_cache_capacity', 10240);
 
 /** SPECULATIVE CONNECTIONS ***/
 pref('network.http.speculative-parallel-limit', 0);
@@ -234,7 +233,6 @@ pref('browser.display.focus_ring_on_anything', true);
 pref('browser.display.focus_ring_style', 0);
 pref('browser.display.focus_ring_width', 0);
 pref('browser.privateWindowSeparation.enabled', false); // WINDOWS
-pref('browser.privatebrowsing.enable-new-indicator', false);
 pref('cookiebanners.service.mode', 2);
 pref('cookiebanners.service.mode.privateBrowsing', 2);
 pref('browser.translations.enable', true);
