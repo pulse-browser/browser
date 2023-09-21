@@ -202,6 +202,10 @@ tab.tabbrowser-tab:nth-child(1) {
   width: unset;
 }
 
+#new-tab-button {
+  margin: 0 !important;
+}
+
 /* =========================================================================- */
 /* General sidebar stuff */
 .sidebar-splitter {

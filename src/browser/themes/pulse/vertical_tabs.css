@@ -121,6 +121,26 @@
   display: none;
 }
 
+/** Extra margins for pinned tabs */
+#browser
+  #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  > #tabbrowser-arrowscrollbox
+  > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
+  margin-inline-start: 0px !important;
+}
+
+#browser .tab-content {
+  padding: 0 var(--inline-tab-padding) !important;
+}
+
+#browser .tab-throbber,
+#browser .tab-icon-pending,
+#browser .tab-icon-image,
+#browser .tab-sharing-icon-overlay,
+#browser .tab-icon-overlay {
+  margin-inline-end: 5.5px;
+}
+
 /* ========================================================================== */
 /* New tab icon styles */
 

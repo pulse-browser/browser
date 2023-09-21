@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update Betterfox to `117.0`
 
+### Fixed
+
+- Assorted UI inconsistencies for vertical tabs
+- Make vertical tabs visible in fullscreen (tested in sway)
+
 ## 1.0.0-a.80
 
 ### Changed
