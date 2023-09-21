@@ -44,13 +44,13 @@
       "sidebar_text": "rgb(242, 241, 244)", // Grey 100
       "sidebar_border": "transparent",
 
-      "button": "rgb(51, 47, 55)", // Grey 800
+      "button": "rgb(26, 23, 28)", // Grey 900
       "button_hover": "rgb(77, 73, 80)", // Grey 700
       "button_active": "rgb(101, 99, 105)", // Grey 600
-      "button_primary": "rgba(130, 64, 181, 0.20)", // Primary 500, 20%
-      "button_primary_hover": "rgb(130, 64, 191, 0.30)", // Primary 500, 30%
+      "button_primary": "rgba(130, 64, 191, 1.00)", // Primary 500
+      "button_primary_hover": "rgb(163, 99, 222, 1.00)", // Primary 600
       "button_primary_active": "rgb(130, 64, 191, 0.40)", // Primary 500, 40%
-      "button_primary_color": "rgb(218, 182, 251)", // Primary 200
+      "button_primary_color": "rgb(243, 230, 255)", // Primary 100
 
       "error_text_color": "rgb(255, 154, 162)", // TODO: We need red / error colors
 

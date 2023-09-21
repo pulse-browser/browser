@@ -1,0 +1,21 @@
+diff --git a/toolkit/mozapps/extensions/content/aboutaddons.html b/toolkit/mozapps/extensions/content/aboutaddons.html
+index 1c4101dc2843b113e02b29a26ad3d9966f6cc074..bf321c9e79340ea1bbb811fca8934b777c71c4da 100644
+--- a/toolkit/mozapps/extensions/content/aboutaddons.html
++++ b/toolkit/mozapps/extensions/content/aboutaddons.html
+@@ -2,7 +2,7 @@
+    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+    - You can obtain one at http://mozilla.org/MPL/2.0/. -->
+ 
+-<!DOCTYPE html>
++<!doctype html>
+ <html>
+   <head>
+     <title data-l10n-id="addons-page-title"></title>
+@@ -72,6 +72,7 @@
+       type="module"
+       src="chrome://global/content/elements/moz-five-star.mjs"
+     ></script>
++    <script src="chrome://browser/content/contentTheme.js"></script>
+   </head>
+   <body>
+     <drag-drop-addon-installer></drag-drop-addon-installer>
