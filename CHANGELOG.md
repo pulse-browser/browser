@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update uBlock to `1.52.2`
 
+### Fixed
+
+- Vertical tabs will correctly follow fullscreen state
+
 ## 1.0.0-a.81
 
 ### Changed
@@ -49,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vertical tabs: Open new tab w/ clipboard contents on space middle click
 - The new tab & close tab buttons can now be hidden
 
-### Changedv
+### Changed
 
 - Vertical tabs: New tab button no longer has text
 - Partial `:has` support is enabled (this is intended for userchrome use only)

@@ -147,7 +147,16 @@ var VerticalTabs = {
 
     addEventListener('fullscreen', this, true)
     window.addEventListener('mousemove', (e) => {
-      if (!window.fullScreen || !this.verticalTabsEnabled) return
+      // We can ignore mouse move events when:
+      // - We are not in fullscreen
+      // - Vertical tabs are disabled (this logic is handled elsewher )
+      // - We are in fullscreen because of a document element (e.g. a video)
+      if (
+        !window.fullScreen ||
+        !this.verticalTabsEnabled ||
+        document.fullscreenElement
+      )
+        return
       const tabsToolbar = this.tabsToolbar
       if (!tabsToolbar) return
 
@@ -243,7 +252,7 @@ var VerticalTabs = {
   handleEvent(event) {
     switch (event.type) {
       case 'fullscreen':
-        if (!window.fullScreen) this.fsMethods.collapse()
+        if (window.fullScreen) this.fsMethods.collapse()
         else this.fsMethods.expand()
         break
     }
