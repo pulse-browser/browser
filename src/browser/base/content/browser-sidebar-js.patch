@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2f8f0d4e8 100644
+index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..d784fb44e7263d05fbe4bc562afdecf53fe52f8f 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,9 @@ var SidebarUI = {
@@ -74,7 +74,7 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
      ]));
    },
  
-@@ -63,6 +98,10 @@ var SidebarUI = {
+@@ -63,6 +98,19 @@ var SidebarUI = {
    POSITION_START_PREF: "sidebar.position_start",
    DEFAULT_SIDEBAR_ID: "viewBookmarksSidebar",
  
@@ -82,13 +82,6 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +  SIDEBAR_TABS_PREF: "pulse.sidebar.enabled",
 +  SIDEBAR_EXTENSIONS_PREF: "pulse.sidebar.extensions.enabled",
 +
-   // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
-   // and isn't persisted across windows
-   lastOpenedId: null,
-@@ -83,6 +122,15 @@ var SidebarUI = {
-   _switcherArrow: null,
-   _inited: false,
- 
 +  _sidebarIcons: null,
 +  _sidebarIconsBottom: null,
 +  /** @type {HTMLDivElement?} */
@@ -98,9 +91,9 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +  /** @type {boolean} */
 +  _keepTabsActivePref: false,
 +
-   /**
-    * @type {MutationObserver | null}
-    */
+   // lastOpenedId is set in show() but unlike currentID it's not cleared out on hide
+   // and isn't persisted across windows
+   lastOpenedId: null,
 @@ -111,6 +159,48 @@ var SidebarUI = {
      this._switcherTarget.addEventListener("command", () => {
        this.toggleSwitcherPanel();
@@ -143,7 +136,7 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +    }
 +
 +    // Temporary migration for 1.0.0-a.61
-+    this._box.style.marginLeft = 'unset';
++    this._box.style.marginLeft = "unset";
 +
 +    this.loadedSidebars = [];
 +
@@ -185,21 +178,12 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
-@@ -160,7 +268,7 @@ var SidebarUI = {
-   /**
-    * The handler for Services.obs.addObserver.
-    **/
--  observe(_subject, topic, _data) {
-+  observe(_subject, topic, data) {
-     switch (topic) {
-       case "intl:app-locales-changed": {
-         if (this.isOpen) {
-@@ -171,7 +279,55 @@ var SidebarUI = {
+@@ -171,6 +279,54 @@ var SidebarUI = {
            this.showInitially(this.lastOpenedId);
            break;
          }
 +        break;
-       }
++      }
 +
 +      case "nsPref:changed": {
 +        switch (data) {
@@ -246,10 +230,9 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +            break;
 +        }
 +        break;
-+       }
+       }
      }
    },
- 
 @@ -290,17 +446,31 @@ var SidebarUI = {
      // First reset all ordinals to match DOM ordering.
      let browser = document.getElementById("browser");
@@ -283,7 +266,7 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +      const splitterBoxOrdinal = this._splitter.style.order;
 +      this._splitter.style.order = this._box.style.order;
 +      this._box.style.order = splitterBoxOrdinal;
-+ 
++
        // Indicate we've switched ordering to the box
        this._box.setAttribute("positionend", true);
      } else {
@@ -349,7 +332,7 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +          browser.setAttribute("hidden", "true");
 +        }
 +      }
-+      
++
        this.selectMenuItem(commandID);
  
        this._box.hidden = this._splitter.hidden = false;
@@ -385,7 +368,7 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
  
      let selBrowser = gBrowser.selectedBrowser;
      selBrowser.focus();
-@@ -642,10 +859,28 @@ var SidebarUI = {
+@@ -642,10 +859,27 @@ var SidebarUI = {
     * none if the argument is an empty string.
     */
    selectMenuItem(commandID) {
@@ -397,7 +380,6 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
 +      if (!menuId) {
 +        continue;
 +      }
-+
        let menu = document.getElementById(menuId);
 -      let triggerbutton =
 +      let dropdownTriggerButton =
@@ -415,7 +397,7 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..f984c600d27dabe102b0598135acd7e2
        if (id == commandID) {
          menu.setAttribute("checked", "true");
          if (triggerbutton) {
-@@ -661,6 +896,107 @@ var SidebarUI = {
+@@ -661,6 +895,107 @@ var SidebarUI = {
        }
      }
    },
