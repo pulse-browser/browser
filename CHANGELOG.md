@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.0-a.82
+
+### Changed
+
+- Update uBlock to `1.52.2`
+
 ## 1.0.0-a.81
 
 ### Changed
@@ -13,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Improve contrast on pulse light and dark themes
 - Assorted UI inconsistencies for vertical tabs
 - Make vertical tabs visible in fullscreen (tested in sway)
 
@@ -42,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vertical tabs: Open new tab w/ clipboard contents on space middle click
 - The new tab & close tab buttons can now be hidden
 
-### Changed
+### Changedv
 
 - Vertical tabs: New tab button no longer has text
 - Partial `:has` support is enabled (this is intended for userchrome use only)
