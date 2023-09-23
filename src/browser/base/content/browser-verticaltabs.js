@@ -291,10 +291,16 @@ var VerticalTabs = {
    * @param {MutationObserver} _observer
    */
   _mutationObserverCallback(mutationsList, _observer) {
+    const browserCollapseTabs = Services.prefs.getBoolPref(
+      VERTICAL_TABS_COLLAPSE,
+      false,
+    )
+    const tabsToolbar = document.getElementById('TabsToolbar')
+    if (browserCollapseTabs) {
+      return
+    }
     for (const mutation of mutationsList) {
       if (mutation.type === 'attributes' && mutation.attributeName == 'width') {
-        const tabsToolbar = document.getElementById('TabsToolbar')
-
         Services.prefs.setIntPref(
           VERTICAL_TABS_WIDTH,
           parseInt(tabsToolbar?.getAttribute('width') || '100'),

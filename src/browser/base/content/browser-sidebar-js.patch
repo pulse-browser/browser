@@ -1,5 +1,5 @@
 diff --git a/browser/base/content/browser-sidebar.js b/browser/base/content/browser-sidebar.js
-index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..d784fb44e7263d05fbe4bc562afdecf53fe52f8f 100644
+index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..976768180f96c3ae1abec661410d42bf8419d2f6 100644
 --- a/browser/base/content/browser-sidebar.js
 +++ b/browser/base/content/browser-sidebar.js
 @@ -11,6 +11,9 @@ var SidebarUI = {
@@ -178,6 +178,15 @@ index f5def93f56fc8d02d6ae6834ca8d2df0aead2379..d784fb44e7263d05fbe4bc562afdecf5
  
        if (this._box.hasAttribute("positionend")) {
          xulStore.persist(this._box, "positionend");
+@@ -160,7 +268,7 @@ var SidebarUI = {
+   /**
+    * The handler for Services.obs.addObserver.
+    **/
+-  observe(_subject, topic, _data) {
++  observe(_subject, topic, data) {
+     switch (topic) {
+       case "intl:app-locales-changed": {
+         if (this.isOpen) {
 @@ -171,6 +279,54 @@ var SidebarUI = {
            this.showInitially(this.lastOpenedId);
            break;
