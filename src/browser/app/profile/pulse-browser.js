@@ -54,7 +54,9 @@ pref('pulse.welcome.seen', false);
 // Sidebar pref
 pref('pulse.sidebar.enabled', true);
 pref('pulse.sidebar.extensions.enabled', true);
-pref('pulse.sidebar.keeptabsactive.enabled', true);
+// Note that this is causing state & performance issues. I am going to disable
+// it by default
+pref('pulse.sidebar.keeptabsactive.enabled', false);
 
 
 //PIP pref
