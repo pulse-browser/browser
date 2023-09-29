@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Firefox updated to `118.0.1`
 - Sidebar tabs no longer persist state on new profiles (can be reenabled in prefs)
+- Assorted URLs now point to more correct / relevant locations
 
 ### Fixed
 
