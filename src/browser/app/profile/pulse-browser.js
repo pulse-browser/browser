@@ -83,6 +83,11 @@ pref('browser.vpn_promo.enabled', false);
 // will also provide us with the benefit of more features
 pref('dom.webmidi.enabled', true);
 
+// Our versioning system is incomprehensible to Mozilla's servers. To fix a bunch
+// of addon bugs, we need to update these prefs
+pref("extensions.getAddons.search.browseURL", "https://addons.mozilla.org/%LOCALE%/firefox/search?q=%TERMS%&platform=%OS%&appver=%PLATFORMVERSION%");
+pref("extensions.getAddons.langpacks.url", "https://services.addons.mozilla.org/api/v4/addons/language-tools/?app=firefox&type=language&appversion=%PLATFORMVERSION%");
+
 // Check for system add-on updates.
 pref("extensions.systemAddon.update.url", "https://updates.pulsebrowser.app/browser/addons/%CHANNEL%/update.xml");
 pref("extensions.systemAddon.update.enabled", true);
