@@ -190,27 +190,27 @@ Fight with CI.
 
 ## 1.0.0-a.54
 
-## Added
+### Added
 
 - Vertical tab resizing (#199)
 
-## Changed
+### Changed
 
 - Welcome screeen will ask if you want to enable vertical tabs (#198)
 - Pulse Theme for vertical tabs has been cleaned up (#201)
 
 ## 1.0.0-a.53
 
-## Added
+### Added
 
 - Vivaldi & Opera importers (#200, Upstream)
 
-## Changed
+### Changed
 
 - Updated Firefox to `109.0` (#200)
 - Update uBlock Origin to `1.46.0` (#200)
 
-## Fixed
+### Fixed
 
 - Vertical tabs no-longer display in fullscreen (#197, @Jacob-Tsekrekos)
 - Remove gap above toolbar w/ vertical tabs on Windows (#197, @Jacob-Tsekrekos)
