@@ -95,8 +95,8 @@ pref("extensions.systemAddon.update.enabled", true);
 //Update Routes (Download page for manual download and Temperoraliy Discord Invite Link for Release Notes)
 pref("app.update.url.manual", "https://pulsebrowser.app/download");
 pref("app.update.url.details", "hhttps://pulsebrowser.app/download");
-pref("app.releaseNotesURL", "https://discord.gg/Y3khyEtAgS");
-pref("app.releaseNotesURL.aboutDialog", "https://discord.gg/Y3khyEtAgS");
+pref("app.releaseNotesURL", "https://github.com/pulse-browser/browser/blob/alpha/CHANGELOG.md");
+pref("app.releaseNotesURL.aboutDialog", "https://github.com/pulse-browser/browser/blob/alpha/CHANGELOG.md");
 
 // This pref needs to be here to not break context menus (GH#169)
 pref("extensions.pocket.enabled", false);
