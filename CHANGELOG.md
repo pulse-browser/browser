@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix fetching new language packs (bug #287)
+- Fix fetching new language packs (bug [#287](https://github.com/pulse-browser/browser/issues/287))
+- Sidebar starts up on the correct side of the browser (bug [#277](https://github.com/pulse-browser/browser/issues/277))
 
 ## 1.0.0-a.82
 
