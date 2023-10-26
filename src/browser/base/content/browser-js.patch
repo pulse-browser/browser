@@ -1,8 +1,8 @@
 diff --git a/browser/base/content/browser.js b/browser/base/content/browser.js
-index a9d4fc4abe1d3b5d5213d3afd90fd0128ee0d032..f2eb4888521deefa7da2b7666ec6012af2a27a4e 100644
+index 0bc3e362057b69754919b0e4a57eeb1846a7e6e5..6cc97a82b354274e8367d6aa00374bf87013a5f6 100644
 --- a/browser/base/content/browser.js
 +++ b/browser/base/content/browser.js
-@@ -1841,6 +1841,7 @@ var gBrowserInit = {
+@@ -1710,6 +1710,7 @@ var gBrowserInit = {
      gPrivateBrowsingUI.init();
      BrowserSearch.init();
      BrowserPageActions.init();
@@ -10,3 +10,14 @@ index a9d4fc4abe1d3b5d5213d3afd90fd0128ee0d032..f2eb4888521deefa7da2b7666ec6012a
      if (gToolbarKeyNavEnabled) {
        ToolbarKeyboardNavigator.init();
      }
+@@ -9865,9 +9866,7 @@ var FirefoxViewHandler = {
+     NimbusFeatures.firefoxViewNext.offUpdate(this._updateEnabledState);
+   },
+   _updateEnabledState() {
+-    this._enabled =
+-      NimbusFeatures.majorRelease2022.getVariable("firefoxView") ||
+-      NimbusFeatures.firefoxViewNext.getVariable("enabled");
++    this._enabled = false;
+     // We use a root attribute because there's no guarantee the button is in the
+     // DOM, and visibility changes need to take effect even if it isn't in the DOM
+     // right now.
