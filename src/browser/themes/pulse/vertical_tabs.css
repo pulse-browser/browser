@@ -23,7 +23,7 @@
   display: none;
 }
 
-#navigator-toolbox-background[verticaltabs='true'] #titlebar {
+#main-window[verticaltabs='true'] #titlebar {
   display: none;
 }
 
@@ -103,16 +103,14 @@
 /* Border radius up at the top left of the browser when vertical tabs are enabled */
 @media (-moz-gtk-csd-available) {
   :root[tabsintitlebar][sizemode='normal']:not([gtktiledwindow='true'])
-    #navigator-toolbox-background[verticaltabs='true']
+    #main-window[verticaltabs='true']
     #nav-bar {
     border-top-left-radius: env(-moz-gtk-csd-titlebar-radius);
     border-top-right-radius: env(-moz-gtk-csd-titlebar-radius);
   }
 }
 
-#navigator-toolbox-background:not([verticaltabs='true'])
-  #nav-bar
-  .titlebar-buttonbox-container {
+#main-window:not([verticaltabs='true']) #nav-bar .titlebar-buttonbox-container {
   display: none;
 }
 

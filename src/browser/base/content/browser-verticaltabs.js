@@ -176,9 +176,7 @@ var VerticalTabs = {
     this.arrowScrollbox?.setAttribute('orient', 'vertical')
     this.tabBrowserTabs?.setAttribute('orient', 'vertical')
 
-    document
-      .getElementById('navigator-toolbox-background')
-      ?.setAttribute('verticaltabs', 'true')
+    document.getElementById('main-window')?.setAttribute('verticaltabs', 'true')
     document
       .querySelector('#TabsToolbar .toolbar-items')
       ?.setAttribute('align', 'start')
@@ -225,9 +223,7 @@ var VerticalTabs = {
     this.arrowScrollbox?.setAttribute('orient', 'horizontal')
     this.tabBrowserTabs?.setAttribute('orient', 'horizontal')
 
-    document
-      .getElementById('navigator-toolbox-background')
-      ?.removeAttribute('verticaltabs')
+    document.getElementById('main-window')?.removeAttribute('verticaltabs')
     document
       .querySelector('#TabsToolbar .toolbar-items')
       ?.setAttribute('align', 'end')
