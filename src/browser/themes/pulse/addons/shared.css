@@ -63,8 +63,8 @@ tab.tabbrowser-tab:nth-child(1) {
   overflow-clip-margin: var(--tab-rounding-size) !important;
 }
 
-.tab-background[selected='true']::before,
-.tab-background[selected='true']::after {
+.tab-background[selected='']::before,
+.tab-background[selected='']::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -77,12 +77,12 @@ tab.tabbrowser-tab:nth-child(1) {
   height: var(--tab-rounding-size);
 }
 
-.tab-background[selected='true']::before {
+.tab-background[selected='']::before {
   background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
   left: var(--tab-rounding-size-neg);
 }
 
-.tab-background[selected='true']::after {
+.tab-background[selected='']::after {
   background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
   right: var(--tab-rounding-size-neg);
 }
@@ -120,8 +120,8 @@ tab.tabbrowser-tab:nth-child(1) {
 /* Sidebar tabs & vertical tabs */
 .sidebar-item-background[checked='true']::before,
 .sidebar-item-background[checked='true']::after,
-#browser .tab-background[selected='true']::before,
-#browser .tab-background[selected='true']::after {
+#browser .tab-background[selected='']::before,
+#browser .tab-background[selected='']::after {
   content: '';
   position: absolute;
   right: 0;
@@ -139,14 +139,14 @@ tab.tabbrowser-tab:nth-child(1) {
 }
 
 .sidebar-item-background[checked='true']::before,
-#browser .tab-background[selected='true']::before {
+#browser .tab-background[selected='']::before {
   background-image: url('chrome://global/skin/icons/tab-rising-edge.svg');
   top: var(--tab-rounding-size-neg);
   left: unset; /* This is for vertical tabs */
 }
 
 .sidebar-item-background[checked='true']::after,
-#browser .tab-background[selected='true']::after {
+#browser .tab-background[selected='']::after {
   background-image: url('chrome://global/skin/icons/tab-falling-edge.svg');
   bottom: var(--tab-rounding-size-neg);
   transform: rotate(180deg);
