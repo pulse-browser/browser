@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.0.0-a.84
 
+### Added
+
+- Note regarding maintenance to ReadMe
+
+### Changed
+
+- Updated to Firefox `120.0`
+- Updated uBlock to `1.54.0`
+
+## 1.0.0-a.84
+
 ### Changed
 
 - Updated to Firefox `119.0`
