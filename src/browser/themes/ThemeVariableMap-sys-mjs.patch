@@ -1,19 +1,8 @@
 diff --git a/browser/themes/ThemeVariableMap.sys.mjs b/browser/themes/ThemeVariableMap.sys.mjs
-index f2fd99193ddd0c24b7ad3ec953216973b162aaed..6d03f796569080667910276c631fb6731547c9d7 100644
+index ff8e85336158e4d86fab047882d6430b9e781445..4da903c46d8597ab1f749c9464ebcc0fd2f99c92 100644
 --- a/browser/themes/ThemeVariableMap.sys.mjs
 +++ b/browser/themes/ThemeVariableMap.sys.mjs
-@@ -126,7 +126,9 @@ export const ThemeVariableMap = [
-     "--sidebar-background-color",
-     {
-       lwtProperty: "sidebar",
--      optionalElementID: "sidebar-box",
-+      // Pulse: we want to use the sidebar color in the sidebar tabs, which are
-+      // under the `browser` parent rather than the `sidebar-box` parent
-+      optionalElementID: "browser",
-       processColor(rgbaChannels, element) {
-         if (!rgbaChannels) {
-           element.removeAttribute("lwt-sidebar");
-@@ -176,6 +178,18 @@ export const ThemeVariableMap = [
+@@ -159,6 +159,18 @@ export const ThemeVariableMap = [
        },
      },
    ],
@@ -32,7 +21,7 @@ index f2fd99193ddd0c24b7ad3ec953216973b162aaed..6d03f796569080667910276c631fb673
  ];
  
  export const ThemeContentPropertyList = [
-@@ -187,4 +201,10 @@ export const ThemeContentPropertyList = [
+@@ -170,4 +182,10 @@ export const ThemeContentPropertyList = [
    "sidebar_highlight_text",
    "sidebar_text",
    "zap_gradient",
