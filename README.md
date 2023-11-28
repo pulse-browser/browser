@@ -1,3 +1,7 @@
+## A note on maintenance
+
+This project will never make it past alpha, nor will it receive any bug fixes or new features that do not directly affect me (@trickypr). I am putting my energy towards [a project using a different approach](https://github.com/pulse-browser/experiment). For a rough guide to my reasoning, see [this Mastodon post](https://mas.to/@trickypr/111328440028458478).
+
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/pulse-browser/assets/main/pulse-logo.png" height="180" width="180">
