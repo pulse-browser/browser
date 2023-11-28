@@ -15,7 +15,7 @@
       "platform": "github",
       "id": "uBlock0@raymondhill.net",
       "repo": "gorhill/uBlock",
-      "version": "1.52.4",
+      "version": "1.54.0",
       "fileGlob": "uBlock0_*.firefox(.signed)?.xpi"
     },
     "tabliss": {
