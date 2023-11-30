@@ -223,6 +223,7 @@ jobs:
       - name: Install system dependencies
         run: |
           brew install cairo sccache gnu-tar mercurial
+          sudo pip install setuptools
 
       - name: Force usage fo gnu-tar
         run: |
