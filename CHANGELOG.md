@@ -10,7 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Changed
 
 - Update to firefox `121.0`
-- Bump to preprelease betterfox
+- Bump to prerelease betterfox
+
+## Fixed
+
+- Addons will now update correctly (will send platform version rather than app version)
 
 ## 1.0.0-a.84
 

@@ -1,0 +1,28 @@
+diff --git a/toolkit/mozapps/extensions/internal/XPIInstall.jsm b/toolkit/mozapps/extensions/internal/XPIInstall.jsm
+index e0cac973f657048b34ee46e090dd0f3a85f1d91e..cbfa7b8130cee804850c13ad260f46dae18ef856 100644
+--- a/toolkit/mozapps/extensions/internal/XPIInstall.jsm
++++ b/toolkit/mozapps/extensions/internal/XPIInstall.jsm
+@@ -2922,11 +2922,13 @@ var UpdateChecker = function (
+     "resource://gre/modules/addons/AddonUpdateChecker.sys.mjs"
+   ));
+ 
++  if (!aPlatformVersion) aPlatformVersion = Services.appinfo.platformVersion;
++
+   this.addon = aAddon;
+   aAddon._updateCheck = this;
+   XPIInstall.doing(this);
+   this.listener = aListener;
+-  this.appVersion = aAppVersion;
++  this.appVersion = aPlatformVersion;
+   this.platformVersion = aPlatformVersion;
+   this.syncCompatibility =
+     aReason == AddonManager.UPDATE_WHEN_NEW_APP_INSTALLED;
+@@ -2953,7 +2955,7 @@ var UpdateChecker = function (
+     aReason |= UPDATE_TYPE_NEWVERSION;
+   }
+ 
+-  let url = escapeAddonURI(aAddon, updateURL, aReason, aAppVersion);
++  let url = escapeAddonURI(aAddon, updateURL, aReason, aPlatformVersion);
+   this._parser = AddonUpdateChecker.checkForUpdates(aAddon.id, url, this);
+ };
+ 
