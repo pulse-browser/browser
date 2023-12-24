@@ -35,7 +35,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 119                                                             *
+ * version: 121                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
  ****************************************************************************/
 
@@ -50,8 +50,8 @@ pref('gfx.canvas.accelerated.cache-items', 4096);
 pref('gfx.canvas.accelerated.cache-size', 512);
 pref('gfx.content.skia-font-cache-size', 20);
 
-/** BROWSER CACHE ***/
-pref('browser.cache.disk.enable', false);
+/** DISK CACHE ***/
+pref('browser.cache.jsbc_compression_level', 3);
 
 /** MEDIA CACHE ***/
 pref('media.memory_cache_max_size', 65536);
@@ -68,15 +68,14 @@ pref('network.http.max-connections', 1800);
 pref('network.http.max-persistent-connections-per-server', 10);
 pref('network.http.max-urgent-start-excessive-connections-per-host', 5);
 pref('network.http.pacing.requests.enabled', false);
-pref('network.dnsCacheExpiration', 86400);
+pref('network.dnsCacheExpiration', 3600);
 pref('network.dns.max_high_priority_threads', 8);
 pref('network.ssl_tokens_cache_capacity', 10240);
 
-/** IMPLICIT OUTBOUND ***/
+/** SPECULATIVE LOADING ***/
 pref('network.dns.disablePrefetch', true);
 pref('network.prefetch-next', false);
 pref('network.predictor.enabled', false);
-pref('network.predictor.enable-prefetch', false);
 
 /** EXPERIMENTAL ***/
 pref('layout.css.grid-template-masonry-value.enabled', true);
@@ -102,7 +101,6 @@ pref('browser.download.start_downloads_in_tmp_dir', true);
 pref('browser.helperApps.deleteTempFileOnExit', true);
 pref('browser.uitour.enabled', false);
 pref('privacy.globalprivacycontrol.enabled', true);
-pref('privacy.globalprivacycontrol.functionality.enabled', true);
 
 /** OCSP & CERTS / HPKP ***/
 pref('security.OCSP.enabled', 0);
@@ -134,6 +132,7 @@ pref('network.IDN_show_punycode', true);
 
 /** HTTPS-FIRST POLICY ***/
 pref('dom.security.https_first', true);
+pref('dom.security.https_first_schemeless', true);
 
 /** PASSWORDS ***/
 pref('signon.rememberSignons', false);
@@ -149,6 +148,7 @@ pref('extensions.formautofill.creditCards.enabled', false);
 /** MIXED CONTENT + CROSS-SITE ***/
 pref('security.mixed_content.block_display_content', true);
 pref('security.mixed_content.upgrade_display_content', true);
+pref('security.mixed_content.upgrade_display_content.image', true);
 pref('pdfjs.enableScripting', false);
 pref('extensions.postDownloadThirdPartyPrompt', false);
 
@@ -240,18 +240,16 @@ pref('browser.privateWindowSeparation.enabled', false); // WINDOWS
 /** COOKIE BANNER HANDLING ***/
 pref('cookiebanners.service.mode', 1);
 pref('cookiebanners.service.mode.privateBrowsing', 1);
-pref('cookiebanners.service.enableGlobalRules', true);
 
 /** FULLSCREEN NOTICE ***/
-pref('full-screen-api.transition-duration.enter', '25 25');
-pref('full-screen-api.transition-duration.leave', '25 25');
+pref('full-screen-api.transition-duration.enter', '0 0');
+pref('full-screen-api.transition-duration.leave', '0 0');
 pref('full-screen-api.warning.delay', -1);
 pref('full-screen-api.warning.timeout', 0);
 
 /** URL BAR ***/
 pref('browser.urlbar.suggest.calculator', true);
 pref('browser.urlbar.unitConversion.enabled', true);
-pref('browser.urlbar.suggest.topsites', false);
 pref('browser.urlbar.trending.featureGate', false);
 
 /** NEW TAB PAGE ***/
@@ -262,7 +260,6 @@ pref('browser.newtabpage.activity-stream.feeds.section.topstories', false);
 pref('extensions.pocket.enabled', false);
 
 /** DOWNLOADS ***/
-pref('browser.download.useDownloadDir', false);
 pref('browser.download.always_ask_before_handling_new_types', true);
 pref('browser.download.manager.addToRecentDocs', false);
 
@@ -273,6 +270,7 @@ pref('browser.download.open_pdf_attachments_inline', true);
 pref('browser.bookmarks.openInTabClosesMenu', false);
 pref('browser.menu.showViewImageInfo', true);
 pref('findbar.highlightAll', true);
+pref('layout.word_select.eat_space_to_next_word', false);
 
 /****************************************************************************
  * START: MY OVERRIDES                                                      *

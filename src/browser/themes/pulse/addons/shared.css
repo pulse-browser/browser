@@ -70,7 +70,7 @@ tab.tabbrowser-tab:nth-child(1) {
   bottom: 0;
 
   -moz-context-properties: fill;
-  fill: var(--lwt-selected-tab-background-color);
+  fill: var(--tab-selected-bgcolor);
   background-size: cover;
 
   width: var(--tab-rounding-size);
@@ -127,7 +127,7 @@ tab.tabbrowser-tab:nth-child(1) {
   right: 0;
 
   background-size: cover;
-  color: var(--lwt-selected-tab-background-color);
+  color: var(--tab-selected-bgcolor);
   -moz-context-properties: fill, fill-opacity;
   fill: currentColor;
 

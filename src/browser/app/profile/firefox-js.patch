@@ -1,10 +1,11 @@
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
-index 8a0558ae2e2d694fdb2a8ed20e712216edd046d1..13bd889df4977ccb9952457f043ca4a622006beb 100644
+index 29e5b7316f3549181f4a1415a8324e1bf81519a4..58b672329b5c0596b773db659220a59de5e85482 100644
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -2880,3 +2880,5 @@ pref("browser.privatebrowsing.resetPBM.showConfirmationDialog", true);
- #ifdef XP_MACOSX
-   pref("browser.attribution.macos.enabled", false);
- #endif
+@@ -2937,3 +2937,5 @@ pref("browser.mailto.dualPrompt.os", false);
+ // When visiting a site which uses registerProtocolHandler: Ask the user to set Firefox as
+ // default mailto handler.
+ pref("browser.mailto.prompt.os", true);
 +
 +#include pulse-browser.js
+\ No newline at end of file
