@@ -207,7 +207,7 @@ packages:
   /axios@0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.6
     transitivePeerDependencies:
       - debug
     dev: false
@@ -353,8 +353,8 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /follow-redirects@1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+  /follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -406,7 +406,7 @@ packages:
       execa: 5.1.1
       fs-extra: 10.1.0
       ini: 3.0.1
-      is-apple-silicon: github.com/trickypr/is-apple-silicon/5f75501a1d7566ba9f94174b6825d7bd9d302b6a
+      is-apple-silicon: git@github.com+trickypr/is-apple-silicon/5f75501a1d7566ba9f94174b6825d7bd9d302b6a
       kleur: 4.1.5
       modern-async: 1.1.3
       picomatch: 2.3.1
@@ -830,14 +830,14 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: false
 
+  git@github.com+trickypr/is-apple-silicon/5f75501a1d7566ba9f94174b6825d7bd9d302b6a:
+    resolution: {commit: 5f75501a1d7566ba9f94174b6825d7bd9d302b6a, repo: git@github.com:trickypr/is-apple-silicon.git, type: git}
+    name: is-apple-silicon
+    version: 1.0.1
+    dev: false
+
   github.com/quark-platform/gecko-types/5b753cc14696eb8aa23ab15bc68041a72f394f8f:
     resolution: {tarball: https://codeload.github.com/quark-platform/gecko-types/tar.gz/5b753cc14696eb8aa23ab15bc68041a72f394f8f}
     name: gecko-types
     version: 1.0.0
     dev: true
-
-  github.com/trickypr/is-apple-silicon/5f75501a1d7566ba9f94174b6825d7bd9d302b6a:
-    resolution: {tarball: https://codeload.github.com/trickypr/is-apple-silicon/tar.gz/5f75501a1d7566ba9f94174b6825d7bd9d302b6a}
-    name: is-apple-silicon
-    version: 1.0.1
-    dev: false
